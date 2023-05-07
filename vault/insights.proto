@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package vault.insights;
+
+import "google/protobuf/timestamp.proto";
+
+
+/* VitalInsightsResponse represents insights 
+response */
+message VitalInsightsResponse {
+  message Coordinate {
+    double value = 1; // Value of vital.
+    int32 count = 2; // Number of data points (users) for the concerned value.
+  }
+
+  message Insight {
+    string title = 1; // Title for the insight.
+    string body = 2; // Body for the insight.
+    repeated Coordinate coordinates = 3; // Coordinates for the histogram.
+  }
+
+  message NormalRange {
+    optional double low = 1; // Low value for the normal range.
+    optional double high = 2; // High value for the normal range.
+  }
+
+  enum Interpretation {
+    INTERPRETATION_UNSPECIFIED = 0; // Interpretation -> Unspecified.
+
+    INTERPRETATION_NORMAL = 1; // Interpretation -> Normal.
+
+    INTERPRETATION_CRITICALLY_HIGH = 2; // Interpretation -> Critically High.
+    INTERPRETATION_VERY_HIGH = 3; // Interpretation -> Very High.
+    INTERPRETATION_HIGH = 4; // Interpretation -> High.
+    INTERPRETATION_BORDERLINE_HIGH = 5; // Interpretation -> Borderline High.
+
+    INTERPRETATION_CRITICALLY_LOW = 6; // Interpretation -> Critically Low.
+    INTERPRETATION_VERY_LOW = 7; // Interpretation -> Very Low.
+    INTERPRETATION_LOW = 8; // Interpretation -> Low.
+    INTERPRETATION_BORDERLINE_LOW = 9; // Interpretation -> Borderline Low.
+
+    INTERPRETATION_ABNORMAL = 10; // Interpretation -> Abnormal.
+    INTERPRETATION_UNDETERMINED = 11; // Interpretation -> Undertermined.
+  }
+
+  message LatestValue {
+    double value = 1; // Latest value.
+    optional Interpretation result_id = 2; // Interpretation of latest value.
+    google.protobuf.Timestamp result_date = 3; // Timestamp of latest value.
+    string display_result_date = 4; // Display timestamp of latest value.
+    optional NormalRange normal_range = 5; // Normal range of the vital.
+  }
+
+  optional string name = 1; // Display Name of the vital.
+  optional string test_eka_id = 2; // Test Eka ID of the vital.
+  optional string unit = 3; // Normalised Unit of the vital.
+  repeated Insight insights = 4; // Insights for the vital.
+  LatestValue latest_value = 5; // Latest Value of the vital.
+}
