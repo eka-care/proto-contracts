@@ -56,4 +56,5 @@ message VitalInsightsResponse {
   optional string unit = 3; // Normalised Unit of the vital.
   repeated Insight insights = 4; // Insights for the vital.
   LatestValue latest_value = 5; // Latest Value of the vital.
+  double latest_value_y_ccordinate = 6; // Y coordinate of the latest value.
 }
