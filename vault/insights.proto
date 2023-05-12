@@ -10,7 +10,7 @@ response */
 message VitalInsightsResponse {
   message Coordinate {
     double value = 1; // Value of vital.
-    int32 count = 2; // Number of data points (users) for the concerned value.
+    double count = 2; // Number of data points (users) for the concerned value.
   }
 
   message Insight {
