@@ -17,6 +17,7 @@ message VitalInsightsResponse {
     string title = 1; // Title for the insight.
     string body = 2; // Body for the insight.
     repeated Coordinate coordinates = 3; // Coordinates for the histogram.
+    string type = 4; // Type of the insight.
   }
 
   message NormalRange {
@@ -49,6 +50,7 @@ message VitalInsightsResponse {
     google.protobuf.Timestamp result_date = 3; // Timestamp of latest value.
     string display_result_date = 4; // Display timestamp of latest value.
     optional NormalRange normal_range = 5; // Normal range of the vital.
+    bool is_old = 6; // Is the latest value old.
   }
 
   optional string name = 1; // Display Name of the vital.
