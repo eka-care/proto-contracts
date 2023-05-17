@@ -4,7 +4,11 @@ package vault.insights;
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/errors";
 
+enum ErrorCode {
+  ERROR_CODE_UNSPECIFIED = 0; // Unknown Error.
+}
+
 message VaultErrorResponse {
-  optional string code = 1;
+  optional ErrorCode code = 1;
   optional string message = 2;
 }
