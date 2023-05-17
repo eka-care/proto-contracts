@@ -18,6 +18,10 @@ message VitalInsightsResponse {
     string body = 2; // Body for the insight.
     repeated Coordinate coordinates = 3; // Coordinates for the histogram.
     string type = 4; // Type of the insight.
+    LatestValue latest_value = 5; // Latest Value of the vital.
+    optional string name = 6; // Display Name of the vital.
+    optional string test_eka_id = 7; // Test Eka ID of the vital.
+    optional string unit = 8; // Normalised Unit of the vital.
   }
 
   message NormalRange {
@@ -46,17 +50,13 @@ message VitalInsightsResponse {
 
   message LatestValue {
     double value = 1; // Latest value.
-    optional Interpretation result_id = 2; // Interpretation of latest value.
-    google.protobuf.Timestamp result_date = 3; // Timestamp of latest value.
-    string display_result_date = 4; // Display timestamp of latest value.
-    optional NormalRange normal_range = 5; // Normal range of the vital.
-    bool is_old = 6; // Is the latest value old.
+    google.protobuf.Timestamp result_date = 2; // Timestamp of latest value.
+    string display_result_date = 3; // Display timestamp of latest value.
+    bool is_old = 4; // Is the latest value old.
+    double latest_value_y_coordinate = 5; // Y coordinate of the latest value.
+    optional Interpretation result_id = 6; // Interpretation of latest value.
+    optional NormalRange normal_range = 7; // Normal range of the vital.
   }
 
-  optional string name = 1; // Display Name of the vital.
-  optional string test_eka_id = 2; // Test Eka ID of the vital.
-  optional string unit = 3; // Normalised Unit of the vital.
-  repeated Insight insights = 4; // Insights for the vital.
-  LatestValue latest_value = 5; // Latest Value of the vital.
-  double latest_value_y_coordinate = 6; // Y coordinate of the latest value.
+  repeated Insight insights = 1; // Insights for the vital.
 }
