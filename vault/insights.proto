@@ -3,7 +3,6 @@ syntax = "proto3";
 package vault.insights;
 
 import "google/protobuf/timestamp.proto";
-import "vault/errors.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/insights";
 
@@ -16,6 +15,15 @@ message VitalInsightsResponse {
     double count = 2; // Number of data points (users) for the concerned value.
   }
 
+  message Axis {
+    optional string title = 1; // Title for the axis.
+  }
+
+  message Axes {
+    optional Axis x = 1; // X Axis.
+    optional Axis y = 2; // Y Axis.
+  }
+
   message Insight {
     string title = 1; // Title for the insight.
     string body = 2; // Body for the insight.
@@ -25,6 +33,7 @@ message VitalInsightsResponse {
     optional string name = 6; // Display Name of the vital.
     optional string test_eka_id = 7; // Test Eka ID of the vital.
     optional string unit = 8; // Normalised Unit of the vital.
+    optional Axes axes = 9; // Axes of plot.
   }
 
   message NormalRange {
@@ -62,5 +71,4 @@ message VitalInsightsResponse {
   }
 
   repeated Insight insights = 1; // Insights for the vital.
-  optional VaultErrorResponse error = 2; // Error response.
 }
