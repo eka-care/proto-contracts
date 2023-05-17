@@ -3,6 +3,9 @@ syntax = "proto3";
 package vault.insights;
 
 import "google/protobuf/timestamp.proto";
+import "vault/errors.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/insights";
 
 
 /* VitalInsightsResponse represents insights 
@@ -59,4 +62,5 @@ message VitalInsightsResponse {
   }
 
   repeated Insight insights = 1; // Insights for the vital.
+  optional VaultErrorResponse error = 2; // Error response.
 }
