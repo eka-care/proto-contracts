@@ -59,11 +59,16 @@ message VitalInsightsResponse {
     INTERPRETATION_UNDETERMINED = 11; // Interpretation -> Undertermined.
   }
 
+  message AddLatestDataPrompt {
+    optional string text = 1; // Title for the prompt.
+  }
+
   message LatestValue {
     double value = 1;                          // Latest value.
     google.protobuf.Timestamp result_date = 2; // Timestamp of latest value.
-    string display_result_date = 3;        // Display timestamp of latest value.
-    bool is_old = 4;                       // Is the latest value old.
+    string display_result_date = 3; // Display timestamp of latest value.
+    optional AddLatestDataPrompt add_latest_data_prompt =
+        4;                                 // Prompt for adding latest data.
     double latest_value_y_coordinate = 5;  // Y coordinate of the latest value.
     optional Interpretation result_id = 6; // Interpretation of latest value.
     optional NormalRange normal_range = 7; // Normal range of the vital.
