@@ -146,6 +146,63 @@ func (x *VitalInsightsResponse) GetInsights() []*VitalInsightsResponse_Insight {
 	return nil
 }
 
+// VitalInsightsListResponse represents insights list
+// response
+type VitalInsightsListResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Insights []*VitalInsightsResponse_Insight `protobuf:"bytes,1,rep,name=insights,proto3" json:"insights,omitempty"` // Insights.
+	Token    *string                          `protobuf:"bytes,2,opt,name=token,proto3,oneof" json:"token,omitempty"` // Token for the next page.
+}
+
+func (x *VitalInsightsListResponse) Reset() {
+	*x = VitalInsightsListResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_insights_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *VitalInsightsListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VitalInsightsListResponse) ProtoMessage() {}
+
+func (x *VitalInsightsListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_insights_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VitalInsightsListResponse.ProtoReflect.Descriptor instead.
+func (*VitalInsightsListResponse) Descriptor() ([]byte, []int) {
+	return file_vault_insights_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *VitalInsightsListResponse) GetInsights() []*VitalInsightsResponse_Insight {
+	if x != nil {
+		return x.Insights
+	}
+	return nil
+}
+
+func (x *VitalInsightsListResponse) GetToken() string {
+	if x != nil && x.Token != nil {
+		return *x.Token
+	}
+	return ""
+}
+
 type VitalInsightsResponse_Coordinate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -158,7 +215,7 @@ type VitalInsightsResponse_Coordinate struct {
 func (x *VitalInsightsResponse_Coordinate) Reset() {
 	*x = VitalInsightsResponse_Coordinate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_insights_proto_msgTypes[1]
+		mi := &file_vault_insights_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -171,7 +228,7 @@ func (x *VitalInsightsResponse_Coordinate) String() string {
 func (*VitalInsightsResponse_Coordinate) ProtoMessage() {}
 
 func (x *VitalInsightsResponse_Coordinate) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_insights_proto_msgTypes[1]
+	mi := &file_vault_insights_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -212,7 +269,7 @@ type VitalInsightsResponse_Axis struct {
 func (x *VitalInsightsResponse_Axis) Reset() {
 	*x = VitalInsightsResponse_Axis{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_insights_proto_msgTypes[2]
+		mi := &file_vault_insights_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -225,7 +282,7 @@ func (x *VitalInsightsResponse_Axis) String() string {
 func (*VitalInsightsResponse_Axis) ProtoMessage() {}
 
 func (x *VitalInsightsResponse_Axis) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_insights_proto_msgTypes[2]
+	mi := &file_vault_insights_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -260,7 +317,7 @@ type VitalInsightsResponse_Axes struct {
 func (x *VitalInsightsResponse_Axes) Reset() {
 	*x = VitalInsightsResponse_Axes{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_insights_proto_msgTypes[3]
+		mi := &file_vault_insights_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -273,7 +330,7 @@ func (x *VitalInsightsResponse_Axes) String() string {
 func (*VitalInsightsResponse_Axes) ProtoMessage() {}
 
 func (x *VitalInsightsResponse_Axes) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_insights_proto_msgTypes[3]
+	mi := &file_vault_insights_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -322,7 +379,7 @@ type VitalInsightsResponse_Insight struct {
 func (x *VitalInsightsResponse_Insight) Reset() {
 	*x = VitalInsightsResponse_Insight{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_insights_proto_msgTypes[4]
+		mi := &file_vault_insights_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -335,7 +392,7 @@ func (x *VitalInsightsResponse_Insight) String() string {
 func (*VitalInsightsResponse_Insight) ProtoMessage() {}
 
 func (x *VitalInsightsResponse_Insight) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_insights_proto_msgTypes[4]
+	mi := &file_vault_insights_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -426,7 +483,7 @@ type VitalInsightsResponse_NormalRange struct {
 func (x *VitalInsightsResponse_NormalRange) Reset() {
 	*x = VitalInsightsResponse_NormalRange{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_insights_proto_msgTypes[5]
+		mi := &file_vault_insights_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -439,7 +496,7 @@ func (x *VitalInsightsResponse_NormalRange) String() string {
 func (*VitalInsightsResponse_NormalRange) ProtoMessage() {}
 
 func (x *VitalInsightsResponse_NormalRange) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_insights_proto_msgTypes[5]
+	mi := &file_vault_insights_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -486,7 +543,7 @@ type VitalInsightsResponse_LatestValue struct {
 func (x *VitalInsightsResponse_LatestValue) Reset() {
 	*x = VitalInsightsResponse_LatestValue{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_insights_proto_msgTypes[6]
+		mi := &file_vault_insights_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -499,7 +556,7 @@ func (x *VitalInsightsResponse_LatestValue) String() string {
 func (*VitalInsightsResponse_LatestValue) ProtoMessage() {}
 
 func (x *VitalInsightsResponse_LatestValue) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_insights_proto_msgTypes[6]
+	mi := &file_vault_insights_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -677,11 +734,20 @@ var file_vault_insights_proto_rawDesc = []byte{
 	0x12, 0x1b, 0x0a, 0x17, 0x49, 0x4e, 0x54, 0x45, 0x52, 0x50, 0x52, 0x45, 0x54, 0x41, 0x54, 0x49,
 	0x4f, 0x4e, 0x5f, 0x41, 0x42, 0x4e, 0x4f, 0x52, 0x4d, 0x41, 0x4c, 0x10, 0x0a, 0x12, 0x1f, 0x0a,
 	0x1b, 0x49, 0x4e, 0x54, 0x45, 0x52, 0x50, 0x52, 0x45, 0x54, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x5f,
-	0x55, 0x4e, 0x44, 0x45, 0x54, 0x45, 0x52, 0x4d, 0x49, 0x4e, 0x45, 0x44, 0x10, 0x0b, 0x42, 0x37,
-	0x5a, 0x35, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61,
-	0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74,
-	0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2f, 0x69,
-	0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x55, 0x4e, 0x44, 0x45, 0x54, 0x45, 0x52, 0x4d, 0x49, 0x4e, 0x45, 0x44, 0x10, 0x0b, 0x22, 0x8b,
+	0x01, 0x0a, 0x19, 0x56, 0x69, 0x74, 0x61, 0x6c, 0x49, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73,
+	0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x49, 0x0a, 0x08,
+	0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d,
+	0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e,
+	0x56, 0x69, 0x74, 0x61, 0x6c, 0x49, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x49, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x52, 0x08, 0x69,
+	0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x12, 0x19, 0x0a, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x88,
+	0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x42, 0x37, 0x5a, 0x35,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63,
+	0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61,
+	0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2f, 0x69, 0x6e, 0x73,
+	0x69, 0x67, 0x68, 0x74, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -697,33 +763,35 @@ func file_vault_insights_proto_rawDescGZIP() []byte {
 }
 
 var file_vault_insights_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_vault_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_vault_insights_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_vault_insights_proto_goTypes = []interface{}{
 	(VitalInsightsResponse_Interpretation)(0), // 0: vault.insights.VitalInsightsResponse.Interpretation
 	(*VitalInsightsResponse)(nil),             // 1: vault.insights.VitalInsightsResponse
-	(*VitalInsightsResponse_Coordinate)(nil),  // 2: vault.insights.VitalInsightsResponse.Coordinate
-	(*VitalInsightsResponse_Axis)(nil),        // 3: vault.insights.VitalInsightsResponse.Axis
-	(*VitalInsightsResponse_Axes)(nil),        // 4: vault.insights.VitalInsightsResponse.Axes
-	(*VitalInsightsResponse_Insight)(nil),     // 5: vault.insights.VitalInsightsResponse.Insight
-	(*VitalInsightsResponse_NormalRange)(nil), // 6: vault.insights.VitalInsightsResponse.NormalRange
-	(*VitalInsightsResponse_LatestValue)(nil), // 7: vault.insights.VitalInsightsResponse.LatestValue
-	(*timestamppb.Timestamp)(nil),             // 8: google.protobuf.Timestamp
+	(*VitalInsightsListResponse)(nil),         // 2: vault.insights.VitalInsightsListResponse
+	(*VitalInsightsResponse_Coordinate)(nil),  // 3: vault.insights.VitalInsightsResponse.Coordinate
+	(*VitalInsightsResponse_Axis)(nil),        // 4: vault.insights.VitalInsightsResponse.Axis
+	(*VitalInsightsResponse_Axes)(nil),        // 5: vault.insights.VitalInsightsResponse.Axes
+	(*VitalInsightsResponse_Insight)(nil),     // 6: vault.insights.VitalInsightsResponse.Insight
+	(*VitalInsightsResponse_NormalRange)(nil), // 7: vault.insights.VitalInsightsResponse.NormalRange
+	(*VitalInsightsResponse_LatestValue)(nil), // 8: vault.insights.VitalInsightsResponse.LatestValue
+	(*timestamppb.Timestamp)(nil),             // 9: google.protobuf.Timestamp
 }
 var file_vault_insights_proto_depIdxs = []int32{
-	5, // 0: vault.insights.VitalInsightsResponse.insights:type_name -> vault.insights.VitalInsightsResponse.Insight
-	3, // 1: vault.insights.VitalInsightsResponse.Axes.x:type_name -> vault.insights.VitalInsightsResponse.Axis
-	3, // 2: vault.insights.VitalInsightsResponse.Axes.y:type_name -> vault.insights.VitalInsightsResponse.Axis
-	2, // 3: vault.insights.VitalInsightsResponse.Insight.coordinates:type_name -> vault.insights.VitalInsightsResponse.Coordinate
-	7, // 4: vault.insights.VitalInsightsResponse.Insight.latest_value:type_name -> vault.insights.VitalInsightsResponse.LatestValue
-	4, // 5: vault.insights.VitalInsightsResponse.Insight.axes:type_name -> vault.insights.VitalInsightsResponse.Axes
-	8, // 6: vault.insights.VitalInsightsResponse.LatestValue.result_date:type_name -> google.protobuf.Timestamp
-	0, // 7: vault.insights.VitalInsightsResponse.LatestValue.result_id:type_name -> vault.insights.VitalInsightsResponse.Interpretation
-	6, // 8: vault.insights.VitalInsightsResponse.LatestValue.normal_range:type_name -> vault.insights.VitalInsightsResponse.NormalRange
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	6,  // 0: vault.insights.VitalInsightsResponse.insights:type_name -> vault.insights.VitalInsightsResponse.Insight
+	6,  // 1: vault.insights.VitalInsightsListResponse.insights:type_name -> vault.insights.VitalInsightsResponse.Insight
+	4,  // 2: vault.insights.VitalInsightsResponse.Axes.x:type_name -> vault.insights.VitalInsightsResponse.Axis
+	4,  // 3: vault.insights.VitalInsightsResponse.Axes.y:type_name -> vault.insights.VitalInsightsResponse.Axis
+	3,  // 4: vault.insights.VitalInsightsResponse.Insight.coordinates:type_name -> vault.insights.VitalInsightsResponse.Coordinate
+	8,  // 5: vault.insights.VitalInsightsResponse.Insight.latest_value:type_name -> vault.insights.VitalInsightsResponse.LatestValue
+	5,  // 6: vault.insights.VitalInsightsResponse.Insight.axes:type_name -> vault.insights.VitalInsightsResponse.Axes
+	9,  // 7: vault.insights.VitalInsightsResponse.LatestValue.result_date:type_name -> google.protobuf.Timestamp
+	0,  // 8: vault.insights.VitalInsightsResponse.LatestValue.result_id:type_name -> vault.insights.VitalInsightsResponse.Interpretation
+	7,  // 9: vault.insights.VitalInsightsResponse.LatestValue.normal_range:type_name -> vault.insights.VitalInsightsResponse.NormalRange
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_vault_insights_proto_init() }
@@ -745,7 +813,7 @@ func file_vault_insights_proto_init() {
 			}
 		}
 		file_vault_insights_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VitalInsightsResponse_Coordinate); i {
+			switch v := v.(*VitalInsightsListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -757,7 +825,7 @@ func file_vault_insights_proto_init() {
 			}
 		}
 		file_vault_insights_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VitalInsightsResponse_Axis); i {
+			switch v := v.(*VitalInsightsResponse_Coordinate); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -769,7 +837,7 @@ func file_vault_insights_proto_init() {
 			}
 		}
 		file_vault_insights_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VitalInsightsResponse_Axes); i {
+			switch v := v.(*VitalInsightsResponse_Axis); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -781,7 +849,7 @@ func file_vault_insights_proto_init() {
 			}
 		}
 		file_vault_insights_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VitalInsightsResponse_Insight); i {
+			switch v := v.(*VitalInsightsResponse_Axes); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -793,7 +861,7 @@ func file_vault_insights_proto_init() {
 			}
 		}
 		file_vault_insights_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VitalInsightsResponse_NormalRange); i {
+			switch v := v.(*VitalInsightsResponse_Insight); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -805,6 +873,18 @@ func file_vault_insights_proto_init() {
 			}
 		}
 		file_vault_insights_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VitalInsightsResponse_NormalRange); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vault_insights_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VitalInsightsResponse_LatestValue); i {
 			case 0:
 				return &v.state
@@ -817,18 +897,19 @@ func file_vault_insights_proto_init() {
 			}
 		}
 	}
-	file_vault_insights_proto_msgTypes[2].OneofWrappers = []interface{}{}
+	file_vault_insights_proto_msgTypes[1].OneofWrappers = []interface{}{}
 	file_vault_insights_proto_msgTypes[3].OneofWrappers = []interface{}{}
 	file_vault_insights_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	file_vault_insights_proto_msgTypes[5].OneofWrappers = []interface{}{}
 	file_vault_insights_proto_msgTypes[6].OneofWrappers = []interface{}{}
+	file_vault_insights_proto_msgTypes[7].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_vault_insights_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
