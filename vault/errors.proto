@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package vault.insights;
+package vault;
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/errors";
 

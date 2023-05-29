@@ -1,0 +1,208 @@
+syntax = "proto3";
+
+package vault.trends.v1;
+
+import "vault/insights.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/v1/trends";
+
+message Range {
+  optional double low = 1;
+  optional double high = 2;
+}
+
+message ParameterReadingsGraph {
+  message InstantRange {
+    optional int64 start = 1;
+    optional int64 end = 2;
+  }
+
+  optional double value = 1;
+  optional string value_string = 2;
+  optional Range value_range = 3;
+  optional int64 instant = 4;
+  optional InstantRange instant_range = 5;
+  optional vault.insights.VitalInsightsResponse.Interpretation result_id = 6;
+  optional string display_result = 7;
+  optional string test_eka_id = 8;
+}
+
+message CategoryReadings { repeated ParameterReadingsGraph readings = 1; }
+
+message PlotData {
+  Range plot_range = 1;
+  optional double tick_amount = 2;
+  optional double tick_interval = 3;
+  optional double y_max = 4;
+  optional double y_min = 5;
+  repeated ParameterReadingsGraph readings = 6;
+  repeated CategoryReadings readings_by_category = 7;
+  repeated int32 categories_with_data = 8;
+}
+
+message Readings {
+  string plot_type = 1;
+  string label = 2;
+  map<string, PlotData> plot_data = 3;
+  repeated string reading_group = 4;
+  optional int64 start_date = 5;
+  optional int64 end_date = 6;
+}
+
+enum Tab {
+  TAB_UNSPECIFIED = 0;
+  TAB_HOUR = 1;
+  TAB_DAY = 2;
+  TAB_WEEK = 3;
+  TAB_MONTH = 4;
+  TAB_SIX_MONTHS = 5;
+  TAB_YEAR = 6;
+  TAB_TEN_YEARS = 7;
+}
+
+message TrendsResponse {
+  message FilterValueInfo {
+    string id = 1;
+    string display_name = 2;
+  }
+
+  message Filter {
+    string display_name = 1;
+    string id = 2;
+    repeated FilterValueInfo values = 3;
+  }
+
+  message CTAs {
+    CTA left_cta = 1;
+    CTA right_cta = 2;
+  }
+
+  message CTA {
+    string pid = 1;
+    map<string, string> params = 2;
+    string title = 3;
+    string action = 4;
+  }
+
+  message Symbol {
+    string test_eka_id = 1;
+    string type = 2;
+  }
+
+  string name = 1;
+  string unit = 2;
+  int32 default_tab = 3;
+  repeated Tab tab_array = 4;
+  repeated Readings readings_v2 = 5;
+  CTAs ctas = 6;
+  string no_graph_data_display_text = 7;
+  bool non_interpretable = 8;
+  repeated Symbol symbols = 9;
+  repeated Filter filters = 10;
+  string filter_delimiter = 11;
+  optional string unit_eka_id = 12;
+  optional string no_readings_img = 13;
+}
+
+message TrendsMoreTabResponse {
+  repeated Tab tab_array = 1;
+  repeated Readings readings_v2 = 2;
+}
+
+message TrendsRelatedVitals {
+  message Related {
+    string mdb_id = 1;
+    string name = 2;
+  }
+
+  string display_name = 1;
+  repeated Related related_vitals = 2;
+}
+
+message Log {
+  message CTA { string title = 1; }
+
+  message VitalInfo {
+    optional string image = 1;
+    string title = 2;
+    optional CTA cta = 3;
+  }
+
+  message ParameterReadingsAtInstant {
+    uint32 parameter_id = 1;
+    string document_id = 2;
+    string value = 3;
+    string display_value = 4;
+    string unit = 5;
+    optional string unit_eka_id = 6;
+    int64 date = 7;
+    Range range = 8;
+    optional string display_range = 9;
+    string result = 10;
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 11;
+    string display_result = 12;
+    int32 page_num = 13;
+    string asset_url = 14;
+    string file_type = 15;
+    repeated Coordinate coordinates = 16;
+    optional string body_state = 17;
+    optional string display_body_state = 18;
+    optional string source = 19;
+    optional VitalInfo vital_info = 20;
+    string display_time = 21;
+  }
+
+  message Coordinate {
+    double x = 1;
+    double y = 2;
+  }
+
+  message UnverifiedParameterReading {
+    uint32 parameter_id = 1;
+    string document_id = 2;
+    string value = 3;
+    string unit = 4;
+    optional string unit_eka_id = 5;
+    string display_range = 6;
+    optional int64 date = 7;
+    int32 page_num = 8;
+    string asset_url = 9;
+    string file_type = 10;
+    repeated Coordinate coordinates = 11;
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 12;
+    string display_result = 13;
+    optional string display_time = 14;
+  }
+
+  repeated ParameterReadingsAtInstant readings = 1;
+  repeated UnverifiedParameterReading unverified = 2;
+}
+
+message VitalContent {
+  message CTA {
+    string pid = 1;
+    map<string, string> params = 2;
+    string title = 3;
+  }
+
+  message Banner {
+    string id = 1;
+    string title = 2;
+    string body = 3;
+    repeated string body_parameters = 4;
+    optional CTA cta = 5;
+    string category = 6;
+    string img = 7;
+    string lottie_id = 8;
+  }
+
+  message VitalGeneralInfo {
+    string heading = 1;
+    string body = 2;
+    optional string img = 3;
+  }
+
+  optional string current_state_information = 1;
+  repeated Banner linked_cards = 2;
+  repeated VitalGeneralInfo vital_info = 3;
+}
