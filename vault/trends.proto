@@ -2,51 +2,61 @@ syntax = "proto3";
 
 package vault.trends.v1;
 
+import "google/protobuf/timestamp.proto";
+import "vault/coordinate.proto";
+import "vault/cta.proto";
 import "vault/insights.proto";
+import "vault/range.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/v1/trends";
 
-message Range {
-  optional double low = 1;
-  optional double high = 2;
-}
+message Readings {
+  message Categories { repeated string categories = 1; }
 
-message ParameterReadingsGraph {
-  message InstantRange {
-    optional int64 start = 1;
-    optional int64 end = 2;
+  message PlotData {
+    message ParameterReadingsGraph {
+      oneof plot_value {
+        double value = 1;
+        string value_string = 2;
+        vault.common.ValueRange value_range = 3;
+      }
+
+      oneof plot_time {
+        google.protobuf.Timestamp instant = 4;
+        vault.common.TimeRange instant_range = 5;
+      }
+
+      optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+          6;
+      optional string display_result = 7;
+      optional string test_eka_id = 8;
+    }
+
+    message CategoryReadings { repeated ParameterReadingsGraph readings = 1; }
+
+    message Readings { repeated ParameterReadingsGraph readings = 1; }
+
+    message ReadingsByCategory { repeated CategoryReadings readings = 1; }
+
+    optional vault.common.ValueRange plot_range = 1;
+    optional double tick_amount = 2;
+    optional double tick_interval = 3;
+    optional double y_max = 4;
+    optional double y_min = 5;
+    oneof data {
+      Readings readings = 6;
+      ReadingsByCategory readings_by_category = 7;
+    }
+    repeated int32 categories_with_data = 8;
   }
 
-  optional double value = 1;
-  optional string value_string = 2;
-  optional Range value_range = 3;
-  optional int64 instant = 4;
-  optional InstantRange instant_range = 5;
-  optional vault.insights.VitalInsightsResponse.Interpretation result_id = 6;
-  optional string display_result = 7;
-  optional string test_eka_id = 8;
-}
-
-message CategoryReadings { repeated ParameterReadingsGraph readings = 1; }
-
-message PlotData {
-  Range plot_range = 1;
-  optional double tick_amount = 2;
-  optional double tick_interval = 3;
-  optional double y_max = 4;
-  optional double y_min = 5;
-  repeated ParameterReadingsGraph readings = 6;
-  repeated CategoryReadings readings_by_category = 7;
-  repeated int32 categories_with_data = 8;
-}
-
-message Readings {
   string plot_type = 1;
   string label = 2;
   map<string, PlotData> plot_data = 3;
-  repeated string reading_group = 4;
-  optional int64 start_date = 5;
-  optional int64 end_date = 6;
+  oneof x_axis {
+    Categories reading_group = 4;
+    vault.common.TimeRange time_range = 5;
+  }
 }
 
 enum Tab {
@@ -73,15 +83,8 @@ message TrendsResponse {
   }
 
   message CTAs {
-    CTA left_cta = 1;
-    CTA right_cta = 2;
-  }
-
-  message CTA {
-    string pid = 1;
-    map<string, string> params = 2;
-    string title = 3;
-    string action = 4;
+    optional vault.common.CTA left_cta = 1;
+    optional vault.common.CTA right_cta = 2;
   }
 
   message Symbol {
@@ -135,8 +138,8 @@ message Log {
     string display_value = 4;
     string unit = 5;
     optional string unit_eka_id = 6;
-    int64 date = 7;
-    Range range = 8;
+    google.protobuf.Timestamp date = 7;
+    vault.common.ValueRange range = 8;
     optional string display_range = 9;
     string result = 10;
     optional vault.insights.VitalInsightsResponse.Interpretation result_id = 11;
@@ -144,17 +147,12 @@ message Log {
     int32 page_num = 13;
     string asset_url = 14;
     string file_type = 15;
-    repeated Coordinate coordinates = 16;
+    repeated vault.common.Coordinate coordinates = 16;
     optional string body_state = 17;
     optional string display_body_state = 18;
     optional string source = 19;
     optional VitalInfo vital_info = 20;
     string display_time = 21;
-  }
-
-  message Coordinate {
-    double x = 1;
-    double y = 2;
   }
 
   message UnverifiedParameterReading {
@@ -164,11 +162,11 @@ message Log {
     string unit = 4;
     optional string unit_eka_id = 5;
     string display_range = 6;
-    optional int64 date = 7;
+    optional google.protobuf.Timestamp date = 7;
     int32 page_num = 8;
     string asset_url = 9;
     string file_type = 10;
-    repeated Coordinate coordinates = 11;
+    repeated vault.common.Coordinate coordinates = 11;
     optional vault.insights.VitalInsightsResponse.Interpretation result_id = 12;
     string display_result = 13;
     optional string display_time = 14;
@@ -179,19 +177,24 @@ message Log {
 }
 
 message VitalContent {
-  message CTA {
-    string pid = 1;
-    map<string, string> params = 2;
-    string title = 3;
+  enum BannerCategory {
+    BANNER_CATEGORY_UNSPECIFIED = 0;
+    BANNER_CATEGORY_INFO = 1;
+    BANNER_CATEGORY_ACTION = 2;
+  }
+
+  enum DynamicParameter {
+    DYNAMIC_PARAMETER_UNSPECIFIED = 0;
+    DYNAMIC_PARAMETER_MOBILE = 1;
   }
 
   message Banner {
     string id = 1;
     string title = 2;
     string body = 3;
-    repeated string body_parameters = 4;
-    optional CTA cta = 5;
-    string category = 6;
+    repeated DynamicParameter body_parameters = 4;
+    optional vault.common.CTA cta = 5;
+    BannerCategory category = 6;
     string img = 7;
     string lottie_id = 8;
   }

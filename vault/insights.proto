@@ -3,6 +3,7 @@ syntax = "proto3";
 package vault.insights;
 
 import "google/protobuf/timestamp.proto";
+import "vault/range.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/insights";
 
@@ -33,11 +34,6 @@ message VitalInsightsResponse {
     optional string test_eka_id = 7;     // Test Eka ID of the vital.
     optional string unit = 8;            // Normalised Unit of the vital.
     optional Axes axes = 9;              // Axes of plot.
-  }
-
-  message NormalRange {
-    optional double low = 1;  // Low value for the normal range.
-    optional double high = 2; // High value for the normal range.
   }
 
   enum Interpretation {
@@ -71,7 +67,8 @@ message VitalInsightsResponse {
         4;                                 // Prompt for adding latest data.
     double latest_value_y_coordinate = 5;  // Y coordinate of the latest value.
     optional Interpretation result_id = 6; // Interpretation of latest value.
-    optional NormalRange normal_range = 7; // Normal range of the vital.
+    optional vault.common.ValueRange normal_range =
+        7; // Normal range of the vital.
   }
 
   repeated Insight insights = 1; // Insights for the vital.
