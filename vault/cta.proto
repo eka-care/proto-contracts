@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package vault.common;
+
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/cta";
+
+message CTA {
+  string pid = 1;
+  google.protobuf.Struct params = 2;
+  optional string title = 3;
+  optional string action = 4;
+}
+
+message ActionCTA {
+  string action = 1;
+  optional string title = 2;
+}

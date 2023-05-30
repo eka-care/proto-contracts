@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package vault.common;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/coordinate";
+
+message Coordinate {
+  double x = 1;
+  double y = 2;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package vault.common;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/range";
+
+message ValueRange {
+  optional double low = 1;
+  optional double high = 2;
+}
+
+message TimeRange {
+  optional google.protobuf.Timestamp start = 1;
+  optional google.protobuf.Timestamp end = 2;
+}
