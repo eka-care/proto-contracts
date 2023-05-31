@@ -515,6 +515,15 @@ public struct Vault_Trends_V1_TrendsResponse {
   /// Clears the value of `noReadingsImg`. Subsequent reads from it will return its default value.
   public mutating func clearNoReadingsImg() {_uniqueStorage()._noReadingsImg = nil}
 
+  public var latestValue: Vault_Trends_V1_TrendsResponse.LatestValue {
+    get {return _storage._latestValue ?? Vault_Trends_V1_TrendsResponse.LatestValue()}
+    set {_uniqueStorage()._latestValue = newValue}
+  }
+  /// Returns true if `latestValue` has been explicitly set.
+  public var hasLatestValue: Bool {return _storage._latestValue != nil}
+  /// Clears the value of `latestValue`. Subsequent reads from it will return its default value.
+  public mutating func clearLatestValue() {_uniqueStorage()._latestValue = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public struct FilterValueInfo {
@@ -590,6 +599,31 @@ public struct Vault_Trends_V1_TrendsResponse {
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
     public init() {}
+  }
+
+  public struct LatestValue {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var displayDate: String = String()
+
+    public var displayValue: String = String()
+
+    public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
+      get {return _resultID ?? .unspecified}
+      set {_resultID = newValue}
+    }
+    /// Returns true if `resultID` has been explicitly set.
+    public var hasResultID: Bool {return self._resultID != nil}
+    /// Clears the value of `resultID`. Subsequent reads from it will return its default value.
+    public mutating func clearResultID() {self._resultID = nil}
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+
+    fileprivate var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
   }
 
   public init() {}
@@ -818,8 +852,8 @@ public struct Vault_Trends_V1_Log {
     /// Clears the value of `displayBodyState`. Subsequent reads from it will return its default value.
     public mutating func clearDisplayBodyState() {_uniqueStorage()._displayBodyState = nil}
 
-    public var source: String {
-      get {return _storage._source ?? String()}
+    public var source: Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source {
+      get {return _storage._source ?? .unspecified}
       set {_uniqueStorage()._source = newValue}
     }
     /// Returns true if `source` has been explicitly set.
@@ -842,6 +876,40 @@ public struct Vault_Trends_V1_Log {
     }
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public enum Source: SwiftProtobuf.Enum {
+      public typealias RawValue = Int
+      case unspecified // = 0
+      case record // = 1
+      case appleHealth // = 2
+      case googleFit // = 3
+      case UNRECOGNIZED(Int)
+
+      public init() {
+        self = .unspecified
+      }
+
+      public init?(rawValue: Int) {
+        switch rawValue {
+        case 0: self = .unspecified
+        case 1: self = .record
+        case 2: self = .appleHealth
+        case 3: self = .googleFit
+        default: self = .UNRECOGNIZED(rawValue)
+        }
+      }
+
+      public var rawValue: Int {
+        switch self {
+        case .unspecified: return 0
+        case .record: return 1
+        case .appleHealth: return 2
+        case .googleFit: return 3
+        case .UNRECOGNIZED(let i): return i
+        }
+      }
+
+    }
 
     public init() {}
 
@@ -921,6 +989,20 @@ public struct Vault_Trends_V1_Log {
 
   public init() {}
 }
+
+#if swift(>=4.2)
+
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source] = [
+    .unspecified,
+    .record,
+    .appleHealth,
+    .googleFit,
+  ]
+}
+
+#endif  // swift(>=4.2)
 
 public struct Vault_Trends_V1_VitalContent {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -1105,6 +1187,7 @@ extension Vault_Trends_V1_TrendsResponse.FilterValueInfo: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsResponse.Filter: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsResponse.CTAs: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsResponse.Symbol: @unchecked Sendable {}
+extension Vault_Trends_V1_TrendsResponse.LatestValue: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsMoreTabResponse: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsRelatedVitals: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsRelatedVitals.Related: @unchecked Sendable {}
@@ -1112,6 +1195,7 @@ extension Vault_Trends_V1_Log: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.CTA: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.VitalInfo: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: @unchecked Sendable {}
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.UnverifiedParameterReading: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent.BannerCategory: @unchecked Sendable {}
@@ -1611,6 +1695,7 @@ extension Vault_Trends_V1_TrendsResponse: SwiftProtobuf.Message, SwiftProtobuf._
     11: .standard(proto: "filter_delimiter"),
     12: .standard(proto: "unit_eka_id"),
     13: .standard(proto: "no_readings_img"),
+    14: .standard(proto: "latest_value"),
   ]
 
   fileprivate class _StorageClass {
@@ -1627,6 +1712,7 @@ extension Vault_Trends_V1_TrendsResponse: SwiftProtobuf.Message, SwiftProtobuf._
     var _filterDelimiter: String = String()
     var _unitEkaID: String? = nil
     var _noReadingsImg: String? = nil
+    var _latestValue: Vault_Trends_V1_TrendsResponse.LatestValue? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -1646,6 +1732,7 @@ extension Vault_Trends_V1_TrendsResponse: SwiftProtobuf.Message, SwiftProtobuf._
       _filterDelimiter = source._filterDelimiter
       _unitEkaID = source._unitEkaID
       _noReadingsImg = source._noReadingsImg
+      _latestValue = source._latestValue
     }
   }
 
@@ -1677,6 +1764,7 @@ extension Vault_Trends_V1_TrendsResponse: SwiftProtobuf.Message, SwiftProtobuf._
         case 11: try { try decoder.decodeSingularStringField(value: &_storage._filterDelimiter) }()
         case 12: try { try decoder.decodeSingularStringField(value: &_storage._unitEkaID) }()
         case 13: try { try decoder.decodeSingularStringField(value: &_storage._noReadingsImg) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._latestValue) }()
         default: break
         }
       }
@@ -1728,6 +1816,9 @@ extension Vault_Trends_V1_TrendsResponse: SwiftProtobuf.Message, SwiftProtobuf._
       try { if let v = _storage._noReadingsImg {
         try visitor.visitSingularStringField(value: v, fieldNumber: 13)
       } }()
+      try { if let v = _storage._latestValue {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1750,6 +1841,7 @@ extension Vault_Trends_V1_TrendsResponse: SwiftProtobuf.Message, SwiftProtobuf._
         if _storage._filterDelimiter != rhs_storage._filterDelimiter {return false}
         if _storage._unitEkaID != rhs_storage._unitEkaID {return false}
         if _storage._noReadingsImg != rhs_storage._noReadingsImg {return false}
+        if _storage._latestValue != rhs_storage._latestValue {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -1916,6 +2008,54 @@ extension Vault_Trends_V1_TrendsResponse.Symbol: SwiftProtobuf.Message, SwiftPro
   public static func ==(lhs: Vault_Trends_V1_TrendsResponse.Symbol, rhs: Vault_Trends_V1_TrendsResponse.Symbol) -> Bool {
     if lhs.testEkaID != rhs.testEkaID {return false}
     if lhs.type != rhs.type {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Trends_V1_TrendsResponse.LatestValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Trends_V1_TrendsResponse.protoMessageName + ".LatestValue"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "display_date"),
+    2: .standard(proto: "display_value"),
+    3: .standard(proto: "result_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.displayDate) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.displayValue) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self._resultID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.displayDate.isEmpty {
+      try visitor.visitSingularStringField(value: self.displayDate, fieldNumber: 1)
+    }
+    if !self.displayValue.isEmpty {
+      try visitor.visitSingularStringField(value: self.displayValue, fieldNumber: 2)
+    }
+    try { if let v = self._resultID {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Trends_V1_TrendsResponse.LatestValue, rhs: Vault_Trends_V1_TrendsResponse.LatestValue) -> Bool {
+    if lhs.displayDate != rhs.displayDate {return false}
+    if lhs.displayValue != rhs.displayValue {return false}
+    if lhs._resultID != rhs._resultID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -2198,7 +2338,7 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: SwiftProtobuf.Message,
     var _coordinates: [Vault_Common_Coordinate] = []
     var _bodyState: String? = nil
     var _displayBodyState: String? = nil
-    var _source: String? = nil
+    var _source: Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source? = nil
     var _vitalInfo: Vault_Trends_V1_Log.VitalInfo? = nil
     var _displayTime: String = String()
 
@@ -2264,7 +2404,7 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: SwiftProtobuf.Message,
         case 16: try { try decoder.decodeRepeatedMessageField(value: &_storage._coordinates) }()
         case 17: try { try decoder.decodeSingularStringField(value: &_storage._bodyState) }()
         case 18: try { try decoder.decodeSingularStringField(value: &_storage._displayBodyState) }()
-        case 19: try { try decoder.decodeSingularStringField(value: &_storage._source) }()
+        case 19: try { try decoder.decodeSingularEnumField(value: &_storage._source) }()
         case 20: try { try decoder.decodeSingularMessageField(value: &_storage._vitalInfo) }()
         case 21: try { try decoder.decodeSingularStringField(value: &_storage._displayTime) }()
         default: break
@@ -2334,7 +2474,7 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: SwiftProtobuf.Message,
         try visitor.visitSingularStringField(value: v, fieldNumber: 18)
       } }()
       try { if let v = _storage._source {
-        try visitor.visitSingularStringField(value: v, fieldNumber: 19)
+        try visitor.visitSingularEnumField(value: v, fieldNumber: 19)
       } }()
       try { if let v = _storage._vitalInfo {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
@@ -2379,6 +2519,15 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: SwiftProtobuf.Message,
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
+}
+
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "SOURCE_UNSPECIFIED"),
+    1: .same(proto: "SOURCE_RECORD"),
+    2: .same(proto: "SOURCE_APPLE_HEALTH"),
+    3: .same(proto: "SOURCE_GOOGLE_FIT"),
+  ]
 }
 
 extension Vault_Trends_V1_Log.UnverifiedParameterReading: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
