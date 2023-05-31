@@ -10,44 +10,59 @@ import "vault/range.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/v1/trends";
 
+/* Readings represent plot data */
 message Readings {
-  message Categories { repeated string categories = 1; }
+  /* Categories represents the x-axis categories */
+  message Categories { 
+    repeated string categories = 1; // x-axis categories.
+  }
 
+  /* PlotData represent readings in a tab per filter. */
   message PlotData {
+    /* ParameterReadingsGraph represent data for the reading. */
     message ParameterReadingsGraph {
       oneof plot_value {
-        double value = 1;
-        string value_string = 2;
-        vault.common.ValueRange value_range = 3;
+        double value = 1; // Value of the reading.
+        string value_string = 2; // String value of the reading.
+        vault.common.ValueRange value_range = 3; // Range of the reading.
       }
 
       oneof plot_time {
-        google.protobuf.Timestamp instant = 4;
-        vault.common.TimeRange instant_range = 5;
+        google.protobuf.Timestamp instant = 4; // Timestamp of the reading.
+        vault.common.TimeRange instant_range = 5; // Start and End timestamp of the reading.
       }
 
       optional vault.insights.VitalInsightsResponse.Interpretation result_id =
-          6;
-      optional string display_result = 7;
-      optional string test_eka_id = 8;
+          6; // Interpretation of the reading.
+      optional string display_result = 7; // Display Result of the reading.
+      optional string test_eka_id = 8; // Test Eka ID of the reading.
     }
 
-    message CategoryReadings { repeated ParameterReadingsGraph readings = 1; }
+    /* CategoryReadings represent readings in a category. */
+    message CategoryReadings { 
+      repeated ParameterReadingsGraph readings = 1; // readings in a category.
+    }
 
-    message Readings { repeated ParameterReadingsGraph readings = 1; }
+    /* Readings represent the scatter readings */
+    message Readings { 
+      repeated ParameterReadingsGraph readings = 1; // Scatter readings.
+    }
 
-    message ReadingsByCategory { repeated CategoryReadings readings = 1; }
+    // Readings of x-categories.
+    message ReadingsByCategory { 
+      repeated CategoryReadings readings = 1;  // Readings in the categories.
+      repeated int32 categories_with_data = 2; // Categories in which data is present.
+    }
 
-    optional vault.common.ValueRange plot_range = 1;
-    optional double tick_amount = 2;
-    optional double tick_interval = 3;
-    optional double y_max = 4;
-    optional double y_min = 5;
+    optional vault.common.ValueRange plot_range = 1; // plot band range.
+    optional double tick_amount = 2; // tick amount on y-axis.
+    optional double tick_interval = 3; // tick interval of x-axis.
+    optional double y_max = 4; // y-max.
+    optional double y_min = 5; // y-min.
     oneof data {
-      Readings readings = 6;
-      ReadingsByCategory readings_by_category = 7;
+      Readings readings = 6; // Scatter readings.
+      ReadingsByCategory readings_by_category = 7; // Readings by x-category.
     }
-    repeated int32 categories_with_data = 8;
   }
 
   /* PlotType is an enum used to represent the type of the plot */
@@ -61,12 +76,12 @@ message Readings {
     PLOT_X_RANGE = 6; // X-Range plot.
   }
 
-  PlotType plot_type = 1;
-  string label = 2;
-  map<string, PlotData> plot_data = 3;
+  PlotType plot_type = 1; // plot type in the tab.
+  string label = 2; // Label in the tab.
+  map<string, PlotData> plot_data = 3; // map of filter to it's plot data.
   oneof x_axis {
-    Categories reading_group = 4;
-    vault.common.TimeRange time_range = 5;
+    Categories reading_group = 4; // X-Axis categories.
+    vault.common.TimeRange time_range = 5; // X-Axis time series.
   }
 }
 
@@ -92,8 +107,7 @@ message TrendsResponse {
   }
 
   /* FilterColumn represents the attribute/ column on which filter can be
-   * applied
-   */
+    applied */
   message FilterColumn {
     string display_name = 1;         // Display name of the filter column.
     string id = 2;                   // Id of the filter column.
@@ -140,82 +154,85 @@ message TrendsResponse {
 /* TrendsMoreTabResponse represents the API response of graph data for the
  * remaining tabs */
 message TrendsMoreTabResponse {
-  repeated Tab tab_array = 1;
-  repeated Readings readings_v2 = 2;
+  repeated Tab tab_array = 1; // Tabs that should be present in the graph.
+  repeated Readings readings_v2 = 2; // Plot data inside the tabs.
 }
 
 /* TrendsRelatedVitals represents the API response of related vitals of the
  * given test */
 message TrendsRelatedVitals {
+  /* Related represents information of the related vital */
   message Related {
-    string mdb_id = 1;
-    string name = 2;
+    string mdb_id = 1; // ID of the vital.
+    string name = 2; // Name of the vital.
   }
 
-  string display_name = 1;
-  repeated Related related_vitals = 2;
+  string display_name = 1; // Display Name of Related Vitals Label.
+  repeated Related related_vitals = 2; // Related Vitals.
 }
 
 /* Log represents the API response of log data of the given test */
 message Log {
-  message CTA { string title = 1; }
+  /* CTA represents information of the reading */
+  message CTA { string title = 1; // Title of the reading. }
 
+  /* VitalInfo represent the vital source info */
   message VitalInfo {
-    optional string image = 1;
-    string title = 2;
-    optional CTA cta = 3;
+    string title = 1; // Title of the reading.
+    optional CTA cta = 2; // CTA of the reading.
   }
 
   message ParameterReadingsAtInstant {
+    /*  Source is an enum to represent source of the data */
     enum Source {
-      SOURCE_UNSPECIFIED = 0;
-      SOURCE_RECORD = 1;
-      SOURCE_APPLE_HEALTH = 2;
-      SOURCE_GOOGLE_FIT = 3;
+      SOURCE_UNSPECIFIED = 0; // Unhandled source.
+      SOURCE_RECORD = 1; // Source of data is record/ document.
+      SOURCE_APPLE_HEALTH = 2; // Source of data is Apple Health.
+      SOURCE_GOOGLE_FIT = 3; // Source of data is Google Fit.
     }
 
-    uint32 parameter_id = 1;
-    string document_id = 2;
-    string value = 3;
-    string display_value = 4;
-    string unit = 5;
-    optional string unit_eka_id = 6;
-    google.protobuf.Timestamp date = 7;
-    vault.common.ValueRange range = 8;
-    optional string display_range = 9;
-    string result = 10;
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 11;
-    string display_result = 12;
-    int32 page_num = 13;
-    string asset_url = 14;
-    string file_type = 15;
-    repeated vault.common.Coordinate coordinates = 16;
-    optional string body_state = 17;
-    optional string display_body_state = 18;
-    optional Source source = 19;
-    optional VitalInfo vital_info = 20;
-    string display_time = 21;
+    uint32 parameter_id = 1; // id of the reading.
+    string document_id = 2; // id of the document or record from which the reading is based on.
+    string value = 3; // value of the reading.
+    string display_value = 4; // display value of the reading.
+    string unit = 5; // Unit of the reading.
+    optional string unit_eka_id = 6; // Unit eka id of the reading.
+    google.protobuf.Timestamp date = 7; // Time at which the reading is measured.
+    vault.common.ValueRange range = 8; // Normal range of the reading.
+    optional string display_range = 9; // Display Normal range of the reading.
+    string result = 10; //
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 11; // Interpretation of the reading.
+    string display_result = 12; // Display result of the reading.
+    int32 page_num = 13; // Page num of the document in which the reading is found.
+    string asset_url = 14; // URL of the document.
+    string file_type = 15; // Type of document.
+    repeated vault.common.Coordinate coordinates = 16; // Coordinates inside the document where reading is found.
+    optional string body_state = 17; // Body State when reading is measured.
+    optional string display_body_state = 18; // Display name of the Body State. 
+    optional Source source = 19; // Source of the reading.
+    optional VitalInfo vital_info = 20; // Information of the reading.
+    string display_time = 21; // Display time of the reading measured time.
   }
 
   message UnverifiedParameterReading {
-    uint32 parameter_id = 1;
-    string document_id = 2;
-    string value = 3;
-    string unit = 4;
-    optional string unit_eka_id = 5;
-    string display_range = 6;
-    optional google.protobuf.Timestamp date = 7;
-    int32 page_num = 8;
-    string asset_url = 9;
-    string file_type = 10;
-    repeated vault.common.Coordinate coordinates = 11;
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 12;
-    string display_result = 13;
-    optional string display_time = 14;
+    uint32 parameter_id = 1; // id of the reading.
+    string document_id = 2; // id of the document or record from which the reading is based on.
+    string value = 3; // value of the reading.
+    string unit = 4; // Unit of the reading.
+    optional string unit_eka_id = 5; // Unit eka id of the reading.
+    string display_range = 6; // Display Normal range of the reading.
+    optional google.protobuf.Timestamp date = 7; // Time at which the reading is measured.
+    int32 page_num = 8; // Page num of the document in which the reading is found.
+    string asset_url = 9; // URL of the document.
+    string file_type = 10; // Type of document.
+    repeated vault.common.Coordinate coordinates = 11; // Coordinates inside the document where reading is found.
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 12; // Interpretation of the reading.
+    string display_result = 13; // Display result of the reading.
+    optional string display_time = 14; // Display time of the reading measured time.
   }
 
-  repeated ParameterReadingsAtInstant readings = 1;
-  repeated UnverifiedParameterReading unverified = 2;
+  repeated ParameterReadingsAtInstant readings = 1; // Verified or readings extracted with confidence.
+  repeated UnverifiedParameterReading unverified = 2; // Readings extracted with less confidence and needs user confirmation.
 }
 
 /* Log represents the API response of vital content of the given test. */
