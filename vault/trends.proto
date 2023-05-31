@@ -92,6 +92,12 @@ message TrendsResponse {
     string type = 2;
   }
 
+  message LatestValue {
+    string display_date = 1;
+    string display_value = 2;
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 3;
+  }
+
   string name = 1;
   string unit = 2;
   int32 default_tab = 3;
@@ -105,6 +111,7 @@ message TrendsResponse {
   string filter_delimiter = 11;
   optional string unit_eka_id = 12;
   optional string no_readings_img = 13;
+  optional LatestValue latest_value = 14;
 }
 
 message TrendsMoreTabResponse {
@@ -132,6 +139,13 @@ message Log {
   }
 
   message ParameterReadingsAtInstant {
+    enum Source {
+      SOURCE_UNSPECIFIED = 0;
+      SOURCE_RECORD = 1;
+      SOURCE_APPLE_HEALTH = 2;
+      SOURCE_GOOGLE_FIT = 3;
+    }
+
     uint32 parameter_id = 1;
     string document_id = 2;
     string value = 3;
@@ -150,7 +164,7 @@ message Log {
     repeated vault.common.Coordinate coordinates = 16;
     optional string body_state = 17;
     optional string display_body_state = 18;
-    optional string source = 19;
+    optional Source source = 19;
     optional VitalInfo vital_info = 20;
     string display_time = 21;
   }
