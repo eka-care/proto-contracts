@@ -6,12 +6,14 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/range";
 
+/* ValueRange represent range */
 message ValueRange {
-  optional double low = 1;
-  optional double high = 2;
+  optional double low = 1; // low of the range.
+  optional double high = 2; // high of the range.
 }
 
+/* ValueRange represent time range */
 message TimeRange {
-  optional google.protobuf.Timestamp start = 1;
-  optional google.protobuf.Timestamp end = 2;
+  optional google.protobuf.Timestamp start = 1; // Start of the time.
+  optional google.protobuf.Timestamp end = 2; // End of the time.
 }
