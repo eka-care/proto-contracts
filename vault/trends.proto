@@ -50,7 +50,18 @@ message Readings {
     repeated int32 categories_with_data = 8;
   }
 
-  string plot_type = 1;
+  /* PlotType is an enum used to represent the type of the plot */
+  enum PlotType {
+    PLOT_UNSPECIFIED = 0; // Unhandled plot type.
+    PLOT_SCATTER = 1; // Scatter plot.
+    PLOT_COLUMN_RANGE = 2; // Column range plot.
+    PLOT_COLUMN = 3; // Column plot.
+    PLOT_AREA = 4; // Area plot.
+    PLOT_LINE = 5; // Line plot.
+    PLOT_X_RANGE = 6; // X-Range plot.
+  }
+
+  PlotType plot_type = 1;
   string label = 2;
   map<string, PlotData> plot_data = 3;
   oneof x_axis {
@@ -225,13 +236,13 @@ message VitalContent {
   /* Banner represents the card content. */
   message Banner {
     string id = 1; // id of the card.
-    string title = 2;
-    string body = 3;
-    repeated DynamicParameter body_parameters = 4;
-    optional vault.common.CTA cta = 5;
-    BannerCategory category = 6;
-    string img = 7;
-    string lottie_id = 8;
+    string title = 2; // title of the card.
+    string body = 3; // body of the card.
+    repeated DynamicParameter body_parameters = 4; // dynamic parameters with body.
+    optional vault.common.CTA cta = 5; // CTA of the card.
+    BannerCategory category = 6; // Category of the banner.
+    optional string img = 7; // Image used in the card.
+    string lottie_id = 8; // Identifier of the lottie used in the card.
   }
 
   /* VitalGeneralInfo represents the static content about the test. */
