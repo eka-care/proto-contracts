@@ -6,14 +6,16 @@ import "google/protobuf/struct.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/cta";
 
+/* CTA represents data for any click through action */
 message CTA {
-  string pid = 1;
-  map<string, google.protobuf.Value> params = 2;
-  optional string title = 3;
-  optional string action = 4;
+  string pid = 1; // pid of the destination screen.
+  map<string, google.protobuf.Value> params = 2; // params accepted/ needed by the destination screen.
+  optional string title = 3; // Title of the source click block.
+  optional string action = 4; // action applied on click.
 }
 
+/* ActionCTA represents data for any action on click */
 message ActionCTA {
-  string action = 1;
-  optional string title = 2;
+  string action = 1; // action enum.
+  optional string title = 2; // Title of the source click block.
 }
