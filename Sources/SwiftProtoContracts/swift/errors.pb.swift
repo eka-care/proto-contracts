@@ -20,6 +20,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+/// ErrorCode is an enum for error code 
 public enum Vault_ErrorCode: SwiftProtobuf.Enum {
   public typealias RawValue = Int
 
@@ -58,11 +59,13 @@ extension Vault_ErrorCode: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+/// VaultErrorResponse represent API response in case an error 
 public struct Vault_VaultErrorResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// Error Code.
   public var code: Vault_ErrorCode {
     get {return _code ?? .unspecified}
     set {_code = newValue}
@@ -72,6 +75,7 @@ public struct Vault_VaultErrorResponse {
   /// Clears the value of `code`. Subsequent reads from it will return its default value.
   public mutating func clearCode() {self._code = nil}
 
+  /// Error message.
   public var message: String {
     get {return _message ?? String()}
     set {_message = newValue}
