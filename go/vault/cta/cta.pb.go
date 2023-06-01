@@ -21,15 +21,16 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// CTA represents data for any click through action
 type CTA struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Pid    string                     `protobuf:"bytes,1,opt,name=pid,proto3" json:"pid,omitempty"`
-	Params map[string]*structpb.Value `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Title  *string                    `protobuf:"bytes,3,opt,name=title,proto3,oneof" json:"title,omitempty"`
-	Action *string                    `protobuf:"bytes,4,opt,name=action,proto3,oneof" json:"action,omitempty"`
+	Pid    string                     `protobuf:"bytes,1,opt,name=pid,proto3" json:"pid,omitempty"`                                                                                               // pid of the destination screen.
+	Params map[string]*structpb.Value `protobuf:"bytes,2,rep,name=params,proto3" json:"params,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // params accepted/ needed by the destination screen.
+	Title  *string                    `protobuf:"bytes,3,opt,name=title,proto3,oneof" json:"title,omitempty"`                                                                                     // Title of the source click block.
+	Action *string                    `protobuf:"bytes,4,opt,name=action,proto3,oneof" json:"action,omitempty"`                                                                                   // action applied on click.
 }
 
 func (x *CTA) Reset() {
@@ -92,13 +93,14 @@ func (x *CTA) GetAction() string {
 	return ""
 }
 
+// ActionCTA represents data for any action on click
 type ActionCTA struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Action string  `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	Title  *string `protobuf:"bytes,2,opt,name=title,proto3,oneof" json:"title,omitempty"`
+	Action string  `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`     // action enum.
+	Title  *string `protobuf:"bytes,2,opt,name=title,proto3,oneof" json:"title,omitempty"` // Title of the source click block.
 }
 
 func (x *ActionCTA) Reset() {

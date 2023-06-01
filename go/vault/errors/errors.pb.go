@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ErrorCode is an enum for error code
 type ErrorCode int32
 
 const (
@@ -63,13 +64,14 @@ func (ErrorCode) EnumDescriptor() ([]byte, []int) {
 	return file_vault_errors_proto_rawDescGZIP(), []int{0}
 }
 
+// VaultErrorResponse represent API response in case an error
 type VaultErrorResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code    *ErrorCode `protobuf:"varint,1,opt,name=code,proto3,enum=vault.ErrorCode,oneof" json:"code,omitempty"`
-	Message *string    `protobuf:"bytes,2,opt,name=message,proto3,oneof" json:"message,omitempty"`
+	Code    *ErrorCode `protobuf:"varint,1,opt,name=code,proto3,enum=vault.ErrorCode,oneof" json:"code,omitempty"` // Error Code.
+	Message *string    `protobuf:"bytes,2,opt,name=message,proto3,oneof" json:"message,omitempty"`                 // Error message.
 }
 
 func (x *VaultErrorResponse) Reset() {
