@@ -20,13 +20,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Coordinate represents point in a graph
 type Coordinate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	X float64 `protobuf:"fixed64,1,opt,name=x,proto3" json:"x,omitempty"`
-	Y float64 `protobuf:"fixed64,2,opt,name=y,proto3" json:"y,omitempty"`
+	X float64 `protobuf:"fixed64,1,opt,name=x,proto3" json:"x,omitempty"` // X Value of the coordinate.
+	Y float64 `protobuf:"fixed64,2,opt,name=y,proto3" json:"y,omitempty"` // Y Value of the coordinate.
 }
 
 func (x *Coordinate) Reset() {

@@ -10,216 +10,288 @@ import "vault/range.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/v1/trends";
 
+/* Readings represent plot data */
 message Readings {
-  message Categories { repeated string categories = 1; }
+  /* Categories represents the x-axis categories */
+  message Categories {
+    repeated string categories = 1; // x-axis categories.
+  }
 
+  /* PlotData represent readings in a tab per filter. */
   message PlotData {
+    /* ParameterReadingsGraph represent data for the reading. */
     message ParameterReadingsGraph {
       oneof plot_value {
-        double value = 1;
-        string value_string = 2;
-        vault.common.ValueRange value_range = 3;
+        double value = 1;                        // Value of the reading.
+        string value_string = 2;                 // String value of the reading.
+        vault.common.ValueRange value_range = 3; // Range of the reading.
       }
 
       oneof plot_time {
-        google.protobuf.Timestamp instant = 4;
-        vault.common.TimeRange instant_range = 5;
+        google.protobuf.Timestamp instant = 4; // Timestamp of the reading.
+        vault.common.TimeRange instant_range =
+            5; // Start and End timestamp of the reading.
       }
 
       optional vault.insights.VitalInsightsResponse.Interpretation result_id =
-          6;
-      optional string display_result = 7;
-      optional string test_eka_id = 8;
+          6;                              // Interpretation of the reading.
+      optional string display_result = 7; // Display Result of the reading.
+      optional string test_eka_id = 8;    // Test Eka ID of the reading.
     }
 
-    message CategoryReadings { repeated ParameterReadingsGraph readings = 1; }
+    /* CategoryReadings represent readings in a category. */
+    message CategoryReadings {
+      repeated ParameterReadingsGraph readings = 1; // readings in a category.
+    }
 
-    message Readings { repeated ParameterReadingsGraph readings = 1; }
+    /* Readings represent the scatter readings */
+    message Readings {
+      repeated ParameterReadingsGraph readings = 1; // Scatter readings.
+    }
 
-    message ReadingsByCategory { repeated CategoryReadings readings = 1; }
+    // Readings of x-categories.
+    message ReadingsByCategory {
+      repeated CategoryReadings readings = 1; // Readings in the categories.
+      repeated int32 categories_with_data =
+          2; // Categories in which data is present.
+    }
 
-    optional vault.common.ValueRange plot_range = 1;
-    optional double tick_amount = 2;
-    optional double tick_interval = 3;
-    optional double y_max = 4;
-    optional double y_min = 5;
+    optional vault.common.ValueRange plot_range = 1; // plot band range.
+    optional double tick_amount = 2;                 // tick amount on y-axis.
+    optional double tick_interval = 3;               // tick interval of x-axis.
+    optional double y_max = 4;                       // y-max.
+    optional double y_min = 5;                       // y-min.
     oneof data {
-      Readings readings = 6;
-      ReadingsByCategory readings_by_category = 7;
+      Readings readings = 6;                       // Scatter readings.
+      ReadingsByCategory readings_by_category = 7; // Readings by x-category.
     }
-    repeated int32 categories_with_data = 8;
   }
 
-  string plot_type = 1;
-  string label = 2;
-  map<string, PlotData> plot_data = 3;
+  /* PlotType is an enum used to represent the type of the plot */
+  enum PlotType {
+    PLOT_UNSPECIFIED = 0;  // Unhandled plot type.
+    PLOT_SCATTER = 1;      // Scatter plot.
+    PLOT_COLUMN_RANGE = 2; // Column range plot.
+    PLOT_COLUMN = 3;       // Column plot.
+    PLOT_AREA = 4;         // Area plot.
+    PLOT_LINE = 5;         // Line plot.
+    PLOT_X_RANGE = 6;      // X-Range plot.
+  }
+
+  PlotType plot_type = 1;              // plot type in the tab.
+  string label = 2;                    // Label in the tab.
+  map<string, PlotData> plot_data = 3; // map of filter to it's plot data.
   oneof x_axis {
-    Categories reading_group = 4;
-    vault.common.TimeRange time_range = 5;
+    Categories reading_group = 4;          // X-Axis categories.
+    vault.common.TimeRange time_range = 5; // X-Axis time series.
   }
 }
 
+/* Tab is an enum used to represent the tabs in the graph. */
 enum Tab {
-  TAB_UNSPECIFIED = 0;
-  TAB_HOUR = 1;
-  TAB_DAY = 2;
-  TAB_WEEK = 3;
-  TAB_MONTH = 4;
-  TAB_SIX_MONTHS = 5;
-  TAB_YEAR = 6;
-  TAB_TEN_YEARS = 7;
+  TAB_UNSPECIFIED = 0; // Unhandled tab.
+  TAB_HOUR = 1;        // Hour tab.
+  TAB_DAY = 2;         // Day tab.
+  TAB_WEEK = 3;        // Week tab.
+  TAB_MONTH = 4;       // Month tab.
+  TAB_SIX_MONTHS = 5;  // Six months tab.
+  TAB_YEAR = 6;        // Year tab.
+  TAB_TEN_YEARS = 7;   // Ten years tab.
 }
 
+/* TrendsResponse represents the API response of graph data from the landing tab
+and other details like filters, latest value */
 message TrendsResponse {
-  message FilterValueInfo {
-    string id = 1;
-    string display_name = 2;
+  /* FilterValue represents filter values of a filter column */
+  message FilterValue {
+    string id = 1;           // id of the filter.
+    string display_name = 2; // display name of the filter.
   }
 
-  message Filter {
-    string display_name = 1;
-    string id = 2;
-    repeated FilterValueInfo values = 3;
+  /* FilterColumn represents the attribute/ column on which filter can be
+    applied */
+  message FilterColumn {
+    string display_name = 1;         // Display name of the filter column.
+    string id = 2;                   // Id of the filter column.
+    repeated FilterValue values = 3; // Values of the filter column.
   }
 
+  /* CTAs represents the bottom navigations in trends screen */
   message CTAs {
-    optional vault.common.CTA left_cta = 1;
-    optional vault.common.CTA right_cta = 2;
+    optional vault.common.CTA left_cta = 1;  // Left CTA.
+    optional vault.common.CTA right_cta = 2; // Right CTA.
   }
 
+  /* Symbol is used to represent a test with a given symbol */
   message Symbol {
-    string test_eka_id = 1;
-    string type = 2;
+    string test_eka_id = 1; // ID of the test.
+    string type = 2;        // Type of the symbol.
   }
 
+  /* LatestValue represents the latest value of a test */
   message LatestValue {
-    string display_date = 1;
-    string display_value = 2;
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 3;
+    string display_date = 1;  // Display date of the latest value.
+    string display_value = 2; // Display value of the latest value.
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+        3; // Result id of the latest value.
   }
 
-  string name = 1;
-  string unit = 2;
-  int32 default_tab = 3;
-  repeated Tab tab_array = 4;
-  repeated Readings readings_v2 = 5;
-  CTAs ctas = 6;
-  string no_graph_data_display_text = 7;
-  bool non_interpretable = 8;
-  repeated Symbol symbols = 9;
-  repeated Filter filters = 10;
-  string filter_delimiter = 11;
-  optional string unit_eka_id = 12;
-  optional string no_readings_img = 13;
-  optional LatestValue latest_value = 14;
+  string name = 1;            // Name of the test.
+  string unit = 2;            // Unit of the test.
+  int32 default_tab = 3;      // Landing tab index in the graph.
+  repeated Tab tab_array = 4; // Tabs that should be present in the graph.
+  repeated Readings readings_v2 = 5; // Plot data inside the tabs.
+  CTAs ctas = 6;                     // Bottom navigation CTAs.
+  string no_graph_data_display_text =
+      7;                       // Display text when no graph data in a tab.
+  bool non_interpretable = 8;  // Whether the test is non-interpretable.
+  repeated Symbol symbols = 9; // Symbols for tests.
+  repeated FilterColumn filters = 10;     // Filters for the graph.
+  string filter_delimiter = 11;           // Delimiter for the filter values.
+  optional string unit_eka_id = 12;       // Unit EKA ID of the test.
+  optional string no_readings_img = 13;   // Image when no graph data.
+  optional LatestValue latest_value = 14; // Latest value of the test.
 }
 
+/* TrendsMoreTabResponse represents the API response of graph data for the
+ * remaining tabs */
 message TrendsMoreTabResponse {
-  repeated Tab tab_array = 1;
-  repeated Readings readings_v2 = 2;
+  repeated Tab tab_array = 1; // Tabs that should be present in the graph.
+  repeated Readings readings_v2 = 2; // Plot data inside the tabs.
 }
 
+/* TrendsRelatedVitals represents the API response of related vitals of the
+ * given test */
 message TrendsRelatedVitals {
+  /* Related represents information of the related vital */
   message Related {
-    string mdb_id = 1;
-    string name = 2;
+    string mdb_id = 1; // ID of the vital.
+    string name = 2;   // Name of the vital.
   }
 
-  string display_name = 1;
-  repeated Related related_vitals = 2;
+  string display_name = 1;             // Display Name of Related Vitals Label.
+  repeated Related related_vitals = 2; // Related Vitals.
 }
 
+/* Log represents the API response of log data of the given test */
 message Log {
-  message CTA { string title = 1; }
+  /* CTA represents information of the reading */
+  message CTA {
+    string title = 1; // Title of the reading.
+  }
 
+  /* VitalInfo represent the vital source info */
   message VitalInfo {
-    optional string image = 1;
-    string title = 2;
-    optional CTA cta = 3;
+    string title = 1;     // Title of the reading.
+    optional CTA cta = 2; // CTA of the reading.
   }
 
   message ParameterReadingsAtInstant {
+    /*  Source is an enum to represent source of the data */
     enum Source {
-      SOURCE_UNSPECIFIED = 0;
-      SOURCE_RECORD = 1;
-      SOURCE_APPLE_HEALTH = 2;
-      SOURCE_GOOGLE_FIT = 3;
+      SOURCE_UNSPECIFIED = 0;  // Unhandled source.
+      SOURCE_RECORD = 1;       // Source of data is record/ document.
+      SOURCE_APPLE_HEALTH = 2; // Source of data is Apple Health.
+      SOURCE_GOOGLE_FIT = 3;   // Source of data is Google Fit.
     }
 
-    uint32 parameter_id = 1;
-    string document_id = 2;
-    string value = 3;
-    string display_value = 4;
-    string unit = 5;
-    optional string unit_eka_id = 6;
-    google.protobuf.Timestamp date = 7;
-    vault.common.ValueRange range = 8;
-    optional string display_range = 9;
-    string result = 10;
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 11;
-    string display_result = 12;
-    int32 page_num = 13;
-    string asset_url = 14;
-    string file_type = 15;
-    repeated vault.common.Coordinate coordinates = 16;
-    optional string body_state = 17;
-    optional string display_body_state = 18;
-    optional Source source = 19;
-    optional VitalInfo vital_info = 20;
-    string display_time = 21;
+    uint32 parameter_id = 1; // id of the reading.
+    string document_id =
+        2; // id of the document or record from which the reading is based on.
+    string value = 3;                // value of the reading.
+    string display_value = 4;        // display value of the reading.
+    string unit = 5;                 // Unit of the reading.
+    optional string unit_eka_id = 6; // Unit eka id of the reading.
+    google.protobuf.Timestamp date =
+        7;                             // Time at which the reading is measured.
+    vault.common.ValueRange range = 8; // Normal range of the reading.
+    optional string display_range = 9; // Display Normal range of the reading.
+    string result = 10;                //
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+        11;                     // Interpretation of the reading.
+    string display_result = 12; // Display result of the reading.
+    int32 page_num =
+        13; // Page num of the document in which the reading is found.
+    string asset_url = 14; // URL of the document.
+    string file_type = 15; // Type of document.
+    repeated vault.common.Coordinate coordinates =
+        16; // Coordinates inside the document where reading is found.
+    optional string body_state = 17; // Body State when reading is measured.
+    optional string display_body_state = 18; // Display name of the Body State.
+    optional Source source = 19;             // Source of the reading.
+    optional VitalInfo vital_info = 20;      // Information of the reading.
+    string display_time = 21; // Display time of the reading measured time.
   }
 
   message UnverifiedParameterReading {
-    uint32 parameter_id = 1;
-    string document_id = 2;
-    string value = 3;
-    string unit = 4;
-    optional string unit_eka_id = 5;
-    string display_range = 6;
-    optional google.protobuf.Timestamp date = 7;
-    int32 page_num = 8;
-    string asset_url = 9;
-    string file_type = 10;
-    repeated vault.common.Coordinate coordinates = 11;
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id = 12;
-    string display_result = 13;
-    optional string display_time = 14;
+    uint32 parameter_id = 1; // id of the reading.
+    string document_id =
+        2; // id of the document or record from which the reading is based on.
+    string value = 3;                // value of the reading.
+    string unit = 4;                 // Unit of the reading.
+    optional string unit_eka_id = 5; // Unit eka id of the reading.
+    string display_range = 6;        // Display Normal range of the reading.
+    optional google.protobuf.Timestamp date =
+        7; // Time at which the reading is measured.
+    int32 page_num =
+        8; // Page num of the document in which the reading is found.
+    string asset_url = 9;  // URL of the document.
+    string file_type = 10; // Type of document.
+    repeated vault.common.Coordinate coordinates =
+        11; // Coordinates inside the document where reading is found.
+    optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+        12;                     // Interpretation of the reading.
+    string display_result = 13; // Display result of the reading.
+    optional string display_time =
+        14; // Display time of the reading measured time.
   }
 
-  repeated ParameterReadingsAtInstant readings = 1;
-  repeated UnverifiedParameterReading unverified = 2;
+  repeated ParameterReadingsAtInstant readings =
+      1; // Verified or readings extracted with confidence.
+  repeated UnverifiedParameterReading unverified =
+      2; // Readings extracted with less confidence and needs user
+         // confirmation.
 }
 
+/* VitalContent represents the API response of vital content of the given
+  test. */
 message VitalContent {
+  /* BannerCategory is an enum used to represent the card type. */
   enum BannerCategory {
-    BANNER_CATEGORY_UNSPECIFIED = 0;
-    BANNER_CATEGORY_INFO = 1;
-    BANNER_CATEGORY_ACTION = 2;
+    BANNER_CATEGORY_UNSPECIFIED = 0; // Unhandled banner category.
+    BANNER_CATEGORY_INFO = 1;        // Information banner category.
+    BANNER_CATEGORY_ACTION = 2;      // Actionable banner category.
   }
 
+  /* DynamicParameter is an enum used to represent dynamic parameter.  */
   enum DynamicParameter {
-    DYNAMIC_PARAMETER_UNSPECIFIED = 0;
-    DYNAMIC_PARAMETER_MOBILE = 1;
+    DYNAMIC_PARAMETER_UNSPECIFIED = 0; // Unhandled dynamic parameter.
+    DYNAMIC_PARAMETER_MOBILE = 1;      // Mobile number dynamic parameter.
   }
 
+  /* Banner represents the card content. */
   message Banner {
-    string id = 1;
-    string title = 2;
-    string body = 3;
-    repeated DynamicParameter body_parameters = 4;
-    optional vault.common.CTA cta = 5;
-    BannerCategory category = 6;
-    string img = 7;
-    string lottie_id = 8;
+    string id = 1;    // id of the card.
+    string title = 2; // title of the card.
+    string body = 3;  // body of the card.
+    repeated DynamicParameter body_parameters =
+        4;                             // dynamic parameters with body.
+    optional vault.common.CTA cta = 5; // CTA of the card.
+    BannerCategory category = 6;       // Category of the banner.
+    optional string img = 7;           // Image used in the card.
+    string lottie_id = 8; // Identifier of the lottie used in the card.
   }
 
+  /* VitalGeneralInfo represents the static content about the test. */
   message VitalGeneralInfo {
-    string heading = 1;
-    string body = 2;
-    optional string img = 3;
+    string heading = 1;      // Heading to explain a topic about the test.
+    string body = 2;         // Body to explain a topic about the test.
+    optional string img = 3; // Image to explain a topic about the test.
   }
 
-  optional string current_state_information = 1;
-  repeated Banner linked_cards = 2;
-  repeated VitalGeneralInfo vital_info = 3;
+  optional string current_state_information =
+      1; // Information based on latest value interpretation.
+  repeated Banner linked_cards = 2; // Linked cards.
+  repeated VitalGeneralInfo vital_info =
+      3; // General static information about the test.
 }

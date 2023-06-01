@@ -21,13 +21,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// ValueRange represent range
 type ValueRange struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Low  *float64 `protobuf:"fixed64,1,opt,name=low,proto3,oneof" json:"low,omitempty"`
-	High *float64 `protobuf:"fixed64,2,opt,name=high,proto3,oneof" json:"high,omitempty"`
+	Low  *float64 `protobuf:"fixed64,1,opt,name=low,proto3,oneof" json:"low,omitempty"`   // low of the range.
+	High *float64 `protobuf:"fixed64,2,opt,name=high,proto3,oneof" json:"high,omitempty"` // high of the range.
 }
 
 func (x *ValueRange) Reset() {
@@ -76,13 +77,14 @@ func (x *ValueRange) GetHigh() float64 {
 	return 0
 }
 
+// ValueRange represent time range
 type TimeRange struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Start *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start,proto3,oneof" json:"start,omitempty"`
-	End   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end,proto3,oneof" json:"end,omitempty"`
+	Start *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start,proto3,oneof" json:"start,omitempty"` // Start of the time.
+	End   *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=end,proto3,oneof" json:"end,omitempty"`     // End of the time.
 }
 
 func (x *TimeRange) Reset() {
