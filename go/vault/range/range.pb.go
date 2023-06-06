@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// ValueRange represent range
+// ValueRange represent value range
 type ValueRange struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -77,7 +77,7 @@ func (x *ValueRange) GetHigh() float64 {
 	return 0
 }
 
-// ValueRange represent time range
+// TimeRange represent time range
 type TimeRange struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

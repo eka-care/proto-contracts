@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package vault.keyvitals;
+
+import "vault/insights.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/keyvitals";
+
+/* KeyVitalsAPIResponse represent API response of key vitals */
+message KeyVitalsAPIResponse {
+  repeated KeyVital vitals = 1; // key vitals.
+}
+
+message KeyVital {
+  string name = 1;           // Name of the vital.
+  string test_eka_id = 2;    // Test EKA ID.
+  optional string value = 3; // Value of the vital.
+  optional string unit = 4;  // Unit of the vital.
+  optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+      5; // Interpretation of the reading.
+
+  oneof result {
+    string measured_at = 6; // Date of the vital.
+    bool is_old = 7;        // Is the data old.
+  }
+}

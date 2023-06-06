@@ -45,12 +45,12 @@ message Readings {
     }
 
     /* Readings represent the scatter readings */
-    message Readings {
+    message DatetimeReadings {
       repeated ParameterReadingsGraph readings = 1; // Scatter readings.
     }
 
     // Readings of x-categories.
-    message ReadingsByCategory {
+    message CategoryReadingsInfo {
       repeated CategoryReadings readings = 1; // Readings in the categories.
       repeated int32 categories_with_data =
           2; // Categories in which data is present.
@@ -62,8 +62,8 @@ message Readings {
     optional double y_max = 4;                       // y-max.
     optional double y_min = 5;                       // y-min.
     oneof data {
-      Readings readings = 6;                       // Scatter readings.
-      ReadingsByCategory readings_by_category = 7; // Readings by x-category.
+      DatetimeReadings readings = 6;                 // Scatter readings.
+      CategoryReadingsInfo readings_by_category = 7; // Readings by x-category.
     }
   }
 
@@ -195,6 +195,17 @@ message Log {
       SOURCE_GOOGLE_FIT = 3;   // Source of data is Google Fit.
     }
 
+    message ParameterValue {
+      double value = 1;
+      string unit = 2;
+      optional string unit_eka_id = 3;
+    }
+
+    message ParameterRange {
+      optional ParameterValue low = 1;
+      optional ParameterValue high = 2;
+    }
+
     uint32 parameter_id = 1; // id of the reading.
     string document_id =
         2; // id of the document or record from which the reading is based on.
@@ -204,7 +215,7 @@ message Log {
     optional string unit_eka_id = 6; // Unit eka id of the reading.
     google.protobuf.Timestamp date =
         7;                             // Time at which the reading is measured.
-    vault.common.ValueRange range = 8; // Normal range of the reading.
+    ParameterRange range = 8;          // Normal range of the reading.
     optional string display_range = 9; // Display Normal range of the reading.
     string result = 10;                //
     optional vault.insights.VitalInsightsResponse.Interpretation result_id =
