@@ -295,19 +295,19 @@ public struct Vault_Trends_V1_Readings {
     public var data: Vault_Trends_V1_Readings.PlotData.OneOf_Data? = nil
 
     /// Scatter readings.
-    public var readings: Vault_Trends_V1_Readings.PlotData.Readings {
+    public var readings: Vault_Trends_V1_Readings.PlotData.DatetimeReadings {
       get {
         if case .readings(let v)? = data {return v}
-        return Vault_Trends_V1_Readings.PlotData.Readings()
+        return Vault_Trends_V1_Readings.PlotData.DatetimeReadings()
       }
       set {data = .readings(newValue)}
     }
 
     /// Readings by x-category.
-    public var readingsByCategory: Vault_Trends_V1_Readings.PlotData.ReadingsByCategory {
+    public var readingsByCategory: Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo {
       get {
         if case .readingsByCategory(let v)? = data {return v}
-        return Vault_Trends_V1_Readings.PlotData.ReadingsByCategory()
+        return Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo()
       }
       set {data = .readingsByCategory(newValue)}
     }
@@ -316,9 +316,9 @@ public struct Vault_Trends_V1_Readings {
 
     public enum OneOf_Data: Equatable {
       /// Scatter readings.
-      case readings(Vault_Trends_V1_Readings.PlotData.Readings)
+      case readings(Vault_Trends_V1_Readings.PlotData.DatetimeReadings)
       /// Readings by x-category.
-      case readingsByCategory(Vault_Trends_V1_Readings.PlotData.ReadingsByCategory)
+      case readingsByCategory(Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo)
 
     #if !swift(>=4.1)
       public static func ==(lhs: Vault_Trends_V1_Readings.PlotData.OneOf_Data, rhs: Vault_Trends_V1_Readings.PlotData.OneOf_Data) -> Bool {
@@ -507,7 +507,7 @@ public struct Vault_Trends_V1_Readings {
     }
 
     /// Readings represent the scatter readings 
-    public struct Readings {
+    public struct DatetimeReadings {
       // SwiftProtobuf.Message conformance is added in an extension below. See the
       // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
       // methods supported on all messages.
@@ -521,7 +521,7 @@ public struct Vault_Trends_V1_Readings {
     }
 
     /// Readings of x-categories.
-    public struct ReadingsByCategory {
+    public struct CategoryReadingsInfo {
       // SwiftProtobuf.Message conformance is added in an extension below. See the
       // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
       // methods supported on all messages.
@@ -961,8 +961,8 @@ public struct Vault_Trends_V1_Log {
     public mutating func clearDate() {_uniqueStorage()._date = nil}
 
     /// Normal range of the reading.
-    public var range: Vault_Common_ValueRange {
-      get {return _storage._range ?? Vault_Common_ValueRange()}
+    public var range: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange {
+      get {return _storage._range ?? Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange()}
       set {_uniqueStorage()._range = newValue}
     }
     /// Returns true if `range` has been explicitly set.
@@ -1114,6 +1114,62 @@ public struct Vault_Trends_V1_Log {
         }
       }
 
+    }
+
+    public struct ParameterValue {
+      // SwiftProtobuf.Message conformance is added in an extension below. See the
+      // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+      // methods supported on all messages.
+
+      public var value: Double = 0
+
+      public var unit: String = String()
+
+      public var unitEkaID: String {
+        get {return _unitEkaID ?? String()}
+        set {_unitEkaID = newValue}
+      }
+      /// Returns true if `unitEkaID` has been explicitly set.
+      public var hasUnitEkaID: Bool {return self._unitEkaID != nil}
+      /// Clears the value of `unitEkaID`. Subsequent reads from it will return its default value.
+      public mutating func clearUnitEkaID() {self._unitEkaID = nil}
+
+      public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+      public init() {}
+
+      fileprivate var _unitEkaID: String? = nil
+    }
+
+    public struct ParameterRange {
+      // SwiftProtobuf.Message conformance is added in an extension below. See the
+      // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+      // methods supported on all messages.
+
+      public var low: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue {
+        get {return _low ?? Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue()}
+        set {_low = newValue}
+      }
+      /// Returns true if `low` has been explicitly set.
+      public var hasLow: Bool {return self._low != nil}
+      /// Clears the value of `low`. Subsequent reads from it will return its default value.
+      public mutating func clearLow() {self._low = nil}
+
+      public var high: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue {
+        get {return _high ?? Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue()}
+        set {_high = newValue}
+      }
+      /// Returns true if `high` has been explicitly set.
+      public var hasHigh: Bool {return self._high != nil}
+      /// Clears the value of `high`. Subsequent reads from it will return its default value.
+      public mutating func clearHigh() {self._high = nil}
+
+      public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+      public init() {}
+
+      fileprivate var _low: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue? = nil
+      fileprivate var _high: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue? = nil
     }
 
     public init() {}
@@ -1438,8 +1494,8 @@ extension Vault_Trends_V1_Readings.PlotData.ParameterReadingsGraph: @unchecked S
 extension Vault_Trends_V1_Readings.PlotData.ParameterReadingsGraph.OneOf_PlotValue: @unchecked Sendable {}
 extension Vault_Trends_V1_Readings.PlotData.ParameterReadingsGraph.OneOf_PlotTime: @unchecked Sendable {}
 extension Vault_Trends_V1_Readings.PlotData.CategoryReadings: @unchecked Sendable {}
-extension Vault_Trends_V1_Readings.PlotData.Readings: @unchecked Sendable {}
-extension Vault_Trends_V1_Readings.PlotData.ReadingsByCategory: @unchecked Sendable {}
+extension Vault_Trends_V1_Readings.PlotData.DatetimeReadings: @unchecked Sendable {}
+extension Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsResponse: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsResponse.FilterValue: @unchecked Sendable {}
 extension Vault_Trends_V1_TrendsResponse.FilterColumn: @unchecked Sendable {}
@@ -1454,6 +1510,8 @@ extension Vault_Trends_V1_Log.CTA: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.VitalInfo: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source: @unchecked Sendable {}
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue: @unchecked Sendable {}
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange: @unchecked Sendable {}
 extension Vault_Trends_V1_Log.UnverifiedParameterReading: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent.BannerCategory: @unchecked Sendable {}
@@ -1635,7 +1693,7 @@ extension Vault_Trends_V1_Readings.PlotData: SwiftProtobuf.Message, SwiftProtobu
       case 4: try { try decoder.decodeSingularDoubleField(value: &self._yMax) }()
       case 5: try { try decoder.decodeSingularDoubleField(value: &self._yMin) }()
       case 6: try {
-        var v: Vault_Trends_V1_Readings.PlotData.Readings?
+        var v: Vault_Trends_V1_Readings.PlotData.DatetimeReadings?
         var hadOneofValue = false
         if let current = self.data {
           hadOneofValue = true
@@ -1648,7 +1706,7 @@ extension Vault_Trends_V1_Readings.PlotData: SwiftProtobuf.Message, SwiftProtobu
         }
       }()
       case 7: try {
-        var v: Vault_Trends_V1_Readings.PlotData.ReadingsByCategory?
+        var v: Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo?
         var hadOneofValue = false
         if let current = self.data {
           hadOneofValue = true
@@ -1879,8 +1937,8 @@ extension Vault_Trends_V1_Readings.PlotData.CategoryReadings: SwiftProtobuf.Mess
   }
 }
 
-extension Vault_Trends_V1_Readings.PlotData.Readings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Vault_Trends_V1_Readings.PlotData.protoMessageName + ".Readings"
+extension Vault_Trends_V1_Readings.PlotData.DatetimeReadings: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Trends_V1_Readings.PlotData.protoMessageName + ".DatetimeReadings"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "readings"),
   ]
@@ -1904,15 +1962,15 @@ extension Vault_Trends_V1_Readings.PlotData.Readings: SwiftProtobuf.Message, Swi
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Trends_V1_Readings.PlotData.Readings, rhs: Vault_Trends_V1_Readings.PlotData.Readings) -> Bool {
+  public static func ==(lhs: Vault_Trends_V1_Readings.PlotData.DatetimeReadings, rhs: Vault_Trends_V1_Readings.PlotData.DatetimeReadings) -> Bool {
     if lhs.readings != rhs.readings {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Vault_Trends_V1_Readings.PlotData.ReadingsByCategory: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Vault_Trends_V1_Readings.PlotData.protoMessageName + ".ReadingsByCategory"
+extension Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Trends_V1_Readings.PlotData.protoMessageName + ".CategoryReadingsInfo"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "readings"),
     2: .standard(proto: "categories_with_data"),
@@ -1941,7 +1999,7 @@ extension Vault_Trends_V1_Readings.PlotData.ReadingsByCategory: SwiftProtobuf.Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Trends_V1_Readings.PlotData.ReadingsByCategory, rhs: Vault_Trends_V1_Readings.PlotData.ReadingsByCategory) -> Bool {
+  public static func ==(lhs: Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo, rhs: Vault_Trends_V1_Readings.PlotData.CategoryReadingsInfo) -> Bool {
     if lhs.readings != rhs.readings {return false}
     if lhs.categoriesWithData != rhs.categoriesWithData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -2591,7 +2649,7 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: SwiftProtobuf.Message,
     var _unit: String = String()
     var _unitEkaID: String? = nil
     var _date: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-    var _range: Vault_Common_ValueRange? = nil
+    var _range: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange? = nil
     var _displayRange: String? = nil
     var _result: String = String()
     var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
@@ -2792,6 +2850,96 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source: SwiftProtobuf._
     2: .same(proto: "SOURCE_APPLE_HEALTH"),
     3: .same(proto: "SOURCE_GOOGLE_FIT"),
   ]
+}
+
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Trends_V1_Log.ParameterReadingsAtInstant.protoMessageName + ".ParameterValue"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "value"),
+    2: .same(proto: "unit"),
+    3: .standard(proto: "unit_eka_id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularDoubleField(value: &self.value) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.unit) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self._unitEkaID) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.value != 0 {
+      try visitor.visitSingularDoubleField(value: self.value, fieldNumber: 1)
+    }
+    if !self.unit.isEmpty {
+      try visitor.visitSingularStringField(value: self.unit, fieldNumber: 2)
+    }
+    try { if let v = self._unitEkaID {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue, rhs: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterValue) -> Bool {
+    if lhs.value != rhs.value {return false}
+    if lhs.unit != rhs.unit {return false}
+    if lhs._unitEkaID != rhs._unitEkaID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Trends_V1_Log.ParameterReadingsAtInstant.protoMessageName + ".ParameterRange"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "low"),
+    2: .same(proto: "high"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._low) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._high) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._low {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._high {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange, rhs: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange) -> Bool {
+    if lhs._low != rhs._low {return false}
+    if lhs._high != rhs._high {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
 }
 
 extension Vault_Trends_V1_Log.UnverifiedParameterReading: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

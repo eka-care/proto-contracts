@@ -20,7 +20,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-/// ValueRange represent range 
+/// ValueRange represent value range 
 public struct Vault_Common_ValueRange {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -54,7 +54,7 @@ public struct Vault_Common_ValueRange {
   fileprivate var _high: Double? = nil
 }
 
-/// ValueRange represent time range 
+/// TimeRange represent time range 
 public struct Vault_Common_TimeRange {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
