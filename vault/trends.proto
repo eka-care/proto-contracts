@@ -5,8 +5,8 @@ package vault.trends.v1;
 import "google/protobuf/timestamp.proto";
 import "vault/coordinate.proto";
 import "vault/cta.proto";
-import "vault/insights.proto";
 import "vault/range.proto";
+import "vault/interpretation.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/v1/trends";
 
@@ -33,7 +33,7 @@ message Readings {
             5; // Start and End timestamp of the reading.
       }
 
-      optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+      optional vault.vitals.Interpretation result_id =
           6;                              // Interpretation of the reading.
       optional string display_result = 7; // Display Result of the reading.
       optional string test_eka_id = 8;    // Test Eka ID of the reading.
@@ -132,7 +132,7 @@ message TrendsResponse {
   message LatestValue {
     string display_date = 1;  // Display date of the latest value.
     string display_value = 2; // Display value of the latest value.
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+    optional vault.vitals.Interpretation result_id =
         3; // Result id of the latest value.
   }
 
@@ -218,7 +218,7 @@ message Log {
     ParameterRange range = 8;          // Normal range of the reading.
     optional string display_range = 9; // Display Normal range of the reading.
     string result = 10;                //
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+    optional vault.vitals.Interpretation result_id =
         11;                     // Interpretation of the reading.
     string display_result = 12; // Display result of the reading.
     int32 page_num =
@@ -250,7 +250,7 @@ message Log {
     string file_type = 10; // Type of document.
     repeated vault.common.Coordinate coordinates =
         11; // Coordinates inside the document where reading is found.
-    optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+    optional vault.vitals.Interpretation result_id =
         12;                     // Interpretation of the reading.
     string display_result = 13; // Display result of the reading.
     optional string display_time =

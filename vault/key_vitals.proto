@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package vault.keyvitals;
 
-import "vault/insights.proto";
+import "vault/interpretation.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/keyvitals";
 
@@ -16,7 +16,7 @@ message KeyVital {
   string test_eka_id = 2;    // Test EKA ID.
   optional string value = 3; // Value of the vital.
   optional string unit = 4;  // Unit of the vital.
-  optional vault.insights.VitalInsightsResponse.Interpretation result_id =
+  optional vault.vitals.Interpretation result_id =
       5; // Interpretation of the reading.
 
   oneof result {
