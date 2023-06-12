@@ -46,8 +46,8 @@ public struct Vault_Keyvitals_KeyVital {
   public var testEkaID: String = String()
 
   /// Value of the vital.
-  public var value: String {
-    get {return _value ?? String()}
+  public var value: Vault_Keyvitals_KeyVital.Value {
+    get {return _value ?? Vault_Keyvitals_KeyVital.Value()}
     set {_value = newValue}
   }
   /// Returns true if `value` has been explicitly set.
@@ -55,85 +55,100 @@ public struct Vault_Keyvitals_KeyVital {
   /// Clears the value of `value`. Subsequent reads from it will return its default value.
   public mutating func clearValue() {self._value = nil}
 
-  /// Unit of the vital.
-  public var unit: String {
-    get {return _unit ?? String()}
-    set {_unit = newValue}
-  }
-  /// Returns true if `unit` has been explicitly set.
-  public var hasUnit: Bool {return self._unit != nil}
-  /// Clears the value of `unit`. Subsequent reads from it will return its default value.
-  public mutating func clearUnit() {self._unit = nil}
-
-  /// Interpretation of the reading.
-  public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
-    get {return _resultID ?? .unspecified}
-    set {_resultID = newValue}
-  }
-  /// Returns true if `resultID` has been explicitly set.
-  public var hasResultID: Bool {return self._resultID != nil}
-  /// Clears the value of `resultID`. Subsequent reads from it will return its default value.
-  public mutating func clearResultID() {self._resultID = nil}
-
-  public var result: Vault_Keyvitals_KeyVital.OneOf_Result? = nil
-
-  /// Date of the vital.
-  public var measuredAt: String {
-    get {
-      if case .measuredAt(let v)? = result {return v}
-      return String()
-    }
-    set {result = .measuredAt(newValue)}
-  }
-
-  /// Is the data old.
-  public var isOld: Bool {
-    get {
-      if case .isOld(let v)? = result {return v}
-      return false
-    }
-    set {result = .isOld(newValue)}
-  }
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Result: Equatable {
-    /// Date of the vital.
-    case measuredAt(String)
-    /// Is the data old.
-    case isOld(Bool)
+  public struct Value {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
 
-  #if !swift(>=4.1)
-    public static func ==(lhs: Vault_Keyvitals_KeyVital.OneOf_Result, rhs: Vault_Keyvitals_KeyVital.OneOf_Result) -> Bool {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch (lhs, rhs) {
-      case (.measuredAt, .measuredAt): return {
-        guard case .measuredAt(let l) = lhs, case .measuredAt(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      case (.isOld, .isOld): return {
-        guard case .isOld(let l) = lhs, case .isOld(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      default: return false
-      }
+    /// Value of the vital.
+    public var value: String = String()
+
+    /// Unit of the vital.
+    public var unit: String {
+      get {return _unit ?? String()}
+      set {_unit = newValue}
     }
-  #endif
+    /// Returns true if `unit` has been explicitly set.
+    public var hasUnit: Bool {return self._unit != nil}
+    /// Clears the value of `unit`. Subsequent reads from it will return its default value.
+    public mutating func clearUnit() {self._unit = nil}
+
+    /// Interpretation of the reading.
+    public var resultID: Vault_Vitals_Interpretation {
+      get {return _resultID ?? .unspecified}
+      set {_resultID = newValue}
+    }
+    /// Returns true if `resultID` has been explicitly set.
+    public var hasResultID: Bool {return self._resultID != nil}
+    /// Clears the value of `resultID`. Subsequent reads from it will return its default value.
+    public mutating func clearResultID() {self._resultID = nil}
+
+    public var result: Vault_Keyvitals_KeyVital.Value.OneOf_Result? = nil
+
+    /// Date of the vital.
+    public var measuredAt: String {
+      get {
+        if case .measuredAt(let v)? = result {return v}
+        return String()
+      }
+      set {result = .measuredAt(newValue)}
+    }
+
+    /// Is the data old.
+    public var isOld: Bool {
+      get {
+        if case .isOld(let v)? = result {return v}
+        return false
+      }
+      set {result = .isOld(newValue)}
+    }
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public enum OneOf_Result: Equatable {
+      /// Date of the vital.
+      case measuredAt(String)
+      /// Is the data old.
+      case isOld(Bool)
+
+    #if !swift(>=4.1)
+      public static func ==(lhs: Vault_Keyvitals_KeyVital.Value.OneOf_Result, rhs: Vault_Keyvitals_KeyVital.Value.OneOf_Result) -> Bool {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch (lhs, rhs) {
+        case (.measuredAt, .measuredAt): return {
+          guard case .measuredAt(let l) = lhs, case .measuredAt(let r) = rhs else { preconditionFailure() }
+          return l == r
+        }()
+        case (.isOld, .isOld): return {
+          guard case .isOld(let l) = lhs, case .isOld(let r) = rhs else { preconditionFailure() }
+          return l == r
+        }()
+        default: return false
+        }
+      }
+    #endif
+    }
+
+    public init() {}
+
+    fileprivate var _unit: String? = nil
+    fileprivate var _resultID: Vault_Vitals_Interpretation? = nil
   }
 
   public init() {}
 
-  fileprivate var _value: String? = nil
-  fileprivate var _unit: String? = nil
-  fileprivate var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
+  fileprivate var _value: Vault_Keyvitals_KeyVital.Value? = nil
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Keyvitals_KeyVitalsAPIResponse: @unchecked Sendable {}
 extension Vault_Keyvitals_KeyVital: @unchecked Sendable {}
-extension Vault_Keyvitals_KeyVital.OneOf_Result: @unchecked Sendable {}
+extension Vault_Keyvitals_KeyVital.Value: @unchecked Sendable {}
+extension Vault_Keyvitals_KeyVital.Value.OneOf_Result: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -178,10 +193,6 @@ extension Vault_Keyvitals_KeyVital: SwiftProtobuf.Message, SwiftProtobuf._Messag
     1: .same(proto: "name"),
     2: .standard(proto: "test_eka_id"),
     3: .same(proto: "value"),
-    4: .same(proto: "unit"),
-    5: .standard(proto: "result_id"),
-    6: .standard(proto: "measured_at"),
-    7: .standard(proto: "is_old"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -192,25 +203,7 @@ extension Vault_Keyvitals_KeyVital: SwiftProtobuf.Message, SwiftProtobuf._Messag
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.testEkaID) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self._value) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self._unit) }()
-      case 5: try { try decoder.decodeSingularEnumField(value: &self._resultID) }()
-      case 6: try {
-        var v: String?
-        try decoder.decodeSingularStringField(value: &v)
-        if let v = v {
-          if self.result != nil {try decoder.handleConflictingOneOf()}
-          self.result = .measuredAt(v)
-        }
-      }()
-      case 7: try {
-        var v: Bool?
-        try decoder.decodeSingularBoolField(value: &v)
-        if let v = v {
-          if self.result != nil {try decoder.handleConflictingOneOf()}
-          self.result = .isOld(v)
-        }
-      }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._value) }()
       default: break
       }
     }
@@ -228,25 +221,8 @@ extension Vault_Keyvitals_KeyVital: SwiftProtobuf.Message, SwiftProtobuf._Messag
       try visitor.visitSingularStringField(value: self.testEkaID, fieldNumber: 2)
     }
     try { if let v = self._value {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 3)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
-    try { if let v = self._unit {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
-    } }()
-    try { if let v = self._resultID {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
-    } }()
-    switch self.result {
-    case .measuredAt?: try {
-      guard case .measuredAt(let v)? = self.result else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
-    }()
-    case .isOld?: try {
-      guard case .isOld(let v)? = self.result else { preconditionFailure() }
-      try visitor.visitSingularBoolField(value: v, fieldNumber: 7)
-    }()
-    case nil: break
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -254,6 +230,81 @@ extension Vault_Keyvitals_KeyVital: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.name != rhs.name {return false}
     if lhs.testEkaID != rhs.testEkaID {return false}
     if lhs._value != rhs._value {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Keyvitals_KeyVital.Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Keyvitals_KeyVital.protoMessageName + ".Value"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "value"),
+    2: .same(proto: "unit"),
+    3: .standard(proto: "result_id"),
+    4: .standard(proto: "measured_at"),
+    5: .standard(proto: "is_old"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.value) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._unit) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self._resultID) }()
+      case 4: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.result != nil {try decoder.handleConflictingOneOf()}
+          self.result = .measuredAt(v)
+        }
+      }()
+      case 5: try {
+        var v: Bool?
+        try decoder.decodeSingularBoolField(value: &v)
+        if let v = v {
+          if self.result != nil {try decoder.handleConflictingOneOf()}
+          self.result = .isOld(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.value.isEmpty {
+      try visitor.visitSingularStringField(value: self.value, fieldNumber: 1)
+    }
+    try { if let v = self._unit {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._resultID {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 3)
+    } }()
+    switch self.result {
+    case .measuredAt?: try {
+      guard case .measuredAt(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    }()
+    case .isOld?: try {
+      guard case .isOld(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    }()
+    case nil: break
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Keyvitals_KeyVital.Value, rhs: Vault_Keyvitals_KeyVital.Value) -> Bool {
+    if lhs.value != rhs.value {return false}
     if lhs._unit != rhs._unit {return false}
     if lhs._resultID != rhs._resultID {return false}
     if lhs.result != rhs.result {return false}

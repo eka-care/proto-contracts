@@ -396,7 +396,7 @@ public struct Vault_Trends_V1_Readings {
       }
 
       /// Interpretation of the reading.
-      public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
+      public var resultID: Vault_Vitals_Interpretation {
         get {return _resultID ?? .unspecified}
         set {_resultID = newValue}
       }
@@ -487,7 +487,7 @@ public struct Vault_Trends_V1_Readings {
 
       public init() {}
 
-      fileprivate var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
+      fileprivate var _resultID: Vault_Vitals_Interpretation? = nil
       fileprivate var _displayResult: String? = nil
       fileprivate var _testEkaID: String? = nil
     }
@@ -777,7 +777,7 @@ public struct Vault_Trends_V1_TrendsResponse {
     public var displayValue: String = String()
 
     /// Result id of the latest value.
-    public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
+    public var resultID: Vault_Vitals_Interpretation {
       get {return _resultID ?? .unspecified}
       set {_resultID = newValue}
     }
@@ -790,7 +790,7 @@ public struct Vault_Trends_V1_TrendsResponse {
 
     public init() {}
 
-    fileprivate var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
+    fileprivate var _resultID: Vault_Vitals_Interpretation? = nil
   }
 
   public init() {}
@@ -986,7 +986,7 @@ public struct Vault_Trends_V1_Log {
     }
 
     /// Interpretation of the reading.
-    public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
+    public var resultID: Vault_Vitals_Interpretation {
       get {return _storage._resultID ?? .unspecified}
       set {_uniqueStorage()._resultID = newValue}
     }
@@ -1230,7 +1230,7 @@ public struct Vault_Trends_V1_Log {
     public var coordinates: [Vault_Common_Coordinate] = []
 
     /// Interpretation of the reading.
-    public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
+    public var resultID: Vault_Vitals_Interpretation {
       get {return _resultID ?? .unspecified}
       set {_resultID = newValue}
     }
@@ -1258,7 +1258,7 @@ public struct Vault_Trends_V1_Log {
 
     fileprivate var _unitEkaID: String? = nil
     fileprivate var _date: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-    fileprivate var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
+    fileprivate var _resultID: Vault_Vitals_Interpretation? = nil
     fileprivate var _displayTime: String? = nil
   }
 
@@ -2652,7 +2652,7 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant: SwiftProtobuf.Message,
     var _range: Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange? = nil
     var _displayRange: String? = nil
     var _result: String = String()
-    var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
+    var _resultID: Vault_Vitals_Interpretation? = nil
     var _displayResult: String = String()
     var _pageNum: Int32 = 0
     var _assetURL: String = String()
