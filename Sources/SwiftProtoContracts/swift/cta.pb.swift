@@ -20,15 +20,19 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+/// CTA represents data for any click through action 
 public struct Vault_Common_CTA {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// pid of the destination screen.
   public var pid: String = String()
 
+  /// params accepted/ needed by the destination screen.
   public var params: Dictionary<String,SwiftProtobuf.Google_Protobuf_Value> = [:]
 
+  /// Title of the source click block.
   public var title: String {
     get {return _title ?? String()}
     set {_title = newValue}
@@ -38,6 +42,7 @@ public struct Vault_Common_CTA {
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
   public mutating func clearTitle() {self._title = nil}
 
+  /// action applied on click.
   public var action: String {
     get {return _action ?? String()}
     set {_action = newValue}
@@ -55,13 +60,16 @@ public struct Vault_Common_CTA {
   fileprivate var _action: String? = nil
 }
 
+/// ActionCTA represents data for any action on click 
 public struct Vault_Common_ActionCTA {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// action enum.
   public var action: String = String()
 
+  /// Title of the source click block.
   public var title: String {
     get {return _title ?? String()}
     set {_title = newValue}

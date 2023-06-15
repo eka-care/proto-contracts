@@ -32,104 +32,6 @@ public struct Vault_Insights_VitalInsightsResponse {
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum Interpretation: SwiftProtobuf.Enum {
-    public typealias RawValue = Int
-
-    /// Interpretation -> Unspecified.
-    case unspecified // = 0
-
-    /// Interpretation -> Normal.
-    case normal // = 1
-
-    /// Interpretation -> Critically High.
-    case criticallyHigh // = 2
-
-    /// Interpretation -> Very High.
-    case veryHigh // = 3
-
-    /// Interpretation -> High.
-    case high // = 4
-
-    /// Interpretation -> Borderline High.
-    case borderlineHigh // = 5
-
-    /// Interpretation -> Critically Low.
-    case criticallyLow // = 6
-
-    /// Interpretation -> Very Low.
-    case veryLow // = 7
-
-    /// Interpretation -> Low.
-    case low // = 8
-
-    /// Interpretation -> Borderline Low.
-    case borderlineLow // = 9
-
-    /// Interpretation -> Abnormal.
-    case abnormal // = 10
-
-    /// Interpretation -> Undertermined.
-    case undetermined // = 11
-    case UNRECOGNIZED(Int)
-
-    public init() {
-      self = .unspecified
-    }
-
-    public init?(rawValue: Int) {
-      switch rawValue {
-      case 0: self = .unspecified
-      case 1: self = .normal
-      case 2: self = .criticallyHigh
-      case 3: self = .veryHigh
-      case 4: self = .high
-      case 5: self = .borderlineHigh
-      case 6: self = .criticallyLow
-      case 7: self = .veryLow
-      case 8: self = .low
-      case 9: self = .borderlineLow
-      case 10: self = .abnormal
-      case 11: self = .undetermined
-      default: self = .UNRECOGNIZED(rawValue)
-      }
-    }
-
-    public var rawValue: Int {
-      switch self {
-      case .unspecified: return 0
-      case .normal: return 1
-      case .criticallyHigh: return 2
-      case .veryHigh: return 3
-      case .high: return 4
-      case .borderlineHigh: return 5
-      case .criticallyLow: return 6
-      case .veryLow: return 7
-      case .low: return 8
-      case .borderlineLow: return 9
-      case .abnormal: return 10
-      case .undetermined: return 11
-      case .UNRECOGNIZED(let i): return i
-      }
-    }
-
-  }
-
-  public struct Coordinate {
-    // SwiftProtobuf.Message conformance is added in an extension below. See the
-    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-    // methods supported on all messages.
-
-    /// Value of vital.
-    public var value: Double = 0
-
-    /// Number of data points (users) for the concerned value.
-    public var count: Double = 0
-
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-    public init() {}
-  }
-
   public struct Axis {
     // SwiftProtobuf.Message conformance is added in an extension below. See the
     // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -203,7 +105,7 @@ public struct Vault_Insights_VitalInsightsResponse {
     }
 
     /// Coordinates for the histogram.
-    public var coordinates: [Vault_Insights_VitalInsightsResponse.Coordinate] {
+    public var coordinates: [Vault_Common_Coordinate] {
       get {return _storage._coordinates}
       set {_uniqueStorage()._coordinates = newValue}
     }
@@ -328,7 +230,7 @@ public struct Vault_Insights_VitalInsightsResponse {
     public var latestValueYCoordinate: Double = 0
 
     /// Interpretation of latest value.
-    public var resultID: Vault_Insights_VitalInsightsResponse.Interpretation {
+    public var resultID: Vault_Vitals_Interpretation {
       get {return _resultID ?? .unspecified}
       set {_resultID = newValue}
     }
@@ -353,34 +255,12 @@ public struct Vault_Insights_VitalInsightsResponse {
 
     fileprivate var _resultDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
     fileprivate var _addLatestDataPrompt: Vault_Insights_VitalInsightsResponse.AddLatestDataPrompt? = nil
-    fileprivate var _resultID: Vault_Insights_VitalInsightsResponse.Interpretation? = nil
+    fileprivate var _resultID: Vault_Vitals_Interpretation? = nil
     fileprivate var _normalRange: Vault_Common_ValueRange? = nil
   }
 
   public init() {}
 }
-
-#if swift(>=4.2)
-
-extension Vault_Insights_VitalInsightsResponse.Interpretation: CaseIterable {
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Insights_VitalInsightsResponse.Interpretation] = [
-    .unspecified,
-    .normal,
-    .criticallyHigh,
-    .veryHigh,
-    .high,
-    .borderlineHigh,
-    .criticallyLow,
-    .veryLow,
-    .low,
-    .borderlineLow,
-    .abnormal,
-    .undetermined,
-  ]
-}
-
-#endif  // swift(>=4.2)
 
 /// VitalInsightsListResponse represents insights list
 ///response 
@@ -411,8 +291,6 @@ public struct Vault_Insights_VitalInsightsListResponse {
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Insights_VitalInsightsResponse: @unchecked Sendable {}
-extension Vault_Insights_VitalInsightsResponse.Interpretation: @unchecked Sendable {}
-extension Vault_Insights_VitalInsightsResponse.Coordinate: @unchecked Sendable {}
 extension Vault_Insights_VitalInsightsResponse.Axis: @unchecked Sendable {}
 extension Vault_Insights_VitalInsightsResponse.Axes: @unchecked Sendable {}
 extension Vault_Insights_VitalInsightsResponse.Insight: @unchecked Sendable {}
@@ -452,61 +330,6 @@ extension Vault_Insights_VitalInsightsResponse: SwiftProtobuf.Message, SwiftProt
 
   public static func ==(lhs: Vault_Insights_VitalInsightsResponse, rhs: Vault_Insights_VitalInsightsResponse) -> Bool {
     if lhs.insights != rhs.insights {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Vault_Insights_VitalInsightsResponse.Interpretation: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "INTERPRETATION_UNSPECIFIED"),
-    1: .same(proto: "INTERPRETATION_NORMAL"),
-    2: .same(proto: "INTERPRETATION_CRITICALLY_HIGH"),
-    3: .same(proto: "INTERPRETATION_VERY_HIGH"),
-    4: .same(proto: "INTERPRETATION_HIGH"),
-    5: .same(proto: "INTERPRETATION_BORDERLINE_HIGH"),
-    6: .same(proto: "INTERPRETATION_CRITICALLY_LOW"),
-    7: .same(proto: "INTERPRETATION_VERY_LOW"),
-    8: .same(proto: "INTERPRETATION_LOW"),
-    9: .same(proto: "INTERPRETATION_BORDERLINE_LOW"),
-    10: .same(proto: "INTERPRETATION_ABNORMAL"),
-    11: .same(proto: "INTERPRETATION_UNDETERMINED"),
-  ]
-}
-
-extension Vault_Insights_VitalInsightsResponse.Coordinate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Vault_Insights_VitalInsightsResponse.protoMessageName + ".Coordinate"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "value"),
-    2: .same(proto: "count"),
-  ]
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularDoubleField(value: &self.value) }()
-      case 2: try { try decoder.decodeSingularDoubleField(value: &self.count) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.value != 0 {
-      try visitor.visitSingularDoubleField(value: self.value, fieldNumber: 1)
-    }
-    if self.count != 0 {
-      try visitor.visitSingularDoubleField(value: self.count, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Vault_Insights_VitalInsightsResponse.Coordinate, rhs: Vault_Insights_VitalInsightsResponse.Coordinate) -> Bool {
-    if lhs.value != rhs.value {return false}
-    if lhs.count != rhs.count {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -607,7 +430,7 @@ extension Vault_Insights_VitalInsightsResponse.Insight: SwiftProtobuf.Message, S
   fileprivate class _StorageClass {
     var _title: String = String()
     var _body: String = String()
-    var _coordinates: [Vault_Insights_VitalInsightsResponse.Coordinate] = []
+    var _coordinates: [Vault_Common_Coordinate] = []
     var _type: String = String()
     var _latestValue: Vault_Insights_VitalInsightsResponse.LatestValue? = nil
     var _name: String? = nil

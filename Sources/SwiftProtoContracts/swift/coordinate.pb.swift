@@ -20,13 +20,16 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+/// Coordinate represents point in a graph 
 public struct Vault_Common_Coordinate {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// X Value of the coordinate.
   public var x: Double = 0
 
+  /// Y Value of the coordinate.
   public var y: Double = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()

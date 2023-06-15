@@ -20,11 +20,13 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+/// ValueRange represent value range 
 public struct Vault_Common_ValueRange {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// low of the range.
   public var low: Double {
     get {return _low ?? 0}
     set {_low = newValue}
@@ -34,6 +36,7 @@ public struct Vault_Common_ValueRange {
   /// Clears the value of `low`. Subsequent reads from it will return its default value.
   public mutating func clearLow() {self._low = nil}
 
+  /// high of the range.
   public var high: Double {
     get {return _high ?? 0}
     set {_high = newValue}
@@ -51,11 +54,13 @@ public struct Vault_Common_ValueRange {
   fileprivate var _high: Double? = nil
 }
 
+/// TimeRange represent time range 
 public struct Vault_Common_TimeRange {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// Start of the time.
   public var start: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _start ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_start = newValue}
@@ -65,6 +70,7 @@ public struct Vault_Common_TimeRange {
   /// Clears the value of `start`. Subsequent reads from it will return its default value.
   public mutating func clearStart() {self._start = nil}
 
+  /// End of the time.
   public var end: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _end ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_end = newValue}
