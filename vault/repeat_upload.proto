@@ -4,21 +4,21 @@ package vault.insights;
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/repeat_upload";
 
+/*RepeatUploadResponse represents health bottom sheet and gmail sync status */
 message RepeatUploadResponse {
   oneof Response {
-    SyncInit syncInit = 1;
-    SyncRecords syncRecords = 2;
-    AnalyzingRecords analyzingRecords = 3;
-    SyncEnd syncEnd = 4;
+    SyncRecords sync_records = 1; //Adding records to Health Locker
+    AnalyzingRecords analyzing_records = 2; //Analyzing your health records (X)
+    SyncEnd sync_end = 3; //Making it simpler to see your health
   }
 }
 
-message SyncInit {}
-
+/*Sync Records represents the state when records are added to health locker*/
 message SyncRecords {
-  GmailSync gmailsync = 1;
+  GmailSync gmail_sync = 1; //gmail sync records found, count is required field
 }
 
+/*GmailSyncState represents current sync status */
 enum GmailSyncState {
   STARTED = 0; //GmailSyncState -> "STARTED"
   PROCESSING = 1; //GmailSyncState -> "PROCESSING"
@@ -28,6 +28,7 @@ enum GmailSyncState {
   REVOKED = 5; //GmailSyncState -> "REVOKED"
 }
 
+/*GmailSyncType represents sync type*/
 enum GmailSyncType {
   PERIODIC = 0; //GmailSyncType ->  "PERIODIC"
   RERUN = 1; //GmailSyncType ->  "RERUN"
@@ -35,56 +36,64 @@ enum GmailSyncType {
   ONDEMAND = 3; //GmailSyncType -> "ONDEMAND"
 }
 
+/*GmailSync represents sync status along with pop-up summary*/
 message GmailSync {
-  string status = 1;
-  string sync_id = 2;
-  repeated Categories categories = 3;
-  uint32 total_count = 4;
-  ProfileDocPopup profile_doc_popup = 5;
+  string status = 1; //gmail sync status
+  string sync_id = 2; //gmail sync sync id
+  repeated Categories categories = 3; //gmail sync profile classification data
+  uint32 total_count = 4; //total count og docs (identified + needs review)
+  ProfileDocPopup profile_doc_popup = 5; //gmail sync pop-up summary
  }
 
+/*AnalyzingRecords represents smart report extraction state of documents*/
 message AnalyzingRecords {
-  int32 count = 1;
-  GmailSync gmailsync = 2;
+  int32 count = 1; //total count i.e. manual upload + gmail sync upload
+  GmailSync gmail_sync = 2; //gmail sync records found, count is required field
 }
 
+/*SyncEnd represents gmail sync completion and smart report extraction*/
 message SyncEnd {
-  GmailSync gmailsync = 1;
-  ViewMyHealthResponse viewMyHealthResponse = 2;
+  GmailSync gmail_sync = 1; //gmail sync records found, count is required field
+  ViewMyHealthResponse view_my_health = 2; //view my health bottom sheet
 }
 
+/*ViewMyHealthResponse represents health summary bottom sheet*/
 message  ViewMyHealthResponse {
   message VitalsInfo {
-    int32 vitals_found = 1;
-    int32 concerns = 2;
-    int32 trends_updated = 3;
-    int32 latest_added = 4;
+    int32 vitals_found = 1; //total vitals found for current upload
+    int32 concerns = 2; // concerned vitals
+    int32 trends_updated = 3; //trends updated count 
+    int32 latest_added = 4; // latest added trends from current upload
   }
-    oneof Response {
-      bool is_analysing = 1;
-      VitalsInfo vitalsInfo = 2;
-    }
-    int32 no_of_records = 3;
+  oneof Response {
+    bool is_analysing = 1; // smart report yet to be extracted
+    VitalsInfo vitals_info = 2; // vitals related info
   }
+  int32 no_of_records = 3; // total number of documents uploaded
+}
 
+/*Categories represent gmail sync profile classification screen*/
 message Categories {
-  string tab_title = 1;
-  uint32 tab_count = 2;
-  string description = 3;
-  string bgcolor = 4;
-  string tab_count_color = 5;
+  string tab_title = 1; // Identified or Needs review tab title
+  uint32 tab_count = 2; // Number of records found under each tab
+  string description = 3; // Description of the tab
+  string bgcolor = 4; //Background color for the tab
+  string tab_count_color = 5; //Color for tab count
 }
 
+/*Params represents parameters for CTA*/
 message Params {
-  string email_id = 1;
+  string email_id = 1; // Gmail synced email
 }
 
-message Cta {
-  Params params = 1;
-  string title = 2;
+/* CTA represents data for any click through action */
+message CTA {
+  Params params = 1; // params
+  string title = 2; // title of the CTA - View Summary
 }
 
+/*ProfileDocPopup represents gmail sync pop-up summary*/
 message ProfileDocPopup {
-  Cta cta = 1;
-  string title = 2;
+  CTA cta = 1; //CTA configuration for button
+  string title = 2; //No. of records belonging to tab
 }
