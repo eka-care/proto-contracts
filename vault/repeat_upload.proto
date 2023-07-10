@@ -2,22 +2,89 @@ syntax = "proto3";
 
 package vault.insights;
 
-
 option go_package = "github.com/eka-care/proto-contracts/go/vault/repeat_upload";
 
-message  ViewMyHealthResponse {
-	bool is_analysing = 1;
-	int32 no_of_records = 2;
-	bool is_data = 3;
-	message HealthCategories {
-		repeated Categories categories = 1; 
-	}
-    HealthCategories healthCategories = 4;
+message RepeatUploadResponse {
+  oneof Response {
+    SyncInit syncInit = 1;
+    SyncRecords syncRecords = 2;
+    AnalyzingRecords analyzingRecords = 3;
+    SyncEnd syncEnd = 4;
+  }
+}
 
-    message Categories {
-        int32 vitals_found =1;
-        int32 concerns =2;
-        int32 trends_updated=3;
-        int32 latest_added=4;
+message SyncInit {}
+
+message SyncRecords {
+  GmailSync gmailsync = 1;
+}
+
+enum GmailSyncState {
+  STARTED = 0; //GmailSyncState -> "STARTED"
+  PROCESSING = 1; //GmailSyncState -> "PROCESSING"
+  SYNCED = 2; //GmailSyncState -> "SYNCED"
+  UNLINKED = 3; //GmailSyncState -> "UNLINKED"
+  FAILED = 4; //GmailSyncState -> "FAILED"
+  REVOKED = 5; //GmailSyncState -> "REVOKED"
+}
+
+enum GmailSyncType {
+  PERIODIC = 0; //GmailSyncType ->  "PERIODIC"
+  RERUN = 1; //GmailSyncType ->  "RERUN"
+  INITIAL = 2; //GmailSyncType -> "INITIAL"
+  ONDEMAND = 3; //GmailSyncType -> "ONDEMAND"
+}
+
+message GmailSync {
+  string status = 1;
+  string sync_id = 2;
+  repeated Categories categories = 3;
+  uint32 total_count = 4;
+  ProfileDocPopup profile_doc_popup = 5;
+ }
+
+message AnalyzingRecords {
+  int32 count = 1;
+  GmailSync gmailsync = 2;
+}
+
+message SyncEnd {
+  GmailSync gmailsync = 1;
+  ViewMyHealthResponse viewMyHealthResponse = 2;
+}
+
+message  ViewMyHealthResponse {
+  message VitalsInfo {
+    int32 vitals_found = 1;
+    int32 concerns = 2;
+    int32 trends_updated = 3;
+    int32 latest_added = 4;
+  }
+    oneof Response {
+      bool is_analysing = 1;
+      VitalsInfo vitalsInfo = 2;
     }
+    int32 no_of_records = 3;
+  }
+
+message Categories {
+  string tab_title = 1;
+  uint32 tab_count = 2;
+  string description = 3;
+  string bgcolor = 4;
+  string tab_count_color = 5;
+}
+
+message Params {
+  string email_id = 1;
+}
+
+message Cta {
+  Params params = 1;
+  string title = 2;
+}
+
+message ProfileDocPopup {
+  Cta cta = 1;
+  string title = 2;
 }

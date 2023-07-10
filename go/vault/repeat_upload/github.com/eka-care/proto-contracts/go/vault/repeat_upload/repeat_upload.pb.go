@@ -20,21 +20,516 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GmailSyncState int32
+
+const (
+	GmailSyncState_STARTED    GmailSyncState = 0 //GmailSyncState -> "STARTED"
+	GmailSyncState_PROCESSING GmailSyncState = 1 //GmailSyncState -> "PROCESSING"
+	GmailSyncState_SYNCED     GmailSyncState = 2 //GmailSyncState -> "SYNCED"
+	GmailSyncState_UNLINKED   GmailSyncState = 3 //GmailSyncState -> "UNLINKED"
+	GmailSyncState_FAILED     GmailSyncState = 4 //GmailSyncState -> "FAILED"
+	GmailSyncState_REVOKED    GmailSyncState = 5 //GmailSyncState -> "REVOKED"
+)
+
+// Enum value maps for GmailSyncState.
+var (
+	GmailSyncState_name = map[int32]string{
+		0: "STARTED",
+		1: "PROCESSING",
+		2: "SYNCED",
+		3: "UNLINKED",
+		4: "FAILED",
+		5: "REVOKED",
+	}
+	GmailSyncState_value = map[string]int32{
+		"STARTED":    0,
+		"PROCESSING": 1,
+		"SYNCED":     2,
+		"UNLINKED":   3,
+		"FAILED":     4,
+		"REVOKED":    5,
+	}
+)
+
+func (x GmailSyncState) Enum() *GmailSyncState {
+	p := new(GmailSyncState)
+	*p = x
+	return p
+}
+
+func (x GmailSyncState) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (GmailSyncState) Descriptor() protoreflect.EnumDescriptor {
+	return file_repeat_upload_proto_enumTypes[0].Descriptor()
+}
+
+func (GmailSyncState) Type() protoreflect.EnumType {
+	return &file_repeat_upload_proto_enumTypes[0]
+}
+
+func (x GmailSyncState) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use GmailSyncState.Descriptor instead.
+func (GmailSyncState) EnumDescriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{0}
+}
+
+type GmailSyncType int32
+
+const (
+	GmailSyncType_PERIODIC GmailSyncType = 0 //GmailSyncType ->  "PERIODIC"
+	GmailSyncType_RERUN    GmailSyncType = 1 //GmailSyncType ->  "RERUN"
+	GmailSyncType_INITIAL  GmailSyncType = 2 //GmailSyncType -> "INITIAL"
+	GmailSyncType_ONDEMAND GmailSyncType = 3 //GmailSyncType -> "ONDEMAND"
+)
+
+// Enum value maps for GmailSyncType.
+var (
+	GmailSyncType_name = map[int32]string{
+		0: "PERIODIC",
+		1: "RERUN",
+		2: "INITIAL",
+		3: "ONDEMAND",
+	}
+	GmailSyncType_value = map[string]int32{
+		"PERIODIC": 0,
+		"RERUN":    1,
+		"INITIAL":  2,
+		"ONDEMAND": 3,
+	}
+)
+
+func (x GmailSyncType) Enum() *GmailSyncType {
+	p := new(GmailSyncType)
+	*p = x
+	return p
+}
+
+func (x GmailSyncType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (GmailSyncType) Descriptor() protoreflect.EnumDescriptor {
+	return file_repeat_upload_proto_enumTypes[1].Descriptor()
+}
+
+func (GmailSyncType) Type() protoreflect.EnumType {
+	return &file_repeat_upload_proto_enumTypes[1]
+}
+
+func (x GmailSyncType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use GmailSyncType.Descriptor instead.
+func (GmailSyncType) EnumDescriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{1}
+}
+
+type RepeatUploadResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Response:
+	//
+	//	*RepeatUploadResponse_SyncInit
+	//	*RepeatUploadResponse_SyncRecords
+	//	*RepeatUploadResponse_AnalyzingRecords
+	//	*RepeatUploadResponse_SyncEnd
+	Response isRepeatUploadResponse_Response `protobuf_oneof:"Response"`
+}
+
+func (x *RepeatUploadResponse) Reset() {
+	*x = RepeatUploadResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RepeatUploadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepeatUploadResponse) ProtoMessage() {}
+
+func (x *RepeatUploadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepeatUploadResponse.ProtoReflect.Descriptor instead.
+func (*RepeatUploadResponse) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{0}
+}
+
+func (m *RepeatUploadResponse) GetResponse() isRepeatUploadResponse_Response {
+	if m != nil {
+		return m.Response
+	}
+	return nil
+}
+
+func (x *RepeatUploadResponse) GetSyncInit() *SyncInit {
+	if x, ok := x.GetResponse().(*RepeatUploadResponse_SyncInit); ok {
+		return x.SyncInit
+	}
+	return nil
+}
+
+func (x *RepeatUploadResponse) GetSyncRecords() *SyncRecords {
+	if x, ok := x.GetResponse().(*RepeatUploadResponse_SyncRecords); ok {
+		return x.SyncRecords
+	}
+	return nil
+}
+
+func (x *RepeatUploadResponse) GetAnalyzingRecords() *AnalyzingRecords {
+	if x, ok := x.GetResponse().(*RepeatUploadResponse_AnalyzingRecords); ok {
+		return x.AnalyzingRecords
+	}
+	return nil
+}
+
+func (x *RepeatUploadResponse) GetSyncEnd() *SyncEnd {
+	if x, ok := x.GetResponse().(*RepeatUploadResponse_SyncEnd); ok {
+		return x.SyncEnd
+	}
+	return nil
+}
+
+type isRepeatUploadResponse_Response interface {
+	isRepeatUploadResponse_Response()
+}
+
+type RepeatUploadResponse_SyncInit struct {
+	SyncInit *SyncInit `protobuf:"bytes,1,opt,name=syncInit,proto3,oneof"`
+}
+
+type RepeatUploadResponse_SyncRecords struct {
+	SyncRecords *SyncRecords `protobuf:"bytes,2,opt,name=syncRecords,proto3,oneof"`
+}
+
+type RepeatUploadResponse_AnalyzingRecords struct {
+	AnalyzingRecords *AnalyzingRecords `protobuf:"bytes,3,opt,name=analyzingRecords,proto3,oneof"`
+}
+
+type RepeatUploadResponse_SyncEnd struct {
+	SyncEnd *SyncEnd `protobuf:"bytes,4,opt,name=syncEnd,proto3,oneof"`
+}
+
+func (*RepeatUploadResponse_SyncInit) isRepeatUploadResponse_Response() {}
+
+func (*RepeatUploadResponse_SyncRecords) isRepeatUploadResponse_Response() {}
+
+func (*RepeatUploadResponse_AnalyzingRecords) isRepeatUploadResponse_Response() {}
+
+func (*RepeatUploadResponse_SyncEnd) isRepeatUploadResponse_Response() {}
+
+type SyncInit struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *SyncInit) Reset() {
+	*x = SyncInit{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncInit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncInit) ProtoMessage() {}
+
+func (x *SyncInit) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncInit.ProtoReflect.Descriptor instead.
+func (*SyncInit) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{1}
+}
+
+type SyncRecords struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Gmailsync *GmailSync `protobuf:"bytes,1,opt,name=gmailsync,proto3" json:"gmailsync,omitempty"`
+}
+
+func (x *SyncRecords) Reset() {
+	*x = SyncRecords{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncRecords) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncRecords) ProtoMessage() {}
+
+func (x *SyncRecords) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncRecords.ProtoReflect.Descriptor instead.
+func (*SyncRecords) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SyncRecords) GetGmailsync() *GmailSync {
+	if x != nil {
+		return x.Gmailsync
+	}
+	return nil
+}
+
+type GmailSync struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status          string           `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	SyncId          string           `protobuf:"bytes,2,opt,name=sync_id,json=syncId,proto3" json:"sync_id,omitempty"`
+	Categories      []*Categories    `protobuf:"bytes,3,rep,name=categories,proto3" json:"categories,omitempty"`
+	TotalCount      uint32           `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	ProfileDocPopup *ProfileDocPopup `protobuf:"bytes,5,opt,name=profile_doc_popup,json=profileDocPopup,proto3" json:"profile_doc_popup,omitempty"`
+}
+
+func (x *GmailSync) Reset() {
+	*x = GmailSync{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GmailSync) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GmailSync) ProtoMessage() {}
+
+func (x *GmailSync) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GmailSync.ProtoReflect.Descriptor instead.
+func (*GmailSync) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GmailSync) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GmailSync) GetSyncId() string {
+	if x != nil {
+		return x.SyncId
+	}
+	return ""
+}
+
+func (x *GmailSync) GetCategories() []*Categories {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
+func (x *GmailSync) GetTotalCount() uint32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *GmailSync) GetProfileDocPopup() *ProfileDocPopup {
+	if x != nil {
+		return x.ProfileDocPopup
+	}
+	return nil
+}
+
+type AnalyzingRecords struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Count     int32      `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Gmailsync *GmailSync `protobuf:"bytes,2,opt,name=gmailsync,proto3" json:"gmailsync,omitempty"`
+}
+
+func (x *AnalyzingRecords) Reset() {
+	*x = AnalyzingRecords{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AnalyzingRecords) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnalyzingRecords) ProtoMessage() {}
+
+func (x *AnalyzingRecords) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AnalyzingRecords.ProtoReflect.Descriptor instead.
+func (*AnalyzingRecords) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AnalyzingRecords) GetCount() int32 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
+func (x *AnalyzingRecords) GetGmailsync() *GmailSync {
+	if x != nil {
+		return x.Gmailsync
+	}
+	return nil
+}
+
+type SyncEnd struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Gmailsync            *GmailSync            `protobuf:"bytes,1,opt,name=gmailsync,proto3" json:"gmailsync,omitempty"`
+	ViewMyHealthResponse *ViewMyHealthResponse `protobuf:"bytes,2,opt,name=viewMyHealthResponse,proto3" json:"viewMyHealthResponse,omitempty"`
+}
+
+func (x *SyncEnd) Reset() {
+	*x = SyncEnd{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SyncEnd) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SyncEnd) ProtoMessage() {}
+
+func (x *SyncEnd) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SyncEnd.ProtoReflect.Descriptor instead.
+func (*SyncEnd) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *SyncEnd) GetGmailsync() *GmailSync {
+	if x != nil {
+		return x.Gmailsync
+	}
+	return nil
+}
+
+func (x *SyncEnd) GetViewMyHealthResponse() *ViewMyHealthResponse {
+	if x != nil {
+		return x.ViewMyHealthResponse
+	}
+	return nil
+}
+
 type ViewMyHealthResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	IsAnalysing      bool                                   `protobuf:"varint,1,opt,name=is_analysing,json=isAnalysing,proto3" json:"is_analysing,omitempty"`
-	NoOfRecords      int32                                  `protobuf:"varint,2,opt,name=no_of_records,json=noOfRecords,proto3" json:"no_of_records,omitempty"`
-	IsData           bool                                   `protobuf:"varint,3,opt,name=is_data,json=isData,proto3" json:"is_data,omitempty"`
-	HealthCategories *ViewMyHealthResponse_HealthCategories `protobuf:"bytes,4,opt,name=healthCategories,proto3" json:"healthCategories,omitempty"`
+	// Types that are assignable to Response:
+	//
+	//	*ViewMyHealthResponse_IsAnalysing
+	//	*ViewMyHealthResponse_VitalsInfo_
+	Response    isViewMyHealthResponse_Response `protobuf_oneof:"Response"`
+	NoOfRecords int32                           `protobuf:"varint,3,opt,name=no_of_records,json=noOfRecords,proto3" json:"no_of_records,omitempty"`
 }
 
 func (x *ViewMyHealthResponse) Reset() {
 	*x = ViewMyHealthResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_repeat_upload_proto_msgTypes[0]
+		mi := &file_repeat_upload_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -47,7 +542,7 @@ func (x *ViewMyHealthResponse) String() string {
 func (*ViewMyHealthResponse) ProtoMessage() {}
 
 func (x *ViewMyHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_repeat_upload_proto_msgTypes[0]
+	mi := &file_repeat_upload_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,14 +555,28 @@ func (x *ViewMyHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ViewMyHealthResponse.ProtoReflect.Descriptor instead.
 func (*ViewMyHealthResponse) Descriptor() ([]byte, []int) {
-	return file_repeat_upload_proto_rawDescGZIP(), []int{0}
+	return file_repeat_upload_proto_rawDescGZIP(), []int{6}
+}
+
+func (m *ViewMyHealthResponse) GetResponse() isViewMyHealthResponse_Response {
+	if m != nil {
+		return m.Response
+	}
+	return nil
 }
 
 func (x *ViewMyHealthResponse) GetIsAnalysing() bool {
-	if x != nil {
+	if x, ok := x.GetResponse().(*ViewMyHealthResponse_IsAnalysing); ok {
 		return x.IsAnalysing
 	}
 	return false
+}
+
+func (x *ViewMyHealthResponse) GetVitalsInfo() *ViewMyHealthResponse_VitalsInfo {
+	if x, ok := x.GetResponse().(*ViewMyHealthResponse_VitalsInfo_); ok {
+		return x.VitalsInfo
+	}
+	return nil
 }
 
 func (x *ViewMyHealthResponse) GetNoOfRecords() int32 {
@@ -77,45 +586,51 @@ func (x *ViewMyHealthResponse) GetNoOfRecords() int32 {
 	return 0
 }
 
-func (x *ViewMyHealthResponse) GetIsData() bool {
-	if x != nil {
-		return x.IsData
-	}
-	return false
+type isViewMyHealthResponse_Response interface {
+	isViewMyHealthResponse_Response()
 }
 
-func (x *ViewMyHealthResponse) GetHealthCategories() *ViewMyHealthResponse_HealthCategories {
-	if x != nil {
-		return x.HealthCategories
-	}
-	return nil
+type ViewMyHealthResponse_IsAnalysing struct {
+	IsAnalysing bool `protobuf:"varint,1,opt,name=is_analysing,json=isAnalysing,proto3,oneof"`
 }
 
-type ViewMyHealthResponse_HealthCategories struct {
+type ViewMyHealthResponse_VitalsInfo_ struct {
+	VitalsInfo *ViewMyHealthResponse_VitalsInfo `protobuf:"bytes,2,opt,name=vitalsInfo,proto3,oneof"`
+}
+
+func (*ViewMyHealthResponse_IsAnalysing) isViewMyHealthResponse_Response() {}
+
+func (*ViewMyHealthResponse_VitalsInfo_) isViewMyHealthResponse_Response() {}
+
+type Categories struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Categories []*ViewMyHealthResponse_Categories `protobuf:"bytes,1,rep,name=categories,proto3" json:"categories,omitempty"`
+	TabTitle      string `protobuf:"bytes,1,opt,name=tab_title,json=tabTitle,proto3" json:"tab_title,omitempty"`
+	TabCount      uint32 `protobuf:"varint,2,opt,name=tab_count,json=tabCount,proto3" json:"tab_count,omitempty"`
+	Description   string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Bgcolor       string `protobuf:"bytes,4,opt,name=bgcolor,proto3" json:"bgcolor,omitempty"`
+	TabCountColor string `protobuf:"bytes,5,opt,name=tab_count_color,json=tabCountColor,proto3" json:"tab_count_color,omitempty"`
 }
 
-func (x *ViewMyHealthResponse_HealthCategories) Reset() {
-	*x = ViewMyHealthResponse_HealthCategories{}
+func (x *Categories) Reset() {
+	*x = Categories{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_repeat_upload_proto_msgTypes[1]
+		mi := &file_repeat_upload_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ViewMyHealthResponse_HealthCategories) String() string {
+func (x *Categories) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ViewMyHealthResponse_HealthCategories) ProtoMessage() {}
+func (*Categories) ProtoMessage() {}
 
-func (x *ViewMyHealthResponse_HealthCategories) ProtoReflect() protoreflect.Message {
-	mi := &file_repeat_upload_proto_msgTypes[1]
+func (x *Categories) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -126,19 +641,204 @@ func (x *ViewMyHealthResponse_HealthCategories) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ViewMyHealthResponse_HealthCategories.ProtoReflect.Descriptor instead.
-func (*ViewMyHealthResponse_HealthCategories) Descriptor() ([]byte, []int) {
-	return file_repeat_upload_proto_rawDescGZIP(), []int{0, 0}
+// Deprecated: Use Categories.ProtoReflect.Descriptor instead.
+func (*Categories) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *ViewMyHealthResponse_HealthCategories) GetCategories() []*ViewMyHealthResponse_Categories {
+func (x *Categories) GetTabTitle() string {
 	if x != nil {
-		return x.Categories
+		return x.TabTitle
+	}
+	return ""
+}
+
+func (x *Categories) GetTabCount() uint32 {
+	if x != nil {
+		return x.TabCount
+	}
+	return 0
+}
+
+func (x *Categories) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Categories) GetBgcolor() string {
+	if x != nil {
+		return x.Bgcolor
+	}
+	return ""
+}
+
+func (x *Categories) GetTabCountColor() string {
+	if x != nil {
+		return x.TabCountColor
+	}
+	return ""
+}
+
+type Params struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	EmailId string `protobuf:"bytes,1,opt,name=email_id,json=emailId,proto3" json:"email_id,omitempty"`
+}
+
+func (x *Params) Reset() {
+	*x = Params{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Params) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Params) ProtoMessage() {}
+
+func (x *Params) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Params.ProtoReflect.Descriptor instead.
+func (*Params) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Params) GetEmailId() string {
+	if x != nil {
+		return x.EmailId
+	}
+	return ""
+}
+
+type Cta struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Params *Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params,omitempty"`
+	Title  string  `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+}
+
+func (x *Cta) Reset() {
+	*x = Cta{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Cta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Cta) ProtoMessage() {}
+
+func (x *Cta) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Cta.ProtoReflect.Descriptor instead.
+func (*Cta) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *Cta) GetParams() *Params {
+	if x != nil {
+		return x.Params
 	}
 	return nil
 }
 
-type ViewMyHealthResponse_Categories struct {
+func (x *Cta) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+type ProfileDocPopup struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Cta   *Cta   `protobuf:"bytes,1,opt,name=cta,proto3" json:"cta,omitempty"`
+	Title string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+}
+
+func (x *ProfileDocPopup) Reset() {
+	*x = ProfileDocPopup{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_repeat_upload_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ProfileDocPopup) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProfileDocPopup) ProtoMessage() {}
+
+func (x *ProfileDocPopup) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProfileDocPopup.ProtoReflect.Descriptor instead.
+func (*ProfileDocPopup) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ProfileDocPopup) GetCta() *Cta {
+	if x != nil {
+		return x.Cta
+	}
+	return nil
+}
+
+func (x *ProfileDocPopup) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+type ViewMyHealthResponse_VitalsInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -149,23 +849,23 @@ type ViewMyHealthResponse_Categories struct {
 	LatestAdded   int32 `protobuf:"varint,4,opt,name=latest_added,json=latestAdded,proto3" json:"latest_added,omitempty"`
 }
 
-func (x *ViewMyHealthResponse_Categories) Reset() {
-	*x = ViewMyHealthResponse_Categories{}
+func (x *ViewMyHealthResponse_VitalsInfo) Reset() {
+	*x = ViewMyHealthResponse_VitalsInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_repeat_upload_proto_msgTypes[2]
+		mi := &file_repeat_upload_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ViewMyHealthResponse_Categories) String() string {
+func (x *ViewMyHealthResponse_VitalsInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ViewMyHealthResponse_Categories) ProtoMessage() {}
+func (*ViewMyHealthResponse_VitalsInfo) ProtoMessage() {}
 
-func (x *ViewMyHealthResponse_Categories) ProtoReflect() protoreflect.Message {
-	mi := &file_repeat_upload_proto_msgTypes[2]
+func (x *ViewMyHealthResponse_VitalsInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_repeat_upload_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -176,33 +876,33 @@ func (x *ViewMyHealthResponse_Categories) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ViewMyHealthResponse_Categories.ProtoReflect.Descriptor instead.
-func (*ViewMyHealthResponse_Categories) Descriptor() ([]byte, []int) {
-	return file_repeat_upload_proto_rawDescGZIP(), []int{0, 1}
+// Deprecated: Use ViewMyHealthResponse_VitalsInfo.ProtoReflect.Descriptor instead.
+func (*ViewMyHealthResponse_VitalsInfo) Descriptor() ([]byte, []int) {
+	return file_repeat_upload_proto_rawDescGZIP(), []int{6, 0}
 }
 
-func (x *ViewMyHealthResponse_Categories) GetVitalsFound() int32 {
+func (x *ViewMyHealthResponse_VitalsInfo) GetVitalsFound() int32 {
 	if x != nil {
 		return x.VitalsFound
 	}
 	return 0
 }
 
-func (x *ViewMyHealthResponse_Categories) GetConcerns() int32 {
+func (x *ViewMyHealthResponse_VitalsInfo) GetConcerns() int32 {
 	if x != nil {
 		return x.Concerns
 	}
 	return 0
 }
 
-func (x *ViewMyHealthResponse_Categories) GetTrendsUpdated() int32 {
+func (x *ViewMyHealthResponse_VitalsInfo) GetTrendsUpdated() int32 {
 	if x != nil {
 		return x.TrendsUpdated
 	}
 	return 0
 }
 
-func (x *ViewMyHealthResponse_Categories) GetLatestAdded() int32 {
+func (x *ViewMyHealthResponse_VitalsInfo) GetLatestAdded() int32 {
 	if x != nil {
 		return x.LatestAdded
 	}
@@ -214,41 +914,120 @@ var File_repeat_upload_proto protoreflect.FileDescriptor
 var file_repeat_upload_proto_rawDesc = []byte{
 	0x0a, 0x13, 0x72, 0x65, 0x70, 0x65, 0x61, 0x74, 0x5f, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73,
-	0x69, 0x67, 0x68, 0x74, 0x73, 0x22, 0xd6, 0x03, 0x0a, 0x14, 0x56, 0x69, 0x65, 0x77, 0x4d, 0x79,
-	0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21,
-	0x0a, 0x0c, 0x69, 0x73, 0x5f, 0x61, 0x6e, 0x61, 0x6c, 0x79, 0x73, 0x69, 0x6e, 0x67, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x69, 0x73, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x73, 0x69, 0x6e,
-	0x67, 0x12, 0x22, 0x0a, 0x0d, 0x6e, 0x6f, 0x5f, 0x6f, 0x66, 0x5f, 0x72, 0x65, 0x63, 0x6f, 0x72,
-	0x64, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x6e, 0x6f, 0x4f, 0x66, 0x52, 0x65,
-	0x63, 0x6f, 0x72, 0x64, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x73, 0x5f, 0x64, 0x61, 0x74, 0x61,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x69, 0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x61,
-	0x0a, 0x10, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69,
-	0x65, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x35, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74,
-	0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x56, 0x69, 0x65, 0x77, 0x4d, 0x79,
-	0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x48,
-	0x65, 0x61, 0x6c, 0x74, 0x68, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x52,
-	0x10, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65,
-	0x73, 0x1a, 0x63, 0x0a, 0x10, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x43, 0x61, 0x74, 0x65, 0x67,
-	0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x4f, 0x0a, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
-	0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x76, 0x61, 0x75, 0x6c,
+	0x69, 0x67, 0x68, 0x74, 0x73, 0x22, 0xa0, 0x02, 0x0a, 0x14, 0x52, 0x65, 0x70, 0x65, 0x61, 0x74,
+	0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x36,
+	0x0a, 0x08, 0x73, 0x79, 0x6e, 0x63, 0x49, 0x6e, 0x69, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x18, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74,
+	0x73, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x49, 0x6e, 0x69, 0x74, 0x48, 0x00, 0x52, 0x08, 0x73, 0x79,
+	0x6e, 0x63, 0x49, 0x6e, 0x69, 0x74, 0x12, 0x3f, 0x0a, 0x0b, 0x73, 0x79, 0x6e, 0x63, 0x52, 0x65,
+	0x63, 0x6f, 0x72, 0x64, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x76, 0x61,
+	0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x53, 0x79, 0x6e,
+	0x63, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x48, 0x00, 0x52, 0x0b, 0x73, 0x79, 0x6e, 0x63,
+	0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x12, 0x4e, 0x0a, 0x10, 0x61, 0x6e, 0x61, 0x6c, 0x79,
+	0x7a, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x20, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68,
+	0x74, 0x73, 0x2e, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x63, 0x6f,
+	0x72, 0x64, 0x73, 0x48, 0x00, 0x52, 0x10, 0x61, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x69, 0x6e, 0x67,
+	0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x12, 0x33, 0x0a, 0x07, 0x73, 0x79, 0x6e, 0x63, 0x45,
+	0x6e, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74,
+	0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x53, 0x79, 0x6e, 0x63, 0x45, 0x6e,
+	0x64, 0x48, 0x00, 0x52, 0x07, 0x73, 0x79, 0x6e, 0x63, 0x45, 0x6e, 0x64, 0x42, 0x0a, 0x0a, 0x08,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x0a, 0x0a, 0x08, 0x53, 0x79, 0x6e, 0x63,
+	0x49, 0x6e, 0x69, 0x74, 0x22, 0x46, 0x0a, 0x0b, 0x53, 0x79, 0x6e, 0x63, 0x52, 0x65, 0x63, 0x6f,
+	0x72, 0x64, 0x73, 0x12, 0x37, 0x0a, 0x09, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x79, 0x6e, 0x63,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69,
+	0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x47, 0x6d, 0x61, 0x69, 0x6c, 0x53, 0x79, 0x6e,
+	0x63, 0x52, 0x09, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x79, 0x6e, 0x63, 0x22, 0xe6, 0x01, 0x0a,
+	0x09, 0x47, 0x6d, 0x61, 0x69, 0x6c, 0x53, 0x79, 0x6e, 0x63, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x79, 0x6e, 0x63, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x79, 0x6e, 0x63, 0x49, 0x64, 0x12, 0x3a, 0x0a, 0x0a, 0x63,
+	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1a, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73,
+	0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x52, 0x0a, 0x63, 0x61, 0x74,
+	0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c,
+	0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x74, 0x6f,
+	0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x4b, 0x0a, 0x11, 0x70, 0x72, 0x6f, 0x66,
+	0x69, 0x6c, 0x65, 0x5f, 0x64, 0x6f, 0x63, 0x5f, 0x70, 0x6f, 0x70, 0x75, 0x70, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69,
+	0x67, 0x68, 0x74, 0x73, 0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x44, 0x6f, 0x63, 0x50,
+	0x6f, 0x70, 0x75, 0x70, 0x52, 0x0f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x44, 0x6f, 0x63,
+	0x50, 0x6f, 0x70, 0x75, 0x70, 0x22, 0x61, 0x0a, 0x10, 0x41, 0x6e, 0x61, 0x6c, 0x79, 0x7a, 0x69,
+	0x6e, 0x67, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12,
+	0x37, 0x0a, 0x09, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x79, 0x6e, 0x63, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67,
+	0x68, 0x74, 0x73, 0x2e, 0x47, 0x6d, 0x61, 0x69, 0x6c, 0x53, 0x79, 0x6e, 0x63, 0x52, 0x09, 0x67,
+	0x6d, 0x61, 0x69, 0x6c, 0x73, 0x79, 0x6e, 0x63, 0x22, 0x9c, 0x01, 0x0a, 0x07, 0x53, 0x79, 0x6e,
+	0x63, 0x45, 0x6e, 0x64, 0x12, 0x37, 0x0a, 0x09, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x79, 0x6e,
+	0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e,
+	0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x47, 0x6d, 0x61, 0x69, 0x6c, 0x53, 0x79,
+	0x6e, 0x63, 0x52, 0x09, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x79, 0x6e, 0x63, 0x12, 0x58, 0x0a,
+	0x14, 0x76, 0x69, 0x65, 0x77, 0x4d, 0x79, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x76, 0x61,
+	0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x56, 0x69, 0x65,
+	0x77, 0x4d, 0x79, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x52, 0x14, 0x76, 0x69, 0x65, 0x77, 0x4d, 0x79, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xd6, 0x02, 0x0a, 0x14, 0x56, 0x69, 0x65, 0x77,
+	0x4d, 0x79, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x23, 0x0a, 0x0c, 0x69, 0x73, 0x5f, 0x61, 0x6e, 0x61, 0x6c, 0x79, 0x73, 0x69, 0x6e, 0x67,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x48, 0x00, 0x52, 0x0b, 0x69, 0x73, 0x41, 0x6e, 0x61, 0x6c,
+	0x79, 0x73, 0x69, 0x6e, 0x67, 0x12, 0x51, 0x0a, 0x0a, 0x76, 0x69, 0x74, 0x61, 0x6c, 0x73, 0x49,
+	0x6e, 0x66, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x76, 0x61, 0x75, 0x6c,
 	0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x56, 0x69, 0x65, 0x77, 0x4d,
 	0x79, 0x48, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e,
-	0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65,
-	0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x1a, 0x95, 0x01, 0x0a, 0x0a, 0x43, 0x61, 0x74, 0x65, 0x67,
-	0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x76, 0x69, 0x74, 0x61, 0x6c, 0x73, 0x5f,
-	0x66, 0x6f, 0x75, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x76, 0x69, 0x74,
-	0x61, 0x6c, 0x73, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x63,
-	0x65, 0x72, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x63,
-	0x65, 0x72, 0x6e, 0x73, 0x12, 0x25, 0x0a, 0x0e, 0x74, 0x72, 0x65, 0x6e, 0x64, 0x73, 0x5f, 0x75,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0d, 0x74, 0x72,
-	0x65, 0x6e, 0x64, 0x73, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x6c,
-	0x61, 0x74, 0x65, 0x73, 0x74, 0x5f, 0x61, 0x64, 0x64, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x05, 0x52, 0x0b, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x74, 0x41, 0x64, 0x64, 0x65, 0x64, 0x42, 0x3c,
-	0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61,
-	0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74,
-	0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2f, 0x72,
-	0x65, 0x70, 0x65, 0x61, 0x74, 0x5f, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x56, 0x69, 0x74, 0x61, 0x6c, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x48, 0x00, 0x52, 0x0a, 0x76, 0x69,
+	0x74, 0x61, 0x6c, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x22, 0x0a, 0x0d, 0x6e, 0x6f, 0x5f, 0x6f,
+	0x66, 0x5f, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0b, 0x6e, 0x6f, 0x4f, 0x66, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x1a, 0x95, 0x01, 0x0a,
+	0x0a, 0x56, 0x69, 0x74, 0x61, 0x6c, 0x73, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x21, 0x0a, 0x0c, 0x76,
+	0x69, 0x74, 0x61, 0x6c, 0x73, 0x5f, 0x66, 0x6f, 0x75, 0x6e, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x0b, 0x76, 0x69, 0x74, 0x61, 0x6c, 0x73, 0x46, 0x6f, 0x75, 0x6e, 0x64, 0x12, 0x1a,
+	0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x63, 0x65, 0x72, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x08, 0x63, 0x6f, 0x6e, 0x63, 0x65, 0x72, 0x6e, 0x73, 0x12, 0x25, 0x0a, 0x0e, 0x74, 0x72,
+	0x65, 0x6e, 0x64, 0x73, 0x5f, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x0d, 0x74, 0x72, 0x65, 0x6e, 0x64, 0x73, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x64, 0x12, 0x21, 0x0a, 0x0c, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x74, 0x5f, 0x61, 0x64, 0x64, 0x65,
+	0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0b, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x74, 0x41,
+	0x64, 0x64, 0x65, 0x64, 0x42, 0x0a, 0x0a, 0x08, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0xaa, 0x01, 0x0a, 0x0a, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x12,
+	0x1b, 0x0a, 0x09, 0x74, 0x61, 0x62, 0x5f, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x74, 0x61, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x1b, 0x0a, 0x09,
+	0x74, 0x61, 0x62, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x08, 0x74, 0x61, 0x62, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73,
+	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
+	0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x62,
+	0x67, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x62, 0x67,
+	0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x12, 0x26, 0x0a, 0x0f, 0x74, 0x61, 0x62, 0x5f, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x5f, 0x63, 0x6f, 0x6c, 0x6f, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d,
+	0x74, 0x61, 0x62, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f, 0x6c, 0x6f, 0x72, 0x22, 0x23, 0x0a,
+	0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x19, 0x0a, 0x08, 0x65, 0x6d, 0x61, 0x69, 0x6c,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x65, 0x6d, 0x61, 0x69, 0x6c,
+	0x49, 0x64, 0x22, 0x4b, 0x0a, 0x03, 0x43, 0x74, 0x61, 0x12, 0x2e, 0x0a, 0x06, 0x70, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x76, 0x61, 0x75, 0x6c,
+	0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74,
+	0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x22,
+	0x4e, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x44, 0x6f, 0x63, 0x50, 0x6f, 0x70,
+	0x75, 0x70, 0x12, 0x25, 0x0a, 0x03, 0x63, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x13, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x69, 0x6e, 0x73, 0x69, 0x67, 0x68, 0x74, 0x73,
+	0x2e, 0x43, 0x74, 0x61, 0x52, 0x03, 0x63, 0x74, 0x61, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74,
+	0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x2a,
+	0x60, 0x0a, 0x0e, 0x47, 0x6d, 0x61, 0x69, 0x6c, 0x53, 0x79, 0x6e, 0x63, 0x53, 0x74, 0x61, 0x74,
+	0x65, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x54, 0x41, 0x52, 0x54, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0e,
+	0x0a, 0x0a, 0x50, 0x52, 0x4f, 0x43, 0x45, 0x53, 0x53, 0x49, 0x4e, 0x47, 0x10, 0x01, 0x12, 0x0a,
+	0x0a, 0x06, 0x53, 0x59, 0x4e, 0x43, 0x45, 0x44, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x55, 0x4e,
+	0x4c, 0x49, 0x4e, 0x4b, 0x45, 0x44, 0x10, 0x03, 0x12, 0x0a, 0x0a, 0x06, 0x46, 0x41, 0x49, 0x4c,
+	0x45, 0x44, 0x10, 0x04, 0x12, 0x0b, 0x0a, 0x07, 0x52, 0x45, 0x56, 0x4f, 0x4b, 0x45, 0x44, 0x10,
+	0x05, 0x2a, 0x43, 0x0a, 0x0d, 0x47, 0x6d, 0x61, 0x69, 0x6c, 0x53, 0x79, 0x6e, 0x63, 0x54, 0x79,
+	0x70, 0x65, 0x12, 0x0c, 0x0a, 0x08, 0x50, 0x45, 0x52, 0x49, 0x4f, 0x44, 0x49, 0x43, 0x10, 0x00,
+	0x12, 0x09, 0x0a, 0x05, 0x52, 0x45, 0x52, 0x55, 0x4e, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x49,
+	0x4e, 0x49, 0x54, 0x49, 0x41, 0x4c, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x4f, 0x4e, 0x44, 0x45,
+	0x4d, 0x41, 0x4e, 0x44, 0x10, 0x03, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f,
+	0x2f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2f, 0x72, 0x65, 0x70, 0x65, 0x61, 0x74, 0x5f, 0x75, 0x70,
+	0x6c, 0x6f, 0x61, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -263,20 +1042,43 @@ func file_repeat_upload_proto_rawDescGZIP() []byte {
 	return file_repeat_upload_proto_rawDescData
 }
 
-var file_repeat_upload_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_repeat_upload_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_repeat_upload_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_repeat_upload_proto_goTypes = []interface{}{
-	(*ViewMyHealthResponse)(nil),                  // 0: vault.insights.ViewMyHealthResponse
-	(*ViewMyHealthResponse_HealthCategories)(nil), // 1: vault.insights.ViewMyHealthResponse.HealthCategories
-	(*ViewMyHealthResponse_Categories)(nil),       // 2: vault.insights.ViewMyHealthResponse.Categories
+	(GmailSyncState)(0),                     // 0: vault.insights.GmailSyncState
+	(GmailSyncType)(0),                      // 1: vault.insights.GmailSyncType
+	(*RepeatUploadResponse)(nil),            // 2: vault.insights.RepeatUploadResponse
+	(*SyncInit)(nil),                        // 3: vault.insights.SyncInit
+	(*SyncRecords)(nil),                     // 4: vault.insights.SyncRecords
+	(*GmailSync)(nil),                       // 5: vault.insights.GmailSync
+	(*AnalyzingRecords)(nil),                // 6: vault.insights.AnalyzingRecords
+	(*SyncEnd)(nil),                         // 7: vault.insights.SyncEnd
+	(*ViewMyHealthResponse)(nil),            // 8: vault.insights.ViewMyHealthResponse
+	(*Categories)(nil),                      // 9: vault.insights.Categories
+	(*Params)(nil),                          // 10: vault.insights.Params
+	(*Cta)(nil),                             // 11: vault.insights.Cta
+	(*ProfileDocPopup)(nil),                 // 12: vault.insights.ProfileDocPopup
+	(*ViewMyHealthResponse_VitalsInfo)(nil), // 13: vault.insights.ViewMyHealthResponse.VitalsInfo
 }
 var file_repeat_upload_proto_depIdxs = []int32{
-	1, // 0: vault.insights.ViewMyHealthResponse.healthCategories:type_name -> vault.insights.ViewMyHealthResponse.HealthCategories
-	2, // 1: vault.insights.ViewMyHealthResponse.HealthCategories.categories:type_name -> vault.insights.ViewMyHealthResponse.Categories
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3,  // 0: vault.insights.RepeatUploadResponse.syncInit:type_name -> vault.insights.SyncInit
+	4,  // 1: vault.insights.RepeatUploadResponse.syncRecords:type_name -> vault.insights.SyncRecords
+	6,  // 2: vault.insights.RepeatUploadResponse.analyzingRecords:type_name -> vault.insights.AnalyzingRecords
+	7,  // 3: vault.insights.RepeatUploadResponse.syncEnd:type_name -> vault.insights.SyncEnd
+	5,  // 4: vault.insights.SyncRecords.gmailsync:type_name -> vault.insights.GmailSync
+	9,  // 5: vault.insights.GmailSync.categories:type_name -> vault.insights.Categories
+	12, // 6: vault.insights.GmailSync.profile_doc_popup:type_name -> vault.insights.ProfileDocPopup
+	5,  // 7: vault.insights.AnalyzingRecords.gmailsync:type_name -> vault.insights.GmailSync
+	5,  // 8: vault.insights.SyncEnd.gmailsync:type_name -> vault.insights.GmailSync
+	8,  // 9: vault.insights.SyncEnd.viewMyHealthResponse:type_name -> vault.insights.ViewMyHealthResponse
+	13, // 10: vault.insights.ViewMyHealthResponse.vitalsInfo:type_name -> vault.insights.ViewMyHealthResponse.VitalsInfo
+	10, // 11: vault.insights.Cta.params:type_name -> vault.insights.Params
+	11, // 12: vault.insights.ProfileDocPopup.cta:type_name -> vault.insights.Cta
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_repeat_upload_proto_init() }
@@ -286,7 +1088,7 @@ func file_repeat_upload_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_repeat_upload_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ViewMyHealthResponse); i {
+			switch v := v.(*RepeatUploadResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -298,7 +1100,7 @@ func file_repeat_upload_proto_init() {
 			}
 		}
 		file_repeat_upload_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ViewMyHealthResponse_HealthCategories); i {
+			switch v := v.(*SyncInit); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -310,7 +1112,115 @@ func file_repeat_upload_proto_init() {
 			}
 		}
 		file_repeat_upload_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ViewMyHealthResponse_Categories); i {
+			switch v := v.(*SyncRecords); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GmailSync); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AnalyzingRecords); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SyncEnd); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ViewMyHealthResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Categories); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Params); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Cta); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProfileDocPopup); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_repeat_upload_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ViewMyHealthResponse_VitalsInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -322,18 +1232,29 @@ func file_repeat_upload_proto_init() {
 			}
 		}
 	}
+	file_repeat_upload_proto_msgTypes[0].OneofWrappers = []interface{}{
+		(*RepeatUploadResponse_SyncInit)(nil),
+		(*RepeatUploadResponse_SyncRecords)(nil),
+		(*RepeatUploadResponse_AnalyzingRecords)(nil),
+		(*RepeatUploadResponse_SyncEnd)(nil),
+	}
+	file_repeat_upload_proto_msgTypes[6].OneofWrappers = []interface{}{
+		(*ViewMyHealthResponse_IsAnalysing)(nil),
+		(*ViewMyHealthResponse_VitalsInfo_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_repeat_upload_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      2,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_repeat_upload_proto_goTypes,
 		DependencyIndexes: file_repeat_upload_proto_depIdxs,
+		EnumInfos:         file_repeat_upload_proto_enumTypes,
 		MessageInfos:      file_repeat_upload_proto_msgTypes,
 	}.Build()
 	File_repeat_upload_proto = out.File
