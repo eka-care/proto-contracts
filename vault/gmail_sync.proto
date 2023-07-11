@@ -6,29 +6,20 @@ import "vault/cta.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/gmail_sync";
 
-/* GmailSyncState represents current sync status. */
-enum GmailSyncState {
-  GMAIL_SYNC_STATE_UNSPECIFIED = 0;         // GmailSyncState -> Unspecified.
-  GMAIL_SYNC_STATE_STARTED = 1;            // GmailSyncState -> Started.
-  GMAIL_SYNC_STATE_PROCESSING = 2;        // GmailSyncState -> Processing.
-  GMAIL_SYNC_STATE_SYNCED = 3;            // GmailSyncState -> Synced.
-  GMAIL_SYNC_STATE_UNLINKED = 4;          // GmailSyncState -> Unlinked.
-  GMAIL_SYNC_STATE_FAILED = 5;            // GmailSyncState -> Failed.
-  GMAIL_SYNC_STATE_REVOKED = 6;           // GmailSyncState -> Revoked.
-}
-
-/* GmailSyncType represents sync type. */
-enum GmailSyncType {
-  GMAIL_SYNC_TYPE_UNSPECIFIED = 0; // GmailSyncType -> Unspecified.
-  GMAIL_SYNC_TYPE_PERIODIC = 1;    // GmailSyncType -> Periodic.
-  GMAIL_SYNC_TYPE_RERUN = 2;       // GmailSyncType -> Rerun.
-  GMAIL_SYNC_TYPE_INITIAL = 3;     // GmailSyncType -> Initial.
-  GMAIL_SYNC_TYPE_ONDEMAND = 4;    // GmailSyncType -> Ondemand.
+/* State represents current gmail sync status. */
+enum State {
+  STATE_UNSPECIFIED = 0;       // State -> Unspecified.
+  STATE_STARTED = 1;           // State -> Started.
+  STATE_PROCESSING = 2;        // State -> Processing.
+  STATE_SYNCED = 3;            // State -> Synced.
+  STATE_UNLINKED = 4;          // State -> Unlinked.
+  STATE_FAILED = 5;            // State -> Failed.
+  STATE_REVOKED = 6;           // State -> Revoked.
 }
   
 /* GmailSync represents sync status along with pop-up summary. */
 message GmailSync {
-  string status = 1; // Gmail sync status.
+  State status = 1; // Gmail sync status.
   string sync_id = 2; // Gmail sync sync id.
   repeated Categories categories = 3; // Gmail sync profile classification data.
   optional uint32 total_count = 4; // Total count of docs (identified + needs review).
