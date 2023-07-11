@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package vault.gmail_sync;
+
+import "vault/cta.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/gmail_sync";
+
+/* GmailSyncState represents current sync status. */
+enum GmailSyncState {
+  GMAIL_SYNC_STATE_UNSPECIFIED = 0;         // GmailSyncState -> Unspecified.
+  GMAIL_SYNC_STATE_STARTED = 1;            // GmailSyncState -> Started.
+  GMAIL_SYNC_STATE_PROCESSING = 2;        // GmailSyncState -> Processing.
+  GMAIL_SYNC_STATE_SYNCED = 3;            // GmailSyncState -> Synced.
+  GMAIL_SYNC_STATE_UNLINKED = 4;          // GmailSyncState -> Unlinked.
+  GMAIL_SYNC_STATE_FAILED = 5;            // GmailSyncState -> Failed.
+  GMAIL_SYNC_STATE_REVOKED = 6;           // GmailSyncState -> Revoked.
+}
+
+/* GmailSyncType represents sync type. */
+enum GmailSyncType {
+  GMAIL_SYNC_TYPE_UNSPECIFIED = 0; // GmailSyncType -> Unspecified.
+  GMAIL_SYNC_TYPE_PERIODIC = 1;    // GmailSyncType -> Periodic.
+  GMAIL_SYNC_TYPE_RERUN = 2;       // GmailSyncType -> Rerun.
+  GMAIL_SYNC_TYPE_INITIAL = 3;     // GmailSyncType -> Initial.
+  GMAIL_SYNC_TYPE_ONDEMAND = 4;    // GmailSyncType -> Ondemand.
+}
+  
+/* GmailSync represents sync status along with pop-up summary. */
+message GmailSync {
+  string status = 1; // Gmail sync status.
+  string sync_id = 2; // Gmail sync sync id.
+  repeated Categories categories = 3; // Gmail sync profile classification data.
+  optional uint32 total_count = 4; // Total count of docs (identified + needs review).
+  optional ProfileDocPopup profile_doc_popup = 5; // Gmail sync pop-up summary.
+  uint32 count = 6; // Gmail sync documents count.
+}
+
+/* Categories represent gmail sync profile classification screen. */
+message Categories {
+  string tab_title = 1; // Identified or Needs review tab title.
+  uint32 tab_count = 2; // Number of records found under each tab.
+  string description = 3; // Description of the tab.
+  string bgcolor = 4; // Background color for the tab.
+  string tab_count_color = 5; // Color for tab count.
+}
+  
+/* ProfileDocPopup represents gmail sync pop-up summary. */
+message ProfileDocPopup {
+  vault.common.CTA cta = 1; // CTA configuration for button.
+  string title = 2; // No. of records belonging to tab.
+}
+  

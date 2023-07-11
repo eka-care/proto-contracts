@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package vault.added_records_summary;
 
-import "vault/cta.proto";
+import "vault/gmail_sync.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/added_records_summary";
 
-/* RepeatUploadResponse represents health bottom sheet and gmail sync status. */
-message RepeatUploadResponse {
+/* Status represents health bottom sheet and gmail sync status. */
+message Status {
   oneof Response {
     SyncRecords sync_records = 1; // Adding records to Health Locker.
     AnalyzingRecords analyzing_records = 2; // Analyzing your health records (X).
@@ -17,74 +17,29 @@ message RepeatUploadResponse {
 
 /* Sync Records represents the state when records are added to health locker. */
 message SyncRecords {
-  GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
-}
-
-/* GmailSyncState represents current sync status. */
-enum GmailSyncState {
-  GMAIL_SYNC_STATE_UNSPECIFIED = 0;         // GmailSyncState -> Unspecified.
-  GMAIL_SYNC_STATE_STARTED = 1;            // GmailSyncState -> Started.
-  GMAIL_SYNC_STATE_PROCESSING = 2;        // GmailSyncState -> Processing.
-  GMAIL_SYNC_STATE_SYNCED = 3;            // GmailSyncState -> Synced.
-  GMAIL_SYNC_STATE_UNLINKED = 4;          // GmailSyncState -> Unlinked.
-  GMAIL_SYNC_STATE_FAILED = 5;            // GmailSyncState -> Failed.
-  GMAIL_SYNC_STATE_REVOKED = 6;           // GmailSyncState -> Revoked.
-}
-
-/* GmailSyncType represents sync type. */
-enum GmailSyncType {
-  GMAIL_SYNC_TYPE_UNSPECIFIED = 0; // GmailSyncType -> Unspecified.
-  GMAIL_SYNC_TYPE_PERIODIC = 1;    // GmailSyncType -> Periodic.
-  GMAIL_SYNC_TYPE_RERUN = 2;       // GmailSyncType -> Rerun.
-  GMAIL_SYNC_TYPE_INITIAL = 3;     // GmailSyncType -> Initial.
-  GMAIL_SYNC_TYPE_ONDEMAND = 4;    // GmailSyncType -> Ondemand.
-}
-
-/* GmailSync represents sync status along with pop-up summary. */
-message GmailSync {
-  optional string status = 1; // Gmail sync status.
-  optional string sync_id = 2; // Gmail sync sync id.
-  repeated Categories categories = 3; // Gmail sync profile classification data.
-  optional int32 total_count = 4; // Total count of docs (identified + needs review).
-  optional ProfileDocPopup profile_doc_popup = 5; // Gmail sync pop-up summary.
-  int32 count = 6; // Gmail sync documents count.
+  vault.gmail_sync.GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
 }
 
 /* AnalyzingRecords represents smart report extraction state of documents. */
 message AnalyzingRecords {
-  int32 count = 1; // Total count i.e. manual upload + gmail sync upload.
-  optional GmailSync gmail_sync = 2; // Gmail sync records found, count is required field.
+  uint32 count = 1; // Total count i.e. manual upload + gmail sync upload.
+  optional vault.gmail_sync.GmailSync gmail_sync = 2; // Gmail sync records found, count is required field.
 }
 
 /* EndState represents gmail sync completion and smart report extraction. */
 message EndState {
-  optional GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
+  optional vault.gmail_sync.GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
   Summary summary = 2; // View my health bottom sheet.
 }
 
 /* Summary represents health summary bottom sheet. */
 message Summary {
   message VitalsInfo {
-    optional int32 vitals_found = 1; // Total vitals found for current upload.
-    optional int32 concerns = 2; // Concerned vitals.
-    optional int32 trends_updated = 3; // Trends updated count.
-    optional int32 latest_added = 4; // Latest added trends from current upload.
+    uint32 vitals_found = 1; // Total vitals found for current upload.
+    optional uint32 concerns = 2; // Concerned vitals.
+    optional uint32 trends_updated = 3; // Trends updated count.
+    optional uint32 latest_added = 4; // Latest added trends from current upload.
   }
-  VitalsInfo vitals_info = 1; // Vitals related info.
-  int32 records_count = 2; // Total number of documents uploaded.
-}
-
-/* Categories represent gmail sync profile classification screen. */
-message Categories {
-  string tab_title = 1; // Identified or Needs review tab title.
-  int32 tab_count = 2; // Number of records found under each tab.
-  string description = 3; // Description of the tab.
-  string bgcolor = 4; // Background color for the tab.
-  string tab_count_color = 5; // Color for tab count.
-}
-
-/* ProfileDocPopup represents gmail sync pop-up summary. */
-message ProfileDocPopup {
-  vault.common.CTA cta = 1; // CTA configuration for button.
-  string title = 2; // No. of records belonging to tab.
+  optional VitalsInfo vitals_info = 1; // Vitals related info.
+  uint32 records_count = 2; // Total number of documents uploaded.
 }
