@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package vault.added_records_summary;
+
+import "vault/cta.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/added_records_summary";
+
+/* RepeatUploadResponse represents health bottom sheet and gmail sync status. */
+message RepeatUploadResponse {
+  oneof Response {
+    SyncRecords sync_records = 1; // Adding records to Health Locker.
+    AnalyzingRecords analyzing_records = 2; // Analyzing your health records (X).
+    SyncEnd sync_end = 3; // Making it simpler to see your health.
+  }
+}
+
+/* Sync Records represents the state when records are added to health locker. */
+message SyncRecords {
+  GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
+}
+
+/* GmailSyncState represents current sync status. */
+enum GmailSyncState { 
+  GMAILSYNCSTATE_STARTED = 0; // GmailSyncState -> "STARTED"
+  GMAILSYNCSTATE_PROCESSING = 1; // GmailSyncState -> "PROCESSING"
+  GMAILSYNCSTATE_SYNCED = 2; // GmailSyncState -> "SYNCED"
+  GMAILSYNCSTATE_UNLINKED = 3; // GmailSyncState -> "UNLINKED"
+  GMAILSYNCSTATE_FAILED = 4; // GmailSyncState -> "FAILED"
+  GMAILSYNCSTATE_REVOKED = 5; // GmailSyncState -> "REVOKED"
+}
+
+/* GmailSyncType represents sync type. */
+enum GmailSyncType {
+  GMAILSYNCTYPE_PERIODIC = 0;   // GmailSyncType -> "PERIODIC"
+  GMAILSYNCTYPE_RERUN = 1;      // GmailSyncType -> "RERUN"
+  GMAILSYNCTYPE_INITIAL = 2;   // GmailSyncType -> "INITIAL"
+  GMAILSYNCTYPE_ONDEMAND = 3; // GmailSyncType -> "ONDEMAND"
+}
+
+/* GmailSync represents sync status along with pop-up summary. */
+message GmailSync {
+  optional string status = 1; // Gmail sync status.
+  optional string sync_id = 2; // Gmail sync sync id.
+  repeated Categories categories = 3; // Gmail sync profile classification data.
+  optional int32 total_count = 4; // Total count og docs (identified + needs review).
+  optional ProfileDocPopup profile_doc_popup = 5; // Gmail sync pop-up summary.
+  int32 count = 6; // Gmail sync documents count.
+ }
+
+/* AnalyzingRecords represents smart report extraction state of documents. */
+message AnalyzingRecords {
+  int32 count = 1; // Total count i.e. manual upload + gmail sync upload.
+  GmailSync gmail_sync = 2; // Gmail sync records found, count is required field.
+}
+
+/* SyncEnd represents gmail sync completion and smart report extraction. */
+message SyncEnd {
+  GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
+  ViewMyHealthResponse view_my_health = 2; // View my health bottom sheet.
+}
+
+/* ViewMyHealthResponse represents health summary bottom sheet. */
+message  ViewMyHealthResponse {
+  message VitalsInfo {
+    optional int32 vitals_found = 1; // Total vitals found for current upload.
+    optional int32 concerns = 2; // Concerned vitals.
+    optional int32 trends_updated = 3; // Trends updated count.
+    optional int32 latest_added = 4; // Latest added trends from current upload.
+  }
+  oneof Response {
+    bool is_analysing = 1; // Smart report yet to be extracted.
+    VitalsInfo vitals_info = 2; // Vitals related info.
+  }
+  int32 records_count = 3; // Total number of documents uploaded.
+}
+
+/* Categories represent gmail sync profile classification screen. */
+message Categories {
+  string tab_title = 1; // Identified or Needs review tab title.
+  uint32 tab_count = 2; // Number of records found under each tab.
+  string description = 3; // Description of the tab.
+  string bgcolor = 4; // Background color for the tab.
+  string tab_count_color = 5; // Color for tab count.
+}
+
+/* ProfileDocPopup represents gmail sync pop-up summary. */
+message ProfileDocPopup {
+  vault.common.CTA cta = 1; // CTA configuration for button.
+  string title = 2; // No. of records belonging to tab.
+}
