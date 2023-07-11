@@ -22,7 +22,7 @@ message SyncRecords {
 
 /* GmailSyncState represents current sync status. */
 enum GmailSyncState {
-  GMAIL_SYNC_STATE_UNSPECIFIED = 0; // GmailSyncState -> Unspecified.
+  GMAIL_SYNC_STATE_UNSPECIFIED = 0;         // GmailSyncState -> Unspecified.
   GMAIL_SYNC_STATE_STARTED = 1;            // GmailSyncState -> Started.
   GMAIL_SYNC_STATE_PROCESSING = 2;        // GmailSyncState -> Processing.
   GMAIL_SYNC_STATE_SYNCED = 3;            // GmailSyncState -> Synced.
@@ -34,10 +34,10 @@ enum GmailSyncState {
 /* GmailSyncType represents sync type. */
 enum GmailSyncType {
   GMAIL_SYNC_TYPE_UNSPECIFIED = 0; // GmailSyncType -> Unspecified.
-  GMAIL_SYNC_TYPE_PERIODIC = 1;   // GmailSyncType -> Periodic.
-  GMAIL_SYNC_TYPE_RERUN = 2;      // GmailSyncType -> Rerun.
-  GMAIL_SYNC_TYPE_INITIAL = 3;   // GmailSyncType -> Initial.
-  GMAIL_SYNC_TYPE_ONDEMAND = 4; // GmailSyncType -> Ondemand.
+  GMAIL_SYNC_TYPE_PERIODIC = 1;    // GmailSyncType -> Periodic.
+  GMAIL_SYNC_TYPE_RERUN = 2;       // GmailSyncType -> Rerun.
+  GMAIL_SYNC_TYPE_INITIAL = 3;     // GmailSyncType -> Initial.
+  GMAIL_SYNC_TYPE_ONDEMAND = 4;    // GmailSyncType -> Ondemand.
 }
 
 /* GmailSync represents sync status along with pop-up summary. */
@@ -45,7 +45,7 @@ message GmailSync {
   optional string status = 1; // Gmail sync status.
   optional string sync_id = 2; // Gmail sync sync id.
   repeated Categories categories = 3; // Gmail sync profile classification data.
-  optional int32 total_count = 4; // Total count og docs (identified + needs review).
+  optional int32 total_count = 4; // Total count of docs (identified + needs review).
   optional ProfileDocPopup profile_doc_popup = 5; // Gmail sync pop-up summary.
   int32 count = 6; // Gmail sync documents count.
  }
@@ -53,12 +53,12 @@ message GmailSync {
 /* AnalyzingRecords represents smart report extraction state of documents. */
 message AnalyzingRecords {
   int32 count = 1; // Total count i.e. manual upload + gmail sync upload.
-  GmailSync gmail_sync = 2; // Gmail sync records found, count is required field.
+  optional GmailSync gmail_sync = 2; // Gmail sync records found, count is required field.
 }
 
 /* SyncEnd represents gmail sync completion and smart report extraction. */
 message SyncEnd {
-  GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
+  optional GmailSync gmail_sync = 1; // Gmail sync records found, count is required field.
   ViewMyHealthResponse view_my_health = 2; // View my health bottom sheet.
 }
 
