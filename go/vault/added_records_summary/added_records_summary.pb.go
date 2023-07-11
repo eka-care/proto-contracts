@@ -25,12 +25,12 @@ const (
 type GmailSyncState int32
 
 const (
-	GmailSyncState_GMAILSYNCSTATE_STARTED    GmailSyncState = 0 //GmailSyncState -> "STARTED"
-	GmailSyncState_GMAILSYNCSTATE_PROCESSING GmailSyncState = 1 //GmailSyncState -> "PROCESSING"
-	GmailSyncState_GMAILSYNCSTATE_SYNCED     GmailSyncState = 2 //GmailSyncState -> "SYNCED"
-	GmailSyncState_GMAILSYNCSTATE_UNLINKED   GmailSyncState = 3 //GmailSyncState -> "UNLINKED"
-	GmailSyncState_GMAILSYNCSTATE_FAILED     GmailSyncState = 4 //GmailSyncState -> "FAILED"
-	GmailSyncState_GMAILSYNCSTATE_REVOKED    GmailSyncState = 5 //GmailSyncState -> "REVOKED"
+	GmailSyncState_GMAILSYNCSTATE_STARTED    GmailSyncState = 0 // GmailSyncState -> "STARTED"
+	GmailSyncState_GMAILSYNCSTATE_PROCESSING GmailSyncState = 1 // GmailSyncState -> "PROCESSING"
+	GmailSyncState_GMAILSYNCSTATE_SYNCED     GmailSyncState = 2 // GmailSyncState -> "SYNCED"
+	GmailSyncState_GMAILSYNCSTATE_UNLINKED   GmailSyncState = 3 // GmailSyncState -> "UNLINKED"
+	GmailSyncState_GMAILSYNCSTATE_FAILED     GmailSyncState = 4 // GmailSyncState -> "FAILED"
+	GmailSyncState_GMAILSYNCSTATE_REVOKED    GmailSyncState = 5 // GmailSyncState -> "REVOKED"
 )
 
 // Enum value maps for GmailSyncState.
@@ -84,10 +84,10 @@ func (GmailSyncState) EnumDescriptor() ([]byte, []int) {
 type GmailSyncType int32
 
 const (
-	GmailSyncType_GMAILSYNCTYPE_PERIODIC GmailSyncType = 0 //GmailSyncType ->  "PERIODIC"
-	GmailSyncType_GMAILSYNCTYPE_RERUN    GmailSyncType = 1 //GmailSyncType ->  "RERUN"
-	GmailSyncType_GMAILSYNCTYPE_INITIAL  GmailSyncType = 2 //GmailSyncType -> "INITIAL"
-	GmailSyncType_GMAILSYNCTYPE_ONDEMAND GmailSyncType = 3 //GmailSyncType -> "ONDEMAND"
+	GmailSyncType_GMAILSYNCTYPE_PERIODIC GmailSyncType = 0 // GmailSyncType -> "PERIODIC"
+	GmailSyncType_GMAILSYNCTYPE_RERUN    GmailSyncType = 1 // GmailSyncType -> "RERUN"
+	GmailSyncType_GMAILSYNCTYPE_INITIAL  GmailSyncType = 2 // GmailSyncType -> "INITIAL"
+	GmailSyncType_GMAILSYNCTYPE_ONDEMAND GmailSyncType = 3 // GmailSyncType -> "ONDEMAND"
 )
 
 // Enum value maps for GmailSyncType.
@@ -212,15 +212,15 @@ type isRepeatUploadResponse_Response interface {
 }
 
 type RepeatUploadResponse_SyncRecords struct {
-	SyncRecords *SyncRecords `protobuf:"bytes,1,opt,name=sync_records,json=syncRecords,proto3,oneof"` //Adding records to Health Locker
+	SyncRecords *SyncRecords `protobuf:"bytes,1,opt,name=sync_records,json=syncRecords,proto3,oneof"` // Adding records to Health Locker.
 }
 
 type RepeatUploadResponse_AnalyzingRecords struct {
-	AnalyzingRecords *AnalyzingRecords `protobuf:"bytes,2,opt,name=analyzing_records,json=analyzingRecords,proto3,oneof"` //Analyzing your health records (X)
+	AnalyzingRecords *AnalyzingRecords `protobuf:"bytes,2,opt,name=analyzing_records,json=analyzingRecords,proto3,oneof"` // Analyzing your health records (X).
 }
 
 type RepeatUploadResponse_SyncEnd struct {
-	SyncEnd *SyncEnd `protobuf:"bytes,3,opt,name=sync_end,json=syncEnd,proto3,oneof"` //Making it simpler to see your health
+	SyncEnd *SyncEnd `protobuf:"bytes,3,opt,name=sync_end,json=syncEnd,proto3,oneof"` // Making it simpler to see your health.
 }
 
 func (*RepeatUploadResponse_SyncRecords) isRepeatUploadResponse_Response() {}
@@ -235,7 +235,7 @@ type SyncRecords struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GmailSync *GmailSync `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"` //gmail sync records found, count is required field
+	GmailSync *GmailSync `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
 }
 
 func (x *SyncRecords) Reset() {
@@ -283,12 +283,12 @@ type GmailSync struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status          *string          `protobuf:"bytes,1,opt,name=status,proto3,oneof" json:"status,omitempty"`                                            //gmail sync status
-	SyncId          *string          `protobuf:"bytes,2,opt,name=sync_id,json=syncId,proto3,oneof" json:"sync_id,omitempty"`                              //gmail sync sync id
-	Categories      []*Categories    `protobuf:"bytes,3,rep,name=categories,proto3" json:"categories,omitempty"`                                          //gmail sync profile classification data
-	TotalCount      *int32           `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3,oneof" json:"total_count,omitempty"`                 //total count og docs (identified + needs review)
-	ProfileDocPopup *ProfileDocPopup `protobuf:"bytes,5,opt,name=profile_doc_popup,json=profileDocPopup,proto3,oneof" json:"profile_doc_popup,omitempty"` //gmail sync pop-up summary
-	Count           int32            `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`                                                   //gmail sync documents count
+	Status          *string          `protobuf:"bytes,1,opt,name=status,proto3,oneof" json:"status,omitempty"`                                            // Gmail sync status.
+	SyncId          *string          `protobuf:"bytes,2,opt,name=sync_id,json=syncId,proto3,oneof" json:"sync_id,omitempty"`                              // Gmail sync sync id.
+	Categories      []*Categories    `protobuf:"bytes,3,rep,name=categories,proto3" json:"categories,omitempty"`                                          // Gmail sync profile classification data.
+	TotalCount      *int32           `protobuf:"varint,4,opt,name=total_count,json=totalCount,proto3,oneof" json:"total_count,omitempty"`                 // Total count og docs (identified + needs review).
+	ProfileDocPopup *ProfileDocPopup `protobuf:"bytes,5,opt,name=profile_doc_popup,json=profileDocPopup,proto3,oneof" json:"profile_doc_popup,omitempty"` // Gmail sync pop-up summary.
+	Count           int32            `protobuf:"varint,6,opt,name=count,proto3" json:"count,omitempty"`                                                   // Gmail sync documents count.
 }
 
 func (x *GmailSync) Reset() {
@@ -371,8 +371,8 @@ type AnalyzingRecords struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Count     int32      `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`                         //total count i.e. manual upload + gmail sync upload
-	GmailSync *GmailSync `protobuf:"bytes,2,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"` //gmail sync records found, count is required field
+	Count     int32      `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`                         // Total count i.e. manual upload + gmail sync upload.
+	GmailSync *GmailSync `protobuf:"bytes,2,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
 }
 
 func (x *AnalyzingRecords) Reset() {
@@ -427,8 +427,8 @@ type SyncEnd struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GmailSync    *GmailSync            `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"`            //gmail sync records found, count is required field
-	ViewMyHealth *ViewMyHealthResponse `protobuf:"bytes,2,opt,name=view_my_health,json=viewMyHealth,proto3" json:"view_my_health,omitempty"` //view my health bottom sheet
+	GmailSync    *GmailSync            `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"`            // Gmail sync records found, count is required field.
+	ViewMyHealth *ViewMyHealthResponse `protobuf:"bytes,2,opt,name=view_my_health,json=viewMyHealth,proto3" json:"view_my_health,omitempty"` // View my health bottom sheet.
 }
 
 func (x *SyncEnd) Reset() {
@@ -488,7 +488,7 @@ type ViewMyHealthResponse struct {
 	//	*ViewMyHealthResponse_IsAnalysing
 	//	*ViewMyHealthResponse_VitalsInfo_
 	Response     isViewMyHealthResponse_Response `protobuf_oneof:"Response"`
-	RecordsCount int32                           `protobuf:"varint,3,opt,name=records_count,json=recordsCount,proto3" json:"records_count,omitempty"` // total number of documents uploaded
+	RecordsCount int32                           `protobuf:"varint,3,opt,name=records_count,json=recordsCount,proto3" json:"records_count,omitempty"` // Total number of documents uploaded.
 }
 
 func (x *ViewMyHealthResponse) Reset() {
@@ -556,11 +556,11 @@ type isViewMyHealthResponse_Response interface {
 }
 
 type ViewMyHealthResponse_IsAnalysing struct {
-	IsAnalysing bool `protobuf:"varint,1,opt,name=is_analysing,json=isAnalysing,proto3,oneof"` // smart report yet to be extracted
+	IsAnalysing bool `protobuf:"varint,1,opt,name=is_analysing,json=isAnalysing,proto3,oneof"` // Smart report yet to be extracted.
 }
 
 type ViewMyHealthResponse_VitalsInfo_ struct {
-	VitalsInfo *ViewMyHealthResponse_VitalsInfo `protobuf:"bytes,2,opt,name=vitals_info,json=vitalsInfo,proto3,oneof"` // vitals related info
+	VitalsInfo *ViewMyHealthResponse_VitalsInfo `protobuf:"bytes,2,opt,name=vitals_info,json=vitalsInfo,proto3,oneof"` // Vitals related info.
 }
 
 func (*ViewMyHealthResponse_IsAnalysing) isViewMyHealthResponse_Response() {}
@@ -573,11 +573,11 @@ type Categories struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TabTitle      string `protobuf:"bytes,1,opt,name=tab_title,json=tabTitle,proto3" json:"tab_title,omitempty"`                  // Identified or Needs review tab title
-	TabCount      uint32 `protobuf:"varint,2,opt,name=tab_count,json=tabCount,proto3" json:"tab_count,omitempty"`                 // Number of records found under each tab
-	Description   string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                            // Description of the tab
-	Bgcolor       string `protobuf:"bytes,4,opt,name=bgcolor,proto3" json:"bgcolor,omitempty"`                                    //Background color for the tab
-	TabCountColor string `protobuf:"bytes,5,opt,name=tab_count_color,json=tabCountColor,proto3" json:"tab_count_color,omitempty"` //Color for tab count
+	TabTitle      string `protobuf:"bytes,1,opt,name=tab_title,json=tabTitle,proto3" json:"tab_title,omitempty"`                  // Identified or Needs review tab title.
+	TabCount      uint32 `protobuf:"varint,2,opt,name=tab_count,json=tabCount,proto3" json:"tab_count,omitempty"`                 // Number of records found under each tab.
+	Description   string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`                            // Description of the tab.
+	Bgcolor       string `protobuf:"bytes,4,opt,name=bgcolor,proto3" json:"bgcolor,omitempty"`                                    // Background color for the tab.
+	TabCountColor string `protobuf:"bytes,5,opt,name=tab_count_color,json=tabCountColor,proto3" json:"tab_count_color,omitempty"` // Color for tab count.
 }
 
 func (x *Categories) Reset() {
@@ -653,8 +653,8 @@ type ProfileDocPopup struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Cta   *cta.CTA `protobuf:"bytes,1,opt,name=cta,proto3" json:"cta,omitempty"`     //CTA configuration for button
-	Title string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"` //No. of records belonging to tab
+	Cta   *cta.CTA `protobuf:"bytes,1,opt,name=cta,proto3" json:"cta,omitempty"`     // CTA configuration for button.
+	Title string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"` // No. of records belonging to tab.
 }
 
 func (x *ProfileDocPopup) Reset() {
@@ -708,10 +708,10 @@ type ViewMyHealthResponse_VitalsInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	VitalsFound   *int32 `protobuf:"varint,1,opt,name=vitals_found,json=vitalsFound,proto3,oneof" json:"vitals_found,omitempty"`       //total vitals found for current upload
-	Concerns      *int32 `protobuf:"varint,2,opt,name=concerns,proto3,oneof" json:"concerns,omitempty"`                                // concerned vitals
-	TrendsUpdated *int32 `protobuf:"varint,3,opt,name=trends_updated,json=trendsUpdated,proto3,oneof" json:"trends_updated,omitempty"` //trends updated count
-	LatestAdded   *int32 `protobuf:"varint,4,opt,name=latest_added,json=latestAdded,proto3,oneof" json:"latest_added,omitempty"`       // latest added trends from current upload
+	VitalsFound   *int32 `protobuf:"varint,1,opt,name=vitals_found,json=vitalsFound,proto3,oneof" json:"vitals_found,omitempty"`       // Total vitals found for current upload.
+	Concerns      *int32 `protobuf:"varint,2,opt,name=concerns,proto3,oneof" json:"concerns,omitempty"`                                // Concerned vitals.
+	TrendsUpdated *int32 `protobuf:"varint,3,opt,name=trends_updated,json=trendsUpdated,proto3,oneof" json:"trends_updated,omitempty"` // Trends updated count.
+	LatestAdded   *int32 `protobuf:"varint,4,opt,name=latest_added,json=latestAdded,proto3,oneof" json:"latest_added,omitempty"`       // Latest added trends from current upload.
 }
 
 func (x *ViewMyHealthResponse_VitalsInfo) Reset() {
