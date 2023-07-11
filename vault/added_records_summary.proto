@@ -21,21 +21,23 @@ message SyncRecords {
 }
 
 /* GmailSyncState represents current sync status. */
-enum GmailSyncState { 
-  GMAILSYNCSTATE_STARTED = 0; // GmailSyncState -> "STARTED"
-  GMAILSYNCSTATE_PROCESSING = 1; // GmailSyncState -> "PROCESSING"
-  GMAILSYNCSTATE_SYNCED = 2; // GmailSyncState -> "SYNCED"
-  GMAILSYNCSTATE_UNLINKED = 3; // GmailSyncState -> "UNLINKED"
-  GMAILSYNCSTATE_FAILED = 4; // GmailSyncState -> "FAILED"
-  GMAILSYNCSTATE_REVOKED = 5; // GmailSyncState -> "REVOKED"
+enum GmailSyncState {
+  GMAIL_SYNC_STATE_STARTED_UNSPECIFIED = 0; // GmailSyncState -> Unspecified.
+  GMAIL_SYNC_STATE_STARTED = 1;            // GmailSyncState -> Started.
+  GMAIL_SYNC_STATE_PROCESSING = 2;        // GmailSyncState -> Processing.
+  GMAIL_SYNC_STATE_SYNCED = 3;            // GmailSyncState -> Synced.
+  GMAIL_SYNC_STATE_UNLINKED = 4;          // GmailSyncState -> Unlinked.
+  GMAIL_SYNC_STATE_FAILED = 5;            // GmailSyncState -> Failed.
+  GMAIL_SYNC_STATE_REVOKED = 6;           // GmailSyncState -> Revoked.
 }
 
 /* GmailSyncType represents sync type. */
 enum GmailSyncType {
-  GMAILSYNCTYPE_PERIODIC = 0;   // GmailSyncType -> "PERIODIC"
-  GMAILSYNCTYPE_RERUN = 1;      // GmailSyncType -> "RERUN"
-  GMAILSYNCTYPE_INITIAL = 2;   // GmailSyncType -> "INITIAL"
-  GMAILSYNCTYPE_ONDEMAND = 3; // GmailSyncType -> "ONDEMAND"
+  GMAIL_SYNC_TYPE_UNSPECIFIED = 0; // GmailSyncType -> Unspecified.
+  GMAIL_SYNC_TYPE_PERIODIC = 1;   // GmailSyncType -> Periodic.
+  GMAIL_SYNC_TYPE_RERUN = 2;      // GmailSyncType -> Rerun.
+  GMAIL_SYNC_TYPE_INITIAL = 3;   // GmailSyncType -> Initial.
+  GMAIL_SYNC_TYPE_ONDEMAND = 4; // GmailSyncType -> Ondemand.
 }
 
 /* GmailSync represents sync status along with pop-up summary. */
@@ -61,7 +63,7 @@ message SyncEnd {
 }
 
 /* ViewMyHealthResponse represents health summary bottom sheet. */
-message  ViewMyHealthResponse {
+message ViewMyHealthResponse {
   message VitalsInfo {
     optional int32 vitals_found = 1; // Total vitals found for current upload.
     optional int32 concerns = 2; // Concerned vitals.
