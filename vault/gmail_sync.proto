@@ -4,7 +4,7 @@ package vault.gmail_sync;
 
 import "vault/cta.proto";
 
-option go_package = "github.com/eka-care/proto-contracts/go/vault/gmail_sync";
+option go_package = "github.com/eka-care/proto-contracts/go/vault/gmailsync";
 
 /* State represents current gmail sync status. */
 enum State {

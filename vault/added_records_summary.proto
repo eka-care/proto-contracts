@@ -4,7 +4,7 @@ package vault.added_records_summary;
 
 import "vault/gmail_sync.proto";
 
-option go_package = "github.com/eka-care/proto-contracts/go/vault/added_records_summary";
+option go_package = "github.com/eka-care/proto-contracts/go/vault/addrecsummary";
 
 /* Status represents health bottom sheet and gmail sync status. */
 message Status {

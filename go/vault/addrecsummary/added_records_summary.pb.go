@@ -4,10 +4,10 @@
 // 	protoc        v3.21.12
 // source: vault/added_records_summary.proto
 
-package added_records_summary
+package addrecsummary
 
 import (
-	gmail_sync "github.com/eka-care/proto-contracts/go/vault/gmail_sync"
+	gmailsync "github.com/eka-care/proto-contracts/go/vault/gmailsync"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -123,7 +123,7 @@ type SyncRecords struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GmailSync *gmail_sync.GmailSync `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
+	GmailSync *gmailsync.GmailSync `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
 }
 
 func (x *SyncRecords) Reset() {
@@ -158,7 +158,7 @@ func (*SyncRecords) Descriptor() ([]byte, []int) {
 	return file_vault_added_records_summary_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SyncRecords) GetGmailSync() *gmail_sync.GmailSync {
+func (x *SyncRecords) GetGmailSync() *gmailsync.GmailSync {
 	if x != nil {
 		return x.GmailSync
 	}
@@ -171,8 +171,8 @@ type AnalyzingRecords struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Count     uint32                `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`                               // Total count i.e. manual upload + gmail sync upload.
-	GmailSync *gmail_sync.GmailSync `protobuf:"bytes,2,opt,name=gmail_sync,json=gmailSync,proto3,oneof" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
+	Count     uint32               `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`                               // Total count i.e. manual upload + gmail sync upload.
+	GmailSync *gmailsync.GmailSync `protobuf:"bytes,2,opt,name=gmail_sync,json=gmailSync,proto3,oneof" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
 }
 
 func (x *AnalyzingRecords) Reset() {
@@ -214,7 +214,7 @@ func (x *AnalyzingRecords) GetCount() uint32 {
 	return 0
 }
 
-func (x *AnalyzingRecords) GetGmailSync() *gmail_sync.GmailSync {
+func (x *AnalyzingRecords) GetGmailSync() *gmailsync.GmailSync {
 	if x != nil {
 		return x.GmailSync
 	}
@@ -227,8 +227,8 @@ type EndState struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GmailSync *gmail_sync.GmailSync `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3,oneof" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
-	Summary   *Summary              `protobuf:"bytes,2,opt,name=summary,proto3" json:"summary,omitempty"`                            // View my health bottom sheet.
+	GmailSync *gmailsync.GmailSync `protobuf:"bytes,1,opt,name=gmail_sync,json=gmailSync,proto3,oneof" json:"gmail_sync,omitempty"` // Gmail sync records found, count is required field.
+	Summary   *Summary             `protobuf:"bytes,2,opt,name=summary,proto3" json:"summary,omitempty"`                            // View my health bottom sheet.
 }
 
 func (x *EndState) Reset() {
@@ -263,7 +263,7 @@ func (*EndState) Descriptor() ([]byte, []int) {
 	return file_vault_added_records_summary_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *EndState) GetGmailSync() *gmail_sync.GmailSync {
+func (x *EndState) GetGmailSync() *gmailsync.GmailSync {
 	if x != nil {
 		return x.GmailSync
 	}
@@ -474,12 +474,11 @@ var file_vault_added_records_summary_proto_rawDesc = []byte{
 	0x42, 0x11, 0x0a, 0x0f, 0x5f, 0x74, 0x72, 0x65, 0x6e, 0x64, 0x73, 0x5f, 0x75, 0x70, 0x64, 0x61,
 	0x74, 0x65, 0x64, 0x42, 0x0f, 0x0a, 0x0d, 0x5f, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x74, 0x5f, 0x61,
 	0x64, 0x64, 0x65, 0x64, 0x42, 0x0e, 0x0a, 0x0c, 0x5f, 0x76, 0x69, 0x74, 0x61, 0x6c, 0x73, 0x5f,
-	0x69, 0x6e, 0x66, 0x6f, 0x42, 0x44, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x69, 0x6e, 0x66, 0x6f, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
 	0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76,
-	0x61, 0x75, 0x6c, 0x74, 0x2f, 0x61, 0x64, 0x64, 0x65, 0x64, 0x5f, 0x72, 0x65, 0x63, 0x6f, 0x72,
-	0x64, 0x73, 0x5f, 0x73, 0x75, 0x6d, 0x6d, 0x61, 0x72, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x61, 0x75, 0x6c, 0x74, 0x2f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x63, 0x73, 0x75, 0x6d, 0x6d, 0x61,
+	0x72, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -496,13 +495,13 @@ func file_vault_added_records_summary_proto_rawDescGZIP() []byte {
 
 var file_vault_added_records_summary_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_vault_added_records_summary_proto_goTypes = []interface{}{
-	(*Status)(nil),               // 0: vault.added_records_summary.Status
-	(*SyncRecords)(nil),          // 1: vault.added_records_summary.SyncRecords
-	(*AnalyzingRecords)(nil),     // 2: vault.added_records_summary.AnalyzingRecords
-	(*EndState)(nil),             // 3: vault.added_records_summary.EndState
-	(*Summary)(nil),              // 4: vault.added_records_summary.Summary
-	(*Summary_VitalsInfo)(nil),   // 5: vault.added_records_summary.Summary.VitalsInfo
-	(*gmail_sync.GmailSync)(nil), // 6: vault.gmail_sync.GmailSync
+	(*Status)(nil),              // 0: vault.added_records_summary.Status
+	(*SyncRecords)(nil),         // 1: vault.added_records_summary.SyncRecords
+	(*AnalyzingRecords)(nil),    // 2: vault.added_records_summary.AnalyzingRecords
+	(*EndState)(nil),            // 3: vault.added_records_summary.EndState
+	(*Summary)(nil),             // 4: vault.added_records_summary.Summary
+	(*Summary_VitalsInfo)(nil),  // 5: vault.added_records_summary.Summary.VitalsInfo
+	(*gmailsync.GmailSync)(nil), // 6: vault.gmail_sync.GmailSync
 }
 var file_vault_added_records_summary_proto_depIdxs = []int32{
 	1, // 0: vault.added_records_summary.Status.sync_records:type_name -> vault.added_records_summary.SyncRecords
