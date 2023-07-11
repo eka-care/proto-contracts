@@ -80,7 +80,7 @@ message ViewMyHealthResponse {
 /* Categories represent gmail sync profile classification screen. */
 message Categories {
   string tab_title = 1; // Identified or Needs review tab title.
-  uint32 tab_count = 2; // Number of records found under each tab.
+  int32 tab_count = 2; // Number of records found under each tab.
   string description = 3; // Description of the tab.
   string bgcolor = 4; // Background color for the tab.
   string tab_count_color = 5; // Color for tab count.
