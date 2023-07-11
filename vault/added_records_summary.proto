@@ -22,7 +22,7 @@ message SyncRecords {
 
 /* GmailSyncState represents current sync status. */
 enum GmailSyncState {
-  GMAIL_SYNC_STATE_STARTED_UNSPECIFIED = 0; // GmailSyncState -> Unspecified.
+  GMAIL_SYNC_STATE_UNSPECIFIED = 0; // GmailSyncState -> Unspecified.
   GMAIL_SYNC_STATE_STARTED = 1;            // GmailSyncState -> Started.
   GMAIL_SYNC_STATE_PROCESSING = 2;        // GmailSyncState -> Processing.
   GMAIL_SYNC_STATE_SYNCED = 3;            // GmailSyncState -> Synced.
