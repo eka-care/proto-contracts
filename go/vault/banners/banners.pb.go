@@ -70,7 +70,7 @@ func (x *BannersResponse) GetBanner() []*Banner {
 	return nil
 }
 
-// Banner represent banner content to be displayed.
+// Banner represents configuration.
 type Banner struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
