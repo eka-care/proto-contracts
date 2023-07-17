@@ -3,13 +3,14 @@ syntax = "proto3";
 package vault.banners;
 
 import "vault/cta.proto";
+import "vault/gmail_sync.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/banners";
 
 /* BannersResponse represents banners on records page such as gmail sync, insights etc. */
 message BannersResponse {
-  /* Banner represents multiple banner on the records screen. */
-  repeated Banner banners = 1;
+  repeated Banner banners = 1; // Banner represents multiple banner on the records screen.
+  optional vault.gmail_sync.GmailSync gmailSync = 2; // GmailSync represents gmail sync popup response.
 }
 
 /* Banner represents configuration. */
