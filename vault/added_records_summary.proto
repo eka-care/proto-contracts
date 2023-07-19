@@ -9,18 +9,15 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/addrecsummary"
 /* Status represents health bottom sheet and gmail sync status. */
 message Status {
   oneof Response {
-    SyncRecords sync_records = 1; // Adding records to Health Locker.
+    SyncRecords sync_records = 1; // Secure backup has started.
     AnalyzingRecords analyzing_records =
         2;                  // Analyzing your health records (X).
     EndState end_state = 3; // Making it simpler to see your health.
   }
 }
 
-/* Sync Records represents the state when records are added to health locker. */
-message SyncRecords {
-  vault.gmail_sync.GmailSync gmail_sync =
-      1; // Gmail sync records found, count is required field.
-}
+/* Sync Records represents the state when secure backup has started. */
+message SyncRecords {}
 
 /* AnalyzingRecords represents smart report extraction state of documents. */
 message AnalyzingRecords {
