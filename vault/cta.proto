@@ -12,7 +12,8 @@ message CTA {
   map<string, google.protobuf.Value> params =
       2; // params accepted/ needed by the destination screen.
   optional string title = 3;  // Title of the source click block.
-  optional string action = 4; // action applied on click.
+  optional string action = 4; // Action applied on click.
+  optional string id = 5; // ID required to send mixpanel event.
 }
 
 /* ActionCTA represents data for any action on click */
