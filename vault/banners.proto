@@ -7,7 +7,9 @@ import "vault/cta.proto";
 option go_package = "github.com/eka-care/proto-contracts/go/vault/banners";
 
 enum MobileParameter {
-    MOBILEPARAMETER_DYNAMIC = 0; // MobileParameter -> mobile.
+    MOBILEPARAMETER_UNSPECIFIED = 0; // MobileParameter -> Unspecified.
+
+    MOBILEPARAMETER_DYNAMIC = 1; // MobileParameter -> Mobile.
 }
 
 /* BannersResponse represents banners on records page such as gmail sync, insights etc. */
@@ -26,5 +28,5 @@ message Banner {
     string img = 5; // Image link for the banner.
     string lottie = 6; // Lottie link for the banner.
   }
-  repeated MobileParameter BodyDynamicParameters = 7; //BodyDynamicParameter to add user mobile number.
+  repeated MobileParameter body_parameters = 7; // BodyParameters to add user mobile number.
 }
