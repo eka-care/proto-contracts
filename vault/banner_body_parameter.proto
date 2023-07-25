@@ -9,4 +9,3 @@ enum BannerBodyParameter {
   BODY_PARAMETER_UNSPECIFIED = 0; // Unhandled dynamic parameter.
   BODY_PARAMETER_MOBILE = 1;      // Mobile number dynamic parameter.
 }
-

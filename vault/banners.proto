@@ -25,4 +25,5 @@ message Banner {
   }
   repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
         7;                             // dynamic parameters with body.
+  optional string id = 8; // ID represents banner/card identifier.
 }
