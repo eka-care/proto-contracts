@@ -3,14 +3,9 @@ syntax = "proto3";
 package vault.banners;
 
 import "vault/cta.proto";
+import "vault/banner_body_parameter.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/banners";
-
-enum BannerBodyParameter {
-    BODY_PARAMETER_UNSPECIFIED = 0; // BannerBodyParameter -> Unspecified.
-
-    BODY_PARAMETER_MOBILE = 1; // BannerBodyParameter -> Mobile.
-}
 
 /* BannersResponse represents banners on records page such as gmail sync, insights etc. */
 message BannersResponse {
@@ -28,5 +23,6 @@ message Banner {
     string img = 5; // Image link for the banner.
     string lottie = 6; // Lottie link for the banner.
   }
-  repeated BannerBodyParameter body_parameters = 7; // BodyParameters to add user mobile number.
+  repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
+        7;                             // dynamic parameters with body.
 }
