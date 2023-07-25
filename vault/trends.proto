@@ -7,6 +7,7 @@ import "vault/coordinate.proto";
 import "vault/cta.proto";
 import "vault/range.proto";
 import "vault/interpretation.proto";
+import "vault/banner_body_parameter.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/v1/trends";
 
@@ -274,18 +275,12 @@ message VitalContent {
     BANNER_CATEGORY_ACTION = 2;      // Actionable banner category.
   }
 
-  /* DynamicParameter is an enum used to represent dynamic parameter.  */
-  enum DynamicParameter {
-    DYNAMIC_PARAMETER_UNSPECIFIED = 0; // Unhandled dynamic parameter.
-    DYNAMIC_PARAMETER_MOBILE = 1;      // Mobile number dynamic parameter.
-  }
-
   /* Banner represents the card content. */
   message Banner {
     string id = 1;    // id of the card.
     string title = 2; // title of the card.
     string body = 3;  // body of the card.
-    repeated DynamicParameter body_parameters =
+    repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
         4;                             // dynamic parameters with body.
     optional vault.common.CTA cta = 5; // CTA of the card.
     BannerCategory category = 6;       // Category of the banner.

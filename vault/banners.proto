@@ -3,6 +3,7 @@ syntax = "proto3";
 package vault.banners;
 
 import "vault/cta.proto";
+import "vault/banner_body_parameter.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/banners";
 
@@ -22,4 +23,6 @@ message Banner {
     string img = 5; // Image link for the banner.
     string lottie = 6; // Lottie link for the banner.
   }
+  repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
+        7;                             // dynamic parameters with body.
 }
