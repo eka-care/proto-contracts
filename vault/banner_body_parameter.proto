@@ -9,9 +9,3 @@ enum BannerBodyParameter {
   BODY_PARAMETER_UNSPECIFIED = 0; // Unhandled dynamic parameter.
   BODY_PARAMETER_MOBILE = 1;      // Mobile number dynamic parameter.
 }
-
-/* BannerIdentifier represent identifier for banner/card. */
-enum BannerIdentifier {
-  BANNER_IDENTIFIER_UNSPECIFIED = 0; // BannerIdentifier -> Unspecified.
-  BANNER_IDENTIFIER_SMART_REPORT = 1; // BannerIdentifier -> Smart_report_info.
-}

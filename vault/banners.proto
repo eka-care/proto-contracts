@@ -25,6 +25,6 @@ message Banner {
   }
   repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
         7;                             // dynamic parameters with body.
-  optional vault.banner_body_parameter.BannerIdentifier id = 8; // ID represents banner/card identifier.
+  optional string id = 8; // ID represents banner/card identifier.
   optional string lottie_url = 9; // Lottie URL for the banner.
 }
