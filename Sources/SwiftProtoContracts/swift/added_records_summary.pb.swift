@@ -28,7 +28,7 @@ public struct Vault_AddedRecordsSummary_Status {
 
   public var response: Vault_AddedRecordsSummary_Status.OneOf_Response? = nil
 
-  /// Adding records to Health Locker.
+  /// Secure backup has started.
   public var syncRecords: Vault_AddedRecordsSummary_SyncRecords {
     get {
       if case .syncRecords(let v)? = response {return v}
@@ -58,7 +58,7 @@ public struct Vault_AddedRecordsSummary_Status {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Response: Equatable {
-    /// Adding records to Health Locker.
+    /// Secure backup has started.
     case syncRecords(Vault_AddedRecordsSummary_SyncRecords)
     /// Analyzing your health records (X).
     case analyzingRecords(Vault_AddedRecordsSummary_AnalyzingRecords)
@@ -92,27 +92,15 @@ public struct Vault_AddedRecordsSummary_Status {
   public init() {}
 }
 
-/// Sync Records represents the state when records are added to health locker. 
+/// Sync Records represents the state when secure backup has started. 
 public struct Vault_AddedRecordsSummary_SyncRecords {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// Gmail sync records found, count is required field.
-  public var gmailSync: Vault_GmailSync_GmailSync {
-    get {return _gmailSync ?? Vault_GmailSync_GmailSync()}
-    set {_gmailSync = newValue}
-  }
-  /// Returns true if `gmailSync` has been explicitly set.
-  public var hasGmailSync: Bool {return self._gmailSync != nil}
-  /// Clears the value of `gmailSync`. Subsequent reads from it will return its default value.
-  public mutating func clearGmailSync() {self._gmailSync = nil}
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
-
-  fileprivate var _gmailSync: Vault_GmailSync_GmailSync? = nil
 }
 
 /// AnalyzingRecords represents smart report extraction state of documents. 
@@ -352,35 +340,18 @@ extension Vault_AddedRecordsSummary_Status: SwiftProtobuf.Message, SwiftProtobuf
 
 extension Vault_AddedRecordsSummary_SyncRecords: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SyncRecords"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "gmail_sync"),
-  ]
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._gmailSync) }()
-      default: break
-      }
+    while let _ = try decoder.nextFieldNumber() {
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._gmailSync {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_AddedRecordsSummary_SyncRecords, rhs: Vault_AddedRecordsSummary_SyncRecords) -> Bool {
-    if lhs._gmailSync != rhs._gmailSync {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
