@@ -1342,39 +1342,6 @@ public struct Vault_Trends_V1_VitalContent {
 
   }
 
-  /// DynamicParameter is an enum used to represent dynamic parameter.  
-  public enum DynamicParameter: SwiftProtobuf.Enum {
-    public typealias RawValue = Int
-
-    /// Unhandled dynamic parameter.
-    case unspecified // = 0
-
-    /// Mobile number dynamic parameter.
-    case mobile // = 1
-    case UNRECOGNIZED(Int)
-
-    public init() {
-      self = .unspecified
-    }
-
-    public init?(rawValue: Int) {
-      switch rawValue {
-      case 0: self = .unspecified
-      case 1: self = .mobile
-      default: self = .UNRECOGNIZED(rawValue)
-      }
-    }
-
-    public var rawValue: Int {
-      switch self {
-      case .unspecified: return 0
-      case .mobile: return 1
-      case .UNRECOGNIZED(let i): return i
-      }
-    }
-
-  }
-
   /// Banner represents the card content. 
   public struct Banner {
     // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -1391,7 +1358,7 @@ public struct Vault_Trends_V1_VitalContent {
     public var body: String = String()
 
     /// dynamic parameters with body.
-    public var bodyParameters: [Vault_Trends_V1_VitalContent.DynamicParameter] = []
+    public var bodyParameters: [Vault_BannerBodyParameter_BannerBodyParameter] = []
 
     /// CTA of the card.
     public var cta: Vault_Common_CTA {
@@ -1472,14 +1439,6 @@ extension Vault_Trends_V1_VitalContent.BannerCategory: CaseIterable {
   ]
 }
 
-extension Vault_Trends_V1_VitalContent.DynamicParameter: CaseIterable {
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Trends_V1_VitalContent.DynamicParameter] = [
-    .unspecified,
-    .mobile,
-  ]
-}
-
 #endif  // swift(>=4.2)
 
 #if swift(>=5.5) && canImport(_Concurrency)
@@ -1515,7 +1474,6 @@ extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.ParameterRange: @unchec
 extension Vault_Trends_V1_Log.UnverifiedParameterReading: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent.BannerCategory: @unchecked Sendable {}
-extension Vault_Trends_V1_VitalContent.DynamicParameter: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent.Banner: @unchecked Sendable {}
 extension Vault_Trends_V1_VitalContent.VitalGeneralInfo: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
@@ -3109,13 +3067,6 @@ extension Vault_Trends_V1_VitalContent.BannerCategory: SwiftProtobuf._ProtoNameP
     0: .same(proto: "BANNER_CATEGORY_UNSPECIFIED"),
     1: .same(proto: "BANNER_CATEGORY_INFO"),
     2: .same(proto: "BANNER_CATEGORY_ACTION"),
-  ]
-}
-
-extension Vault_Trends_V1_VitalContent.DynamicParameter: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "DYNAMIC_PARAMETER_UNSPECIFIED"),
-    1: .same(proto: "DYNAMIC_PARAMETER_MOBILE"),
   ]
 }
 

@@ -42,7 +42,7 @@ public struct Vault_Common_CTA {
   /// Clears the value of `title`. Subsequent reads from it will return its default value.
   public mutating func clearTitle() {self._title = nil}
 
-  /// action applied on click.
+  /// Action applied on click.
   public var action: String {
     get {return _action ?? String()}
     set {_action = newValue}
@@ -52,12 +52,23 @@ public struct Vault_Common_CTA {
   /// Clears the value of `action`. Subsequent reads from it will return its default value.
   public mutating func clearAction() {self._action = nil}
 
+  /// ID required to send mixpanel event.
+  public var id: String {
+    get {return _id ?? String()}
+    set {_id = newValue}
+  }
+  /// Returns true if `id` has been explicitly set.
+  public var hasID: Bool {return self._id != nil}
+  /// Clears the value of `id`. Subsequent reads from it will return its default value.
+  public mutating func clearID() {self._id = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _title: String? = nil
   fileprivate var _action: String? = nil
+  fileprivate var _id: String? = nil
 }
 
 /// ActionCTA represents data for any action on click 
@@ -102,6 +113,7 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     2: .same(proto: "params"),
     3: .same(proto: "title"),
     4: .same(proto: "action"),
+    5: .same(proto: "id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -114,6 +126,7 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 2: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.Google_Protobuf_Value>.self, value: &self.params) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._title) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self._action) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self._id) }()
       default: break
       }
     }
@@ -136,6 +149,9 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try { if let v = self._action {
       try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     } }()
+    try { if let v = self._id {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -144,6 +160,7 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs.params != rhs.params {return false}
     if lhs._title != rhs._title {return false}
     if lhs._action != rhs._action {return false}
+    if lhs._id != rhs._id {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
