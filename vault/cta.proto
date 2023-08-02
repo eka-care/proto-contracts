@@ -2,14 +2,12 @@ syntax = "proto3";
 
 package vault.common;
 
-import "google/protobuf/struct.proto";
-
 option go_package = "github.com/eka-care/proto-contracts/go/vault/cta";
 
 /* CTA represents data for any click through action */
 message CTA {
   string pid = 1; // pid of the destination screen.
-  map<string, google.protobuf.Value> params =
+  map<string, CTAParams> params =
       2; // params accepted/ needed by the destination screen.
   optional string title = 3;  // Title of the source click block.
   optional string action = 4; // Action applied on click.
@@ -20,4 +18,15 @@ message CTA {
 message ActionCTA {
   string action = 1;         // action enum.
   optional string title = 2; // Title of the source click block.
+}
+
+/*CTAParams represents parameters provided for CTA */
+message CTAParams {
+	optional string url=1; // URL to redirect the page.
+	repeated string document_ids=2; // Document_ids represent the list of documents.
+	optional string id=3; // ID represent page ID.
+	optional bool file_upload_menu=4; //File_upload_menu represents the pdf pid config.
+	optional string email_id=5; // Email_ID refers to gmail sync email id.
+	optional bool scroll_insight=6; // Scroll_insight allow scrollable page for insights.
+	optional string sr_eka_id=7; // Sr_eka_id represents test_eka_id.
 }
