@@ -165,7 +165,7 @@ type CTAParams struct {
 	Url            *string  `protobuf:"bytes,1,opt,name=url,proto3,oneof" json:"url,omitempty"`                                                // URL to redirect the page.
 	DocumentIds    []string `protobuf:"bytes,2,rep,name=document_ids,json=documentIds,proto3" json:"document_ids,omitempty"`                   // Document_ids represent the list of documents.
 	Id             *string  `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`                                                  // ID represent page ID.
-	FileUploadMenu *bool    `protobuf:"varint,4,opt,name=file_upload_menu,json=fileUploadMenu,proto3,oneof" json:"file_upload_menu,omitempty"` //File_upload_menu represents the pdf pid config.
+	FileUploadMenu *bool    `protobuf:"varint,4,opt,name=file_upload_menu,json=fileUploadMenu,proto3,oneof" json:"file_upload_menu,omitempty"` // File_upload_menu represents the pdf pid config.
 	EmailId        *string  `protobuf:"bytes,5,opt,name=email_id,json=emailId,proto3,oneof" json:"email_id,omitempty"`                         // Email_ID refers to gmail sync email id.
 	ScrollInsight  *bool    `protobuf:"varint,6,opt,name=scroll_insight,json=scrollInsight,proto3,oneof" json:"scroll_insight,omitempty"`      // Scroll_insight allow scrollable page for insights.
 	SrEkaId        *string  `protobuf:"bytes,7,opt,name=sr_eka_id,json=srEkaId,proto3,oneof" json:"sr_eka_id,omitempty"`                       // Sr_eka_id represents test_eka_id.

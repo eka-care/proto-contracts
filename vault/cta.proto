@@ -25,7 +25,7 @@ message CTAParams {
 	optional string url=1; // URL to redirect the page.
 	repeated string document_ids=2; // Document_ids represent the list of documents.
 	optional string id=3; // ID represent page ID.
-	optional bool file_upload_menu=4; //File_upload_menu represents the pdf pid config.
+	optional bool file_upload_menu=4; // File_upload_menu represents the pdf pid config.
 	optional string email_id=5; // Email_ID refers to gmail sync email id.
 	optional bool scroll_insight=6; // Scroll_insight allow scrollable page for insights.
 	optional string sr_eka_id=7; // Sr_eka_id represents test_eka_id.
