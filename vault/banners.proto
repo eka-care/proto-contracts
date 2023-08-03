@@ -16,7 +16,7 @@ message BannersResponse {
 /* Banner represents configuration. */
 message Banner {
   string title = 1; // Title of the banner.
-  optional string body = 2; // Body or description of the banner.
+  string body = 2; // Body or description of the banner.
   vault.common.CTA cta = 3; // CTA configuration for button.
   string colour = 4; // Colour of the banner in hex code.
   oneof image {
