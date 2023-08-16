@@ -14,6 +14,8 @@ message CTA {
   optional string title = 3;  // Title of the source click block.
   optional string action = 4; // Action applied on click.
   optional string id = 5; // ID required to send mixpanel event.
+  optional string cta_params_proto =
+      6; // params accepted/ needed by the destination screen for Android.
 }
 
 /* ActionCTA represents data for any action on click */
