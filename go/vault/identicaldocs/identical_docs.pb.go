@@ -148,6 +148,118 @@ func (x *Document) GetDesc() string {
 	return ""
 }
 
+// ListIdenticalDocs respresents listing of duplicate docs in paginated format.
+type ListIdenticalDocs struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Documents []*IdenticalDocument `protobuf:"bytes,1,rep,name=documents,proto3" json:"documents,omitempty"` // List of documents.
+	Offset    *string              `protobuf:"bytes,2,opt,name=offset,proto3,oneof" json:"offset,omitempty"` // Offset for next query.
+}
+
+func (x *ListIdenticalDocs) Reset() {
+	*x = ListIdenticalDocs{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_identical_docs_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListIdenticalDocs) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListIdenticalDocs) ProtoMessage() {}
+
+func (x *ListIdenticalDocs) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_identical_docs_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListIdenticalDocs.ProtoReflect.Descriptor instead.
+func (*ListIdenticalDocs) Descriptor() ([]byte, []int) {
+	return file_vault_identical_docs_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListIdenticalDocs) GetDocuments() []*IdenticalDocument {
+	if x != nil {
+		return x.Documents
+	}
+	return nil
+}
+
+func (x *ListIdenticalDocs) GetOffset() string {
+	if x != nil && x.Offset != nil {
+		return *x.Offset
+	}
+	return ""
+}
+
+// IdenticalDocument represents individual duplicate document set.
+type IdenticalDocument struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Md5   string `protobuf:"bytes,1,opt,name=md5,proto3" json:"md5,omitempty"`     // MD5 hash of the identical documents.
+	Count string `protobuf:"bytes,2,opt,name=count,proto3" json:"count,omitempty"` // Count of duplicates for given MD5.
+}
+
+func (x *IdenticalDocument) Reset() {
+	*x = IdenticalDocument{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_identical_docs_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *IdenticalDocument) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IdenticalDocument) ProtoMessage() {}
+
+func (x *IdenticalDocument) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_identical_docs_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use IdenticalDocument.ProtoReflect.Descriptor instead.
+func (*IdenticalDocument) Descriptor() ([]byte, []int) {
+	return file_vault_identical_docs_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *IdenticalDocument) GetMd5() string {
+	if x != nil {
+		return x.Md5
+	}
+	return ""
+}
+
+func (x *IdenticalDocument) GetCount() string {
+	if x != nil {
+		return x.Count
+	}
+	return ""
+}
+
 var File_vault_identical_docs_proto protoreflect.FileDescriptor
 
 var file_vault_identical_docs_proto_rawDesc = []byte{
@@ -172,11 +284,23 @@ var file_vault_identical_docs_proto_rawDesc = []byte{
 	0x1c, 0x0a, 0x09, 0x74, 0x68, 0x75, 0x6d, 0x62, 0x6e, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x09, 0x74, 0x68, 0x75, 0x6d, 0x62, 0x6e, 0x61, 0x69, 0x6c, 0x12, 0x12, 0x0a,
 	0x04, 0x64, 0x65, 0x73, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73,
-	0x63, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63,
-	0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61, 0x75, 0x6c,
-	0x74, 0x2f, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x64, 0x6f, 0x63, 0x73, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x63, 0x22, 0x82, 0x01, 0x0a, 0x11, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69,
+	0x63, 0x61, 0x6c, 0x44, 0x6f, 0x63, 0x73, 0x12, 0x45, 0x0a, 0x09, 0x64, 0x6f, 0x63, 0x75, 0x6d,
+	0x65, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x76, 0x61, 0x75,
+	0x6c, 0x74, 0x2e, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x5f, 0x64, 0x6f, 0x63,
+	0x73, 0x2e, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x44, 0x6f, 0x63, 0x75, 0x6d,
+	0x65, 0x6e, 0x74, 0x52, 0x09, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x1b,
+	0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00,
+	0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x88, 0x01, 0x01, 0x42, 0x09, 0x0a, 0x07, 0x5f,
+	0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x22, 0x3b, 0x0a, 0x11, 0x49, 0x64, 0x65, 0x6e, 0x74, 0x69,
+	0x63, 0x61, 0x6c, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x10, 0x0a, 0x03, 0x6d,
+	0x64, 0x35, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x64, 0x35, 0x12, 0x14, 0x0a,
+	0x05, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x42, 0x3c, 0x5a, 0x3a, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61,
+	0x75, 0x6c, 0x74, 0x2f, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x63, 0x61, 0x6c, 0x64, 0x6f, 0x63,
+	0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -191,18 +315,21 @@ func file_vault_identical_docs_proto_rawDescGZIP() []byte {
 	return file_vault_identical_docs_proto_rawDescData
 }
 
-var file_vault_identical_docs_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_vault_identical_docs_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_vault_identical_docs_proto_goTypes = []interface{}{
-	(*IdenticalDocs)(nil), // 0: vault.identical_docs.IdenticalDocs
-	(*Document)(nil),      // 1: vault.identical_docs.Document
+	(*IdenticalDocs)(nil),     // 0: vault.identical_docs.IdenticalDocs
+	(*Document)(nil),          // 1: vault.identical_docs.Document
+	(*ListIdenticalDocs)(nil), // 2: vault.identical_docs.ListIdenticalDocs
+	(*IdenticalDocument)(nil), // 3: vault.identical_docs.IdenticalDocument
 }
 var file_vault_identical_docs_proto_depIdxs = []int32{
 	1, // 0: vault.identical_docs.IdenticalDocs.documents:type_name -> vault.identical_docs.Document
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 1: vault.identical_docs.ListIdenticalDocs.documents:type_name -> vault.identical_docs.IdenticalDocument
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_vault_identical_docs_proto_init() }
@@ -235,15 +362,40 @@ func file_vault_identical_docs_proto_init() {
 				return nil
 			}
 		}
+		file_vault_identical_docs_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListIdenticalDocs); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vault_identical_docs_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*IdenticalDocument); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_vault_identical_docs_proto_msgTypes[0].OneofWrappers = []interface{}{}
+	file_vault_identical_docs_proto_msgTypes[2].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_vault_identical_docs_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -17,3 +17,15 @@ message Document {
   string thumbnail = 3; // Thumbnail of the uploaded document.
   string desc = 4; // Description of the uploaded document.
 }
+
+/* ListIdenticalDocs respresents listing of duplicate docs in paginated format. */
+message ListIdenticalDocs {
+  repeated IdenticalDocument documents = 1; // List of documents.
+  optional string offset = 2;   // Offset for next query.
+}
+
+/* IdenticalDocument represents individual duplicate document set. */
+message IdenticalDocument {
+  string md5 = 1; // MD5 hash of the identical documents.
+  string count = 2; // Count of duplicates for given MD5.
+}
