@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package vault.identical_docs;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/identical_docs";
+
+/* FileType represents type of uploaded file. */
+enum FileType {
+  UNSPECIFIED_FILETYPE = 0; // FileType -> Unspecified.
+  IMG_FILETYPE = 1;         // FileType -> Image.
+  PDF_FILETYPE = 2;         // FileType -> PDF.
+}
+
+/* IdenticalDocs represents response for identical documents. */
+message IdenticalDocs {
+  repeated Documents documents = 1;         // List of documents.
+  optional string last_evaluated_key = 2;   // Offset for next query.
+}
+
+/* Documents represents each document description. */
+message Documents {
+  string patient_name = 1; // Name of the patient on the document.
+  string oid = 2; // Patient ID.
+  string document_id = 3; // Document ID.
+  string document_type = 4; // Type of document.
+  string thumbnail = 5; // Thumbnail of the uploaded document.
+  string desc = 6; // Description of the uploaded document.
+  FileType file_type = 7; // Type of the uploaded document.
+}
