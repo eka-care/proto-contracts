@@ -6,26 +6,27 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/identicaldocs"
 
 /* IdenticalDocsById represents response for identical documents. */
 message IdenticalDocsById {
-  repeated Document documents = 1;         // List of documents.
-  optional string next_token = 2;   // Offset for next query.
+  repeated Document documents = 1; // List of documents.
+  optional string next_token = 2;  // Offset for next query.
 }
 
 /* Document represents each document description. */
 message Document {
-  string document_id = 1; // Document ID.
+  string document_id = 1;   // Document ID.
   string document_type = 2; // Type of document.
-  string thumbnail = 3; // Thumbnail of the uploaded document.
-  string desc = 4; // Description of the uploaded document.
+  string thumbnail = 3;     // Thumbnail of the uploaded document.
+  string desc = 4;          // Description of the uploaded document.
 }
 
-/* ListAllIdenticalDocs respresents listing of duplicate docs in paginated format. */
+/* ListAllIdenticalDocs respresents listing of duplicate docs in paginated
+ * format. */
 message ListAllIdenticalDocs {
   repeated IdenticalDocumentInfo documents = 1; // List of documents.
-  optional string offset = 2;   // Offset for next query.
+  optional string offset = 2;                   // Offset for next query.
 }
 
 /* IdenticalDocumentInfo represents individual duplicate document set. */
 message IdenticalDocumentInfo {
-  string id = 1; // ID of the identical documents.
+  string id = 1;                    // ID of the identical documents.
   string duplicates_count_desc = 2; // Describes duplicates count for given MD5.
 }
