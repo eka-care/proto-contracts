@@ -137,30 +137,29 @@ public struct Vault_AddedRecordsSummary_EndState {
 
   /// Gmail sync records found, count is required field.
   public var gmailSync: Vault_GmailSync_GmailSync {
-    get {return _gmailSync ?? Vault_GmailSync_GmailSync()}
-    set {_gmailSync = newValue}
+    get {return _storage._gmailSync ?? Vault_GmailSync_GmailSync()}
+    set {_uniqueStorage()._gmailSync = newValue}
   }
   /// Returns true if `gmailSync` has been explicitly set.
-  public var hasGmailSync: Bool {return self._gmailSync != nil}
+  public var hasGmailSync: Bool {return _storage._gmailSync != nil}
   /// Clears the value of `gmailSync`. Subsequent reads from it will return its default value.
-  public mutating func clearGmailSync() {self._gmailSync = nil}
+  public mutating func clearGmailSync() {_uniqueStorage()._gmailSync = nil}
 
   /// View my health bottom sheet.
   public var summary: Vault_AddedRecordsSummary_Summary {
-    get {return _summary ?? Vault_AddedRecordsSummary_Summary()}
-    set {_summary = newValue}
+    get {return _storage._summary ?? Vault_AddedRecordsSummary_Summary()}
+    set {_uniqueStorage()._summary = newValue}
   }
   /// Returns true if `summary` has been explicitly set.
-  public var hasSummary: Bool {return self._summary != nil}
+  public var hasSummary: Bool {return _storage._summary != nil}
   /// Clears the value of `summary`. Subsequent reads from it will return its default value.
-  public mutating func clearSummary() {self._summary = nil}
+  public mutating func clearSummary() {_uniqueStorage()._summary = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _gmailSync: Vault_GmailSync_GmailSync? = nil
-  fileprivate var _summary: Vault_AddedRecordsSummary_Summary? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// Summary represents health summary bottom sheet. 
@@ -406,36 +405,70 @@ extension Vault_AddedRecordsSummary_EndState: SwiftProtobuf.Message, SwiftProtob
     2: .same(proto: "summary"),
   ]
 
+  fileprivate class _StorageClass {
+    var _gmailSync: Vault_GmailSync_GmailSync? = nil
+    var _summary: Vault_AddedRecordsSummary_Summary? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _gmailSync = source._gmailSync
+      _summary = source._summary
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._gmailSync) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._summary) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._gmailSync) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._summary) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._gmailSync {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try { if let v = self._summary {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._gmailSync {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      try { if let v = _storage._summary {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_AddedRecordsSummary_EndState, rhs: Vault_AddedRecordsSummary_EndState) -> Bool {
-    if lhs._gmailSync != rhs._gmailSync {return false}
-    if lhs._summary != rhs._summary {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._gmailSync != rhs_storage._gmailSync {return false}
+        if _storage._summary != rhs_storage._summary {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
