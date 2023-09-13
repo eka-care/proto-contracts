@@ -30,20 +30,20 @@ public struct Vault_IdenticalDocs_IdenticalDocsById {
   public var documents: [Vault_IdenticalDocs_Document] = []
 
   /// Offset for next query.
-  public var nextToken: String {
-    get {return _nextToken ?? String()}
-    set {_nextToken = newValue}
+  public var offset: String {
+    get {return _offset ?? String()}
+    set {_offset = newValue}
   }
-  /// Returns true if `nextToken` has been explicitly set.
-  public var hasNextToken: Bool {return self._nextToken != nil}
-  /// Clears the value of `nextToken`. Subsequent reads from it will return its default value.
-  public mutating func clearNextToken() {self._nextToken = nil}
+  /// Returns true if `offset` has been explicitly set.
+  public var hasOffset: Bool {return self._offset != nil}
+  /// Clears the value of `offset`. Subsequent reads from it will return its default value.
+  public mutating func clearOffset() {self._offset = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _nextToken: String? = nil
+  fileprivate var _offset: String? = nil
 }
 
 /// Document represents each document description. 
@@ -108,6 +108,9 @@ public struct Vault_IdenticalDocs_IdenticalDocumentInfo {
   /// Describes duplicates count for given MD5.
   public var duplicatesCountDesc: String = String()
 
+  /// Thumbnail of the duplicate set document.
+  public var thumbnail: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -128,7 +131,7 @@ extension Vault_IdenticalDocs_IdenticalDocsById: SwiftProtobuf.Message, SwiftPro
   public static let protoMessageName: String = _protobuf_package + ".IdenticalDocsById"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "documents"),
-    2: .standard(proto: "next_token"),
+    2: .same(proto: "offset"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -138,7 +141,7 @@ extension Vault_IdenticalDocs_IdenticalDocsById: SwiftProtobuf.Message, SwiftPro
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.documents) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self._nextToken) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self._offset) }()
       default: break
       }
     }
@@ -152,7 +155,7 @@ extension Vault_IdenticalDocs_IdenticalDocsById: SwiftProtobuf.Message, SwiftPro
     if !self.documents.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.documents, fieldNumber: 1)
     }
-    try { if let v = self._nextToken {
+    try { if let v = self._offset {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     } }()
     try unknownFields.traverse(visitor: &visitor)
@@ -160,7 +163,7 @@ extension Vault_IdenticalDocs_IdenticalDocsById: SwiftProtobuf.Message, SwiftPro
 
   public static func ==(lhs: Vault_IdenticalDocs_IdenticalDocsById, rhs: Vault_IdenticalDocs_IdenticalDocsById) -> Bool {
     if lhs.documents != rhs.documents {return false}
-    if lhs._nextToken != rhs._nextToken {return false}
+    if lhs._offset != rhs._offset {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -263,6 +266,7 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .standard(proto: "duplicates_count_desc"),
+    3: .same(proto: "thumbnail"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -273,6 +277,7 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.duplicatesCountDesc) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.thumbnail) }()
       default: break
       }
     }
@@ -285,12 +290,16 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
     if !self.duplicatesCountDesc.isEmpty {
       try visitor.visitSingularStringField(value: self.duplicatesCountDesc, fieldNumber: 2)
     }
+    if !self.thumbnail.isEmpty {
+      try visitor.visitSingularStringField(value: self.thumbnail, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_IdenticalDocs_IdenticalDocumentInfo, rhs: Vault_IdenticalDocs_IdenticalDocumentInfo) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.duplicatesCountDesc != rhs.duplicatesCountDesc {return false}
+    if lhs.thumbnail != rhs.thumbnail {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
