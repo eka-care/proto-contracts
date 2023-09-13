@@ -148,7 +148,8 @@ func (x *Document) GetDesc() string {
 	return ""
 }
 
-// ListAllIdenticalDocs respresents listing of duplicate docs in paginated format.
+// ListAllIdenticalDocs respresents listing of duplicate docs in paginated
+// format.
 type ListAllIdenticalDocs struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
