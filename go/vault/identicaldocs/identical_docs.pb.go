@@ -213,7 +213,7 @@ type IdenticalDocumentInfo struct {
 
 	Id                  string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                                // ID of the identical documents.
 	DuplicatesCountDesc string `protobuf:"bytes,2,opt,name=duplicates_count_desc,json=duplicatesCountDesc,proto3" json:"duplicates_count_desc,omitempty"` // Describes duplicates count for given MD5.
-	Thumbnail           string `protobuf:"bytes,3,opt,name=thumbnail,proto3" json:"thumbnail,omitempty"`                                                  // Thumbnail of the duplicate set document
+	Thumbnail           string `protobuf:"bytes,3,opt,name=thumbnail,proto3" json:"thumbnail,omitempty"`                                                  // Thumbnail of the duplicate set document.
 }
 
 func (x *IdenticalDocumentInfo) Reset() {

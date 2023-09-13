@@ -29,5 +29,5 @@ message ListAllIdenticalDocs {
 message IdenticalDocumentInfo {
   string id = 1;                    // ID of the identical documents.
   string duplicates_count_desc = 2; // Describes duplicates count for given MD5.
-  string thumbnail = 3;             // Thumbnail of the duplicate set document
+  string thumbnail = 3;             // Thumbnail of the duplicate set document.
 }
