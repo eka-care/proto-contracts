@@ -7,7 +7,7 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/identicaldocs"
 /* IdenticalDocsById represents response for identical documents. */
 message IdenticalDocsById {
   repeated Document documents = 1; // List of documents.
-  optional string next_token = 2;  // Offset for next query.
+  optional string offset = 2;      // Offset for next query.
 }
 
 /* Document represents each document description. */
