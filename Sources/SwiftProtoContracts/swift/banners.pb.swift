@@ -91,14 +91,14 @@ public struct Vault_Banners_Banner {
   public var bodyParameters: [Vault_BannerBodyParameter_BannerBodyParameter] = []
 
   /// ID represents banner/card identifier.
-  public var id: String {
-    get {return _id ?? String()}
-    set {_id = newValue}
+  public var bannerID: String {
+    get {return _bannerID ?? String()}
+    set {_bannerID = newValue}
   }
-  /// Returns true if `id` has been explicitly set.
-  public var hasID: Bool {return self._id != nil}
-  /// Clears the value of `id`. Subsequent reads from it will return its default value.
-  public mutating func clearID() {self._id = nil}
+  /// Returns true if `bannerID` has been explicitly set.
+  public var hasBannerID: Bool {return self._bannerID != nil}
+  /// Clears the value of `bannerID`. Subsequent reads from it will return its default value.
+  public mutating func clearBannerID() {self._bannerID = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -132,7 +132,7 @@ public struct Vault_Banners_Banner {
 
   fileprivate var _body: String? = nil
   fileprivate var _cta: Vault_Common_CTA? = nil
-  fileprivate var _id: String? = nil
+  fileprivate var _bannerID: String? = nil
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
@@ -187,7 +187,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     5: .same(proto: "img"),
     6: .same(proto: "lottie"),
     7: .standard(proto: "body_parameters"),
-    8: .same(proto: "id"),
+    8: .standard(proto: "banner_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -217,7 +217,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
       }()
       case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
-      case 8: try { try decoder.decodeSingularStringField(value: &self._id) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
       default: break
       }
     }
@@ -254,7 +254,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if !self.bodyParameters.isEmpty {
       try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 7)
     }
-    try { if let v = self._id {
+    try { if let v = self._bannerID {
       try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     } }()
     try unknownFields.traverse(visitor: &visitor)
@@ -267,7 +267,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs.colour != rhs.colour {return false}
     if lhs.image != rhs.image {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
-    if lhs._id != rhs._id {return false}
+    if lhs._bannerID != rhs._bannerID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
