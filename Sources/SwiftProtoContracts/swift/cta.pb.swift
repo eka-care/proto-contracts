@@ -62,6 +62,16 @@ public struct Vault_Common_CTA {
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
+  /// params accepted/ needed by the destination screen for Android.
+  public var ctaParamsProto: String {
+    get {return _ctaParamsProto ?? String()}
+    set {_ctaParamsProto = newValue}
+  }
+  /// Returns true if `ctaParamsProto` has been explicitly set.
+  public var hasCtaParamsProto: Bool {return self._ctaParamsProto != nil}
+  /// Clears the value of `ctaParamsProto`. Subsequent reads from it will return its default value.
+  public mutating func clearCtaParamsProto() {self._ctaParamsProto = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -69,6 +79,7 @@ public struct Vault_Common_CTA {
   fileprivate var _title: String? = nil
   fileprivate var _action: String? = nil
   fileprivate var _id: String? = nil
+  fileprivate var _ctaParamsProto: String? = nil
 }
 
 /// ActionCTA represents data for any action on click 
@@ -114,6 +125,7 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     3: .same(proto: "title"),
     4: .same(proto: "action"),
     5: .same(proto: "id"),
+    6: .standard(proto: "cta_params_proto"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -127,6 +139,7 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 3: try { try decoder.decodeSingularStringField(value: &self._title) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self._action) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self._id) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._ctaParamsProto) }()
       default: break
       }
     }
@@ -152,6 +165,9 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try { if let v = self._id {
       try visitor.visitSingularStringField(value: v, fieldNumber: 5)
     } }()
+    try { if let v = self._ctaParamsProto {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -161,6 +177,7 @@ extension Vault_Common_CTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs._title != rhs._title {return false}
     if lhs._action != rhs._action {return false}
     if lhs._id != rhs._id {return false}
+    if lhs._ctaParamsProto != rhs._ctaParamsProto {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
