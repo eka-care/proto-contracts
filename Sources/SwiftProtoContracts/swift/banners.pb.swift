@@ -20,7 +20,8 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-/// BannersResponse represents banners on records page such as gmail sync, insights etc. 
+/// BannersResponse represents banners on records page such as gmail sync,
+/// insights etc. 
 public struct Vault_Banners_BannersResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
