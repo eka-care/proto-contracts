@@ -34,6 +34,8 @@ message Category {
 message PackagesResponse {
   repeated Package packages = 1;     // list of packages.
   vault.common.CTA view_all_cta = 2; // CTA of view all button.
+  string title = 3;                  // Title of packages.
+  string sub_title = 4;              // Subtitle of packages.
 }
 
 /* Package represents information of a lab package that can be booked */
