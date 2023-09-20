@@ -153,6 +153,12 @@ public struct Vault_Labs_PackagesResponse {
   /// Clears the value of `viewAllCta`. Subsequent reads from it will return its default value.
   public mutating func clearViewAllCta() {self._viewAllCta = nil}
 
+  /// Title of packages.
+  public var title: String = String()
+
+  /// Subtitle of packages.
+  public var subTitle: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -541,6 +547,8 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "packages"),
     2: .standard(proto: "view_all_cta"),
+    3: .same(proto: "title"),
+    4: .standard(proto: "sub_title"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -551,6 +559,8 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.packages) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._viewAllCta) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.subTitle) }()
       default: break
       }
     }
@@ -567,12 +577,20 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try { if let v = self._viewAllCta {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
+    if !self.title.isEmpty {
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 3)
+    }
+    if !self.subTitle.isEmpty {
+      try visitor.visitSingularStringField(value: self.subTitle, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_Labs_PackagesResponse, rhs: Vault_Labs_PackagesResponse) -> Bool {
     if lhs.packages != rhs.packages {return false}
     if lhs._viewAllCta != rhs._viewAllCta {return false}
+    if lhs.title != rhs.title {return false}
+    if lhs.subTitle != rhs.subTitle {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
