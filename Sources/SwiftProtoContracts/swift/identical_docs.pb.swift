@@ -114,6 +114,9 @@ public struct Vault_IdenticalDocs_IdenticalDocumentInfo {
   /// Thumbnail of the duplicate set document.
   public var thumbnail: String = String()
 
+  /// Description of the latest uploaded duplicate document.
+  public var docUploadDesc: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -276,6 +279,7 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
     1: .same(proto: "id"),
     2: .standard(proto: "duplicates_count_desc"),
     3: .same(proto: "thumbnail"),
+    4: .standard(proto: "doc_upload_desc"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -287,6 +291,7 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
       case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.duplicatesCountDesc) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.thumbnail) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.docUploadDesc) }()
       default: break
       }
     }
@@ -302,6 +307,9 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
     if !self.thumbnail.isEmpty {
       try visitor.visitSingularStringField(value: self.thumbnail, fieldNumber: 3)
     }
+    if !self.docUploadDesc.isEmpty {
+      try visitor.visitSingularStringField(value: self.docUploadDesc, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -309,6 +317,7 @@ extension Vault_IdenticalDocs_IdenticalDocumentInfo: SwiftProtobuf.Message, Swif
     if lhs.id != rhs.id {return false}
     if lhs.duplicatesCountDesc != rhs.duplicatesCountDesc {return false}
     if lhs.thumbnail != rhs.thumbnail {return false}
+    if lhs.docUploadDesc != rhs.docUploadDesc {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
