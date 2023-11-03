@@ -25,9 +25,9 @@ type DocumentType int32
 
 const (
 	DocumentType_DOCUMENTTYPE_UNSPECIFIED  DocumentType = 0 // DocumentType -> Unspecified.
-	DocumentType_DOCUMENTTYPE_LAB_REPORT   DocumentType = 1 // DocumentType -> lab_report.
-	DocumentType_DOCUMENTTYPE_PRESCRIPTION DocumentType = 2 // DocumentType -> prescription.
-	DocumentType_DOCUMENTTYPE_OTHERS       DocumentType = 3 // DocumentType -> others.
+	DocumentType_DOCUMENTTYPE_LAB_REPORT   DocumentType = 1 // DocumentType -> Lab report.
+	DocumentType_DOCUMENTTYPE_PRESCRIPTION DocumentType = 2 // DocumentType -> Prescription.
+	DocumentType_DOCUMENTTYPE_OTHERS       DocumentType = 3 // DocumentType -> Other.
 )
 
 // Enum value maps for DocumentType.

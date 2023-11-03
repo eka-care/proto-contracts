@@ -8,10 +8,10 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/documentlist";
 enum DocumentType {
     DOCUMENTTYPE_UNSPECIFIED = 0; // DocumentType -> Unspecified.
   
-    DOCUMENTTYPE_LAB_REPORT = 1; // DocumentType -> lab_report.
+    DOCUMENTTYPE_LAB_REPORT = 1; // DocumentType -> Lab report.
   
-    DOCUMENTTYPE_PRESCRIPTION = 2; // DocumentType -> prescription.
-    DOCUMENTTYPE_OTHERS = 3;       // DocumentType -> others.
+    DOCUMENTTYPE_PRESCRIPTION = 2; // DocumentType -> Prescription.
+    DOCUMENTTYPE_OTHERS = 3;       // DocumentType -> Other.
 }
 
 /* FileType of the uploaded document.*/
@@ -70,5 +70,5 @@ message GetFileResponse {
 message SearchMetaData  {
   string highlight = 1; // Highlight a vital.
   uint32 page = 2;      // Page of the report.
-  uint32 file_num = 3;    // File number within the document.
+  uint32 file_num = 3;  // File number within the document.
 }
