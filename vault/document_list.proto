@@ -1,0 +1,74 @@
+syntax = "proto3";
+     
+package vault.document_list;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/documentlist";
+
+/* Document type suggests type of document uploaded to the vault. */
+enum DocumentType {
+    DOCUMENTTYPE_UNSPECIFIED = 0; // DocumentType -> Unspecified.
+  
+    DOCUMENTTYPE_LAB_REPORT = 1; // DocumentType -> lab_report.
+  
+    DOCUMENTTYPE_PRESCRIPTION = 2; // DocumentType -> prescription.
+    DOCUMENTTYPE_OTHERS = 3;       // DocumentType -> others.
+}
+
+/* FileType of the uploaded document.*/
+enum FileType {
+  FILETYPE_UNSPECIFIED = 0; // FileType -> Unspecified.
+  FILETYPE_IMG = 1;         // FileType -> Image file.
+  FILETYPE_PDF = 2;         // FileType -> PDF file.
+}
+
+/* List of documents along with the offset to fetch next page document list. */
+message DocumentList {
+    repeated Document documents = 1;
+    optional string offset = 2;
+}
+
+/* Document describes attributes of vault document. */
+message Document {
+  string patient_name = 1;                  // Patient name of the uploaded vault document.
+  string oid = 2;                           // Profile ID.
+  string document_id = 3;                   // Document ID.
+  DocumentType document_type = 4;           // Type of the uploaded document.
+  string thumbnail = 5;                     // Thumbnail url of the document.
+  bool shareable = 6;                       // Is the document shareable with doctors.
+  uint32 files_count = 7;                   // Number of files in the document.
+  optional SearchMetaData search_meta = 8;  // Search meta defines page number, file, highlight of the document.
+  string desc = 9;                          // Description on the document uploaded.
+  bool can_delete = 10;                     // Document deletion allowed flag.
+  bool is_smart_report_available = 11;      // Is the uploaded document a medical lab report.
+  bool is_analyzing = 12;                   // Document still in analysis process of a smart report.
+  optional bool uploaded_by_me = 13;        // If the document is uploaded by the doctor.
+  bool is_processing = 14;                  // Is document in processing state.
+  FileType file_type = 15;                  // Type of document uploaded, IMG or PDF.
+  uint32 created_at = 16;                   // Time at which the document was created or uploaded.
+  optional bool health_id = 17;             // Document linked with ABHA ID.
+  repeated string content_type = 18;        // Content type of the document.
+  uint32 document_date = 19;                // Date of the lab-report or prescription or other.
+  repeated string user_tags = 20;           // User added tags for the document.
+  repeated string dervied_tags = 21;        // Tags derived based on the vitals in the document.
+  string post_analyzer_observations = 22;   // Post analyzer observations.
+  repeated string shared_with = 23;         // Document shared with list of doctors.
+  string doctor_id = 24;                    // Doctor ID.
+  string clinic_id = 25;                    // Clinic ID.
+  optional string hip_id = 26;              // Provider ID.
+  optional bool is_encrypted = 27;          // Is the document part of secret vault.
+  optional GetFileResponse file = 28;       // GetFileResponse describes file of the uploaded document.
+}
+
+/* GetFileResponse describes files under the document. */
+message GetFileResponse {
+  string asset_url = 1;    // Asset uri of the uploaded document.
+  string file_type = 2;    // File type of the uploaded document.
+  string share_text = 3;   // Share text of the uploaded document.
+}
+
+/* SearchMetaData describes the metadata within the smart report.*/
+message SearchMetaData  {
+  string highlight = 1; // Highlight a vital.
+  uint32 page = 2;      // Page of the report.
+  uint32 file_num = 3;    // File number within the document.
+}
