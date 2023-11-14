@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package vitals;
+
+import "vitals/commons.plots.range.proto";
+import "vitals/commons.plots.types.proto";
+import "vitals/commons.cta.proto";
+
+option go_package = "github.com/eka-care/vitals/proto_generated/go/vitals/cards/streaks";
+
+/** Streaks cards are used in homepage, to show the latest vitals readings **/
+// https://www.figma.com/file/WMYbcRP1whFcA3h3cro9mR/ABHA-%26-Login-2023?type=design&node-id=14369-2221&mode=design&t=aBjWulxjjRO2JT8r-4
+message StreaksCardV1 {
+
+  /** Vitals MetaData **/
+  StreakCardMetaV1 meta = 1;
+
+  /** Plot Data **/
+  StreaksPlotV1 plot = 2;
+
+  /** Latest Reading **/
+  LatestReadingV1 latest_reading = 3;
+}
+
+message Bannerv1 {
+  string title = 1;
+  // Icon before the title text.
+  string icon = 2;
+  // Background color for the banner
+  string background_color = 3;
+  // CTA
+  commons.cta.CTAV1 cta = 4;
+
+}
+
+message LatestReadingV1 {
+  // Value to be displayed for the latest value
+  string value = 1;
+  // Unit in string
+  string unit = 2;
+  // Time in a string format
+  string time = 3;
+  // State of the reading. High, low normal etc..
+  string state_display = 4;
+  string state_color = 5;
+
+  // Source for the latest reading
+  string source_display = 6;
+  // Source Icon
+  oneof source_icon {
+    string id = 7;
+    string url = 8;
+  }
+}
+
+
+message StreakCardMetaV1 {
+  // Icon representing the vital
+  string icon = 1;
+  // Display text
+  string display = 2;
+  // Unit display text
+  string unit = 3;
+  // State of the reading. High, Normal, Low etc..
+  string state = 4;
+}
+
+message StreaksPlotV1 {
+  repeated StreaksPlotDataV1 plot_data = 1;
+  commons.plots.PlotType type = 2;
+}
+
+message StreaksPlotDataV1 {
+  string label = 1;
+
+  oneof plot_value {
+    double value = 2;                        // Value of the reading.
+    string value_string = 3;                 // String value of the reading.
+    // PLOT_COLUMN_RANGE supports ValueRangeWithAverage
+    commons.plots.ValueRangeWithAverage value_range = 4; // Range of the reading.
+  }
+
+}
