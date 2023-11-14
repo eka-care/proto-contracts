@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package commons.plots;
 
-option go_package = "github.com/eka-care/vitals/proto_generated/go/vitals/commons/plots/types";
+option go_package = "github.com/eka-care/vitals/proto-generated/go/vitals/commons/plots/types";
 
 /* PlotType is an enum used to represent the type of the plot */
 enum PlotType {
