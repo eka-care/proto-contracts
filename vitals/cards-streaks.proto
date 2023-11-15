@@ -86,6 +86,7 @@ message StreaksPlotDataV1 {
 }
 
 enum CardState {
-Empty = 0;
-HasData = 1;
+  DontUse = 0; // Since in golang with the JSON omitempty the key could get skipped in the generated JSON
+  Empty = 1;
+  HasData = 2;
 }
