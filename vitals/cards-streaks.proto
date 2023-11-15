@@ -64,6 +64,8 @@ message StreakCardMetaV1 {
   string display = 2;
   // CTA
   commons.cta.CTAV1 add_cta = 3;
+  // Card state
+  CardState card_state = 4;
 }
 
 message StreaksPlotV1 {
@@ -81,4 +83,9 @@ message StreaksPlotDataV1 {
     commons.plots.ValueRangeWithAverage value_range = 4; // Range of the reading.
   }
 
+}
+
+enum CardState {
+Empty = 0;
+HasData = 1;
 }
