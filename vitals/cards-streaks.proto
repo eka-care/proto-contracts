@@ -20,9 +20,12 @@ message StreaksCardV1 {
 
   /** Latest Reading **/
   LatestReadingV1 latest_reading = 3;
+
+  /** Bottom Banner **/
+  BannerV1 banner = 4;
 }
 
-message Bannerv1 {
+message BannerV1 {
   string title = 1;
   // Icon before the title text.
   string icon = 2;
@@ -59,10 +62,8 @@ message StreakCardMetaV1 {
   string icon = 1;
   // Display text
   string display = 2;
-  // Unit display text
-  string unit = 3;
-  // State of the reading. High, Normal, Low etc..
-  string state = 4;
+  // CTA
+  commons.cta.CTAV1 add_cta = 3;
 }
 
 message StreaksPlotV1 {
