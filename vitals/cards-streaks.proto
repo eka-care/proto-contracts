@@ -19,7 +19,7 @@ message StreaksCardV1 {
   StreaksPlotV1 plot = 2;
 
   /** Latest Reading **/
-  LatestReadingV1 latest_reading = 3;
+  LatestReadingV1 latest_reading = 3 [json_name = "latest_reading"];
 
   /** Bottom Banner **/
   BannerV1 banner = 4;
@@ -30,7 +30,7 @@ message BannerV1 {
   // Icon before the title text.
   string icon = 2;
   // Background color for the banner
-  string background_color = 3;
+  string background_color = 3 [json_name = "background_color"];
   // CTA
   commons.cta.CTAV1 cta = 4;
 
@@ -44,11 +44,11 @@ message LatestReadingV1 {
   // Time in a string format
   string time = 3;
   // State of the reading. High, low normal etc..
-  string state_display = 4;
-  string state_color = 5;
+  string state_display = 4 [json_name = "state_display"];
+  string state_color = 5 [json_name = "state_color"];
 
   // Source for the latest reading
-  string source_display = 6;
+  string source_display = 6 [json_name = "source_display"];
   // Source Icon
   oneof source_icon {
     string id = 7;
@@ -63,13 +63,13 @@ message StreakCardMetaV1 {
   // Display text
   string display = 2;
   // CTA
-  commons.cta.CTAV1 add_cta = 3;
+  commons.cta.CTAV1 add_cta = 3 [json_name = "add_cta"];
   // Card state
-  CardState card_state = 4;
+  CardState card_state = 4 [json_name = "card_state"];
 }
 
 message StreaksPlotV1 {
-  repeated StreaksPlotDataV1 plot_data = 1;
+  repeated StreaksPlotDataV1 plot_data = 1 [json_name = "plot_data"];
   commons.plots.PlotType type = 2;
 }
 
@@ -78,9 +78,9 @@ message StreaksPlotDataV1 {
 
   oneof plot_value {
     double value = 2;                        // Value of the reading.
-    string value_string = 3;                 // String value of the reading.
+    string value_string = 3 [json_name = "value_string"];                 // String value of the reading.
     // PLOT_COLUMN_RANGE supports ValueRangeWithAverage
-    commons.plots.ValueRangeWithAverage value_range = 4; // Range of the reading.
+    commons.plots.ValueRangeWithAverage value_range = 4 [json_name = "value_range"]; // Range of the reading.
   }
 
 }
