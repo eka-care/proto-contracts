@@ -78,9 +78,9 @@ message StreaksPlotDataV1 {
 
   oneof plot_value {
     double value = 2;                        // Value of the reading.
-    string value_string = 3 [json_name = "value_string"];                 // String value of the reading.
+    string value_string = 3;                 // String value of the reading.
     // PLOT_COLUMN_RANGE supports ValueRangeWithAverage
-    commons.plots.ValueRangeWithAverage value_range = 4 [json_name = "value_range"]; // Range of the reading.
+    commons.plots.ValueRangeWithAverage value_range = 4; // Range of the reading.
   }
 
 }
