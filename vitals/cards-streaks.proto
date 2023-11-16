@@ -67,25 +67,25 @@ message StreakCardMetaV1 {
 }
 
 message StreaksPlotV1 {
-  
-  
+
+
   repeated StreaksPlotDataV1 plot_data = 1 [json_name = "plot_data"];
   commons.plots.PlotType type = 2;
 }
 
 message StreaksPlotDataV1 {
   string label = 1;
-  
+
   // String representation of value, might be empty too.
-  string value_string = 3;                
+  string value_string = 2 [json_name = "value_string"];
+
+  // Value of the reading.
+  optional double value = 3;
 
   // PLOT_COLUMN_RANGE supports ValueRangeWithAverage
   // Range of the reading
   // One should look at the 
-  optional commons.plots.ValueRangeWithAverage value_range = 4; 
-
-  // Value of the reading.
-  optional double value = 2;                       
+  optional commons.plots.ValueRangeWithAverage value_range = 4 [json_name = "value_range"];
 }
 
 enum CardState {
