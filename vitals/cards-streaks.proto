@@ -50,10 +50,8 @@ message LatestReadingV1 {
   // Source for the latest reading
   string source_display = 6 [json_name = "source_display"];
   // Source Icon
-  oneof source_icon {
-    string id = 7;
-    string url = 8;
-  }
+  string source_icon_url = 7;
+
 }
 
 
@@ -69,20 +67,25 @@ message StreakCardMetaV1 {
 }
 
 message StreaksPlotV1 {
+  
+  
   repeated StreaksPlotDataV1 plot_data = 1 [json_name = "plot_data"];
   commons.plots.PlotType type = 2;
 }
 
 message StreaksPlotDataV1 {
   string label = 1;
+  
+  // String representation of value, might be empty too.
+  string value_string = 3;                
 
-  oneof plot_value {
-    double value = 2;                        // Value of the reading.
-    string value_string = 3;                 // String value of the reading.
-    // PLOT_COLUMN_RANGE supports ValueRangeWithAverage
-    commons.plots.ValueRangeWithAverage value_range = 4; // Range of the reading.
-  }
+  // PLOT_COLUMN_RANGE supports ValueRangeWithAverage
+  // Range of the reading
+  // One should look at the 
+  optional commons.plots.ValueRangeWithAverage value_range = 4; 
 
+  // Value of the reading.
+  optional double value = 2;                       
 }
 
 enum CardState {
