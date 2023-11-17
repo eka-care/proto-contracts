@@ -45,12 +45,13 @@ message LatestReadingV1 {
   string time = 3;
   // State of the reading. High, low normal etc..
   string state_display = 4 [json_name = "state_display"];
-  string state_color = 5 [json_name = "state_color"];
+  string state_bg_color = 5 [json_name = "state_bg_color"];
+  string state_text_color = 6 [json_name = "state_text_color"];
 
   // Source for the latest reading
-  string source_display = 6 [json_name = "source_display"];
+  string source_display = 7 [json_name = "source_display"];
   // Source Icon
-  string source_icon_url = 7;
+  string source_icon_url = 8 [json_name = "source_icon_url"];
 
 }
 
