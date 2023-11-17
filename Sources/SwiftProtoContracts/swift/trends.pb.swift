@@ -87,7 +87,7 @@ public enum Vault_Trends_V1_Tab: SwiftProtobuf.Enum {
 
 extension Vault_Trends_V1_Tab: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Trends_V1_Tab] = [
+  public static let allCases: [Vault_Trends_V1_Tab] = [
     .unspecified,
     .hour,
     .day,
@@ -553,7 +553,7 @@ public struct Vault_Trends_V1_Readings {
 
 extension Vault_Trends_V1_Readings.PlotType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Trends_V1_Readings.PlotType] = [
+  public static let allCases: [Vault_Trends_V1_Readings.PlotType] = [
     .plotUnspecified,
     .plotScatter,
     .plotColumnRange,
@@ -1269,7 +1269,7 @@ public struct Vault_Trends_V1_Log {
 
 extension Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source] = [
+  public static let allCases: [Vault_Trends_V1_Log.ParameterReadingsAtInstant.Source] = [
     .unspecified,
     .record,
     .appleHealth,
@@ -1432,7 +1432,7 @@ public struct Vault_Trends_V1_VitalContent {
 
 extension Vault_Trends_V1_VitalContent.BannerCategory: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Trends_V1_VitalContent.BannerCategory] = [
+  public static let allCases: [Vault_Trends_V1_VitalContent.BannerCategory] = [
     .unspecified,
     .info,
     .action,

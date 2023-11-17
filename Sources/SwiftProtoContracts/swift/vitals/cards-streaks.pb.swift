@@ -166,7 +166,9 @@ public struct Vitals_LatestReadingV1 {
   /// State of the reading. High, low normal etc..
   public var stateDisplay: String = String()
 
-  public var stateColor: String = String()
+  public var stateBgColor: String = String()
+
+  public var stateTextColor: String = String()
 
   /// Source for the latest reading
   public var sourceDisplay: String = String()
@@ -219,9 +221,20 @@ public struct Vitals_StreaksPlotV1 {
 
   public var type: Commons_Plots_PlotType = .plotUnspecified
 
+  public var plotRange: Commons_Plots_PlotRange {
+    get {return _plotRange ?? Commons_Plots_PlotRange()}
+    set {_plotRange = newValue}
+  }
+  /// Returns true if `plotRange` has been explicitly set.
+  public var hasPlotRange: Bool {return self._plotRange != nil}
+  /// Clears the value of `plotRange`. Subsequent reads from it will return its default value.
+  public mutating func clearPlotRange() {self._plotRange = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _plotRange: Commons_Plots_PlotRange? = nil
 }
 
 public struct Vitals_StreaksPlotDataV1 {
@@ -246,7 +259,7 @@ public struct Vitals_StreaksPlotDataV1 {
 
   /// PLOT_COLUMN_RANGE supports ValueRangeWithAverage
   /// Range of the reading
-  /// One should look at the 
+  /// One should look at the
   public var valueRange: Commons_Plots_ValueRangeWithAverage {
     get {return _valueRange ?? Commons_Plots_ValueRangeWithAverage()}
     set {_valueRange = newValue}
@@ -439,9 +452,10 @@ extension Vitals_LatestReadingV1: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     2: .same(proto: "unit"),
     3: .same(proto: "time"),
     4: .same(proto: "state_display"),
-    5: .same(proto: "state_color"),
-    6: .same(proto: "source_display"),
-    7: .standard(proto: "source_icon_url"),
+    5: .same(proto: "state_bg_color"),
+    6: .same(proto: "state_text_color"),
+    7: .same(proto: "source_display"),
+    8: .same(proto: "source_icon_url"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -454,9 +468,10 @@ extension Vitals_LatestReadingV1: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       case 2: try { try decoder.decodeSingularStringField(value: &self.unit) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.time) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.stateDisplay) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.stateColor) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.sourceDisplay) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.sourceIconURL) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.stateBgColor) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.stateTextColor) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.sourceDisplay) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.sourceIconURL) }()
       default: break
       }
     }
@@ -475,14 +490,17 @@ extension Vitals_LatestReadingV1: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if !self.stateDisplay.isEmpty {
       try visitor.visitSingularStringField(value: self.stateDisplay, fieldNumber: 4)
     }
-    if !self.stateColor.isEmpty {
-      try visitor.visitSingularStringField(value: self.stateColor, fieldNumber: 5)
+    if !self.stateBgColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.stateBgColor, fieldNumber: 5)
+    }
+    if !self.stateTextColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.stateTextColor, fieldNumber: 6)
     }
     if !self.sourceDisplay.isEmpty {
-      try visitor.visitSingularStringField(value: self.sourceDisplay, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: self.sourceDisplay, fieldNumber: 7)
     }
     if !self.sourceIconURL.isEmpty {
-      try visitor.visitSingularStringField(value: self.sourceIconURL, fieldNumber: 7)
+      try visitor.visitSingularStringField(value: self.sourceIconURL, fieldNumber: 8)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -492,7 +510,8 @@ extension Vitals_LatestReadingV1: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if lhs.unit != rhs.unit {return false}
     if lhs.time != rhs.time {return false}
     if lhs.stateDisplay != rhs.stateDisplay {return false}
-    if lhs.stateColor != rhs.stateColor {return false}
+    if lhs.stateBgColor != rhs.stateBgColor {return false}
+    if lhs.stateTextColor != rhs.stateTextColor {return false}
     if lhs.sourceDisplay != rhs.sourceDisplay {return false}
     if lhs.sourceIconURL != rhs.sourceIconURL {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -559,6 +578,7 @@ extension Vitals_StreaksPlotV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "plot_data"),
     2: .same(proto: "type"),
+    3: .same(proto: "plot_range"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -569,24 +589,33 @@ extension Vitals_StreaksPlotV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.plotData) }()
       case 2: try { try decoder.decodeSingularEnumField(value: &self.type) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._plotRange) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.plotData.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.plotData, fieldNumber: 1)
     }
     if self.type != .plotUnspecified {
       try visitor.visitSingularEnumField(value: self.type, fieldNumber: 2)
     }
+    try { if let v = self._plotRange {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vitals_StreaksPlotV1, rhs: Vitals_StreaksPlotV1) -> Bool {
     if lhs.plotData != rhs.plotData {return false}
     if lhs.type != rhs.type {return false}
+    if lhs._plotRange != rhs._plotRange {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

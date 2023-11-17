@@ -99,9 +99,24 @@ public struct Commons_Plots_TimeRangeCommons {
   fileprivate var _end: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 
+public struct Commons_Plots_PlotRange {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var min: Double = 0
+
+  public var max: Double = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Commons_Plots_ValueRangeWithAverage: @unchecked Sendable {}
 extension Commons_Plots_TimeRangeCommons: @unchecked Sendable {}
+extension Commons_Plots_PlotRange: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -193,6 +208,44 @@ extension Commons_Plots_TimeRangeCommons: SwiftProtobuf.Message, SwiftProtobuf._
   public static func ==(lhs: Commons_Plots_TimeRangeCommons, rhs: Commons_Plots_TimeRangeCommons) -> Bool {
     if lhs._start != rhs._start {return false}
     if lhs._end != rhs._end {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Commons_Plots_PlotRange: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".PlotRange"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "min"),
+    2: .same(proto: "max"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularDoubleField(value: &self.min) }()
+      case 2: try { try decoder.decodeSingularDoubleField(value: &self.max) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.min != 0 {
+      try visitor.visitSingularDoubleField(value: self.min, fieldNumber: 1)
+    }
+    if self.max != 0 {
+      try visitor.visitSingularDoubleField(value: self.max, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Commons_Plots_PlotRange, rhs: Commons_Plots_PlotRange) -> Bool {
+    if lhs.min != rhs.min {return false}
+    if lhs.max != rhs.max {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
