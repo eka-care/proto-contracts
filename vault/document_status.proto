@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package vault.doc_status;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/doc_status";
+
+/* DocumentStatus represents status of given document id list. */
+message DocumentStatus {
+  repeated Document document_status = 1; // Status of requested document ids.
+}
+
+/* Document represents status for smart report analysis. */
+message Document {
+  string document_id = 1;                 // ID of the document.
+  bool is_analyzing = 2;                  // If document is in smart report processing.
+  bool is_smart_report_available = 3;     // Is document a smart report.
+  string document_date = 4;               // Date of the document (lab report, prescription).
+  string thumbnail = 5;                   // Thumbnail of the lab report.
+  bool is_accessible = 6;                 // Is_accessible represents document.
+  string patient_id = 7;                  // ID of the patient on document.
+}
