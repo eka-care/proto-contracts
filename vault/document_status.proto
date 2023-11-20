@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package vault.doc_status;
 
-option go_package = "github.com/eka-care/proto-contracts/go/vault/doc_status";
+option go_package = "github.com/eka-care/proto-contracts/go/vault/docstatus";
 
 /* DocumentStatus represents status of given document id list. */
 message DocumentStatus {
