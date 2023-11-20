@@ -19,3 +19,8 @@ message Document {
   bool is_accessible = 6;                 // Is_accessible represents document.
   string patient_id = 7;                  // ID of the patient on document.
 }
+
+/* DocumentList represents list of document ids for request body. */
+message DocumentList {
+  repeated string documents = 1; // List of document ids.
+}
