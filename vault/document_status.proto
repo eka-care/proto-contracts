@@ -21,15 +21,14 @@ message DocumentListResponse {
 
 /* DocumentSmartReport represents smart report status*/
 message DocumentSmartReport {
-  bool is_analyzing = 1;              // Represents if document is in processing.
-  bool is_smart_report_available = 2; // Represents if document is a smart report.
-  optional string document_date = 3;  // Date of the document (lab report, prescription).
+  optional bool is_smart_report_available = 1; // Represents if document is a smart report.
+  optional string document_date = 2;  // Date of the document (lab report, prescription).
 }
 
 /* DocumentInfo represents document related other info. */
 message DocumentInfo {
-  optional string thumbnail = 1;                   // Thumbnail of the lab report.
-  optional string patient_id = 2;                  // OID of the patient on document.
+  string thumbnail = 1;                            // Thumbnail of the lab report.
+  string patient_id = 2;                           // OID of the patient on document.
   repeated string tags = 3;                        // Derived tags of the document.
   optional string post_analyzer_observations = 4;  // Confirm the scanned data message.
 }
