@@ -7,9 +7,10 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/docstatus";
 /* DocumentStatus represents status of given document id list. */
 message DocumentStatus {
   oneof DocumentStatusResponse {
-    DocumentAccessible document_accessible_info = 1;  // DocumentAccessible represent document 
-                                                      // upload status and related fields.
-    DocumentInfo document_info = 2;                   // DocumentInfo represents document related other info.
+    bool is_accessible = 1;                 // Is_accessible represents if document is uploaded to server or not.
+    DocumentAnalysis document_analysis = 2; // DocumentAccessible represent document 
+                                            // upload status and related fields.
+    DocumentInfo document_info = 3;         // DocumentInfo represents document related other info.
   } 
 }
 
@@ -33,11 +34,10 @@ message DocumentInfo {
   optional string post_analyzer_observations = 4;  // Confirm the scanned data message.
 }
 
-/* DocumentAccessible represents if document is uploaded to server and processing of it. */
-message DocumentAccessible {
-  bool is_accessible = 1;                        // Is_accessible represents if document is uploaded to server or not.
-  DocumentSmartReport document_smart_report = 2; // DocumentSmartReport represent smart report related status of document.
-  DocumentInfo document_info = 3;                // Document related other info.
+/* DocumentAnalysis represents if document processing. */
+message DocumentAnalysis {
+  DocumentSmartReport document_smart_report = 1; // DocumentSmartReport represent smart report related status of document.
+  DocumentInfo document_info = 2;                // Document related other info.
 }
 
 /* DocumentListRequest represents list of document ids for request body. */
