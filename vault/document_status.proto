@@ -25,7 +25,6 @@ message DocumentListResponse {
 /* DocumentSmartReport represents smart report related information. */
 message DocumentSmartReport {
   optional bool is_smart_report_available = 1; // Represents if document is a smart report.
-  optional string document_date = 2;  // Date of the document (lab report, prescription).
 }
 
 /* DocumentInfo represents document related other info. */
