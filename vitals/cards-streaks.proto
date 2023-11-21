@@ -65,7 +65,15 @@ message StreakCardMetaV1 {
   commons.cta.CTAV1 add_cta = 3 [json_name = "add_cta"];
   // Card state
   CardState card_state = 4 [json_name = "card_state"];
+
+  // values range tab - W / M / Y
+  string tab = 5;
+
+  // EKA vital id
+  string eka_id = 6 [json_name = "eka_id"];
 }
+
+
 
 message StreaksPlotV1 {
 
