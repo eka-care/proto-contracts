@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package vault.doc_status;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/docstatus";
+
+/* DocumentStatus represents status of given document id list. */
+message DocumentStatus {
+  oneof DocumentStatusResponse {
+    NotAccessible not_accessible = 1;       // Not_accessible represents that document is not uploaded to the server.
+    DocumentAnalysis document_analysis = 2; // Document_analysis represent document
+                                            // status during processing.
+    DocumentInfo document_info = 3;         // DocumentInfo represents document related info post processing.
+  } 
+}
+
+/* NotAccessible represents document is not accessible, i.e., not uploaded to the server. */
+message NotAccessible {}
+
+/* DocumentListResponse represents response for the list of documents in processing. */
+message DocumentListResponse {
+  repeated DocumentStatus document_status = 1; // Status of requested document ids.
+}
+
+/* DocumentSmartReport represents smart report related information. */
+message DocumentSmartReport {
+  optional bool is_smart_report_available = 1; // Represents if document is a smart report.
+}
+
+/* DocumentInfo represents document related other info. */
+message DocumentInfo {
+  optional string thumbnail = 1;                   // Thumbnail of the document.
+  optional string patient_id = 2;                  // OID of the patient on document.
+  repeated string tags = 3;                        // Derived tags of the document.
+  optional string document_date = 4;               // Date of the document.
+  optional string post_analyzer_observations = 5;  // Confirm the scanned data message.
+}
+
+/* DocumentAnalysis represents state of document during it's processing state. */
+message DocumentAnalysis {
+  DocumentSmartReport document_smart_report = 1; // DocumentSmartReport represent smart report related status of document.
+  DocumentInfo document_info = 2;                // Document related other info.
+  optional string document_date = 3;             // Date of the document.
+}
+
+/* DocumentListRequest represents list of document ids for request body. */
+message DocumentListRequest {
+  repeated string documents = 1; // List of document ids.
+}
