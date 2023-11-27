@@ -23,6 +23,9 @@ message StreaksCardV1 {
 
   /** Bottom Banner **/
   BannerV1 banner = 4;
+
+  /** Main card CTA **/
+  commons.cta.CTAV1 cta = 5;
 }
 
 message BannerV1 {
