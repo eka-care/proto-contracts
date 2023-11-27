@@ -2,6 +2,8 @@ syntax = "proto3";
      
 package vault.documents;
 
+import "google/protobuf/timestamp.proto";
+
 option go_package = "github.com/eka-care/proto-contracts/go/vault/documents";
 
 /* Document type suggests type of document uploaded to the vault. */
@@ -29,33 +31,21 @@ message DocumentList {
 
 /* Document describes attributes of vault document. */
 message Document {
-  string patient_name = 1;                  // Patient name of the uploaded vault document.
-  string oid = 2;                           // Profile ID.
-  string document_id = 3;                   // Document ID.
-  DocumentType document_type = 4;           // Type of the uploaded document.
-  string thumbnail = 5;                     // Thumbnail url of the document.
-  bool shareable = 6;                       // Is the document shareable with doctors.
-  string desc = 7;                          // Description on the document uploaded.
-  bool can_delete = 8;                      // Document deletion allowed flag.
-  uint32 created_at = 9;                    // Time at which the document was created or uploaded.
-  uint32 document_date = 10;                // Date of the lab-report or prescription or other.
-  optional bool is_encrypted = 11;          // Is the document part of secret vault.
-  FileProcessing file_response = 12;        // Doctor related document response.
-  DoctorResponse doctor_response = 13;      // File related document response.
-  ABHAResponse abha_response = 14;          // ABHA related document response.
-  DocumentTags document_tags = 15;          // Tags associated with document.
+  string oid = 1;                               // Profile ID.
+  string document_id = 2;                       // Document ID.
+  DocumentType document_type = 3;               // Type of the uploaded document.
+  string thumbnail = 4;                         // Thumbnail url of the document.
+  google.protobuf.Timestamp created_at = 5;     // Time at which the document was created or uploaded.
+  google.protobuf.Timestamp document_date = 6;  // Date of the lab-report or prescription or other.
+  FileProcessing file_response = 7;             // Doctor related document response.
+  DoctorResponse doctor_response = 8;           // File related document response.
+  DocumentTags document_tags = 9;               // Tags associated with document.
 }
 
 /* DocumentTags represents tags for the document. */
 message DocumentTags {
-  repeated string user_tags = 1;           // User added tags for the document.
-  repeated string dervied_tags = 2;        // Tags derived based on the vitals in the document.
-}
-
-/* ABHAResponse represents ABHA related attributes for the document. */
-message ABHAResponse {
-  optional string hip_id = 1;              // Provider ID.
-  optional bool health_id = 2;             // Document linked with ABHA ID.
+  repeated string user_tags = 1;      // User added tags for the document.
+  repeated string dervied_tags = 2;   // Tags derived based on the vitals in the document.
 }
 
 /* FileProcessing represents file related attributes for the document. */
@@ -65,18 +55,15 @@ message FileProcessing {
   bool is_processing = 3;                  // Is document in processing state.
   FileType file_type = 4;                  // Type of document uploaded, IMG or PDF.
   optional GetFileResponse file = 5;       // GetFileResponse describes file of the uploaded document.
-  string post_analyzer_observations = 6;   // Post analyzer observations.
-  repeated string content_type = 7;        // Content type of the document.
-  uint32 files_count = 8;                  // Number of files in the document.
+  repeated string content_type = 6;        // Content type of the document.
+  uint32 files_count = 7;                  // Number of files in the document.
 }
 
 /* DoctorResponse represent doctor related attributes for document response. */
 message DoctorResponse {
   string doctor_id = 1;                     // Doctor ID.
   string clinic_id = 2;                     // Clinic ID.
-  optional bool uploaded_by_me = 3;         // If the document is uploaded by the doctor.
-  repeated string shared_with = 4;          // Document shared with list of doctors.
-  optional SearchMetaData search_meta = 5;  // Search meta defines page number, file, highlight of the document.
+  optional SearchMetaData search_meta = 3;  // Search meta defines page number, file, highlight of the document.
 }
 
 /* GetFileResponse describes files under the document. */
