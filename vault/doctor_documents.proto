@@ -1,10 +1,10 @@
 syntax = "proto3";
      
-package vault.documents;
+package vault.doctor_documents;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/eka-care/proto-contracts/go/vault/documents";
+option go_package = "github.com/eka-care/proto-contracts/go/vault/doctordocuments";
 
 /* Document type suggests type of document uploaded to the vault. */
 enum DocumentType {
@@ -38,8 +38,10 @@ message Document {
   google.protobuf.Timestamp created_at = 5;     // Time at which the document was created or uploaded.
   google.protobuf.Timestamp document_date = 6;  // Date of the lab-report or prescription or other.
   FileProcessing file_response = 7;             // Doctor related document response.
-  DoctorResponse doctor_response = 8;           // File related document response.
-  DocumentTags document_tags = 9;               // Tags associated with document.
+  DocumentTags document_tags = 8;               // Tags associated with document.
+  string desc = 9;                              // Description on the document uploaded.
+  string doctor_id = 10;                        // Doctor ID.
+  string clinic_id = 11;                        // Clinic ID.
 }
 
 /* DocumentTags represents tags for the document. */
@@ -52,18 +54,10 @@ message DocumentTags {
 message FileProcessing {
   bool is_smart_report_available = 1;      // Is the uploaded document a medical lab report.
   bool is_analyzing = 2;                   // Document still in analysis process of a smart report.
-  bool is_processing = 3;                  // Is document in processing state.
-  FileType file_type = 4;                  // Type of document uploaded, IMG or PDF.
-  optional GetFileResponse file = 5;       // GetFileResponse describes file of the uploaded document.
-  repeated string content_type = 6;        // Content type of the document.
-  uint32 files_count = 7;                  // Number of files in the document.
-}
-
-/* DoctorResponse represent doctor related attributes for document response. */
-message DoctorResponse {
-  string doctor_id = 1;                     // Doctor ID.
-  string clinic_id = 2;                     // Clinic ID.
-  optional SearchMetaData search_meta = 3;  // Search meta defines page number, file, highlight of the document.
+  FileType file_type = 3;                  // Type of document uploaded, IMG or PDF.
+  optional GetFileResponse file = 4;       // GetFileResponse describes file of the uploaded document.
+  repeated string content_type = 5;        // Content type of the document.
+  optional SearchMetaData search_meta = 6; // Search meta defines page number, file, highlight of the document.
 }
 
 /* GetFileResponse describes files under the document. */
@@ -71,6 +65,7 @@ message GetFileResponse {
   string asset_url = 1;    // Asset uri of the uploaded document.
   string file_type = 2;    // File type of the uploaded document.
   string share_text = 3;   // Share text of the uploaded document.
+  uint32 files_count = 4;  // Number of files in the document.
 }
 
 /* SearchMetaData describes the metadata within the smart report. */
