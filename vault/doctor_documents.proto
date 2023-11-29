@@ -14,13 +14,6 @@ enum DocumentType {
   DOCUMENT_TYPE_PRESCRIPTION = 3; // DocumentType -> Prescription.
 }
 
-/* FileType of the uploaded document.*/
-enum FileType {
-  FILETYPE_UNSPECIFIED = 0; // FileType -> Unspecified.
-  FILETYPE_IMG = 1;         // FileType -> Image file.
-  FILETYPE_PDF = 2;         // FileType -> PDF file.
-}
-
 /* DocumentList represents API response of listing documents. */
 message DocumentList {
   repeated Document documents = 1; // List of documents for the current page.
