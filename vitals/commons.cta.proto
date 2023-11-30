@@ -17,4 +17,6 @@ message CTAV1 {
 
   optional string title = 3;  // Title of the source click block.
   optional string id = 5; // ID required to send mixpanel event.
+
+  optional string action = 7; // cta action
 }
