@@ -73,7 +73,7 @@ message StreakCardMetaV1 {
   string eka_id = 6 [json_name = "eka_id"];
 
   /** Main card CTA **/
-  commons.cta.CTAV1 cta = 7 [json_name = "card_cta"];
+  commons.cta.CTAV1 card_cta = 7 [json_name = "card_cta"];
 }
 
 
