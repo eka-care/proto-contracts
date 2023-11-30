@@ -14,7 +14,26 @@ enum DocumentType {
   DOCUMENT_TYPE_PRESCRIPTION = 3; // DocumentType -> Prescription.
 }
 
-/* DocumentList represents API response of listing documents. */
+/* ErrorCode represents list of errors */
+enum ErrorCode {
+  ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+}
+
+/* Error represents error resonse of API */
+message Error {
+  ErrorCode code = 1; // Error Code.
+  string message = 2; // Error Message.
+}
+
+/* DocumentAPIResponse represents API response of listing documents. */
+message DocumentAPIResponse {
+  oneof result {
+    DocumentList response = 1; // Successful response of documents.
+    Error error = 2;           // Error fetching documents.
+  }
+}
+
+/* DocumentList represents list of documents. */
 message DocumentList {
   repeated Document documents = 1; // List of documents for the current page.
   optional string offset =
