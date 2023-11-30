@@ -112,16 +112,6 @@ public struct Vitals_StreaksCardV1 {
   /// Clears the value of `banner`. Subsequent reads from it will return its default value.
   public mutating func clearBanner() {_uniqueStorage()._banner = nil}
 
-  ///* Main card CTA *
-  public var cta: Commons_Cta_CTAV1 {
-    get {return _storage._cta ?? Commons_Cta_CTAV1()}
-    set {_uniqueStorage()._cta = newValue}
-  }
-  /// Returns true if `cta` has been explicitly set.
-  public var hasCta: Bool {return _storage._cta != nil}
-  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
-  public mutating func clearCta() {_uniqueStorage()._cta = nil}
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -221,11 +211,22 @@ public struct Vitals_StreakCardMetaV1 {
   /// EKA vital id
   public var ekaID: String = String()
 
+  ///* Main card CTA *
+  public var cta: Commons_Cta_CTAV1 {
+    get {return _cta ?? Commons_Cta_CTAV1()}
+    set {_cta = newValue}
+  }
+  /// Returns true if `cta` has been explicitly set.
+  public var hasCta: Bool {return self._cta != nil}
+  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
+  public mutating func clearCta() {self._cta = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _addCta: Commons_Cta_CTAV1? = nil
+  fileprivate var _cta: Commons_Cta_CTAV1? = nil
 }
 
 public struct Vitals_StreaksPlotV1 {
@@ -322,7 +323,6 @@ extension Vitals_StreaksCardV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     2: .same(proto: "plot"),
     3: .same(proto: "latest_reading"),
     4: .same(proto: "banner"),
-    5: .same(proto: "cta"),
   ]
 
   fileprivate class _StorageClass {
@@ -330,7 +330,6 @@ extension Vitals_StreaksCardV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     var _plot: Vitals_StreaksPlotV1? = nil
     var _latestReading: Vitals_LatestReadingV1? = nil
     var _banner: Vitals_BannerV1? = nil
-    var _cta: Commons_Cta_CTAV1? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -341,7 +340,6 @@ extension Vitals_StreaksCardV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       _plot = source._plot
       _latestReading = source._latestReading
       _banner = source._banner
-      _cta = source._cta
     }
   }
 
@@ -364,7 +362,6 @@ extension Vitals_StreaksCardV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         case 2: try { try decoder.decodeSingularMessageField(value: &_storage._plot) }()
         case 3: try { try decoder.decodeSingularMessageField(value: &_storage._latestReading) }()
         case 4: try { try decoder.decodeSingularMessageField(value: &_storage._banner) }()
-        case 5: try { try decoder.decodeSingularMessageField(value: &_storage._cta) }()
         default: break
         }
       }
@@ -389,9 +386,6 @@ extension Vitals_StreaksCardV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       try { if let v = _storage._banner {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
       } }()
-      try { if let v = _storage._cta {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-      } }()
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -405,7 +399,6 @@ extension Vitals_StreaksCardV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         if _storage._plot != rhs_storage._plot {return false}
         if _storage._latestReading != rhs_storage._latestReading {return false}
         if _storage._banner != rhs_storage._banner {return false}
-        if _storage._cta != rhs_storage._cta {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -552,6 +545,7 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
     4: .same(proto: "card_state"),
     5: .same(proto: "tab"),
     6: .same(proto: "eka_id"),
+    7: .unique(proto: "cta", json: "card_cta"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -566,6 +560,7 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
       case 4: try { try decoder.decodeSingularEnumField(value: &self.cardState) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.tab) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.ekaID) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       default: break
       }
     }
@@ -594,6 +589,9 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
     if !self.ekaID.isEmpty {
       try visitor.visitSingularStringField(value: self.ekaID, fieldNumber: 6)
     }
+    try { if let v = self._cta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -604,6 +602,7 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
     if lhs.cardState != rhs.cardState {return false}
     if lhs.tab != rhs.tab {return false}
     if lhs.ekaID != rhs.ekaID {return false}
+    if lhs._cta != rhs._cta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
