@@ -49,6 +49,7 @@ message Package {
   optional string original_price = 7;       // Original price.
   optional string discount_description = 8; // description of the discount.
   vault.common.CTA cta = 9;                 // CTA of the item.
+  optional string eka_id = 10;              // Eka id of the package.
 
   // Information related to package.
   message Info {
