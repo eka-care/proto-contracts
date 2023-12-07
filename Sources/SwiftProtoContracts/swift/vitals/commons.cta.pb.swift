@@ -34,7 +34,7 @@ public struct Commons_Cta_CTAV1 {
   /// UnMarshal to
   /// Java Map<string, object>
   /// Golang Map[string]interface{}
-  public var params: Dictionary<String,SwiftProtobuf.Google_Protobuf_Any> = [:]
+  public var params: Dictionary<String,String> = [:]
 
   /// Title of the source click block.
   public var title: String {
@@ -102,7 +102,7 @@ extension Commons_Cta_CTAV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       case 1: try { try decoder.decodeSingularStringField(value: &self.pid) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._title) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self._id) }()
-      case 6: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.Google_Protobuf_Any>.self, value: &self.params) }()
+      case 6: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: &self.params) }()
       case 7: try { try decoder.decodeSingularStringField(value: &self._action) }()
       default: break
       }
@@ -124,7 +124,7 @@ extension Commons_Cta_CTAV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       try visitor.visitSingularStringField(value: v, fieldNumber: 5)
     } }()
     if !self.params.isEmpty {
-      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMessageMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.Google_Protobuf_Any>.self, value: self.params, fieldNumber: 6)
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: self.params, fieldNumber: 6)
     }
     try { if let v = self._action {
       try visitor.visitSingularStringField(value: v, fieldNumber: 7)
