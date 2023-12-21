@@ -3,7 +3,7 @@ syntax = "proto3";
 package commons.plots;
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/eka-care/vitals/proto-generated/go/vitals/commons/plots/range";
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/commons/plots/range";
 
 /* ValueRange represent value range */
 message ValueRangeWithAverage {

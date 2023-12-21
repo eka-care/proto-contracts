@@ -34,14 +34,7 @@ public struct Commons_Cta_CTAV1 {
   /// UnMarshal to
   /// Java Map<string, object>
   /// Golang Map[string]interface{}
-  public var params: String {
-    get {return _params ?? String()}
-    set {_params = newValue}
-  }
-  /// Returns true if `params` has been explicitly set.
-  public var hasParams: Bool {return self._params != nil}
-  /// Clears the value of `params`. Subsequent reads from it will return its default value.
-  public mutating func clearParams() {self._params = nil}
+  public var params: Dictionary<String,String> = [:]
 
   /// Title of the source click block.
   public var title: String {
@@ -63,13 +56,23 @@ public struct Commons_Cta_CTAV1 {
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
+  /// cta action
+  public var action: String {
+    get {return _action ?? String()}
+    set {_action = newValue}
+  }
+  /// Returns true if `action` has been explicitly set.
+  public var hasAction: Bool {return self._action != nil}
+  /// Clears the value of `action`. Subsequent reads from it will return its default value.
+  public mutating func clearAction() {self._action = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _params: String? = nil
   fileprivate var _title: String? = nil
   fileprivate var _id: String? = nil
+  fileprivate var _action: String? = nil
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
@@ -87,6 +90,7 @@ extension Commons_Cta_CTAV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     6: .same(proto: "params"),
     3: .same(proto: "title"),
     5: .same(proto: "id"),
+    7: .same(proto: "action"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -98,7 +102,8 @@ extension Commons_Cta_CTAV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
       case 1: try { try decoder.decodeSingularStringField(value: &self.pid) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._title) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self._id) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self._params) }()
+      case 6: try { try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: &self.params) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self._action) }()
       default: break
       }
     }
@@ -118,17 +123,21 @@ extension Commons_Cta_CTAV1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     try { if let v = self._id {
       try visitor.visitSingularStringField(value: v, fieldNumber: 5)
     } }()
-    try { if let v = self._params {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    if !self.params.isEmpty {
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufString>.self, value: self.params, fieldNumber: 6)
+    }
+    try { if let v = self._action {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Commons_Cta_CTAV1, rhs: Commons_Cta_CTAV1) -> Bool {
     if lhs.pid != rhs.pid {return false}
-    if lhs._params != rhs._params {return false}
+    if lhs.params != rhs.params {return false}
     if lhs._title != rhs._title {return false}
     if lhs._id != rhs._id {return false}
+    if lhs._action != rhs._action {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
