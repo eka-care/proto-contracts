@@ -6,7 +6,7 @@ import "vitals/commons.plots.range.proto";
 import "vitals/commons.plots.types.proto";
 import "vitals/commons.cta.proto";
 
-option go_package = "github.com/eka-care/vitals/proto-generated/go/vitals/cards/streaks";
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/cards/streaks";
 
 /** Streaks cards are used in homepage, to show the latest vitals readings **/
 // https://www.figma.com/file/WMYbcRP1whFcA3h3cro9mR/ABHA-%26-Login-2023?type=design&node-id=14369-2221&mode=design&t=aBjWulxjjRO2JT8r-4

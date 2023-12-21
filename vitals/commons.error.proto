@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package commons.error;
 
-option go_package = "github.com/eka-care/vitals/proto-generated/go/vitals/commons/error";
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/commons/error";
 
 message SimpleError {
   int32 code = 1;
