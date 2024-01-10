@@ -36,6 +36,7 @@ message PackagesResponse {
   vault.common.CTA view_all_cta = 2; // CTA of view all button.
   string title = 3;                  // Title of packages.
   string sub_title = 4;              // Subtitle of packages.
+  optional bool hide_prices = 5;     // Bool to decide whether to hide prices.
 }
 
 /* Package represents information of a lab package that can be booked */
@@ -49,6 +50,17 @@ message Package {
   optional string original_price = 7;       // Original price.
   optional string discount_description = 8; // description of the discount.
   vault.common.CTA cta = 9;                 // CTA of the item.
+  optional Nudge nudge = 10;                // Nudge strip.
+
+  message Nudge {
+    Type icon = 1;      // Icon Type.
+    string message = 2; // Nudge message (Expect HTML in this).
+
+    enum Type {
+      TYPE_UNSPECIFIED = 0; // Unspecified.
+      TYPE_HEALTH_PASS = 1; // Health Pass.
+    }
+  }
 
   // Information related to package.
   message Info {
