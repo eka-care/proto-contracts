@@ -87,7 +87,7 @@ message Entity {
 
 message EntityNumber {
   float confidence = 1;
-  string value = 2;
+  float value = 2;
 }
 
 message EntityGender {
