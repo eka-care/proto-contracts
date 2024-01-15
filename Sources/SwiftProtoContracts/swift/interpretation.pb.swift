@@ -106,7 +106,7 @@ public enum Vault_Vitals_Interpretation: SwiftProtobuf.Enum {
 
 extension Vault_Vitals_Interpretation: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_Vitals_Interpretation] = [
+  public static var allCases: [Vault_Vitals_Interpretation] = [
     .unspecified,
     .normal,
     .criticallyHigh,

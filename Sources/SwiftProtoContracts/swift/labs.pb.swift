@@ -126,7 +126,7 @@ public struct Vault_Labs_Category {
 
 extension Vault_Labs_Category.ItemType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_Labs_Category.ItemType] = [
+  public static var allCases: [Vault_Labs_Category.ItemType] = [
     .unspecified,
     .one,
   ]
@@ -159,11 +159,22 @@ public struct Vault_Labs_PackagesResponse {
   /// Subtitle of packages.
   public var subTitle: String = String()
 
+  /// Bool to decide whether to hide prices.
+  public var hidePrices: Bool {
+    get {return _hidePrices ?? false}
+    set {_hidePrices = newValue}
+  }
+  /// Returns true if `hidePrices` has been explicitly set.
+  public var hasHidePrices: Bool {return self._hidePrices != nil}
+  /// Clears the value of `hidePrices`. Subsequent reads from it will return its default value.
+  public mutating func clearHidePrices() {self._hidePrices = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _viewAllCta: Vault_Common_CTA? = nil
+  fileprivate var _hidePrices: Bool? = nil
 }
 
 /// Package represents information of a lab package that can be booked 
@@ -219,6 +230,16 @@ public struct Vault_Labs_Package {
   public var hasCta: Bool {return self._cta != nil}
   /// Clears the value of `cta`. Subsequent reads from it will return its default value.
   public mutating func clearCta() {self._cta = nil}
+
+  /// Nudge strip.
+  public var nudge: Vault_Labs_Package.Nudge {
+    get {return _nudge ?? Vault_Labs_Package.Nudge()}
+    set {_nudge = newValue}
+  }
+  /// Returns true if `nudge` has been explicitly set.
+  public var hasNudge: Bool {return self._nudge != nil}
+  /// Clears the value of `nudge`. Subsequent reads from it will return its default value.
+  public mutating func clearNudge() {self._nudge = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -286,6 +307,54 @@ public struct Vault_Labs_Package {
       }
     }
 
+  }
+
+  public struct Nudge {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    /// Icon Type.
+    public var icon: Vault_Labs_Package.Nudge.TypeEnum = .unspecified
+
+    /// Nudge message (Expect HTML in this).
+    public var message: String = String()
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public enum TypeEnum: SwiftProtobuf.Enum {
+      public typealias RawValue = Int
+
+      /// Unspecified.
+      case unspecified // = 0
+
+      /// Health Pass.
+      case healthPass // = 1
+      case UNRECOGNIZED(Int)
+
+      public init() {
+        self = .unspecified
+      }
+
+      public init?(rawValue: Int) {
+        switch rawValue {
+        case 0: self = .unspecified
+        case 1: self = .healthPass
+        default: self = .UNRECOGNIZED(rawValue)
+        }
+      }
+
+      public var rawValue: Int {
+        switch self {
+        case .unspecified: return 0
+        case .healthPass: return 1
+        case .UNRECOGNIZED(let i): return i
+        }
+      }
+
+    }
+
+    public init() {}
   }
 
   /// Information related to package.
@@ -368,13 +437,14 @@ public struct Vault_Labs_Package {
   fileprivate var _originalPrice: String? = nil
   fileprivate var _discountDescription: String? = nil
   fileprivate var _cta: Vault_Common_CTA? = nil
+  fileprivate var _nudge: Vault_Labs_Package.Nudge? = nil
 }
 
 #if swift(>=4.2)
 
 extension Vault_Labs_Package.TypeEnum: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_Labs_Package.TypeEnum] = [
+  public static var allCases: [Vault_Labs_Package.TypeEnum] = [
     .unspecified,
     .lab,
   ]
@@ -382,15 +452,23 @@ extension Vault_Labs_Package.TypeEnum: CaseIterable {
 
 extension Vault_Labs_Package.ItemType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_Labs_Package.ItemType] = [
+  public static var allCases: [Vault_Labs_Package.ItemType] = [
     .unspecified,
     .one,
   ]
 }
 
+extension Vault_Labs_Package.Nudge.TypeEnum: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [Vault_Labs_Package.Nudge.TypeEnum] = [
+    .unspecified,
+    .healthPass,
+  ]
+}
+
 extension Vault_Labs_Package.Info.TypeEnum: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_Labs_Package.Info.TypeEnum] = [
+  public static var allCases: [Vault_Labs_Package.Info.TypeEnum] = [
     .unspecified,
     .sample,
     .info,
@@ -411,6 +489,8 @@ extension Vault_Labs_PackagesResponse: @unchecked Sendable {}
 extension Vault_Labs_Package: @unchecked Sendable {}
 extension Vault_Labs_Package.TypeEnum: @unchecked Sendable {}
 extension Vault_Labs_Package.ItemType: @unchecked Sendable {}
+extension Vault_Labs_Package.Nudge: @unchecked Sendable {}
+extension Vault_Labs_Package.Nudge.TypeEnum: @unchecked Sendable {}
 extension Vault_Labs_Package.Info: @unchecked Sendable {}
 extension Vault_Labs_Package.Info.TypeEnum: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
@@ -549,6 +629,7 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
     2: .standard(proto: "view_all_cta"),
     3: .same(proto: "title"),
     4: .standard(proto: "sub_title"),
+    5: .standard(proto: "hide_prices"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -561,6 +642,7 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
       case 2: try { try decoder.decodeSingularMessageField(value: &self._viewAllCta) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.title) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.subTitle) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self._hidePrices) }()
       default: break
       }
     }
@@ -583,6 +665,9 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if !self.subTitle.isEmpty {
       try visitor.visitSingularStringField(value: self.subTitle, fieldNumber: 4)
     }
+    try { if let v = self._hidePrices {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 5)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -591,6 +676,7 @@ extension Vault_Labs_PackagesResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if lhs._viewAllCta != rhs._viewAllCta {return false}
     if lhs.title != rhs.title {return false}
     if lhs.subTitle != rhs.subTitle {return false}
+    if lhs._hidePrices != rhs._hidePrices {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -608,6 +694,7 @@ extension Vault_Labs_Package: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     7: .standard(proto: "original_price"),
     8: .standard(proto: "discount_description"),
     9: .same(proto: "cta"),
+    10: .same(proto: "nudge"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -625,6 +712,7 @@ extension Vault_Labs_Package: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       case 7: try { try decoder.decodeSingularStringField(value: &self._originalPrice) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self._discountDescription) }()
       case 9: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
+      case 10: try { try decoder.decodeSingularMessageField(value: &self._nudge) }()
       default: break
       }
     }
@@ -662,6 +750,9 @@ extension Vault_Labs_Package: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try { if let v = self._cta {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
     } }()
+    try { if let v = self._nudge {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -675,6 +766,7 @@ extension Vault_Labs_Package: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     if lhs._originalPrice != rhs._originalPrice {return false}
     if lhs._discountDescription != rhs._discountDescription {return false}
     if lhs._cta != rhs._cta {return false}
+    if lhs._nudge != rhs._nudge {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -691,6 +783,51 @@ extension Vault_Labs_Package.ItemType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "ITEM_TYPE_UNSPECIFIED"),
     1: .same(proto: "ITEM_TYPE_ONE"),
+  ]
+}
+
+extension Vault_Labs_Package.Nudge: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Labs_Package.protoMessageName + ".Nudge"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "icon"),
+    2: .same(proto: "message"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.icon) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.icon != .unspecified {
+      try visitor.visitSingularEnumField(value: self.icon, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Labs_Package.Nudge, rhs: Vault_Labs_Package.Nudge) -> Bool {
+    if lhs.icon != rhs.icon {return false}
+    if lhs.message != rhs.message {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Labs_Package.Nudge.TypeEnum: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "TYPE_UNSPECIFIED"),
+    1: .same(proto: "TYPE_HEALTH_PASS"),
   ]
 }
 
