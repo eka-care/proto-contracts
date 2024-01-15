@@ -57,7 +57,7 @@ public enum Vault_BannerBodyParameter_BannerBodyParameter: SwiftProtobuf.Enum {
 
 extension Vault_BannerBodyParameter_BannerBodyParameter: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_BannerBodyParameter_BannerBodyParameter] = [
+  public static var allCases: [Vault_BannerBodyParameter_BannerBodyParameter] = [
     .bodyParameterUnspecified,
     .bodyParameterMobile,
   ]
