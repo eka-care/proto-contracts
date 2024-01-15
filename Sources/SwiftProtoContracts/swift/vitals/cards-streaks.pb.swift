@@ -211,11 +211,22 @@ public struct Vitals_StreakCardMetaV1 {
   /// EKA vital id
   public var ekaID: String = String()
 
+  ///* Main card CTA *
+  public var cardCta: Commons_Cta_CTAV1 {
+    get {return _cardCta ?? Commons_Cta_CTAV1()}
+    set {_cardCta = newValue}
+  }
+  /// Returns true if `cardCta` has been explicitly set.
+  public var hasCardCta: Bool {return self._cardCta != nil}
+  /// Clears the value of `cardCta`. Subsequent reads from it will return its default value.
+  public mutating func clearCardCta() {self._cardCta = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _addCta: Commons_Cta_CTAV1? = nil
+  fileprivate var _cardCta: Commons_Cta_CTAV1? = nil
 }
 
 public struct Vitals_StreaksPlotV1 {
@@ -534,6 +545,7 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
     4: .same(proto: "card_state"),
     5: .same(proto: "tab"),
     6: .same(proto: "eka_id"),
+    7: .same(proto: "card_cta"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -548,6 +560,7 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
       case 4: try { try decoder.decodeSingularEnumField(value: &self.cardState) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.tab) }()
       case 6: try { try decoder.decodeSingularStringField(value: &self.ekaID) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._cardCta) }()
       default: break
       }
     }
@@ -576,6 +589,9 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
     if !self.ekaID.isEmpty {
       try visitor.visitSingularStringField(value: self.ekaID, fieldNumber: 6)
     }
+    try { if let v = self._cardCta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -586,6 +602,7 @@ extension Vitals_StreakCardMetaV1: SwiftProtobuf.Message, SwiftProtobuf._Message
     if lhs.cardState != rhs.cardState {return false}
     if lhs.tab != rhs.tab {return false}
     if lhs.ekaID != rhs.ekaID {return false}
+    if lhs._cardCta != rhs._cardCta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
