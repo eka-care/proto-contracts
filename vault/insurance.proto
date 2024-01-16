@@ -15,7 +15,7 @@ message InsuranceResponse {
 
 /* InsuranceData represents . */
 message InsuranceData {
-  optional Entity insurance_provider = 1;
+  optional LinkedInsurerProviderEntity insurance_provider = 1;
   optional InsuranceType insurance_type = 2;
   optional PlanDetails plan_details = 3;
   optional PolicyDetails policy_details = 4;
@@ -83,6 +83,53 @@ message EntityTimestamp {
 message Entity {
   float confidence = 1;
   string value = 2;
+}
+
+message LinkedInsurerProviderEntity {
+  float confidence = 1;
+  string value = 2;
+  Type linked_value = 3;
+  enum Type {
+    TYPE_UNSPECIFIED = 0; // Unspecified
+    TYPE_ACKO = 1;
+    TYPE_ADITYA = 2;
+    TYPE_APOLLO = 3;
+    TYPE_BAJAJ = 4;
+    TYPE_BHARTI = 5;
+    TYPE_CARE_HEALTH = 6;
+    TYPE_CHOLAMANDALAM = 7;
+    TYPE_CIGNA = 8;
+    TYPE_DHFL = 9;
+    TYPE_EDELWEISS = 10;
+    TYPE_FUTURE_GENERALI = 11;
+    TYPE_DIGIT = 12;
+    TYPE_HDFC_ERGO_GENERAL = 13;
+    TYPE_HDFC_ERGO_HEALTH = 14;
+    TYPE_ICICI_LOMBARD = 15;
+    TYPE_IFFCO = 16;
+    TYPE_KOTAK = 17;
+    TYPE_LNT = 18;
+    TYPE_LIBERTY = 19;
+    TYPE_MAGMA = 20;
+    TYPE_MANIPAL_CIGNA = 21;
+    TYPE_NATIONAL_INSURANCE = 22;
+    TYPE_NAVI = 23;
+    TYPE_BUPA = 24;
+    TYPE_ORIENTAL = 25;
+    TYPE_RAHEJA = 26;
+    TYPE_RELIANCE_GENERAL = 27;
+    TYPE_RELIANCE_HEALTH = 28;
+    TYPE_RELIGARE = 29;
+    TYPE_ROYAL_SUNDARAM = 30;
+    TYPE_SBI_GENERAL = 31;
+    TYPE_SHRIAM = 32;
+    TYPE_STAR = 33;
+    TYPE_TATA_AIG = 34;
+    TYPE_INDIA_ASSURANCE = 35;
+    TYPE_UNITED_INDIA = 36;
+    TYPE_SOMPO = 37;
+    
+  }
 }
 
 message EntityNumber {
