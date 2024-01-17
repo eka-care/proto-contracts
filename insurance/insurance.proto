@@ -52,9 +52,9 @@ message PolicyItem {
 message PolicyDetails {
   repeated PolicyItem policy_item = 1;
   repeated Members insured_members = 2;
-  int32 sum_insured = 3;
+  optional int32 sum_insured = 3;
   PolicyStatus policy_status = 4;
-  optional CoverageStatus coverage_status = 5;
+  CoverageStatus coverage_status = 5;
 
   enum PolicyStatus {
     POLICY_STATUS_UNSPECIFIED = 0;
