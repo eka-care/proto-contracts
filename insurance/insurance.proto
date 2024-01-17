@@ -2,28 +2,11 @@ syntax = "proto3";
 
 package insurance;
 
-import "google/protobuf/timestamp.proto";
-
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
 message Insurer {
   string img = 1;
   string name = 2;
-}
-
-message PlanDetails { optional string plan_name = 1; }
-
-message PolicyDates { optional google.protobuf.Timestamp policy_end_date = 1; }
-
-message CoverageDetails {
-  optional float sum_insured = 1;
-  optional Status coverage_status = 2;
-  enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_BASIC = 1;
-    STATUS_STANDARD = 2;
-    STATUS_PREMIUM = 3;
-  }
 }
 
 message Age {
@@ -51,26 +34,46 @@ message Members {
   }
 }
 
-message PolicyDetails {
-  optional string policy_number = 1;
-  optional string members = 2;
-  optional PolicyDates policy_dates = 3;
-  optional CoverageDetails coverage_details = 4;
-  repeated Members insured_members = 5;
-  Status status = 6;
+message PolicyItem {
+  string title = 1;
+  string value = 2;
+  Type type = 3;
 
-  enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_ACTIVE = 1;
-    STATUS_INACTIVE = 2;
-    STATUS_DUE_SOON = 3;
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_POLICY_TYPE = 1;
+    TYPE_POLICY_FOR = 2;
+    TYPE_POLICY_NUMBER = 3;
+    TYPE_POLICY_END_DATE = 4;
+    TYPE_SUM_INSURED = 5;
+  }
+}
+
+message PolicyDetails {
+  repeated PolicyItem policy_item = 1;
+  repeated Members insured_members = 2;
+  int32 sum_insured = 3;
+  PolicyStatus policy_status = 4;
+  optional CoverageStatus coverage_status = 5;
+
+  enum PolicyStatus {
+    POLICY_STATUS_UNSPECIFIED = 0;
+    POLICY_STATUS_ACTIVE = 1;
+    POLICY_STATUS_INACTIVE = 2;
+    POLICY_STATUS_DUE_SOON = 3;
+  }
+
+  enum CoverageStatus {
+    COVERAGE_STATUS_UNSPECIFIED = 0;
+    COVERAGE_STATUS_BASIC = 1;
+    COVERAGE_STATUS_STANDARD = 2;
+    COVERAGE_STATUS_PREMIUM = 3;
   }
 }
 
 message InsuranceData {
   Insurer insurer = 1;
-  optional PlanDetails plan_details = 2;
-  optional PolicyDetails policy_details = 3;
+  optional PolicyDetails policy_details = 2;
 }
 
 /* ErrorCode represents list of errors */
