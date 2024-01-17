@@ -128,7 +128,6 @@ message LinkedInsurerProviderEntity {
     TYPE_INDIA_ASSURANCE = 35;
     TYPE_UNITED_INDIA = 36;
     TYPE_SOMPO = 37;
-    
   }
 }
 

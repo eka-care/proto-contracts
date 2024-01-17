@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package insurance;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/insurance";
+
+message Insurer {
+  string img = 1;
+  string name = 2;
+}
+
+message PlanDetails { optional string plan_name = 1; }
+
+message PolicyDates { optional google.protobuf.Timestamp policy_end_date = 1; }
+
+message CoverageDetails {
+  optional float sum_insured = 1;
+  optional Status coverage_status = 2;
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_BASIC = 1;
+    STATUS_STANDARD = 2;
+    STATUS_PREMIUM = 3;
+  }
+}
+
+message Age {
+  optional int32 age = 1;
+  Unit unit = 2;
+
+  enum Unit {
+    UNIT_UNSPECIFIED = 0;
+    UNIT_YEAR = 1;
+    UNIT_MONTH = 2;
+    UNIT_DAYS = 3;
+  }
+}
+
+message Members {
+  optional Age age = 1;
+  optional Gender gender = 2;
+  optional string name = 3;
+  optional string id = 4;
+
+  enum Gender {
+    GENDER_UNSPECIFIED = 0;
+    GENDER_MALE = 1;
+    GENDER_FEMALE = 2;
+  }
+}
+
+message PolicyDetails {
+  optional string policy_number = 1;
+  optional string members = 2;
+  optional PolicyDates policy_dates = 3;
+  optional CoverageDetails coverage_details = 4;
+  repeated Members insured_members = 5;
+  Status status = 6;
+
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_ACTIVE = 1;
+    STATUS_INACTIVE = 2;
+    STATUS_DUE_SOON = 3;
+  }
+}
+
+message InsuranceData {
+  Insurer insurer = 1;
+  optional PlanDetails plan_details = 2;
+  optional PolicyDetails policy_details = 3;
+}
+
+/* ErrorCode represents list of errors */
+enum ErrorCode {
+  ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+}
+
+/* Error represents error resonse of API */
+message Error {
+  ErrorCode code = 1; // Error Code.
+  string message = 2; // Error Message.
+}
+
+message InsuranceAPIResponse {
+  oneof result {
+    InsuranceData response = 1;
+    Error error = 2;
+  }
+}
