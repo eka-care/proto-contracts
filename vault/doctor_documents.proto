@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package vault.doctor_documents;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/doctordocuments";
+
+/* Document type suggests type of document uploaded to the vault. */
+enum DocumentType {
+  DOCUMENT_TYPE_UNSPECIFIED = 0;  // DocumentType -> Unspecified.
+  DOCUMENT_TYPE_OTHER = 1;        // DocumentType -> Other.
+  DOCUMENT_TYPE_LAB_REPORT = 2;   // DocumentType -> Lab report.
+  DOCUMENT_TYPE_PRESCRIPTION = 3; // DocumentType -> Prescription.
+}
+
+/* ErrorCode represents list of errors */
+enum ErrorCode {
+  ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+}
+
+/* Error represents error resonse of API */
+message Error {
+  ErrorCode code = 1; // Error Code.
+  string message = 2; // Error Message.
+}
+
+/* DocumentAPIResponse represents API response of listing documents. */
+message DocumentAPIResponse {
+  oneof result {
+    DocumentList response = 1; // Successful response of documents.
+    Error error = 2;           // Error fetching documents.
+  }
+}
+
+/* DocumentList represents list of documents. */
+message DocumentList {
+  repeated Document documents = 1; // List of documents for the current page.
+  optional string offset =
+      2; // Token to be used to fetch the next page records.
+}
+
+message ProfileMetaData {
+  string oid = 1; // Profile ID.
+}
+
+message DocumentMetaData {
+  DocumentType document_type = 1;              // Type of the uploaded document.
+  string thumbnail = 2;                        // Thumbnail url of the document.
+  google.protobuf.Timestamp document_date = 3; // Date of creation of document.
+  AnalysisStatus file_response =
+      4;                          // Analsyed/ analysing status of the document.
+  DocumentTags document_tags = 5; // Tags associated with document.
+  string desc = 6;                // Description on the document uploaded.
+}
+
+/* Document describes attributes of vault document. */
+message Document {
+  string document_id = 1;                 // Document ID.
+  ProfileMetaData profile_metadata = 2;   // Profile metadata.
+  DocumentMetaData document_metadata = 3; // Document metadata.
+  google.protobuf.Timestamp created_at =
+      4; // Time at which the document was uploaded.
+}
+
+/* DocumentTags represents tags for the document. */
+message DocumentTags {
+  repeated string user_tags = 1; // User added tags for the document.
+  repeated string dervied_tags =
+      2; // Tags derived based on the vitals in the document.
+}
+
+/* AnalysisStatus represents file related attributes for the document. */
+message AnalysisStatus {
+  bool is_smart_report_available =
+      1;                 // Is the uploaded document a smart report.
+  bool is_analyzing = 2; // Is document still being analyzed?.
+}
