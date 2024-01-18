@@ -29,6 +29,8 @@ message InsuranceType {
     TYPE_UNSPECIFIED = 0; // Unspecified.
     TYPE_HEALTH = 1;      // Health.
     TYPE_LIFE = 2;        // Life.
+    TYPE_VEHICLE = 3;        // vehicle.
+    TYPE_TRAVEL = 4;        // travel.
   }
 }
 
@@ -94,20 +96,20 @@ message LinkedInsurerProviderEntity {
     TYPE_ACKO = 1;
     TYPE_ADITYA = 2;
     TYPE_APOLLO = 3;
-    TYPE_BAJAJ = 4;
+    TYPE_BAJAJ_GENERAL = 4;
     TYPE_BHARTI = 5;
     TYPE_CARE_HEALTH = 6;
     TYPE_CHOLAMANDALAM = 7;
-    TYPE_CIGNA = 8;
+    TYPE_CIGNA = 8 [deprecated = true];
     TYPE_DHFL = 9;
     TYPE_EDELWEISS = 10;
     TYPE_FUTURE_GENERALI = 11;
     TYPE_DIGIT = 12;
-    TYPE_HDFC_ERGO_GENERAL = 13;
-    TYPE_HDFC_ERGO_HEALTH = 14;
+    TYPE_HDFC_ERGO = 13;
+    TYPE_HDFC_ERGO_HEALTH = 14 [deprecated = true]; 
     TYPE_ICICI_LOMBARD = 15;
     TYPE_IFFCO = 16;
-    TYPE_KOTAK = 17;
+    TYPE_KOTAK_GENERAL = 17;
     TYPE_LNT = 18;
     TYPE_LIBERTY = 19;
     TYPE_MAGMA = 20;
@@ -118,16 +120,29 @@ message LinkedInsurerProviderEntity {
     TYPE_ORIENTAL = 25;
     TYPE_RAHEJA = 26;
     TYPE_RELIANCE_GENERAL = 27;
-    TYPE_RELIANCE_HEALTH = 28;
+    TYPE_RELIANCE_HEALTH = 28 [deprecated = true];
     TYPE_RELIGARE = 29;
     TYPE_ROYAL_SUNDARAM = 30;
     TYPE_SBI_GENERAL = 31;
-    TYPE_SHRIAM = 32;
+    TYPE_SHRIRAM_GENERAL = 32;
     TYPE_STAR = 33;
     TYPE_TATA_AIG = 34;
     TYPE_INDIA_ASSURANCE = 35;
     TYPE_UNITED_INDIA = 36;
     TYPE_SOMPO = 37;
+    TYPE_LIC = 38;
+    TYPE_SBI_LIFE = 39;
+    TYPE_ICICI_PRUDENTIAL = 40;
+    TYPE_PNB_METLIFE = 41;
+    TYPE_MAX_LIFE = 42;
+    TYPE_AEGON_LIFE = 43;
+    TYPE_SHRIRAM_LIFE = 44;
+    TYPE_TATA_AIA = 45;
+    TYPE_INDIA_FIRST_LIFE = 46;
+    TYPE_RELIANCE_NIPPON = 47;
+    TYPE_KOTAK_LIFE = 48;
+    TYPE_HDFC_LIFE = 49;
+    TYPE_BAJAJ_LIFE = 50;
   }
 }
 
