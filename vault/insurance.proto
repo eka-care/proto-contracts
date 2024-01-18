@@ -29,8 +29,8 @@ message InsuranceType {
     TYPE_UNSPECIFIED = 0; // Unspecified.
     TYPE_HEALTH = 1;      // Health.
     TYPE_LIFE = 2;        // Life.
-    TYPE_VEHICLE = 3;        // vehicle.
-    TYPE_TRAVEL = 4;        // travel.
+    TYPE_VEHICLE = 3;     // vehicle.
+    TYPE_TRAVEL = 4;      // travel.
   }
 }
 
@@ -100,13 +100,13 @@ message LinkedInsurerProviderEntity {
     TYPE_BHARTI = 5;
     TYPE_CARE_HEALTH = 6;
     TYPE_CHOLAMANDALAM = 7;
-    TYPE_CIGNA = 8 [deprecated = true];
+    TYPE_CIGNA = 8 [ deprecated = true ];
     TYPE_DHFL = 9;
     TYPE_EDELWEISS = 10;
     TYPE_FUTURE_GENERALI = 11;
     TYPE_DIGIT = 12;
     TYPE_HDFC_ERGO = 13;
-    TYPE_HDFC_ERGO_HEALTH = 14 [deprecated = true]; 
+    TYPE_HDFC_ERGO_HEALTH = 14 [ deprecated = true ];
     TYPE_ICICI_LOMBARD = 15;
     TYPE_IFFCO = 16;
     TYPE_KOTAK_GENERAL = 17;
@@ -120,7 +120,7 @@ message LinkedInsurerProviderEntity {
     TYPE_ORIENTAL = 25;
     TYPE_RAHEJA = 26;
     TYPE_RELIANCE_GENERAL = 27;
-    TYPE_RELIANCE_HEALTH = 28 [deprecated = true];
+    TYPE_RELIANCE_HEALTH = 28 [ deprecated = true ];
     TYPE_RELIGARE = 29;
     TYPE_ROYAL_SUNDARAM = 30;
     TYPE_SBI_GENERAL = 31;
