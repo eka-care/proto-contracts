@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15vault/insurance.proto\x12\x0fvault.insurance\x1a\x1fgoogle/protobuf/timestamp.proto\"c\n\x11InsuranceResponse\x12\x0e\n\x06job_id\x18\x01 \x01(\t\x12\x0c\n\x04meta\x18\x02 \x01(\t\x12\x30\n\x08response\x18\x03 \x01(\x0b\x32\x1e.vault.insurance.InsuranceData\"\xdf\x02\n\rInsuranceData\x12M\n\x12insurance_provider\x18\x01 \x01(\x0b\x32,.vault.insurance.LinkedInsurerProviderEntityH\x00\x88\x01\x01\x12;\n\x0einsurance_type\x18\x02 \x01(\x0b\x32\x1e.vault.insurance.InsuranceTypeH\x01\x88\x01\x01\x12\x37\n\x0cplan_details\x18\x03 \x01(\x0b\x32\x1c.vault.insurance.PlanDetailsH\x02\x88\x01\x01\x12;\n\x0epolicy_details\x18\x04 \x01(\x0b\x32\x1e.vault.insurance.PolicyDetailsH\x03\x88\x01\x01\x42\x15\n\x13_insurance_providerB\x11\n\x0f_insurance_typeB\x0f\n\r_plan_detailsB\x11\n\x0f_policy_details\"\x95\x01\n\rInsuranceType\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\x32\n\x05value\x18\x02 \x01(\x0e\x32#.vault.insurance.InsuranceType.Type\"<\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bTYPE_HEALTH\x10\x01\x12\r\n\tTYPE_LIFE\x10\x02\"\x92\x02\n\x0f\x43overageDetails\x12:\n\x0epremium_amount\x18\x01 \x01(\x0b\x32\x1d.vault.insurance.EntityNumberH\x00\x88\x01\x01\x12I\n\x19premium_payment_frequency\x18\x02 \x01(\x0b\x32!.vault.insurance.PremiumFrequencyH\x01\x88\x01\x01\x12\x37\n\x0bsum_insured\x18\x03 \x01(\x0b\x32\x1d.vault.insurance.EntityNumberH\x02\x88\x01\x01\x42\x11\n\x0f_premium_amountB\x1c\n\x1a_premium_payment_frequencyB\x0e\n\x0c_sum_insured\"\x8c\x01\n\x10PremiumFrequency\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\x35\n\x05value\x18\x02 \x01(\x0e\x32&.vault.insurance.PremiumFrequency.Type\"-\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bTYPE_YEARLY\x10\x01\"\xab\x04\n\rPolicyDetails\x12\x33\n\rpolicy_number\x18\x01 \x01(\x0b\x32\x17.vault.insurance.EntityH\x00\x88\x01\x01\x12\x36\n\x0cpolicy_dates\x18\x02 \x01(\x0b\x32\x1b.vault.insurance.PolicyDateH\x01\x88\x01\x01\x12?\n\x10\x63overage_details\x18\x03 \x01(\x0b\x32 .vault.insurance.CoverageDetailsH\x02\x88\x01\x01\x12?\n\x0finsured_members\x18\x04 \x03(\x0b\x32&.vault.insurance.PolicyDetails.Members\x1a\xf2\x01\n\x07Members\x12/\n\x03\x61ge\x18\x01 \x01(\x0b\x32\x1d.vault.insurance.EntityNumberH\x00\x88\x01\x01\x12\x32\n\x06gender\x18\x02 \x01(\x0b\x32\x1d.vault.insurance.EntityGenderH\x01\x88\x01\x01\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x17.vault.insurance.EntityH\x02\x88\x01\x01\x12\x32\n\x03\x64ob\x18\x04 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x03\x88\x01\x01\x42\x06\n\x04_ageB\t\n\x07_genderB\x07\n\x05_nameB\x06\n\x04_dobB\x10\n\x0e_policy_numberB\x0f\n\r_policy_datesB\x13\n\x11_coverage_details\"\x99\x02\n\x0bPlanDetails\x12/\n\tplan_name\x18\x01 \x01(\x0b\x32\x17.vault.insurance.EntityH\x00\x88\x01\x01\x12\x35\n\x0f\x61\x64\x64on_plan_name\x18\x02 \x01(\x0b\x32\x17.vault.insurance.EntityH\x01\x88\x01\x01\x12\x30\n\nrider_name\x18\x03 \x01(\x0b\x32\x17.vault.insurance.EntityH\x02\x88\x01\x01\x12\x30\n\nuin_number\x18\x04 \x01(\x0b\x32\x17.vault.insurance.EntityH\x03\x88\x01\x01\x42\x0c\n\n_plan_nameB\x12\n\x10_addon_plan_nameB\r\n\x0b_rider_nameB\r\n\x0b_uin_number\"\x92\x02\n\nPolicyDate\x12>\n\x0fpolicy_end_date\x18\x03 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x00\x88\x01\x01\x12\x41\n\x12policy_issued_date\x18\x01 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x01\x88\x01\x01\x12@\n\x11policy_start_date\x18\x02 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x02\x88\x01\x01\x42\x12\n\x10_policy_end_dateB\x15\n\x13_policy_issued_dateB\x14\n\x12_policy_start_date\"P\n\x0f\x45ntityTimestamp\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"+\n\x06\x45ntity\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\r\n\x05value\x18\x02 \x01(\t\"\x86\x07\n\x1bLinkedInsurerProviderEntity\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\r\n\x05value\x18\x02 \x01(\t\x12G\n\x0clinked_value\x18\x03 \x01(\x0e\x32\x31.vault.insurance.LinkedInsurerProviderEntity.Type\"\xfa\x05\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\r\n\tTYPE_ACKO\x10\x01\x12\x0f\n\x0bTYPE_ADITYA\x10\x02\x12\x0f\n\x0bTYPE_APOLLO\x10\x03\x12\x0e\n\nTYPE_BAJAJ\x10\x04\x12\x0f\n\x0bTYPE_BHARTI\x10\x05\x12\x14\n\x10TYPE_CARE_HEALTH\x10\x06\x12\x16\n\x12TYPE_CHOLAMANDALAM\x10\x07\x12\x0e\n\nTYPE_CIGNA\x10\x08\x12\r\n\tTYPE_DHFL\x10\t\x12\x12\n\x0eTYPE_EDELWEISS\x10\n\x12\x18\n\x14TYPE_FUTURE_GENERALI\x10\x0b\x12\x0e\n\nTYPE_DIGIT\x10\x0c\x12\x1a\n\x16TYPE_HDFC_ERGO_GENERAL\x10\r\x12\x19\n\x15TYPE_HDFC_ERGO_HEALTH\x10\x0e\x12\x16\n\x12TYPE_ICICI_LOMBARD\x10\x0f\x12\x0e\n\nTYPE_IFFCO\x10\x10\x12\x0e\n\nTYPE_KOTAK\x10\x11\x12\x0c\n\x08TYPE_LNT\x10\x12\x12\x10\n\x0cTYPE_LIBERTY\x10\x13\x12\x0e\n\nTYPE_MAGMA\x10\x14\x12\x16\n\x12TYPE_MANIPAL_CIGNA\x10\x15\x12\x1b\n\x17TYPE_NATIONAL_INSURANCE\x10\x16\x12\r\n\tTYPE_NAVI\x10\x17\x12\r\n\tTYPE_BUPA\x10\x18\x12\x11\n\rTYPE_ORIENTAL\x10\x19\x12\x0f\n\x0bTYPE_RAHEJA\x10\x1a\x12\x19\n\x15TYPE_RELIANCE_GENERAL\x10\x1b\x12\x18\n\x14TYPE_RELIANCE_HEALTH\x10\x1c\x12\x11\n\rTYPE_RELIGARE\x10\x1d\x12\x17\n\x13TYPE_ROYAL_SUNDARAM\x10\x1e\x12\x14\n\x10TYPE_SBI_GENERAL\x10\x1f\x12\x0f\n\x0bTYPE_SHRIAM\x10 \x12\r\n\tTYPE_STAR\x10!\x12\x11\n\rTYPE_TATA_AIG\x10\"\x12\x18\n\x14TYPE_INDIA_ASSURANCE\x10#\x12\x15\n\x11TYPE_UNITED_INDIA\x10$\x12\x0e\n\nTYPE_SOMPO\x10%\"1\n\x0c\x45ntityNumber\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\r\n\x05value\x18\x02 \x01(\x02\"\x93\x01\n\x0c\x45ntityGender\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\x31\n\x05value\x18\x02 \x01(\x0e\x32\".vault.insurance.EntityGender.Type\"<\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\r\n\tTYPE_MALE\x10\x01\x12\x0f\n\x0bTYPE_FEMALE\x10\x02\x42\x38Z6github.com/eka-care/proto-contracts/go/vault/insuranceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15vault/insurance.proto\x12\x0fvault.insurance\x1a\x1fgoogle/protobuf/timestamp.proto\"c\n\x11InsuranceResponse\x12\x0e\n\x06job_id\x18\x01 \x01(\t\x12\x0c\n\x04meta\x18\x02 \x01(\t\x12\x30\n\x08response\x18\x03 \x01(\x0b\x32\x1e.vault.insurance.InsuranceData\"\xdf\x02\n\rInsuranceData\x12M\n\x12insurance_provider\x18\x01 \x01(\x0b\x32,.vault.insurance.LinkedInsurerProviderEntityH\x00\x88\x01\x01\x12;\n\x0einsurance_type\x18\x02 \x01(\x0b\x32\x1e.vault.insurance.InsuranceTypeH\x01\x88\x01\x01\x12\x37\n\x0cplan_details\x18\x03 \x01(\x0b\x32\x1c.vault.insurance.PlanDetailsH\x02\x88\x01\x01\x12;\n\x0epolicy_details\x18\x04 \x01(\x0b\x32\x1e.vault.insurance.PolicyDetailsH\x03\x88\x01\x01\x42\x15\n\x13_insurance_providerB\x11\n\x0f_insurance_typeB\x0f\n\r_plan_detailsB\x11\n\x0f_policy_details\"\xb8\x01\n\rInsuranceType\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\x32\n\x05value\x18\x02 \x01(\x0e\x32#.vault.insurance.InsuranceType.Type\"_\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bTYPE_HEALTH\x10\x01\x12\r\n\tTYPE_LIFE\x10\x02\x12\x10\n\x0cTYPE_VEHICLE\x10\x03\x12\x0f\n\x0bTYPE_TRAVEL\x10\x04\"\x92\x02\n\x0f\x43overageDetails\x12:\n\x0epremium_amount\x18\x01 \x01(\x0b\x32\x1d.vault.insurance.EntityNumberH\x00\x88\x01\x01\x12I\n\x19premium_payment_frequency\x18\x02 \x01(\x0b\x32!.vault.insurance.PremiumFrequencyH\x01\x88\x01\x01\x12\x37\n\x0bsum_insured\x18\x03 \x01(\x0b\x32\x1d.vault.insurance.EntityNumberH\x02\x88\x01\x01\x42\x11\n\x0f_premium_amountB\x1c\n\x1a_premium_payment_frequencyB\x0e\n\x0c_sum_insured\"\x8c\x01\n\x10PremiumFrequency\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\x35\n\x05value\x18\x02 \x01(\x0e\x32&.vault.insurance.PremiumFrequency.Type\"-\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bTYPE_YEARLY\x10\x01\"\xea\x04\n\rPolicyDetails\x12\x33\n\rpolicy_number\x18\x01 \x01(\x0b\x32\x17.vault.insurance.EntityH\x00\x88\x01\x01\x12\x36\n\x0cpolicy_dates\x18\x02 \x01(\x0b\x32\x1b.vault.insurance.PolicyDateH\x01\x88\x01\x01\x12?\n\x10\x63overage_details\x18\x03 \x01(\x0b\x32 .vault.insurance.CoverageDetailsH\x02\x88\x01\x01\x12?\n\x0finsured_members\x18\x04 \x03(\x0b\x32&.vault.insurance.PolicyDetails.Members\x1a\xb1\x02\n\x07Members\x12/\n\x03\x61ge\x18\x01 \x01(\x0b\x32\x1d.vault.insurance.EntityNumberH\x00\x88\x01\x01\x12\x32\n\x06gender\x18\x02 \x01(\x0b\x32\x1d.vault.insurance.EntityGenderH\x01\x88\x01\x01\x12*\n\x04name\x18\x03 \x01(\x0b\x32\x17.vault.insurance.EntityH\x02\x88\x01\x01\x12\x32\n\x03\x64ob\x18\x04 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x03\x88\x01\x01\x12/\n\tmember_id\x18\x05 \x01(\x0b\x32\x17.vault.insurance.EntityH\x04\x88\x01\x01\x42\x06\n\x04_ageB\t\n\x07_genderB\x07\n\x05_nameB\x06\n\x04_dobB\x0c\n\n_member_idB\x10\n\x0e_policy_numberB\x0f\n\r_policy_datesB\x13\n\x11_coverage_details\"\x99\x02\n\x0bPlanDetails\x12/\n\tplan_name\x18\x01 \x01(\x0b\x32\x17.vault.insurance.EntityH\x00\x88\x01\x01\x12\x35\n\x0f\x61\x64\x64on_plan_name\x18\x02 \x01(\x0b\x32\x17.vault.insurance.EntityH\x01\x88\x01\x01\x12\x30\n\nrider_name\x18\x03 \x01(\x0b\x32\x17.vault.insurance.EntityH\x02\x88\x01\x01\x12\x30\n\nuin_number\x18\x04 \x01(\x0b\x32\x17.vault.insurance.EntityH\x03\x88\x01\x01\x42\x0c\n\n_plan_nameB\x12\n\x10_addon_plan_nameB\r\n\x0b_rider_nameB\r\n\x0b_uin_number\"\x92\x02\n\nPolicyDate\x12>\n\x0fpolicy_end_date\x18\x03 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x00\x88\x01\x01\x12\x41\n\x12policy_issued_date\x18\x01 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x01\x88\x01\x01\x12@\n\x11policy_start_date\x18\x02 \x01(\x0b\x32 .vault.insurance.EntityTimestampH\x02\x88\x01\x01\x42\x12\n\x10_policy_end_dateB\x15\n\x13_policy_issued_dateB\x14\n\x12_policy_start_date\"P\n\x0f\x45ntityTimestamp\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"+\n\x06\x45ntity\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\r\n\x05value\x18\x02 \x01(\t\"\xba\t\n\x1bLinkedInsurerProviderEntity\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\r\n\x05value\x18\x02 \x01(\t\x12G\n\x0clinked_value\x18\x03 \x01(\x0e\x32\x31.vault.insurance.LinkedInsurerProviderEntity.Type\"\xae\x08\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\r\n\tTYPE_ACKO\x10\x01\x12\x0f\n\x0bTYPE_ADITYA\x10\x02\x12\x0f\n\x0bTYPE_APOLLO\x10\x03\x12\x16\n\x12TYPE_BAJAJ_GENERAL\x10\x04\x12\x0f\n\x0bTYPE_BHARTI\x10\x05\x12\x14\n\x10TYPE_CARE_HEALTH\x10\x06\x12\x16\n\x12TYPE_CHOLAMANDALAM\x10\x07\x12\x12\n\nTYPE_CIGNA\x10\x08\x1a\x02\x08\x01\x12\r\n\tTYPE_DHFL\x10\t\x12\x12\n\x0eTYPE_EDELWEISS\x10\n\x12\x18\n\x14TYPE_FUTURE_GENERALI\x10\x0b\x12\x0e\n\nTYPE_DIGIT\x10\x0c\x12\x12\n\x0eTYPE_HDFC_ERGO\x10\r\x12\x1d\n\x15TYPE_HDFC_ERGO_HEALTH\x10\x0e\x1a\x02\x08\x01\x12\x16\n\x12TYPE_ICICI_LOMBARD\x10\x0f\x12\x0e\n\nTYPE_IFFCO\x10\x10\x12\x16\n\x12TYPE_KOTAK_GENERAL\x10\x11\x12\x0c\n\x08TYPE_LNT\x10\x12\x12\x10\n\x0cTYPE_LIBERTY\x10\x13\x12\x0e\n\nTYPE_MAGMA\x10\x14\x12\x16\n\x12TYPE_MANIPAL_CIGNA\x10\x15\x12\x1b\n\x17TYPE_NATIONAL_INSURANCE\x10\x16\x12\r\n\tTYPE_NAVI\x10\x17\x12\r\n\tTYPE_BUPA\x10\x18\x12\x11\n\rTYPE_ORIENTAL\x10\x19\x12\x0f\n\x0bTYPE_RAHEJA\x10\x1a\x12\x19\n\x15TYPE_RELIANCE_GENERAL\x10\x1b\x12\x1c\n\x14TYPE_RELIANCE_HEALTH\x10\x1c\x1a\x02\x08\x01\x12\x11\n\rTYPE_RELIGARE\x10\x1d\x12\x17\n\x13TYPE_ROYAL_SUNDARAM\x10\x1e\x12\x14\n\x10TYPE_SBI_GENERAL\x10\x1f\x12\x18\n\x14TYPE_SHRIRAM_GENERAL\x10 \x12\r\n\tTYPE_STAR\x10!\x12\x11\n\rTYPE_TATA_AIG\x10\"\x12\x18\n\x14TYPE_INDIA_ASSURANCE\x10#\x12\x15\n\x11TYPE_UNITED_INDIA\x10$\x12\x0e\n\nTYPE_SOMPO\x10%\x12\x0c\n\x08TYPE_LIC\x10&\x12\x11\n\rTYPE_SBI_LIFE\x10\'\x12\x19\n\x15TYPE_ICICI_PRUDENTIAL\x10(\x12\x14\n\x10TYPE_PNB_METLIFE\x10)\x12\x11\n\rTYPE_MAX_LIFE\x10*\x12\x13\n\x0fTYPE_AEGON_LIFE\x10+\x12\x15\n\x11TYPE_SHRIRAM_LIFE\x10,\x12\x11\n\rTYPE_TATA_AIA\x10-\x12\x19\n\x15TYPE_INDIA_FIRST_LIFE\x10.\x12\x18\n\x14TYPE_RELIANCE_NIPPON\x10/\x12\x13\n\x0fTYPE_KOTAK_LIFE\x10\x30\x12\x12\n\x0eTYPE_HDFC_LIFE\x10\x31\x12\x13\n\x0fTYPE_BAJAJ_LIFE\x10\x32\"1\n\x0c\x45ntityNumber\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\r\n\x05value\x18\x02 \x01(\x02\"\x93\x01\n\x0c\x45ntityGender\x12\x12\n\nconfidence\x18\x01 \x01(\x02\x12\x31\n\x05value\x18\x02 \x01(\x0e\x32\".vault.insurance.EntityGender.Type\"<\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\r\n\tTYPE_MALE\x10\x01\x12\x0f\n\x0bTYPE_FEMALE\x10\x02\x42\x38Z6github.com/eka-care/proto-contracts/go/vault/insuranceb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,40 +23,46 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'vault.insurance_pb2', _glob
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z6github.com/eka-care/proto-contracts/go/vault/insurance'
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE'].values_by_name["TYPE_CIGNA"]._options = None
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE'].values_by_name["TYPE_CIGNA"]._serialized_options = b'\010\001'
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE'].values_by_name["TYPE_HDFC_ERGO_HEALTH"]._options = None
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE'].values_by_name["TYPE_HDFC_ERGO_HEALTH"]._serialized_options = b'\010\001'
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE'].values_by_name["TYPE_RELIANCE_HEALTH"]._options = None
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE'].values_by_name["TYPE_RELIANCE_HEALTH"]._serialized_options = b'\010\001'
   _globals['_INSURANCERESPONSE']._serialized_start=75
   _globals['_INSURANCERESPONSE']._serialized_end=174
   _globals['_INSURANCEDATA']._serialized_start=177
   _globals['_INSURANCEDATA']._serialized_end=528
   _globals['_INSURANCETYPE']._serialized_start=531
-  _globals['_INSURANCETYPE']._serialized_end=680
+  _globals['_INSURANCETYPE']._serialized_end=715
   _globals['_INSURANCETYPE_TYPE']._serialized_start=620
-  _globals['_INSURANCETYPE_TYPE']._serialized_end=680
-  _globals['_COVERAGEDETAILS']._serialized_start=683
-  _globals['_COVERAGEDETAILS']._serialized_end=957
-  _globals['_PREMIUMFREQUENCY']._serialized_start=960
-  _globals['_PREMIUMFREQUENCY']._serialized_end=1100
-  _globals['_PREMIUMFREQUENCY_TYPE']._serialized_start=1055
-  _globals['_PREMIUMFREQUENCY_TYPE']._serialized_end=1100
-  _globals['_POLICYDETAILS']._serialized_start=1103
-  _globals['_POLICYDETAILS']._serialized_end=1658
-  _globals['_POLICYDETAILS_MEMBERS']._serialized_start=1360
-  _globals['_POLICYDETAILS_MEMBERS']._serialized_end=1602
-  _globals['_PLANDETAILS']._serialized_start=1661
-  _globals['_PLANDETAILS']._serialized_end=1942
-  _globals['_POLICYDATE']._serialized_start=1945
-  _globals['_POLICYDATE']._serialized_end=2219
-  _globals['_ENTITYTIMESTAMP']._serialized_start=2221
-  _globals['_ENTITYTIMESTAMP']._serialized_end=2301
-  _globals['_ENTITY']._serialized_start=2303
-  _globals['_ENTITY']._serialized_end=2346
-  _globals['_LINKEDINSURERPROVIDERENTITY']._serialized_start=2349
-  _globals['_LINKEDINSURERPROVIDERENTITY']._serialized_end=3251
-  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE']._serialized_start=2489
-  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE']._serialized_end=3251
-  _globals['_ENTITYNUMBER']._serialized_start=3253
-  _globals['_ENTITYNUMBER']._serialized_end=3302
-  _globals['_ENTITYGENDER']._serialized_start=3305
-  _globals['_ENTITYGENDER']._serialized_end=3452
-  _globals['_ENTITYGENDER_TYPE']._serialized_start=3392
-  _globals['_ENTITYGENDER_TYPE']._serialized_end=3452
+  _globals['_INSURANCETYPE_TYPE']._serialized_end=715
+  _globals['_COVERAGEDETAILS']._serialized_start=718
+  _globals['_COVERAGEDETAILS']._serialized_end=992
+  _globals['_PREMIUMFREQUENCY']._serialized_start=995
+  _globals['_PREMIUMFREQUENCY']._serialized_end=1135
+  _globals['_PREMIUMFREQUENCY_TYPE']._serialized_start=1090
+  _globals['_PREMIUMFREQUENCY_TYPE']._serialized_end=1135
+  _globals['_POLICYDETAILS']._serialized_start=1138
+  _globals['_POLICYDETAILS']._serialized_end=1756
+  _globals['_POLICYDETAILS_MEMBERS']._serialized_start=1395
+  _globals['_POLICYDETAILS_MEMBERS']._serialized_end=1700
+  _globals['_PLANDETAILS']._serialized_start=1759
+  _globals['_PLANDETAILS']._serialized_end=2040
+  _globals['_POLICYDATE']._serialized_start=2043
+  _globals['_POLICYDATE']._serialized_end=2317
+  _globals['_ENTITYTIMESTAMP']._serialized_start=2319
+  _globals['_ENTITYTIMESTAMP']._serialized_end=2399
+  _globals['_ENTITY']._serialized_start=2401
+  _globals['_ENTITY']._serialized_end=2444
+  _globals['_LINKEDINSURERPROVIDERENTITY']._serialized_start=2447
+  _globals['_LINKEDINSURERPROVIDERENTITY']._serialized_end=3657
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE']._serialized_start=2587
+  _globals['_LINKEDINSURERPROVIDERENTITY_TYPE']._serialized_end=3657
+  _globals['_ENTITYNUMBER']._serialized_start=3659
+  _globals['_ENTITYNUMBER']._serialized_end=3708
+  _globals['_ENTITYGENDER']._serialized_start=3711
+  _globals['_ENTITYGENDER']._serialized_end=3858
+  _globals['_ENTITYGENDER_TYPE']._serialized_start=3798
+  _globals['_ENTITYGENDER_TYPE']._serialized_end=3858
 # @@protoc_insertion_point(module_scope)
