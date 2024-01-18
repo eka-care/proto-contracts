@@ -61,6 +61,7 @@ message PolicyDetails {
     optional EntityGender gender = 2;
     optional Entity name = 3;
     optional EntityTimestamp dob = 4;
+    optional Entity member_id = 5;
   }
 }
 
