@@ -42,11 +42,16 @@ message CoverageDetails {
 
 message PremiumFrequency {
   float confidence = 1;
-  Type value = 2;
-
+  string value = 3;
+  Type linked_value = 2;
   enum Type {
     TYPE_UNSPECIFIED = 0; // Unspecified.
     TYPE_YEARLY = 1;      // Yearly.
+    TYPE_ONE_TIME = 2;
+    TYPE_MONTHLY = 3;
+    TYPE_QUARTERLY = 4;
+    TYPE_HALF_YEARLY = 5;
+    TYPE_ONCE_IN_TWO_YEARS = 6;
   }
 }
 
