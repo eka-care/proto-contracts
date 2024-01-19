@@ -22,7 +22,7 @@ message Age {
   }
 }
 
-message Members {
+message Member {
   optional Age age = 1;
   optional Gender gender = 2;
   optional string name = 3;
@@ -52,7 +52,7 @@ message PolicyItem {
 
 message PolicyDetails {
   repeated PolicyItem policy_item = 1;
-  repeated Members insured_members = 2;
+  repeated Member insured_members = 2;
   optional int32 sum_insured = 3;
   optional PolicyStatus policy_status = 4;
   optional CoverageStatus coverage_status = 5;
@@ -74,7 +74,7 @@ message PolicyDetails {
 
 message InsuranceData {
   Insurer insurer = 1;
-  optional PolicyDetails policy_details = 2;
+  PolicyDetails policy_details = 2;
   vault.common.CTA polciy_document_cta = 3;
 }
 
