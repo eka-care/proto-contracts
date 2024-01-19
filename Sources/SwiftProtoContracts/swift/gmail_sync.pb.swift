@@ -82,7 +82,7 @@ public enum Vault_GmailSync_State: SwiftProtobuf.Enum {
 
 extension Vault_GmailSync_State: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_GmailSync_State] = [
+  public static var allCases: [Vault_GmailSync_State] = [
     .unspecified,
     .started,
     .processing,
