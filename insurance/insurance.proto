@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package insurance;
-import "google/protobuf/timestamp.proto";
+import "vault/cta.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
@@ -75,8 +75,7 @@ message PolicyDetails {
 message InsuranceData {
   Insurer insurer = 1;
   optional PolicyDetails policy_details = 2;
-  google.protobuf.Timestamp created_at = 3;
-  optional string document_url = 4;
+  vault.common.CTA polciy_document_cta = 3;
 }
 
 /* ErrorCode represents list of errors */
