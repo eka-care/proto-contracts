@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package insurance;
+
+option go_package = "github.com/eka-care/proto-contracts/go/insurance";
+
+message AssignProfileAPIRequest {
+  string member_db_id = 1;
+  optional string assign_oid =
+      2; // when nil, it means clear the OID assigned to the member.
+}
+
+/* Error represents error resonse of API */
+message AssignProfileAPIResponseError {
+  ErrorCode code = 1; // Error Code.
+  string message = 2; // Error Message.
+
+  /* ErrorCode represents list of errors */
+  enum ErrorCode {
+    ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+  }
+}
+
+message AssignProfileAPIResponse {
+  optional AssignProfileAPIResponseError error = 1;
+}

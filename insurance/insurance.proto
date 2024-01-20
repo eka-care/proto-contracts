@@ -27,6 +27,8 @@ message Member {
   optional Gender gender = 2;
   optional string name = 3;
   optional string id = 4;
+  string db_id = 5;
+  optional string p_oid = 6;
 
   enum Gender {
     GENDER_UNSPECIFIED = 0;
@@ -55,9 +57,18 @@ message Value {
   string display_value = 2;
 }
 
+message SuperTopUpCard {
+  string title = 1;
+  string sub_title = 2;
+  vault.common.CTA cta = 3;
+  string img = 4;
+}
+
 message Coverage {
   CoverageStatus coverage_status = 1;
   Value recommended = 2;
+  optional SuperTopUpCard super_top_up_card = 3;
+
   enum CoverageStatus {
     COVERAGE_STATUS_UNSPECIFIED = 0;
     COVERAGE_STATUS_BASIC = 1;
@@ -84,7 +95,7 @@ message PolicyDetails {
 message InsuranceData {
   Insurer insurer = 1;
   PolicyDetails policy_details = 2;
-  vault.common.CTA polciy_document_cta = 3;
+  vault.common.CTA policy_document_cta = 3;
 }
 
 /* ErrorCode represents list of errors */
