@@ -144,7 +144,7 @@ extension Insurance_Age.Unit: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-public struct Insurance_Members {
+public struct Insurance_Member {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -158,7 +158,7 @@ public struct Insurance_Members {
   /// Clears the value of `age`. Subsequent reads from it will return its default value.
   public mutating func clearAge() {self._age = nil}
 
-  public var gender: Insurance_Members.Gender {
+  public var gender: Insurance_Member.Gender {
     get {return _gender ?? .unspecified}
     set {_gender = newValue}
   }
@@ -221,16 +221,16 @@ public struct Insurance_Members {
   public init() {}
 
   fileprivate var _age: Insurance_Age? = nil
-  fileprivate var _gender: Insurance_Members.Gender? = nil
+  fileprivate var _gender: Insurance_Member.Gender? = nil
   fileprivate var _name: String? = nil
   fileprivate var _id: String? = nil
 }
 
 #if swift(>=4.2)
 
-extension Insurance_Members.Gender: CaseIterable {
+extension Insurance_Member.Gender: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Insurance_Members.Gender] = [
+  public static var allCases: [Insurance_Member.Gender] = [
     .unspecified,
     .male,
     .female,
@@ -320,77 +320,37 @@ extension Insurance_PolicyItem.TypeEnum: CaseIterable {
 
 #endif  // swift(>=4.2)
 
-public struct Insurance_PolicyDetails {
+public struct Insurance_Value {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var policyItem: [Insurance_PolicyItem] = []
+  public var val: Int32 = 0
 
-  public var insuredMembers: [Insurance_Members] = []
-
-  public var sumInsured: Int32 {
-    get {return _sumInsured ?? 0}
-    set {_sumInsured = newValue}
-  }
-  /// Returns true if `sumInsured` has been explicitly set.
-  public var hasSumInsured: Bool {return self._sumInsured != nil}
-  /// Clears the value of `sumInsured`. Subsequent reads from it will return its default value.
-  public mutating func clearSumInsured() {self._sumInsured = nil}
-
-  public var policyStatus: Insurance_PolicyDetails.PolicyStatus {
-    get {return _policyStatus ?? .unspecified}
-    set {_policyStatus = newValue}
-  }
-  /// Returns true if `policyStatus` has been explicitly set.
-  public var hasPolicyStatus: Bool {return self._policyStatus != nil}
-  /// Clears the value of `policyStatus`. Subsequent reads from it will return its default value.
-  public mutating func clearPolicyStatus() {self._policyStatus = nil}
-
-  public var coverageStatus: Insurance_PolicyDetails.CoverageStatus {
-    get {return _coverageStatus ?? .unspecified}
-    set {_coverageStatus = newValue}
-  }
-  /// Returns true if `coverageStatus` has been explicitly set.
-  public var hasCoverageStatus: Bool {return self._coverageStatus != nil}
-  /// Clears the value of `coverageStatus`. Subsequent reads from it will return its default value.
-  public mutating func clearCoverageStatus() {self._coverageStatus = nil}
+  public var displayValue: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum PolicyStatus: SwiftProtobuf.Enum {
-    public typealias RawValue = Int
-    case unspecified // = 0
-    case active // = 1
-    case inactive // = 2
-    case dueSoon // = 3
-    case UNRECOGNIZED(Int)
+  public init() {}
+}
 
-    public init() {
-      self = .unspecified
-    }
+public struct Insurance_Coverage {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
-    public init?(rawValue: Int) {
-      switch rawValue {
-      case 0: self = .unspecified
-      case 1: self = .active
-      case 2: self = .inactive
-      case 3: self = .dueSoon
-      default: self = .UNRECOGNIZED(rawValue)
-      }
-    }
+  public var coverageStatus: Insurance_Coverage.CoverageStatus = .unspecified
 
-    public var rawValue: Int {
-      switch self {
-      case .unspecified: return 0
-      case .active: return 1
-      case .inactive: return 2
-      case .dueSoon: return 3
-      case .UNRECOGNIZED(let i): return i
-      }
-    }
-
+  public var recommended: Insurance_Value {
+    get {return _recommended ?? Insurance_Value()}
+    set {_recommended = newValue}
   }
+  /// Returns true if `recommended` has been explicitly set.
+  public var hasRecommended: Bool {return self._recommended != nil}
+  /// Clears the value of `recommended`. Subsequent reads from it will return its default value.
+  public mutating func clearRecommended() {self._recommended = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum CoverageStatus: SwiftProtobuf.Enum {
     public typealias RawValue = Int
@@ -428,9 +388,100 @@ public struct Insurance_PolicyDetails {
 
   public init() {}
 
+  fileprivate var _recommended: Insurance_Value? = nil
+}
+
+#if swift(>=4.2)
+
+extension Insurance_Coverage.CoverageStatus: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [Insurance_Coverage.CoverageStatus] = [
+    .unspecified,
+    .basic,
+    .standard,
+    .premium,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+public struct Insurance_PolicyDetails {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var policyItem: [Insurance_PolicyItem] = []
+
+  public var insuredMembers: [Insurance_Member] = []
+
+  public var sumInsured: Int32 {
+    get {return _sumInsured ?? 0}
+    set {_sumInsured = newValue}
+  }
+  /// Returns true if `sumInsured` has been explicitly set.
+  public var hasSumInsured: Bool {return self._sumInsured != nil}
+  /// Clears the value of `sumInsured`. Subsequent reads from it will return its default value.
+  public mutating func clearSumInsured() {self._sumInsured = nil}
+
+  public var policyStatus: Insurance_PolicyDetails.PolicyStatus {
+    get {return _policyStatus ?? .unspecified}
+    set {_policyStatus = newValue}
+  }
+  /// Returns true if `policyStatus` has been explicitly set.
+  public var hasPolicyStatus: Bool {return self._policyStatus != nil}
+  /// Clears the value of `policyStatus`. Subsequent reads from it will return its default value.
+  public mutating func clearPolicyStatus() {self._policyStatus = nil}
+
+  public var coverage: Insurance_Coverage {
+    get {return _coverage ?? Insurance_Coverage()}
+    set {_coverage = newValue}
+  }
+  /// Returns true if `coverage` has been explicitly set.
+  public var hasCoverage: Bool {return self._coverage != nil}
+  /// Clears the value of `coverage`. Subsequent reads from it will return its default value.
+  public mutating func clearCoverage() {self._coverage = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum PolicyStatus: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
+    case unspecified // = 0
+    case active // = 1
+    case inactive // = 2
+    case dueSoon // = 3
+    case UNRECOGNIZED(Int)
+
+    public init() {
+      self = .unspecified
+    }
+
+    public init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .unspecified
+      case 1: self = .active
+      case 2: self = .inactive
+      case 3: self = .dueSoon
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    public var rawValue: Int {
+      switch self {
+      case .unspecified: return 0
+      case .active: return 1
+      case .inactive: return 2
+      case .dueSoon: return 3
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  public init() {}
+
   fileprivate var _sumInsured: Int32? = nil
   fileprivate var _policyStatus: Insurance_PolicyDetails.PolicyStatus? = nil
-  fileprivate var _coverageStatus: Insurance_PolicyDetails.CoverageStatus? = nil
+  fileprivate var _coverage: Insurance_Coverage? = nil
 }
 
 #if swift(>=4.2)
@@ -442,16 +493,6 @@ extension Insurance_PolicyDetails.PolicyStatus: CaseIterable {
     .active,
     .inactive,
     .dueSoon,
-  ]
-}
-
-extension Insurance_PolicyDetails.CoverageStatus: CaseIterable {
-  // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Insurance_PolicyDetails.CoverageStatus] = [
-    .unspecified,
-    .basic,
-    .standard,
-    .premium,
   ]
 }
 
@@ -572,13 +613,15 @@ extension Insurance_ErrorCode: @unchecked Sendable {}
 extension Insurance_Insurer: @unchecked Sendable {}
 extension Insurance_Age: @unchecked Sendable {}
 extension Insurance_Age.Unit: @unchecked Sendable {}
-extension Insurance_Members: @unchecked Sendable {}
-extension Insurance_Members.Gender: @unchecked Sendable {}
+extension Insurance_Member: @unchecked Sendable {}
+extension Insurance_Member.Gender: @unchecked Sendable {}
 extension Insurance_PolicyItem: @unchecked Sendable {}
 extension Insurance_PolicyItem.TypeEnum: @unchecked Sendable {}
+extension Insurance_Value: @unchecked Sendable {}
+extension Insurance_Coverage: @unchecked Sendable {}
+extension Insurance_Coverage.CoverageStatus: @unchecked Sendable {}
 extension Insurance_PolicyDetails: @unchecked Sendable {}
 extension Insurance_PolicyDetails.PolicyStatus: @unchecked Sendable {}
-extension Insurance_PolicyDetails.CoverageStatus: @unchecked Sendable {}
 extension Insurance_InsuranceData: @unchecked Sendable {}
 extension Insurance_Error: @unchecked Sendable {}
 extension Insurance_InsuranceAPIResponse: @unchecked Sendable {}
@@ -684,8 +727,8 @@ extension Insurance_Age.Unit: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension Insurance_Members: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Members"
+extension Insurance_Member: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Member"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "age"),
     2: .same(proto: "gender"),
@@ -728,7 +771,7 @@ extension Insurance_Members: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Insurance_Members, rhs: Insurance_Members) -> Bool {
+  public static func ==(lhs: Insurance_Member, rhs: Insurance_Member) -> Bool {
     if lhs._age != rhs._age {return false}
     if lhs._gender != rhs._gender {return false}
     if lhs._name != rhs._name {return false}
@@ -738,7 +781,7 @@ extension Insurance_Members: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
   }
 }
 
-extension Insurance_Members.Gender: SwiftProtobuf._ProtoNameProviding {
+extension Insurance_Member.Gender: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "GENDER_UNSPECIFIED"),
     1: .same(proto: "GENDER_MALE"),
@@ -805,6 +848,95 @@ extension Insurance_PolicyItem.TypeEnum: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
+extension Insurance_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Value"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "val"),
+    2: .standard(proto: "display_value"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.val) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.displayValue) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.val != 0 {
+      try visitor.visitSingularInt32Field(value: self.val, fieldNumber: 1)
+    }
+    if !self.displayValue.isEmpty {
+      try visitor.visitSingularStringField(value: self.displayValue, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_Value, rhs: Insurance_Value) -> Bool {
+    if lhs.val != rhs.val {return false}
+    if lhs.displayValue != rhs.displayValue {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Insurance_Coverage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Coverage"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "coverage_status"),
+    2: .same(proto: "recommended"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.coverageStatus) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._recommended) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if self.coverageStatus != .unspecified {
+      try visitor.visitSingularEnumField(value: self.coverageStatus, fieldNumber: 1)
+    }
+    try { if let v = self._recommended {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_Coverage, rhs: Insurance_Coverage) -> Bool {
+    if lhs.coverageStatus != rhs.coverageStatus {return false}
+    if lhs._recommended != rhs._recommended {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Insurance_Coverage.CoverageStatus: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "COVERAGE_STATUS_UNSPECIFIED"),
+    1: .same(proto: "COVERAGE_STATUS_BASIC"),
+    2: .same(proto: "COVERAGE_STATUS_STANDARD"),
+    3: .same(proto: "COVERAGE_STATUS_PREMIUM"),
+  ]
+}
+
 extension Insurance_PolicyDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".PolicyDetails"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -812,7 +944,7 @@ extension Insurance_PolicyDetails: SwiftProtobuf.Message, SwiftProtobuf._Message
     2: .standard(proto: "insured_members"),
     3: .standard(proto: "sum_insured"),
     4: .standard(proto: "policy_status"),
-    5: .standard(proto: "coverage_status"),
+    5: .same(proto: "coverage"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -825,7 +957,7 @@ extension Insurance_PolicyDetails: SwiftProtobuf.Message, SwiftProtobuf._Message
       case 2: try { try decoder.decodeRepeatedMessageField(value: &self.insuredMembers) }()
       case 3: try { try decoder.decodeSingularInt32Field(value: &self._sumInsured) }()
       case 4: try { try decoder.decodeSingularEnumField(value: &self._policyStatus) }()
-      case 5: try { try decoder.decodeSingularEnumField(value: &self._coverageStatus) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._coverage) }()
       default: break
       }
     }
@@ -848,8 +980,8 @@ extension Insurance_PolicyDetails: SwiftProtobuf.Message, SwiftProtobuf._Message
     try { if let v = self._policyStatus {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
     } }()
-    try { if let v = self._coverageStatus {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
+    try { if let v = self._coverage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -859,7 +991,7 @@ extension Insurance_PolicyDetails: SwiftProtobuf.Message, SwiftProtobuf._Message
     if lhs.insuredMembers != rhs.insuredMembers {return false}
     if lhs._sumInsured != rhs._sumInsured {return false}
     if lhs._policyStatus != rhs._policyStatus {return false}
-    if lhs._coverageStatus != rhs._coverageStatus {return false}
+    if lhs._coverage != rhs._coverage {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -871,15 +1003,6 @@ extension Insurance_PolicyDetails.PolicyStatus: SwiftProtobuf._ProtoNameProvidin
     1: .same(proto: "POLICY_STATUS_ACTIVE"),
     2: .same(proto: "POLICY_STATUS_INACTIVE"),
     3: .same(proto: "POLICY_STATUS_DUE_SOON"),
-  ]
-}
-
-extension Insurance_PolicyDetails.CoverageStatus: SwiftProtobuf._ProtoNameProviding {
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "COVERAGE_STATUS_UNSPECIFIED"),
-    1: .same(proto: "COVERAGE_STATUS_BASIC"),
-    2: .same(proto: "COVERAGE_STATUS_STANDARD"),
-    3: .same(proto: "COVERAGE_STATUS_PREMIUM"),
   ]
 }
 
