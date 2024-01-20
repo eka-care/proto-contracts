@@ -185,6 +185,17 @@ public struct Insurance_Member {
   /// Clears the value of `id`. Subsequent reads from it will return its default value.
   public mutating func clearID() {self._id = nil}
 
+  public var dbID: String = String()
+
+  public var pOid: String {
+    get {return _pOid ?? String()}
+    set {_pOid = newValue}
+  }
+  /// Returns true if `pOid` has been explicitly set.
+  public var hasPOid: Bool {return self._pOid != nil}
+  /// Clears the value of `pOid`. Subsequent reads from it will return its default value.
+  public mutating func clearPOid() {self._pOid = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum Gender: SwiftProtobuf.Enum {
@@ -224,6 +235,7 @@ public struct Insurance_Member {
   fileprivate var _gender: Insurance_Member.Gender? = nil
   fileprivate var _name: String? = nil
   fileprivate var _id: String? = nil
+  fileprivate var _pOid: String? = nil
 }
 
 #if swift(>=4.2)
@@ -334,6 +346,33 @@ public struct Insurance_Value {
   public init() {}
 }
 
+public struct Insurance_SuperTopUpCard {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var title: String = String()
+
+  public var subTitle: String = String()
+
+  public var cta: Vault_Common_CTA {
+    get {return _cta ?? Vault_Common_CTA()}
+    set {_cta = newValue}
+  }
+  /// Returns true if `cta` has been explicitly set.
+  public var hasCta: Bool {return self._cta != nil}
+  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
+  public mutating func clearCta() {self._cta = nil}
+
+  public var img: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _cta: Vault_Common_CTA? = nil
+}
+
 public struct Insurance_Coverage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -349,6 +388,15 @@ public struct Insurance_Coverage {
   public var hasRecommended: Bool {return self._recommended != nil}
   /// Clears the value of `recommended`. Subsequent reads from it will return its default value.
   public mutating func clearRecommended() {self._recommended = nil}
+
+  public var superTopUpCard: Insurance_SuperTopUpCard {
+    get {return _superTopUpCard ?? Insurance_SuperTopUpCard()}
+    set {_superTopUpCard = newValue}
+  }
+  /// Returns true if `superTopUpCard` has been explicitly set.
+  public var hasSuperTopUpCard: Bool {return self._superTopUpCard != nil}
+  /// Clears the value of `superTopUpCard`. Subsequent reads from it will return its default value.
+  public mutating func clearSuperTopUpCard() {self._superTopUpCard = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -389,6 +437,7 @@ public struct Insurance_Coverage {
   public init() {}
 
   fileprivate var _recommended: Insurance_Value? = nil
+  fileprivate var _superTopUpCard: Insurance_SuperTopUpCard? = nil
 }
 
 #if swift(>=4.2)
@@ -504,39 +553,37 @@ public struct Insurance_InsuranceData {
   // methods supported on all messages.
 
   public var insurer: Insurance_Insurer {
-    get {return _insurer ?? Insurance_Insurer()}
-    set {_insurer = newValue}
+    get {return _storage._insurer ?? Insurance_Insurer()}
+    set {_uniqueStorage()._insurer = newValue}
   }
   /// Returns true if `insurer` has been explicitly set.
-  public var hasInsurer: Bool {return self._insurer != nil}
+  public var hasInsurer: Bool {return _storage._insurer != nil}
   /// Clears the value of `insurer`. Subsequent reads from it will return its default value.
-  public mutating func clearInsurer() {self._insurer = nil}
+  public mutating func clearInsurer() {_uniqueStorage()._insurer = nil}
 
   public var policyDetails: Insurance_PolicyDetails {
-    get {return _policyDetails ?? Insurance_PolicyDetails()}
-    set {_policyDetails = newValue}
+    get {return _storage._policyDetails ?? Insurance_PolicyDetails()}
+    set {_uniqueStorage()._policyDetails = newValue}
   }
   /// Returns true if `policyDetails` has been explicitly set.
-  public var hasPolicyDetails: Bool {return self._policyDetails != nil}
+  public var hasPolicyDetails: Bool {return _storage._policyDetails != nil}
   /// Clears the value of `policyDetails`. Subsequent reads from it will return its default value.
-  public mutating func clearPolicyDetails() {self._policyDetails = nil}
+  public mutating func clearPolicyDetails() {_uniqueStorage()._policyDetails = nil}
 
-  public var polciyDocumentCta: Vault_Common_CTA {
-    get {return _polciyDocumentCta ?? Vault_Common_CTA()}
-    set {_polciyDocumentCta = newValue}
+  public var policyDocumentCta: Vault_Common_CTA {
+    get {return _storage._policyDocumentCta ?? Vault_Common_CTA()}
+    set {_uniqueStorage()._policyDocumentCta = newValue}
   }
-  /// Returns true if `polciyDocumentCta` has been explicitly set.
-  public var hasPolciyDocumentCta: Bool {return self._polciyDocumentCta != nil}
-  /// Clears the value of `polciyDocumentCta`. Subsequent reads from it will return its default value.
-  public mutating func clearPolciyDocumentCta() {self._polciyDocumentCta = nil}
+  /// Returns true if `policyDocumentCta` has been explicitly set.
+  public var hasPolicyDocumentCta: Bool {return _storage._policyDocumentCta != nil}
+  /// Clears the value of `policyDocumentCta`. Subsequent reads from it will return its default value.
+  public mutating func clearPolicyDocumentCta() {_uniqueStorage()._policyDocumentCta = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _insurer: Insurance_Insurer? = nil
-  fileprivate var _policyDetails: Insurance_PolicyDetails? = nil
-  fileprivate var _polciyDocumentCta: Vault_Common_CTA? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// Error represents error resonse of API 
@@ -618,6 +665,7 @@ extension Insurance_Member.Gender: @unchecked Sendable {}
 extension Insurance_PolicyItem: @unchecked Sendable {}
 extension Insurance_PolicyItem.TypeEnum: @unchecked Sendable {}
 extension Insurance_Value: @unchecked Sendable {}
+extension Insurance_SuperTopUpCard: @unchecked Sendable {}
 extension Insurance_Coverage: @unchecked Sendable {}
 extension Insurance_Coverage.CoverageStatus: @unchecked Sendable {}
 extension Insurance_PolicyDetails: @unchecked Sendable {}
@@ -734,6 +782,8 @@ extension Insurance_Member: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     2: .same(proto: "gender"),
     3: .same(proto: "name"),
     4: .same(proto: "id"),
+    5: .standard(proto: "db_id"),
+    6: .standard(proto: "p_oid"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -746,6 +796,8 @@ extension Insurance_Member: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
       case 2: try { try decoder.decodeSingularEnumField(value: &self._gender) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self._name) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self._id) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.dbID) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self._pOid) }()
       default: break
       }
     }
@@ -768,6 +820,12 @@ extension Insurance_Member: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try { if let v = self._id {
       try visitor.visitSingularStringField(value: v, fieldNumber: 4)
     } }()
+    if !self.dbID.isEmpty {
+      try visitor.visitSingularStringField(value: self.dbID, fieldNumber: 5)
+    }
+    try { if let v = self._pOid {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -776,6 +834,8 @@ extension Insurance_Member: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     if lhs._gender != rhs._gender {return false}
     if lhs._name != rhs._name {return false}
     if lhs._id != rhs._id {return false}
+    if lhs.dbID != rhs.dbID {return false}
+    if lhs._pOid != rhs._pOid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -886,11 +946,66 @@ extension Insurance_Value: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
   }
 }
 
+extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SuperTopUpCard"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "title"),
+    2: .standard(proto: "sub_title"),
+    3: .same(proto: "cta"),
+    4: .same(proto: "img"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.subTitle) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.img) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.title.isEmpty {
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 1)
+    }
+    if !self.subTitle.isEmpty {
+      try visitor.visitSingularStringField(value: self.subTitle, fieldNumber: 2)
+    }
+    try { if let v = self._cta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    if !self.img.isEmpty {
+      try visitor.visitSingularStringField(value: self.img, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_SuperTopUpCard, rhs: Insurance_SuperTopUpCard) -> Bool {
+    if lhs.title != rhs.title {return false}
+    if lhs.subTitle != rhs.subTitle {return false}
+    if lhs._cta != rhs._cta {return false}
+    if lhs.img != rhs.img {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Insurance_Coverage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Coverage"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "coverage_status"),
     2: .same(proto: "recommended"),
+    3: .standard(proto: "super_top_up_card"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -901,6 +1016,7 @@ extension Insurance_Coverage: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularEnumField(value: &self.coverageStatus) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._recommended) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._superTopUpCard) }()
       default: break
       }
     }
@@ -917,12 +1033,16 @@ extension Insurance_Coverage: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try { if let v = self._recommended {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
+    try { if let v = self._superTopUpCard {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_Coverage, rhs: Insurance_Coverage) -> Bool {
     if lhs.coverageStatus != rhs.coverageStatus {return false}
     if lhs._recommended != rhs._recommended {return false}
+    if lhs._superTopUpCard != rhs._superTopUpCard {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1011,44 +1131,80 @@ extension Insurance_InsuranceData: SwiftProtobuf.Message, SwiftProtobuf._Message
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "insurer"),
     2: .standard(proto: "policy_details"),
-    3: .standard(proto: "polciy_document_cta"),
+    3: .standard(proto: "policy_document_cta"),
   ]
 
+  fileprivate class _StorageClass {
+    var _insurer: Insurance_Insurer? = nil
+    var _policyDetails: Insurance_PolicyDetails? = nil
+    var _policyDocumentCta: Vault_Common_CTA? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _insurer = source._insurer
+      _policyDetails = source._policyDetails
+      _policyDocumentCta = source._policyDocumentCta
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._insurer) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._policyDetails) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._polciyDocumentCta) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._insurer) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._policyDetails) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._policyDocumentCta) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._insurer {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try { if let v = self._policyDetails {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._polciyDocumentCta {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._insurer {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      try { if let v = _storage._policyDetails {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._policyDocumentCta {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_InsuranceData, rhs: Insurance_InsuranceData) -> Bool {
-    if lhs._insurer != rhs._insurer {return false}
-    if lhs._policyDetails != rhs._policyDetails {return false}
-    if lhs._polciyDocumentCta != rhs._polciyDocumentCta {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._insurer != rhs_storage._insurer {return false}
+        if _storage._policyDetails != rhs_storage._policyDetails {return false}
+        if _storage._policyDocumentCta != rhs_storage._policyDocumentCta {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
