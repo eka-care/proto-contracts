@@ -67,6 +67,7 @@ message PolicyDetails {
     optional Entity name = 3;
     optional EntityTimestamp dob = 4;
     optional Entity member_id = 5;
+    optional string suggested_patient_id = 6;
   }
 }
 
