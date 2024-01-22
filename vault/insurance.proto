@@ -76,7 +76,7 @@ message PlanDetails {
   optional Entity addon_plan_name = 2;
   optional Entity rider_name = 3;
   optional Entity uin_number = 4;
-  Type plan_type = 5;
+  optional Type plan_type = 5;
   enum Type {
     TYPE_UNSPECIFIED = 0; // Unspecified.
     TYPE_TOPUP = 1;        // top-up.
