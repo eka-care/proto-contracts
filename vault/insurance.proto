@@ -24,6 +24,7 @@ message InsuranceData {
 message InsuranceType {
   float confidence = 1;
   Type value = 2;
+  optional SubType sub_type = 3;
 
   enum Type {
     TYPE_UNSPECIFIED = 0; // Unspecified.
@@ -31,6 +32,11 @@ message InsuranceType {
     TYPE_LIFE = 2;        // Life.
     TYPE_VEHICLE = 3;     // vehicle.
     TYPE_TRAVEL = 4;      // travel.
+  }
+
+  enum SubType {
+    SUBTYPE_UNSPECIFIED = 0; // Unspecified.
+    SUBTYPE_TOPUP = 1;        // top-up.
   }
 }
 
@@ -76,11 +82,6 @@ message PlanDetails {
   optional Entity addon_plan_name = 2;
   optional Entity rider_name = 3;
   optional Entity uin_number = 4;
-  optional Type plan_type = 5;
-  enum Type {
-    TYPE_UNSPECIFIED = 0; // Unspecified.
-    TYPE_TOPUP = 1;        // top-up.
-  }
 }
 
 message PolicyDate {
