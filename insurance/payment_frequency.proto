@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package insurance;
+
+option go_package = "github.com/eka-care/proto-contracts/go/insurance";
+
+enum PaymentFrequencyType {
+  PAYMENT_FREQUENCY_TYPE_UNSPECIFIED = 0; // Unspecified.
+  PAYMENT_FREQUENCY_TYPE_YEARLY = 1;      // Yearly.
+  PAYMENT_FREQUENCY_TYPE_ONE_TIME = 2;
+  PAYMENT_FREQUENCY_TYPE_MONTHLY = 3;
+  PAYMENT_FREQUENCY_TYPE_QUARTERLY = 4;
+  PAYMENT_FREQUENCY_TYPE_HALF_YEARLY = 5;
+  PAYMENT_FREQUENCY_TYPE_ONCE_IN_TWO_YEARS = 6;
+}

@@ -5,7 +5,7 @@ import "vault/cta.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
-message Insurer {
+message InsurerInfo {
   string img = 1;
   optional string name = 2;
 }
@@ -93,7 +93,7 @@ message PolicyDetails {
 }
 
 message InsuranceData {
-  Insurer insurer = 1;
+  InsurerInfo insurer = 1;
   PolicyDetails policy_details = 2;
   vault.common.CTA policy_document_cta = 3;
 }
