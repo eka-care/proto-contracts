@@ -13,9 +13,10 @@ _sym_db = _symbol_database.Default()
 
 
 from vault import cta_pb2 as vault_dot_cta__pb2
+from insurance import gender_pb2 as insurance_dot_gender__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19insurance/insurance.proto\x12\tinsurance\x1a\x0fvault/cta.proto\"6\n\x0bInsurerInfo\x12\x0b\n\x03img\x18\x01 \x01(\t\x12\x11\n\x04name\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\x07\n\x05_name\"\x80\x01\n\x03\x41ge\x12\x0b\n\x03\x61ge\x18\x01 \x01(\x05\x12!\n\x04unit\x18\x02 \x01(\x0e\x32\x13.insurance.Age.Unit\"I\n\x04Unit\x12\x14\n\x10UNIT_UNSPECIFIED\x10\x00\x12\r\n\tUNIT_YEAR\x10\x01\x12\x0e\n\nUNIT_MONTH\x10\x02\x12\x0c\n\x08UNIT_DAY\x10\x03\"\x93\x02\n\x06Member\x12 \n\x03\x61ge\x18\x01 \x01(\x0b\x32\x0e.insurance.AgeH\x00\x88\x01\x01\x12-\n\x06gender\x18\x02 \x01(\x0e\x32\x18.insurance.Member.GenderH\x01\x88\x01\x01\x12\x11\n\x04name\x18\x03 \x01(\tH\x02\x88\x01\x01\x12\x0f\n\x02id\x18\x04 \x01(\tH\x03\x88\x01\x01\x12\r\n\x05\x64\x62_id\x18\x05 \x01(\t\x12\x12\n\x05p_oid\x18\x06 \x01(\tH\x04\x88\x01\x01\"D\n\x06Gender\x12\x16\n\x12GENDER_UNSPECIFIED\x10\x00\x12\x0f\n\x0bGENDER_MALE\x10\x01\x12\x11\n\rGENDER_FEMALE\x10\x02\x42\x06\n\x04_ageB\t\n\x07_genderB\x07\n\x05_nameB\x05\n\x03_idB\x08\n\x06_p_oid\"\xf5\x01\n\nPolicyItem\x12\r\n\x05title\x18\x01 \x01(\t\x12\x12\n\x05value\x18\x02 \x01(\tH\x00\x88\x01\x01\x12(\n\x04type\x18\x03 \x01(\x0e\x32\x1a.insurance.PolicyItem.Type\"\x8f\x01\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x14\n\x10TYPE_POLICY_TYPE\x10\x01\x12\x13\n\x0fTYPE_POLICY_FOR\x10\x02\x12\x16\n\x12TYPE_POLICY_NUMBER\x10\x03\x12\x18\n\x14TYPE_POLICY_END_DATE\x10\x04\x12\x14\n\x10TYPE_SUM_INSURED\x10\x05\x42\x08\n\x06_value\"+\n\x05Value\x12\x0b\n\x03val\x18\x01 \x01(\x05\x12\x15\n\rdisplay_value\x18\x02 \x01(\t\"_\n\x0eSuperTopUpCard\x12\r\n\x05title\x18\x01 \x01(\t\x12\x11\n\tsub_title\x18\x02 \x01(\t\x12\x1e\n\x03\x63ta\x18\x03 \x01(\x0b\x32\x11.vault.common.CTA\x12\x0b\n\x03img\x18\x04 \x01(\t\"\xc9\x02\n\x08\x43overage\x12;\n\x0f\x63overage_status\x18\x01 \x01(\x0e\x32\".insurance.Coverage.CoverageStatus\x12%\n\x0brecommended\x18\x02 \x01(\x0b\x32\x10.insurance.Value\x12\x39\n\x11super_top_up_card\x18\x03 \x01(\x0b\x32\x19.insurance.SuperTopUpCardH\x00\x88\x01\x01\"\x87\x01\n\x0e\x43overageStatus\x12\x1f\n\x1b\x43OVERAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n\x15\x43OVERAGE_STATUS_BASIC\x10\x01\x12\x1c\n\x18\x43OVERAGE_STATUS_STANDARD\x10\x02\x12\x1b\n\x17\x43OVERAGE_STATUS_PREMIUM\x10\x03\x42\x14\n\x12_super_top_up_card\"\xa0\x03\n\rPolicyDetails\x12*\n\x0bpolicy_item\x18\x01 \x03(\x0b\x32\x15.insurance.PolicyItem\x12*\n\x0finsured_members\x18\x02 \x03(\x0b\x32\x11.insurance.Member\x12\x18\n\x0bsum_insured\x18\x03 \x01(\x05H\x00\x88\x01\x01\x12\x41\n\rpolicy_status\x18\x04 \x01(\x0e\x32%.insurance.PolicyDetails.PolicyStatusH\x01\x88\x01\x01\x12*\n\x08\x63overage\x18\x05 \x01(\x0b\x32\x13.insurance.CoverageH\x02\x88\x01\x01\"\x7f\n\x0cPolicyStatus\x12\x1d\n\x19POLICY_STATUS_UNSPECIFIED\x10\x00\x12\x18\n\x14POLICY_STATUS_ACTIVE\x10\x01\x12\x1a\n\x16POLICY_STATUS_INACTIVE\x10\x02\x12\x1a\n\x16POLICY_STATUS_DUE_SOON\x10\x03\x42\x0e\n\x0c_sum_insuredB\x10\n\x0e_policy_statusB\x0b\n\t_coverage\"\x9a\x01\n\rInsuranceData\x12\'\n\x07insurer\x18\x01 \x01(\x0b\x32\x16.insurance.InsurerInfo\x12\x30\n\x0epolicy_details\x18\x02 \x01(\x0b\x32\x18.insurance.PolicyDetails\x12.\n\x13policy_document_cta\x18\x03 \x01(\x0b\x32\x11.vault.common.CTA\"<\n\x05\x45rror\x12\"\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x14.insurance.ErrorCode\x12\x0f\n\x07message\x18\x02 \x01(\t\"q\n\x14InsuranceAPIResponse\x12,\n\x08response\x18\x01 \x01(\x0b\x32\x18.insurance.InsuranceDataH\x00\x12!\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.insurance.ErrorH\x00\x42\x08\n\x06result*\"\n\tErrorCode\x12\x15\n\x11\x45RROR_UNSPECIFIED\x10\x00\x42\x32Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19insurance/insurance.proto\x12\tinsurance\x1a\x0fvault/cta.proto\x1a\x16insurance/gender.proto\"6\n\x0bInsurerInfo\x12\x0b\n\x03img\x18\x01 \x01(\t\x12\x11\n\x04name\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\x07\n\x05_name\"\x80\x01\n\x03\x41ge\x12\x0b\n\x03\x61ge\x18\x01 \x01(\x05\x12!\n\x04unit\x18\x02 \x01(\x0e\x32\x13.insurance.Age.Unit\"I\n\x04Unit\x12\x14\n\x10UNIT_UNSPECIFIED\x10\x00\x12\r\n\tUNIT_YEAR\x10\x01\x12\x0e\n\nUNIT_MONTH\x10\x02\x12\x0c\n\x08UNIT_DAY\x10\x03\"\xc6\x01\n\x06Member\x12 \n\x03\x61ge\x18\x01 \x01(\x0b\x32\x0e.insurance.AgeH\x00\x88\x01\x01\x12&\n\x06gender\x18\x02 \x01(\x0e\x32\x11.insurance.GenderH\x01\x88\x01\x01\x12\x11\n\x04name\x18\x03 \x01(\tH\x02\x88\x01\x01\x12\x0f\n\x02id\x18\x04 \x01(\tH\x03\x88\x01\x01\x12\r\n\x05\x64\x62_id\x18\x05 \x01(\t\x12\x12\n\x05p_oid\x18\x06 \x01(\tH\x04\x88\x01\x01\x42\x06\n\x04_ageB\t\n\x07_genderB\x07\n\x05_nameB\x05\n\x03_idB\x08\n\x06_p_oid\"\xf5\x01\n\nPolicyItem\x12\r\n\x05title\x18\x01 \x01(\t\x12\x12\n\x05value\x18\x02 \x01(\tH\x00\x88\x01\x01\x12(\n\x04type\x18\x03 \x01(\x0e\x32\x1a.insurance.PolicyItem.Type\"\x8f\x01\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x14\n\x10TYPE_POLICY_TYPE\x10\x01\x12\x13\n\x0fTYPE_POLICY_FOR\x10\x02\x12\x16\n\x12TYPE_POLICY_NUMBER\x10\x03\x12\x18\n\x14TYPE_POLICY_END_DATE\x10\x04\x12\x14\n\x10TYPE_SUM_INSURED\x10\x05\x42\x08\n\x06_value\"+\n\x05Value\x12\x0b\n\x03val\x18\x01 \x01(\x05\x12\x15\n\rdisplay_value\x18\x02 \x01(\t\"_\n\x0eSuperTopUpCard\x12\r\n\x05title\x18\x01 \x01(\t\x12\x11\n\tsub_title\x18\x02 \x01(\t\x12\x1e\n\x03\x63ta\x18\x03 \x01(\x0b\x32\x11.vault.common.CTA\x12\x0b\n\x03img\x18\x04 \x01(\t\"\xc9\x02\n\x08\x43overage\x12;\n\x0f\x63overage_status\x18\x01 \x01(\x0e\x32\".insurance.Coverage.CoverageStatus\x12%\n\x0brecommended\x18\x02 \x01(\x0b\x32\x10.insurance.Value\x12\x39\n\x11super_top_up_card\x18\x03 \x01(\x0b\x32\x19.insurance.SuperTopUpCardH\x00\x88\x01\x01\"\x87\x01\n\x0e\x43overageStatus\x12\x1f\n\x1b\x43OVERAGE_STATUS_UNSPECIFIED\x10\x00\x12\x19\n\x15\x43OVERAGE_STATUS_BASIC\x10\x01\x12\x1c\n\x18\x43OVERAGE_STATUS_STANDARD\x10\x02\x12\x1b\n\x17\x43OVERAGE_STATUS_PREMIUM\x10\x03\x42\x14\n\x12_super_top_up_card\"\xa0\x03\n\rPolicyDetails\x12*\n\x0bpolicy_item\x18\x01 \x03(\x0b\x32\x15.insurance.PolicyItem\x12*\n\x0finsured_members\x18\x02 \x03(\x0b\x32\x11.insurance.Member\x12\x18\n\x0bsum_insured\x18\x03 \x01(\x05H\x00\x88\x01\x01\x12\x41\n\rpolicy_status\x18\x04 \x01(\x0e\x32%.insurance.PolicyDetails.PolicyStatusH\x01\x88\x01\x01\x12*\n\x08\x63overage\x18\x05 \x01(\x0b\x32\x13.insurance.CoverageH\x02\x88\x01\x01\"\x7f\n\x0cPolicyStatus\x12\x1d\n\x19POLICY_STATUS_UNSPECIFIED\x10\x00\x12\x18\n\x14POLICY_STATUS_ACTIVE\x10\x01\x12\x1a\n\x16POLICY_STATUS_INACTIVE\x10\x02\x12\x1a\n\x16POLICY_STATUS_DUE_SOON\x10\x03\x42\x0e\n\x0c_sum_insuredB\x10\n\x0e_policy_statusB\x0b\n\t_coverage\"\x9a\x01\n\rInsuranceData\x12\'\n\x07insurer\x18\x01 \x01(\x0b\x32\x16.insurance.InsurerInfo\x12\x30\n\x0epolicy_details\x18\x02 \x01(\x0b\x32\x18.insurance.PolicyDetails\x12.\n\x13policy_document_cta\x18\x03 \x01(\x0b\x32\x11.vault.common.CTA\"<\n\x05\x45rror\x12\"\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x14.insurance.ErrorCode\x12\x0f\n\x07message\x18\x02 \x01(\t\"q\n\x14InsuranceAPIResponse\x12,\n\x08response\x18\x01 \x01(\x0b\x32\x18.insurance.InsuranceDataH\x00\x12!\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x10.insurance.ErrorH\x00\x42\x08\n\x06result*\"\n\tErrorCode\x12\x15\n\x11\x45RROR_UNSPECIFIED\x10\x00\x42\x32Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,38 +24,36 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'insurance.insurance_pb2', _
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
-  _globals['_ERRORCODE']._serialized_start=1997
-  _globals['_ERRORCODE']._serialized_end=2031
-  _globals['_INSURERINFO']._serialized_start=57
-  _globals['_INSURERINFO']._serialized_end=111
-  _globals['_AGE']._serialized_start=114
-  _globals['_AGE']._serialized_end=242
-  _globals['_AGE_UNIT']._serialized_start=169
-  _globals['_AGE_UNIT']._serialized_end=242
-  _globals['_MEMBER']._serialized_start=245
-  _globals['_MEMBER']._serialized_end=520
-  _globals['_MEMBER_GENDER']._serialized_start=407
-  _globals['_MEMBER_GENDER']._serialized_end=475
-  _globals['_POLICYITEM']._serialized_start=523
-  _globals['_POLICYITEM']._serialized_end=768
-  _globals['_POLICYITEM_TYPE']._serialized_start=615
-  _globals['_POLICYITEM_TYPE']._serialized_end=758
-  _globals['_VALUE']._serialized_start=770
-  _globals['_VALUE']._serialized_end=813
-  _globals['_SUPERTOPUPCARD']._serialized_start=815
-  _globals['_SUPERTOPUPCARD']._serialized_end=910
-  _globals['_COVERAGE']._serialized_start=913
-  _globals['_COVERAGE']._serialized_end=1242
-  _globals['_COVERAGE_COVERAGESTATUS']._serialized_start=1085
-  _globals['_COVERAGE_COVERAGESTATUS']._serialized_end=1220
-  _globals['_POLICYDETAILS']._serialized_start=1245
-  _globals['_POLICYDETAILS']._serialized_end=1661
-  _globals['_POLICYDETAILS_POLICYSTATUS']._serialized_start=1487
-  _globals['_POLICYDETAILS_POLICYSTATUS']._serialized_end=1614
-  _globals['_INSURANCEDATA']._serialized_start=1664
-  _globals['_INSURANCEDATA']._serialized_end=1818
-  _globals['_ERROR']._serialized_start=1820
-  _globals['_ERROR']._serialized_end=1880
-  _globals['_INSURANCEAPIRESPONSE']._serialized_start=1882
-  _globals['_INSURANCEAPIRESPONSE']._serialized_end=1995
+  _globals['_ERRORCODE']._serialized_start=1944
+  _globals['_ERRORCODE']._serialized_end=1978
+  _globals['_INSURERINFO']._serialized_start=81
+  _globals['_INSURERINFO']._serialized_end=135
+  _globals['_AGE']._serialized_start=138
+  _globals['_AGE']._serialized_end=266
+  _globals['_AGE_UNIT']._serialized_start=193
+  _globals['_AGE_UNIT']._serialized_end=266
+  _globals['_MEMBER']._serialized_start=269
+  _globals['_MEMBER']._serialized_end=467
+  _globals['_POLICYITEM']._serialized_start=470
+  _globals['_POLICYITEM']._serialized_end=715
+  _globals['_POLICYITEM_TYPE']._serialized_start=562
+  _globals['_POLICYITEM_TYPE']._serialized_end=705
+  _globals['_VALUE']._serialized_start=717
+  _globals['_VALUE']._serialized_end=760
+  _globals['_SUPERTOPUPCARD']._serialized_start=762
+  _globals['_SUPERTOPUPCARD']._serialized_end=857
+  _globals['_COVERAGE']._serialized_start=860
+  _globals['_COVERAGE']._serialized_end=1189
+  _globals['_COVERAGE_COVERAGESTATUS']._serialized_start=1032
+  _globals['_COVERAGE_COVERAGESTATUS']._serialized_end=1167
+  _globals['_POLICYDETAILS']._serialized_start=1192
+  _globals['_POLICYDETAILS']._serialized_end=1608
+  _globals['_POLICYDETAILS_POLICYSTATUS']._serialized_start=1434
+  _globals['_POLICYDETAILS_POLICYSTATUS']._serialized_end=1561
+  _globals['_INSURANCEDATA']._serialized_start=1611
+  _globals['_INSURANCEDATA']._serialized_end=1765
+  _globals['_ERROR']._serialized_start=1767
+  _globals['_ERROR']._serialized_end=1827
+  _globals['_INSURANCEAPIRESPONSE']._serialized_start=1829
+  _globals['_INSURANCEAPIRESPONSE']._serialized_end=1942
 # @@protoc_insertion_point(module_scope)
