@@ -11,16 +11,16 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from insurance import types_pb2 as insurance_dot_types__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cinsurance/smart_report.proto\x12\tinsurance\"4\n\x12SmartReportCreated\x12\x0e\n\x06p_uuid\x18\x01 \x01(\t\x12\x0e\n\x06ref_id\x18\x02 \x01(\tB2Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cinsurance/smart_report.proto\x12\tinsurance\x1a\x15insurance/types.proto\"S\n\x12SmartReportCreated\x12\x0e\n\x06p_uuid\x18\x01 \x01(\t\x12\x0e\n\x06ref_id\x18\x02 \x01(\t\x12\x1d\n\x04type\x18\x03 \x01(\x0e\x32\x0f.insurance.TypeB2Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'insurance.smart_report_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
-
-  DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
-  _SMARTREPORTCREATED._serialized_start=43
-  _SMARTREPORTCREATED._serialized_end=95
+  _globals['DESCRIPTOR']._options = None
+  _globals['DESCRIPTOR']._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
+  _globals['_SMARTREPORTCREATED']._serialized_start=66
+  _globals['_SMARTREPORTCREATED']._serialized_end=149
 # @@protoc_insertion_point(module_scope)
