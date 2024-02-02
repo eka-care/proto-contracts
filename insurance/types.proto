@@ -14,5 +14,5 @@ enum Type {
 
 enum SubType {
   SUBTYPE_UNSPECIFIED = 0; // Unspecified.
-  SUBTYPE_TOPUP = 1;        // top-up.
+  SUBTYPE_SUPER_TOPUP = 1;        // super-top-up.
 }

@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15insurance/types.proto\x12\tinsurance*_\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bTYPE_HEALTH\x10\x01\x12\r\n\tTYPE_LIFE\x10\x02\x12\x10\n\x0cTYPE_VEHICLE\x10\x03\x12\x0f\n\x0bTYPE_TRAVEL\x10\x04*5\n\x07SubType\x12\x17\n\x13SUBTYPE_UNSPECIFIED\x10\x00\x12\x11\n\rSUBTYPE_TOPUP\x10\x01\x42\x32Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15insurance/types.proto\x12\tinsurance*_\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0f\n\x0bTYPE_HEALTH\x10\x01\x12\r\n\tTYPE_LIFE\x10\x02\x12\x10\n\x0cTYPE_VEHICLE\x10\x03\x12\x0f\n\x0bTYPE_TRAVEL\x10\x04*;\n\x07SubType\x12\x17\n\x13SUBTYPE_UNSPECIFIED\x10\x00\x12\x17\n\x13SUBTYPE_SUPER_TOPUP\x10\x01\x42\x32Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'insurance.types_pb2', globals())
@@ -24,5 +24,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _TYPE._serialized_start=36
   _TYPE._serialized_end=131
   _SUBTYPE._serialized_start=133
-  _SUBTYPE._serialized_end=186
+  _SUBTYPE._serialized_end=192
 # @@protoc_insertion_point(module_scope)
