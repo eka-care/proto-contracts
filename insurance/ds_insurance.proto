@@ -44,12 +44,14 @@ message InsuranceResponse {
 message InsuranceType {
   float confidence = 1;
   Type value = 2;
+  optional SubType sub_type = 3;
 }
 
 message CoverageDetails {
   optional EntityNumber premium_amount = 1;
   optional PremiumFrequency premium_payment_frequency = 2;
   optional EntityNumber sum_insured = 3;
+  optional EntityNumber deductible_amount = 4;
 }
 
 message PremiumFrequency {
@@ -63,6 +65,7 @@ message PlanDetails {
   optional Entity addon_plan_name = 2;
   optional Entity rider_name = 3;
   optional Entity uin_number = 4;
+  optional Entity product_name = 5;
 }
 
 message PolicyDate {

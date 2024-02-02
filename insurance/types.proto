@@ -11,3 +11,8 @@ enum Type {
   TYPE_VEHICLE = 3;     // vehicle.
   TYPE_TRAVEL = 4;      // travel.
 }
+
+enum SubType {
+  SUBTYPE_UNSPECIFIED = 0; // Unspecified.
+  SUBTYPE_TOPUP = 1;        // top-up.
+}

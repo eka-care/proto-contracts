@@ -19,8 +19,9 @@ DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cinsurance/smar
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'insurance.smart_report_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
-  _globals['DESCRIPTOR']._options = None
-  _globals['DESCRIPTOR']._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
-  _globals['_SMARTREPORTCREATED']._serialized_start=66
-  _globals['_SMARTREPORTCREATED']._serialized_end=149
+
+  DESCRIPTOR._options = None
+  DESCRIPTOR._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
+  _SMARTREPORTCREATED._serialized_start=66
+  _SMARTREPORTCREATED._serialized_end=149
 # @@protoc_insertion_point(module_scope)
