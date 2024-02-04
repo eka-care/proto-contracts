@@ -3,6 +3,8 @@ syntax = "proto3";
 package insurance;
 import "vault/cta.proto";
 import "insurance/gender.proto";
+import "insurance/types.proto";
+import "insurance/value.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
@@ -47,11 +49,6 @@ message PolicyItem {
   }
 }
 
-message Value {
-  int32 val = 1;
-  string display_value = 2;
-}
-
 message SuperTopUpCard {
   string title = 1;
   string sub_title = 2;
@@ -72,12 +69,19 @@ message Coverage {
   }
 }
 
+message PolicyType {
+  Type type = 1;
+  optional SubType sub_type = 2;
+  optional int32 deductible = 3;
+}
+
 message PolicyDetails {
   repeated PolicyItem policy_item = 1;
   repeated Member insured_members = 2;
   optional int32 sum_insured = 3;
   optional PolicyStatus policy_status = 4;
   optional Coverage coverage = 5;
+  PolicyType policy_type = 6;
 
   enum PolicyStatus {
     POLICY_STATUS_UNSPECIFIED = 0;

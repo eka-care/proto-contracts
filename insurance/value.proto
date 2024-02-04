@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package insurance;
+
+option go_package = "github.com/eka-care/proto-contracts/go/insurance";
+
+message Value {
+  int32 val = 1;
+  string display_value = 2;
+}
+
+message ValueFloat {
+  float val = 1;
+  string display_value = 2;
+}
