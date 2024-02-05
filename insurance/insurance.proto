@@ -46,6 +46,7 @@ message PolicyItem {
     TYPE_POLICY_NUMBER = 3;
     TYPE_POLICY_END_DATE = 4;
     TYPE_SUM_INSURED = 5;
+    TYPE_PREMIUM = 6;
   }
 }
 
@@ -72,16 +73,17 @@ message Coverage {
 message PolicyType {
   Type type = 1;
   optional SubType sub_type = 2;
-  optional int32 deductible = 3;
+  optional Value deductible = 3;
 }
 
 message PolicyDetails {
   repeated PolicyItem policy_item = 1;
   repeated Member insured_members = 2;
-  optional int32 sum_insured = 3;
+  optional int32 sum_insured = 3 [ deprecated = true ];
   optional PolicyStatus policy_status = 4;
   optional Coverage coverage = 5;
   PolicyType policy_type = 6;
+  optional Value sum_insured_val = 7;
 
   enum PolicyStatus {
     POLICY_STATUS_UNSPECIFIED = 0;
@@ -91,10 +93,13 @@ message PolicyDetails {
   }
 }
 
+message OverallPoliciesSummary { int32 count = 1; }
+
 message InsuranceData {
   InsurerInfo insurer = 1;
   PolicyDetails policy_details = 2;
   vault.common.CTA policy_document_cta = 3;
+  OverallPoliciesSummary overall_summary = 4;
 }
 
 /* ErrorCode represents list of errors */
