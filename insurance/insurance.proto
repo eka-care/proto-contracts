@@ -5,6 +5,7 @@ import "vault/cta.proto";
 import "insurance/gender.proto";
 import "insurance/types.proto";
 import "insurance/value.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
@@ -76,14 +77,20 @@ message PolicyType {
   optional Value deductible = 3;
 }
 
+message PolicyDates {
+  optional ValueDate start_date = 1;
+  google.protobuf.Timestamp current_date = 2;
+  optional ValueDate end_date = 3;
+}
+
 message PolicyDetails {
   repeated PolicyItem policy_item = 1;
   repeated Member insured_members = 2;
-  optional int32 sum_insured = 3 [ deprecated = true ];
+  optional int32 sum_insured_val = 3 [ deprecated = true ];
   optional PolicyStatus policy_status = 4;
   optional Coverage coverage = 5;
   PolicyType policy_type = 6;
-  optional Value sum_insured_val = 7;
+  optional Value sum_insured = 7;
 
   enum PolicyStatus {
     POLICY_STATUS_UNSPECIFIED = 0;
