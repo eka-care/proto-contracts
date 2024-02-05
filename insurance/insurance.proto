@@ -91,6 +91,7 @@ message PolicyDetails {
   optional Coverage coverage = 5;
   PolicyType policy_type = 6;
   optional Value sum_insured = 7;
+  PolicyDates policy_dates = 8;
 
   enum PolicyStatus {
     POLICY_STATUS_UNSPECIFIED = 0;
