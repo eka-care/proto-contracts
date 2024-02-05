@@ -93,7 +93,7 @@ public struct Insurance_AssignProfileAPIResponseError {
 
 extension Insurance_AssignProfileAPIResponseError.ErrorCode: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Insurance_AssignProfileAPIResponseError.ErrorCode] = [
+  public static let allCases: [Insurance_AssignProfileAPIResponseError.ErrorCode] = [
     .errorUnspecified,
   ]
 }
