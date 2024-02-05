@@ -2,10 +2,14 @@ syntax = "proto3";
 
 package insurance;
 import "vault/cta.proto";
+import "insurance/gender.proto";
+import "insurance/types.proto";
+import "insurance/value.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
-message Insurer {
+message InsurerInfo {
   string img = 1;
   optional string name = 2;
 }
@@ -29,12 +33,6 @@ message Member {
   optional string id = 4;
   string db_id = 5;
   optional string p_oid = 6;
-
-  enum Gender {
-    GENDER_UNSPECIFIED = 0;
-    GENDER_MALE = 1;
-    GENDER_FEMALE = 2;
-  }
 }
 
 message PolicyItem {
@@ -49,12 +47,8 @@ message PolicyItem {
     TYPE_POLICY_NUMBER = 3;
     TYPE_POLICY_END_DATE = 4;
     TYPE_SUM_INSURED = 5;
+    TYPE_PREMIUM = 6;
   }
-}
-
-message Value {
-  int32 val = 1;
-  string display_value = 2;
 }
 
 message SuperTopUpCard {
@@ -77,12 +71,27 @@ message Coverage {
   }
 }
 
+message PolicyType {
+  Type type = 1;
+  optional SubType sub_type = 2;
+  optional Value deductible = 3;
+}
+
+message PolicyDates {
+  optional ValueDate start_date = 1;
+  google.protobuf.Timestamp current_date = 2;
+  optional ValueDate end_date = 3;
+}
+
 message PolicyDetails {
   repeated PolicyItem policy_item = 1;
   repeated Member insured_members = 2;
-  optional int32 sum_insured = 3;
+  optional int32 sum_insured_val = 3 [ deprecated = true ];
   optional PolicyStatus policy_status = 4;
   optional Coverage coverage = 5;
+  PolicyType policy_type = 6;
+  optional Value sum_insured = 7;
+  PolicyDates policy_dates = 8;
 
   enum PolicyStatus {
     POLICY_STATUS_UNSPECIFIED = 0;
@@ -92,10 +101,13 @@ message PolicyDetails {
   }
 }
 
+message OverallPoliciesSummary { int32 count = 1; }
+
 message InsuranceData {
-  Insurer insurer = 1;
+  InsurerInfo insurer = 1;
   PolicyDetails policy_details = 2;
   vault.common.CTA policy_document_cta = 3;
+  OverallPoliciesSummary overall_summary = 4;
 }
 
 /* ErrorCode represents list of errors */
