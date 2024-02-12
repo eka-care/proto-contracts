@@ -61,7 +61,7 @@ message InsuranceSummaryAPIResponse {
 
   oneof result {
     InsuranceSummaryData response = 1;
-    EmptyState data = 3;
+    EmptyState empty_state_data = 3;
     Error error = 2;
   }
 }
