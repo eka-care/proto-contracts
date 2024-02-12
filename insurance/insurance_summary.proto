@@ -11,6 +11,7 @@ message CoverageInfo {
   Value start_value = 1;
   Value end_value = 2;
   Type type = 3;
+  string display_value = 4;
 
   enum Type {
     TYPE_UNSPECIFIED = 0;
@@ -41,6 +42,7 @@ message Policy {
 message InsuranceSummaryData {
   PoliciesSummary policies_summary = 1;
   repeated Policy policies = 2;
+  repeated SuperTopUpCard plans = 3;
 }
 
 message InsuranceSummaryAPIResponse {
@@ -55,8 +57,11 @@ message InsuranceSummaryAPIResponse {
     string message = 2; // Error Message.
   }
 
+  message EmptyState { repeated SuperTopUpCard plans = 1; }
+
   oneof result {
     InsuranceSummaryData response = 1;
+    EmptyState data = 3;
     Error error = 2;
   }
 }
