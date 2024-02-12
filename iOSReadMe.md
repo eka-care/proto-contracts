@@ -1,9 +1,8 @@
 ## iOS Documentation
 
-* All the proto files will be extracted from the vault folder 
-* Run the following command in terminal to extract swift files from (folderPath) and put it in the required directory namely `Sources/SwiftProtoContracts/swift`
+* All the proto files will be extracted using below command
 ```
-find (folderPath) -name "*.proto" -type f -print0 | xargs -0 protoc --swift_out=Sources/SwiftProtoContracts/swift --swift_opt=Visibility=Public --swift_opt=FileNaming=DropPath 
+make swift_gen
 ```
 * This will generate swift files from proto which can be used as model to communicate data
 
