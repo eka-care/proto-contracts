@@ -250,12 +250,12 @@ public struct Insurance_InsuranceSummaryAPIResponse {
     set {result = .response(newValue)}
   }
 
-  public var data: Insurance_InsuranceSummaryAPIResponse.EmptyState {
+  public var emptyStateData: Insurance_InsuranceSummaryAPIResponse.EmptyState {
     get {
-      if case .data(let v)? = result {return v}
+      if case .emptyStateData(let v)? = result {return v}
       return Insurance_InsuranceSummaryAPIResponse.EmptyState()
     }
-    set {result = .data(newValue)}
+    set {result = .emptyStateData(newValue)}
   }
 
   public var error: Insurance_InsuranceSummaryAPIResponse.Error {
@@ -270,7 +270,7 @@ public struct Insurance_InsuranceSummaryAPIResponse {
 
   public enum OneOf_Result: Equatable {
     case response(Insurance_InsuranceSummaryData)
-    case data(Insurance_InsuranceSummaryAPIResponse.EmptyState)
+    case emptyStateData(Insurance_InsuranceSummaryAPIResponse.EmptyState)
     case error(Insurance_InsuranceSummaryAPIResponse.Error)
 
   #if !swift(>=4.1)
@@ -283,8 +283,8 @@ public struct Insurance_InsuranceSummaryAPIResponse {
         guard case .response(let l) = lhs, case .response(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
-      case (.data, .data): return {
-        guard case .data(let l) = lhs, case .data(let r) = rhs else { preconditionFailure() }
+      case (.emptyStateData, .emptyStateData): return {
+        guard case .emptyStateData(let l) = lhs, case .emptyStateData(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       case (.error, .error): return {
@@ -676,7 +676,7 @@ extension Insurance_InsuranceSummaryAPIResponse: SwiftProtobuf.Message, SwiftPro
   public static let protoMessageName: String = _protobuf_package + ".InsuranceSummaryAPIResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "response"),
-    3: .same(proto: "data"),
+    3: .standard(proto: "empty_state_data"),
     2: .same(proto: "error"),
   ]
 
@@ -717,12 +717,12 @@ extension Insurance_InsuranceSummaryAPIResponse: SwiftProtobuf.Message, SwiftPro
         var hadOneofValue = false
         if let current = self.result {
           hadOneofValue = true
-          if case .data(let m) = current {v = m}
+          if case .emptyStateData(let m) = current {v = m}
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {
           if hadOneofValue {try decoder.handleConflictingOneOf()}
-          self.result = .data(v)
+          self.result = .emptyStateData(v)
         }
       }()
       default: break
@@ -744,8 +744,8 @@ extension Insurance_InsuranceSummaryAPIResponse: SwiftProtobuf.Message, SwiftPro
       guard case .error(let v)? = self.result else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }()
-    case .data?: try {
-      guard case .data(let v)? = self.result else { preconditionFailure() }
+    case .emptyStateData?: try {
+      guard case .emptyStateData(let v)? = self.result else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
     case nil: break
