@@ -312,11 +312,18 @@ public struct Insurance_SuperTopUpCard {
 
   public var img: String = String()
 
-  public var cardCategories: Insurance_SuperTopUpCard.CardCategories = .unspecified
+  public var cardCategory: Insurance_SuperTopUpCard.CardCategory {
+    get {return _cardCategory ?? .unspecified}
+    set {_cardCategory = newValue}
+  }
+  /// Returns true if `cardCategory` has been explicitly set.
+  public var hasCardCategory: Bool {return self._cardCategory != nil}
+  /// Clears the value of `cardCategory`. Subsequent reads from it will return its default value.
+  public mutating func clearCardCategory() {self._cardCategory = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum CardCategories: SwiftProtobuf.Enum {
+  public enum CardCategory: SwiftProtobuf.Enum {
     public typealias RawValue = Int
     case unspecified // = 0
     case primary // = 1
@@ -353,13 +360,14 @@ public struct Insurance_SuperTopUpCard {
   public init() {}
 
   fileprivate var _cta: Vault_Common_CTA? = nil
+  fileprivate var _cardCategory: Insurance_SuperTopUpCard.CardCategory? = nil
 }
 
 #if swift(>=4.2)
 
-extension Insurance_SuperTopUpCard.CardCategories: CaseIterable {
+extension Insurance_SuperTopUpCard.CardCategory: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Insurance_SuperTopUpCard.CardCategories] = [
+  public static let allCases: [Insurance_SuperTopUpCard.CardCategory] = [
     .unspecified,
     .primary,
     .secondary,
@@ -789,7 +797,7 @@ extension Insurance_Member: @unchecked Sendable {}
 extension Insurance_PolicyItem: @unchecked Sendable {}
 extension Insurance_PolicyItem.TypeEnum: @unchecked Sendable {}
 extension Insurance_SuperTopUpCard: @unchecked Sendable {}
-extension Insurance_SuperTopUpCard.CardCategories: @unchecked Sendable {}
+extension Insurance_SuperTopUpCard.CardCategory: @unchecked Sendable {}
 extension Insurance_Coverage: @unchecked Sendable {}
 extension Insurance_Coverage.CoverageStatus: @unchecked Sendable {}
 extension Insurance_PolicyType: @unchecked Sendable {}
@@ -1035,7 +1043,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2: .standard(proto: "sub_title"),
     3: .same(proto: "cta"),
     4: .same(proto: "img"),
-    5: .same(proto: "cardCategories"),
+    5: .standard(proto: "card_category"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1048,7 +1056,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 2: try { try decoder.decodeSingularStringField(value: &self.subTitle) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.img) }()
-      case 5: try { try decoder.decodeSingularEnumField(value: &self.cardCategories) }()
+      case 5: try { try decoder.decodeSingularEnumField(value: &self._cardCategory) }()
       default: break
       }
     }
@@ -1071,9 +1079,9 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if !self.img.isEmpty {
       try visitor.visitSingularStringField(value: self.img, fieldNumber: 4)
     }
-    if self.cardCategories != .unspecified {
-      try visitor.visitSingularEnumField(value: self.cardCategories, fieldNumber: 5)
-    }
+    try { if let v = self._cardCategory {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1082,18 +1090,18 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.subTitle != rhs.subTitle {return false}
     if lhs._cta != rhs._cta {return false}
     if lhs.img != rhs.img {return false}
-    if lhs.cardCategories != rhs.cardCategories {return false}
+    if lhs._cardCategory != rhs._cardCategory {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Insurance_SuperTopUpCard.CardCategories: SwiftProtobuf._ProtoNameProviding {
+extension Insurance_SuperTopUpCard.CardCategory: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "CARD_CATEGORIES_UNSPECIFIED"),
-    1: .same(proto: "CARD_CATEGORIES_PRIMARY"),
-    2: .same(proto: "CARD_CATEGORIES_SECONDARY"),
-    3: .same(proto: "CARD_CATEGORIES_TERTIARY"),
+    0: .same(proto: "CARD_CATEGORY_UNSPECIFIED"),
+    1: .same(proto: "CARD_CATEGORY_PRIMARY"),
+    2: .same(proto: "CARD_CATEGORY_SECONDARY"),
+    3: .same(proto: "CARD_CATEGORY_TERTIARY"),
   ]
 }
 
