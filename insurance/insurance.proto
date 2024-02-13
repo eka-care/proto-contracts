@@ -56,6 +56,14 @@ message SuperTopUpCard {
   string sub_title = 2;
   vault.common.CTA cta = 3;
   string img = 4;
+  CardCategories cardCategories = 5;
+
+  enum CardCategories {
+    CARD_CATEGORIES_UNSPECIFIED = 0;
+    CARD_CATEGORIES_PRIMARY = 1;
+    CARD_CATEGORIES_SECONDARY = 1;
+    CARD_CATEGORIES_TERTIARY = 1;
+  }
 }
 
 message Coverage {
