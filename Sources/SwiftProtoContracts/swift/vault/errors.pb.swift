@@ -52,7 +52,7 @@ public enum Vault_ErrorCode: SwiftProtobuf.Enum {
 
 extension Vault_ErrorCode: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_ErrorCode] = [
+  public static let allCases: [Vault_ErrorCode] = [
     .unspecified,
   ]
 }

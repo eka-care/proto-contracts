@@ -126,7 +126,7 @@ public struct Vault_Labs_Category {
 
 extension Vault_Labs_Category.ItemType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Labs_Category.ItemType] = [
+  public static let allCases: [Vault_Labs_Category.ItemType] = [
     .unspecified,
     .one,
   ]
@@ -444,7 +444,7 @@ public struct Vault_Labs_Package {
 
 extension Vault_Labs_Package.TypeEnum: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Labs_Package.TypeEnum] = [
+  public static let allCases: [Vault_Labs_Package.TypeEnum] = [
     .unspecified,
     .lab,
   ]
@@ -452,7 +452,7 @@ extension Vault_Labs_Package.TypeEnum: CaseIterable {
 
 extension Vault_Labs_Package.ItemType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Labs_Package.ItemType] = [
+  public static let allCases: [Vault_Labs_Package.ItemType] = [
     .unspecified,
     .one,
   ]
@@ -460,7 +460,7 @@ extension Vault_Labs_Package.ItemType: CaseIterable {
 
 extension Vault_Labs_Package.Nudge.TypeEnum: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Labs_Package.Nudge.TypeEnum] = [
+  public static let allCases: [Vault_Labs_Package.Nudge.TypeEnum] = [
     .unspecified,
     .healthPass,
   ]
@@ -468,7 +468,7 @@ extension Vault_Labs_Package.Nudge.TypeEnum: CaseIterable {
 
 extension Vault_Labs_Package.Info.TypeEnum: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Vault_Labs_Package.Info.TypeEnum] = [
+  public static let allCases: [Vault_Labs_Package.Info.TypeEnum] = [
     .unspecified,
     .sample,
     .info,

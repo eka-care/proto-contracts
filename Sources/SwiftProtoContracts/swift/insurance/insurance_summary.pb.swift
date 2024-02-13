@@ -45,6 +45,8 @@ public struct Insurance_CoverageInfo {
 
   public var type: Insurance_CoverageInfo.TypeEnum = .unspecified
 
+  public var displayValue: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum TypeEnum: SwiftProtobuf.Enum {
@@ -224,6 +226,8 @@ public struct Insurance_InsuranceSummaryData {
 
   public var policies: [Insurance_Policy] = []
 
+  public var plans: [Insurance_SuperTopUpCard] = []
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -246,6 +250,14 @@ public struct Insurance_InsuranceSummaryAPIResponse {
     set {result = .response(newValue)}
   }
 
+  public var emptyStateData: Insurance_InsuranceSummaryAPIResponse.EmptyState {
+    get {
+      if case .emptyStateData(let v)? = result {return v}
+      return Insurance_InsuranceSummaryAPIResponse.EmptyState()
+    }
+    set {result = .emptyStateData(newValue)}
+  }
+
   public var error: Insurance_InsuranceSummaryAPIResponse.Error {
     get {
       if case .error(let v)? = result {return v}
@@ -258,6 +270,7 @@ public struct Insurance_InsuranceSummaryAPIResponse {
 
   public enum OneOf_Result: Equatable {
     case response(Insurance_InsuranceSummaryData)
+    case emptyStateData(Insurance_InsuranceSummaryAPIResponse.EmptyState)
     case error(Insurance_InsuranceSummaryAPIResponse.Error)
 
   #if !swift(>=4.1)
@@ -268,6 +281,10 @@ public struct Insurance_InsuranceSummaryAPIResponse {
       switch (lhs, rhs) {
       case (.response, .response): return {
         guard case .response(let l) = lhs, case .response(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.emptyStateData, .emptyStateData): return {
+        guard case .emptyStateData(let l) = lhs, case .emptyStateData(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       case (.error, .error): return {
@@ -325,6 +342,18 @@ public struct Insurance_InsuranceSummaryAPIResponse {
     public init() {}
   }
 
+  public struct EmptyState {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var plans: [Insurance_SuperTopUpCard] = []
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
   public init() {}
 }
 
@@ -350,6 +379,7 @@ extension Insurance_InsuranceSummaryAPIResponse: @unchecked Sendable {}
 extension Insurance_InsuranceSummaryAPIResponse.OneOf_Result: @unchecked Sendable {}
 extension Insurance_InsuranceSummaryAPIResponse.ErrorCode: @unchecked Sendable {}
 extension Insurance_InsuranceSummaryAPIResponse.Error: @unchecked Sendable {}
+extension Insurance_InsuranceSummaryAPIResponse.EmptyState: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -362,6 +392,7 @@ extension Insurance_CoverageInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     1: .standard(proto: "start_value"),
     2: .standard(proto: "end_value"),
     3: .same(proto: "type"),
+    4: .standard(proto: "display_value"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -373,6 +404,7 @@ extension Insurance_CoverageInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       case 1: try { try decoder.decodeSingularMessageField(value: &self._startValue) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._endValue) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.type) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.displayValue) }()
       default: break
       }
     }
@@ -392,6 +424,9 @@ extension Insurance_CoverageInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if self.type != .unspecified {
       try visitor.visitSingularEnumField(value: self.type, fieldNumber: 3)
     }
+    if !self.displayValue.isEmpty {
+      try visitor.visitSingularStringField(value: self.displayValue, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -399,6 +434,7 @@ extension Insurance_CoverageInfo: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if lhs._startValue != rhs._startValue {return false}
     if lhs._endValue != rhs._endValue {return false}
     if lhs.type != rhs.type {return false}
+    if lhs.displayValue != rhs.displayValue {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -593,6 +629,7 @@ extension Insurance_InsuranceSummaryData: SwiftProtobuf.Message, SwiftProtobuf._
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "policies_summary"),
     2: .same(proto: "policies"),
+    3: .same(proto: "plans"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -603,6 +640,7 @@ extension Insurance_InsuranceSummaryData: SwiftProtobuf.Message, SwiftProtobuf._
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._policiesSummary) }()
       case 2: try { try decoder.decodeRepeatedMessageField(value: &self.policies) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.plans) }()
       default: break
       }
     }
@@ -619,12 +657,16 @@ extension Insurance_InsuranceSummaryData: SwiftProtobuf.Message, SwiftProtobuf._
     if !self.policies.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.policies, fieldNumber: 2)
     }
+    if !self.plans.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.plans, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_InsuranceSummaryData, rhs: Insurance_InsuranceSummaryData) -> Bool {
     if lhs._policiesSummary != rhs._policiesSummary {return false}
     if lhs.policies != rhs.policies {return false}
+    if lhs.plans != rhs.plans {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -634,6 +676,7 @@ extension Insurance_InsuranceSummaryAPIResponse: SwiftProtobuf.Message, SwiftPro
   public static let protoMessageName: String = _protobuf_package + ".InsuranceSummaryAPIResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "response"),
+    3: .standard(proto: "empty_state_data"),
     2: .same(proto: "error"),
   ]
 
@@ -669,6 +712,19 @@ extension Insurance_InsuranceSummaryAPIResponse: SwiftProtobuf.Message, SwiftPro
           self.result = .error(v)
         }
       }()
+      case 3: try {
+        var v: Insurance_InsuranceSummaryAPIResponse.EmptyState?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .emptyStateData(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .emptyStateData(v)
+        }
+      }()
       default: break
       }
     }
@@ -687,6 +743,10 @@ extension Insurance_InsuranceSummaryAPIResponse: SwiftProtobuf.Message, SwiftPro
     case .error?: try {
       guard case .error(let v)? = self.result else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case .emptyStateData?: try {
+      guard case .emptyStateData(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
     case nil: break
     }
@@ -739,6 +799,38 @@ extension Insurance_InsuranceSummaryAPIResponse.Error: SwiftProtobuf.Message, Sw
   public static func ==(lhs: Insurance_InsuranceSummaryAPIResponse.Error, rhs: Insurance_InsuranceSummaryAPIResponse.Error) -> Bool {
     if lhs.code != rhs.code {return false}
     if lhs.message != rhs.message {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Insurance_InsuranceSummaryAPIResponse.EmptyState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Insurance_InsuranceSummaryAPIResponse.protoMessageName + ".EmptyState"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "plans"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.plans) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.plans.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.plans, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_InsuranceSummaryAPIResponse.EmptyState, rhs: Insurance_InsuranceSummaryAPIResponse.EmptyState) -> Bool {
+    if lhs.plans != rhs.plans {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

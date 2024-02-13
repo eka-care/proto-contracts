@@ -25,8 +25,6 @@ public struct Insurance_AssignProfileAPIRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var memberDbID: String = String()
-
   /// when nil, it means clear the OID assigned to the member.
   public var assignOid: String {
     get {return _assignOid ?? String()}
@@ -135,8 +133,7 @@ fileprivate let _protobuf_package = "insurance"
 extension Insurance_AssignProfileAPIRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AssignProfileAPIRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "member_db_id"),
-    2: .standard(proto: "assign_oid"),
+    1: .standard(proto: "assign_oid"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -145,8 +142,7 @@ extension Insurance_AssignProfileAPIRequest: SwiftProtobuf.Message, SwiftProtobu
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.memberDbID) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self._assignOid) }()
+      case 1: try { try decoder.decodeSingularStringField(value: &self._assignOid) }()
       default: break
       }
     }
@@ -157,17 +153,13 @@ extension Insurance_AssignProfileAPIRequest: SwiftProtobuf.Message, SwiftProtobu
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    if !self.memberDbID.isEmpty {
-      try visitor.visitSingularStringField(value: self.memberDbID, fieldNumber: 1)
-    }
     try { if let v = self._assignOid {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_AssignProfileAPIRequest, rhs: Insurance_AssignProfileAPIRequest) -> Bool {
-    if lhs.memberDbID != rhs.memberDbID {return false}
     if lhs._assignOid != rhs._assignOid {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
