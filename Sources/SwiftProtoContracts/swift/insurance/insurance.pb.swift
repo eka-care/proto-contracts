@@ -312,12 +312,62 @@ public struct Insurance_SuperTopUpCard {
 
   public var img: String = String()
 
+  public var cardCategories: Insurance_SuperTopUpCard.CardCategories = .unspecified
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum CardCategories: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
+    case unspecified // = 0
+    case primary // = 1
+    case secondary // = 2
+    case tertiary // = 3
+    case UNRECOGNIZED(Int)
+
+    public init() {
+      self = .unspecified
+    }
+
+    public init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .unspecified
+      case 1: self = .primary
+      case 2: self = .secondary
+      case 3: self = .tertiary
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    public var rawValue: Int {
+      switch self {
+      case .unspecified: return 0
+      case .primary: return 1
+      case .secondary: return 2
+      case .tertiary: return 3
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
 
   public init() {}
 
   fileprivate var _cta: Vault_Common_CTA? = nil
 }
+
+#if swift(>=4.2)
+
+extension Insurance_SuperTopUpCard.CardCategories: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Insurance_SuperTopUpCard.CardCategories] = [
+    .unspecified,
+    .primary,
+    .secondary,
+    .tertiary,
+  ]
+}
+
+#endif  // swift(>=4.2)
 
 public struct Insurance_Coverage {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -739,6 +789,7 @@ extension Insurance_Member: @unchecked Sendable {}
 extension Insurance_PolicyItem: @unchecked Sendable {}
 extension Insurance_PolicyItem.TypeEnum: @unchecked Sendable {}
 extension Insurance_SuperTopUpCard: @unchecked Sendable {}
+extension Insurance_SuperTopUpCard.CardCategories: @unchecked Sendable {}
 extension Insurance_Coverage: @unchecked Sendable {}
 extension Insurance_Coverage.CoverageStatus: @unchecked Sendable {}
 extension Insurance_PolicyType: @unchecked Sendable {}
@@ -984,6 +1035,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2: .standard(proto: "sub_title"),
     3: .same(proto: "cta"),
     4: .same(proto: "img"),
+    5: .same(proto: "cardCategories"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -996,6 +1048,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 2: try { try decoder.decodeSingularStringField(value: &self.subTitle) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.img) }()
+      case 5: try { try decoder.decodeSingularEnumField(value: &self.cardCategories) }()
       default: break
       }
     }
@@ -1018,6 +1071,9 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if !self.img.isEmpty {
       try visitor.visitSingularStringField(value: self.img, fieldNumber: 4)
     }
+    if self.cardCategories != .unspecified {
+      try visitor.visitSingularEnumField(value: self.cardCategories, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1026,9 +1082,19 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.subTitle != rhs.subTitle {return false}
     if lhs._cta != rhs._cta {return false}
     if lhs.img != rhs.img {return false}
+    if lhs.cardCategories != rhs.cardCategories {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
+}
+
+extension Insurance_SuperTopUpCard.CardCategories: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "CARD_CATEGORIES_UNSPECIFIED"),
+    1: .same(proto: "CARD_CATEGORIES_PRIMARY"),
+    2: .same(proto: "CARD_CATEGORIES_SECONDARY"),
+    3: .same(proto: "CARD_CATEGORIES_TERTIARY"),
+  ]
 }
 
 extension Insurance_Coverage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
