@@ -3,6 +3,7 @@ syntax = "proto3";
 package insurance;
 
 import "insurance/types.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
@@ -10,4 +11,5 @@ message SmartReportCreated {
   string p_uuid = 1;
   string ref_id = 2;
   Type type = 3;
+  optional google.protobuf.Timestamp issued_date = 4;
 }

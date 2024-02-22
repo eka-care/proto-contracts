@@ -31,9 +31,20 @@ public struct Insurance_SmartReportCreated {
 
   public var type: Insurance_Type = .unspecified
 
+  public var issuedDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _issuedDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_issuedDate = newValue}
+  }
+  /// Returns true if `issuedDate` has been explicitly set.
+  public var hasIssuedDate: Bool {return self._issuedDate != nil}
+  /// Clears the value of `issuedDate`. Subsequent reads from it will return its default value.
+  public mutating func clearIssuedDate() {self._issuedDate = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _issuedDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
@@ -50,6 +61,7 @@ extension Insurance_SmartReportCreated: SwiftProtobuf.Message, SwiftProtobuf._Me
     1: .standard(proto: "p_uuid"),
     2: .standard(proto: "ref_id"),
     3: .same(proto: "type"),
+    4: .standard(proto: "issued_date"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -61,12 +73,17 @@ extension Insurance_SmartReportCreated: SwiftProtobuf.Message, SwiftProtobuf._Me
       case 1: try { try decoder.decodeSingularStringField(value: &self.pUuid) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.refID) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.type) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._issuedDate) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.pUuid.isEmpty {
       try visitor.visitSingularStringField(value: self.pUuid, fieldNumber: 1)
     }
@@ -76,6 +93,9 @@ extension Insurance_SmartReportCreated: SwiftProtobuf.Message, SwiftProtobuf._Me
     if self.type != .unspecified {
       try visitor.visitSingularEnumField(value: self.type, fieldNumber: 3)
     }
+    try { if let v = self._issuedDate {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -83,6 +103,7 @@ extension Insurance_SmartReportCreated: SwiftProtobuf.Message, SwiftProtobuf._Me
     if lhs.pUuid != rhs.pUuid {return false}
     if lhs.refID != rhs.refID {return false}
     if lhs.type != rhs.type {return false}
+    if lhs._issuedDate != rhs._issuedDate {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

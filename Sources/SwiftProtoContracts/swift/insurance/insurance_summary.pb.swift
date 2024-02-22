@@ -349,9 +349,20 @@ public struct Insurance_InsuranceSummaryAPIResponse {
 
     public var plans: [Insurance_SuperTopUpCard] = []
 
+    public var sellCta: Vault_Common_CTA {
+      get {return _sellCta ?? Vault_Common_CTA()}
+      set {_sellCta = newValue}
+    }
+    /// Returns true if `sellCta` has been explicitly set.
+    public var hasSellCta: Bool {return self._sellCta != nil}
+    /// Clears the value of `sellCta`. Subsequent reads from it will return its default value.
+    public mutating func clearSellCta() {self._sellCta = nil}
+
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
     public init() {}
+
+    fileprivate var _sellCta: Vault_Common_CTA? = nil
   }
 
   public init() {}
@@ -808,6 +819,7 @@ extension Insurance_InsuranceSummaryAPIResponse.EmptyState: SwiftProtobuf.Messag
   public static let protoMessageName: String = Insurance_InsuranceSummaryAPIResponse.protoMessageName + ".EmptyState"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "plans"),
+    2: .standard(proto: "sell_cta"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -817,20 +829,29 @@ extension Insurance_InsuranceSummaryAPIResponse.EmptyState: SwiftProtobuf.Messag
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.plans) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._sellCta) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.plans.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.plans, fieldNumber: 1)
     }
+    try { if let v = self._sellCta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_InsuranceSummaryAPIResponse.EmptyState, rhs: Insurance_InsuranceSummaryAPIResponse.EmptyState) -> Bool {
     if lhs.plans != rhs.plans {return false}
+    if lhs._sellCta != rhs._sellCta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

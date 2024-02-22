@@ -57,7 +57,10 @@ message InsuranceSummaryAPIResponse {
     string message = 2; // Error Message.
   }
 
-  message EmptyState { repeated SuperTopUpCard plans = 1; }
+  message EmptyState {
+    repeated SuperTopUpCard plans = 1;
+    vault.common.CTA sell_cta = 2;
+  }
 
   oneof result {
     InsuranceSummaryData response = 1;
