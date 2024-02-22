@@ -42,6 +42,18 @@ public struct Insurance_AssignProfileAPIRequest {
   fileprivate var _assignOid: String? = nil
 }
 
+public struct Insurance_AssignProfileResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var affectedDbIds: [String] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 /// Error represents error resonse of API 
 public struct Insurance_AssignProfileAPIResponseError {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -103,27 +115,60 @@ public struct Insurance_AssignProfileAPIResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var error: Insurance_AssignProfileAPIResponseError {
-    get {return _error ?? Insurance_AssignProfileAPIResponseError()}
-    set {_error = newValue}
+  public var result: Insurance_AssignProfileAPIResponse.OneOf_Result? = nil
+
+  public var response: Insurance_AssignProfileResponse {
+    get {
+      if case .response(let v)? = result {return v}
+      return Insurance_AssignProfileResponse()
+    }
+    set {result = .response(newValue)}
   }
-  /// Returns true if `error` has been explicitly set.
-  public var hasError: Bool {return self._error != nil}
-  /// Clears the value of `error`. Subsequent reads from it will return its default value.
-  public mutating func clearError() {self._error = nil}
+
+  public var error: Insurance_AssignProfileAPIResponseError {
+    get {
+      if case .error(let v)? = result {return v}
+      return Insurance_AssignProfileAPIResponseError()
+    }
+    set {result = .error(newValue)}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public init() {}
+  public enum OneOf_Result: Equatable {
+    case response(Insurance_AssignProfileResponse)
+    case error(Insurance_AssignProfileAPIResponseError)
 
-  fileprivate var _error: Insurance_AssignProfileAPIResponseError? = nil
+  #if !swift(>=4.1)
+    public static func ==(lhs: Insurance_AssignProfileAPIResponse.OneOf_Result, rhs: Insurance_AssignProfileAPIResponse.OneOf_Result) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch (lhs, rhs) {
+      case (.response, .response): return {
+        guard case .response(let l) = lhs, case .response(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.error, .error): return {
+        guard case .error(let l) = lhs, case .error(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      default: return false
+      }
+    }
+  #endif
+  }
+
+  public init() {}
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Insurance_AssignProfileAPIRequest: @unchecked Sendable {}
+extension Insurance_AssignProfileResponse: @unchecked Sendable {}
 extension Insurance_AssignProfileAPIResponseError: @unchecked Sendable {}
 extension Insurance_AssignProfileAPIResponseError.ErrorCode: @unchecked Sendable {}
 extension Insurance_AssignProfileAPIResponse: @unchecked Sendable {}
+extension Insurance_AssignProfileAPIResponse.OneOf_Result: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -161,6 +206,38 @@ extension Insurance_AssignProfileAPIRequest: SwiftProtobuf.Message, SwiftProtobu
 
   public static func ==(lhs: Insurance_AssignProfileAPIRequest, rhs: Insurance_AssignProfileAPIRequest) -> Bool {
     if lhs._assignOid != rhs._assignOid {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Insurance_AssignProfileResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssignProfileResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "affected_db_ids"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.affectedDbIds) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.affectedDbIds.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.affectedDbIds, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_AssignProfileResponse, rhs: Insurance_AssignProfileResponse) -> Bool {
+    if lhs.affectedDbIds != rhs.affectedDbIds {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -213,7 +290,8 @@ extension Insurance_AssignProfileAPIResponseError.ErrorCode: SwiftProtobuf._Prot
 extension Insurance_AssignProfileAPIResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".AssignProfileAPIResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "error"),
+    1: .same(proto: "response"),
+    2: .same(proto: "error"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -222,7 +300,32 @@ extension Insurance_AssignProfileAPIResponse: SwiftProtobuf.Message, SwiftProtob
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._error) }()
+      case 1: try {
+        var v: Insurance_AssignProfileResponse?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .response(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .response(v)
+        }
+      }()
+      case 2: try {
+        var v: Insurance_AssignProfileAPIResponseError?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .error(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .error(v)
+        }
+      }()
       default: break
       }
     }
@@ -233,14 +336,22 @@ extension Insurance_AssignProfileAPIResponse: SwiftProtobuf.Message, SwiftProtob
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._error {
+    switch self.result {
+    case .response?: try {
+      guard case .response(let v)? = self.result else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
+    }()
+    case .error?: try {
+      guard case .error(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case nil: break
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_AssignProfileAPIResponse, rhs: Insurance_AssignProfileAPIResponse) -> Bool {
-    if lhs._error != rhs._error {return false}
+    if lhs.result != rhs.result {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
