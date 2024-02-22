@@ -9,6 +9,10 @@ message AssignProfileAPIRequest {
       1; // when nil, it means clear the OID assigned to the member.
 }
 
+message AssignProfileResponse {
+  repeated string affected_db_ids = 1;
+}
+
 /* Error represents error resonse of API */
 message AssignProfileAPIResponseError {
   ErrorCode code = 1; // Error Code.
@@ -21,5 +25,8 @@ message AssignProfileAPIResponseError {
 }
 
 message AssignProfileAPIResponse {
-  optional AssignProfileAPIResponseError error = 1;
+  oneof result {
+    AssignProfileResponse response = 1;
+    AssignProfileAPIResponseError error = 2;
+  }
 }
