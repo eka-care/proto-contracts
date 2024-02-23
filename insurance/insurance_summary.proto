@@ -4,6 +4,7 @@ package insurance;
 import "vault/cta.proto";
 import "insurance/insurance.proto";
 import "insurance/value.proto";
+import "insurance/policy.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
@@ -31,12 +32,6 @@ message PoliciesSummary {
     Coverage coverage = 1;
     repeated CoverageInfo breakup = 2;
   }
-}
-
-message Policy {
-  InsurerInfo insurer = 1;
-  PolicyDetails policy_details = 2;
-  vault.common.CTA cta = 3;
 }
 
 message ExpiredPolicies {}

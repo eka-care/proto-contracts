@@ -169,47 +169,6 @@ public struct Insurance_PoliciesSummary {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-public struct Insurance_Policy {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  public var insurer: Insurance_InsurerInfo {
-    get {return _insurer ?? Insurance_InsurerInfo()}
-    set {_insurer = newValue}
-  }
-  /// Returns true if `insurer` has been explicitly set.
-  public var hasInsurer: Bool {return self._insurer != nil}
-  /// Clears the value of `insurer`. Subsequent reads from it will return its default value.
-  public mutating func clearInsurer() {self._insurer = nil}
-
-  public var policyDetails: Insurance_PolicyDetails {
-    get {return _policyDetails ?? Insurance_PolicyDetails()}
-    set {_policyDetails = newValue}
-  }
-  /// Returns true if `policyDetails` has been explicitly set.
-  public var hasPolicyDetails: Bool {return self._policyDetails != nil}
-  /// Clears the value of `policyDetails`. Subsequent reads from it will return its default value.
-  public mutating func clearPolicyDetails() {self._policyDetails = nil}
-
-  public var cta: Vault_Common_CTA {
-    get {return _cta ?? Vault_Common_CTA()}
-    set {_cta = newValue}
-  }
-  /// Returns true if `cta` has been explicitly set.
-  public var hasCta: Bool {return self._cta != nil}
-  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
-  public mutating func clearCta() {self._cta = nil}
-
-  public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  public init() {}
-
-  fileprivate var _insurer: Insurance_InsurerInfo? = nil
-  fileprivate var _policyDetails: Insurance_PolicyDetails? = nil
-  fileprivate var _cta: Vault_Common_CTA? = nil
-}
-
 public struct Insurance_ExpiredPolicies {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -414,7 +373,6 @@ extension Insurance_CoverageInfo: @unchecked Sendable {}
 extension Insurance_CoverageInfo.TypeEnum: @unchecked Sendable {}
 extension Insurance_PoliciesSummary: @unchecked Sendable {}
 extension Insurance_PoliciesSummary.CoverageDetails: @unchecked Sendable {}
-extension Insurance_Policy: @unchecked Sendable {}
 extension Insurance_ExpiredPolicies: @unchecked Sendable {}
 extension Insurance_InsuranceSummaryData: @unchecked Sendable {}
 extension Insurance_InsuranceSummaryAPIResponse: @unchecked Sendable {}
@@ -613,54 +571,6 @@ extension Insurance_PoliciesSummary.CoverageDetails: SwiftProtobuf.Message, Swif
   public static func ==(lhs: Insurance_PoliciesSummary.CoverageDetails, rhs: Insurance_PoliciesSummary.CoverageDetails) -> Bool {
     if lhs._coverage != rhs._coverage {return false}
     if lhs.breakup != rhs.breakup {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Insurance_Policy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".Policy"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "insurer"),
-    2: .standard(proto: "policy_details"),
-    3: .same(proto: "cta"),
-  ]
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._insurer) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._policyDetails) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._insurer {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    try { if let v = self._policyDetails {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._cta {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Insurance_Policy, rhs: Insurance_Policy) -> Bool {
-    if lhs._insurer != rhs._insurer {return false}
-    if lhs._policyDetails != rhs._policyDetails {return false}
-    if lhs._cta != rhs._cta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
