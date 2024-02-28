@@ -5,6 +5,7 @@ gen: go_gen python_gen
 go_gen:
 	@protoc -I=./ --go_out=./../../../ ./vault/*.proto
 	@protoc -I=./ --go_out=./../../../ ./insurance/*.proto
+	@protoc -I=./ --go_out=./../../../ ./gmail/*.proto
 
 python_gen:
 	@protoc -I=./ --python_out=./python/ ./vault/*.proto

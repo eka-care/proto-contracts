@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package insurance;
+
+import "google/protobuf/timestamp.proto";
+import "gmail/sync_type.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/gmailsync";
+
+/* SyncComplete */
+message SyncComplete {
+  string p_uuid = 1;
+  string email_id = 2;
+  Data meta = 3;
+
+  message Data {
+    string sync_id = 1;
+    SyncType sync_type = 2;
+    Duration sync_duration = 3;
+    Aggregates sync_aggregates = 4;
+  }
+
+  message Duration {
+    google.protobuf.Timestamp sync_time_start = 1;
+    google.protobuf.Timestamp sync_time_end = 2;
+  }
+
+  message Aggregates {
+    int32 relevant_records_found = 1;
+    BreakUp breakup = 2;
+  }
+
+  message BreakUp {
+    int32 identified_records = 1;
+    int32 needs_review_records = 2;
+    int32 unable_to_classify_records = 3;
+    int32 identified_profiles = 4;
+    int32 needs_review_profiles = 5;
+    int32 count_of_smart_reports = 6;
+  }
+}
