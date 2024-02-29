@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package insurance;
+package gmailsync;
 
 import "google/protobuf/timestamp.proto";
 import "gmail/sync_type.proto";
