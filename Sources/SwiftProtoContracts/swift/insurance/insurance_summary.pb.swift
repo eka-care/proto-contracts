@@ -113,31 +113,31 @@ public struct Insurance_PoliciesSummary {
   // methods supported on all messages.
 
   public var totalCoverage: Insurance_Value {
-    get {return _storage._totalCoverage ?? Insurance_Value()}
-    set {_uniqueStorage()._totalCoverage = newValue}
+    get {return _totalCoverage ?? Insurance_Value()}
+    set {_totalCoverage = newValue}
   }
   /// Returns true if `totalCoverage` has been explicitly set.
-  public var hasTotalCoverage: Bool {return _storage._totalCoverage != nil}
+  public var hasTotalCoverage: Bool {return self._totalCoverage != nil}
   /// Clears the value of `totalCoverage`. Subsequent reads from it will return its default value.
-  public mutating func clearTotalCoverage() {_uniqueStorage()._totalCoverage = nil}
+  public mutating func clearTotalCoverage() {self._totalCoverage = nil}
 
   public var totalPremium: Insurance_ValueFloat {
-    get {return _storage._totalPremium ?? Insurance_ValueFloat()}
-    set {_uniqueStorage()._totalPremium = newValue}
+    get {return _totalPremium ?? Insurance_ValueFloat()}
+    set {_totalPremium = newValue}
   }
   /// Returns true if `totalPremium` has been explicitly set.
-  public var hasTotalPremium: Bool {return _storage._totalPremium != nil}
+  public var hasTotalPremium: Bool {return self._totalPremium != nil}
   /// Clears the value of `totalPremium`. Subsequent reads from it will return its default value.
-  public mutating func clearTotalPremium() {_uniqueStorage()._totalPremium = nil}
+  public mutating func clearTotalPremium() {self._totalPremium = nil}
 
   public var coverageInfo: Insurance_PoliciesSummary.CoverageDetails {
-    get {return _storage._coverageInfo ?? Insurance_PoliciesSummary.CoverageDetails()}
-    set {_uniqueStorage()._coverageInfo = newValue}
+    get {return _coverageInfo ?? Insurance_PoliciesSummary.CoverageDetails()}
+    set {_coverageInfo = newValue}
   }
   /// Returns true if `coverageInfo` has been explicitly set.
-  public var hasCoverageInfo: Bool {return _storage._coverageInfo != nil}
+  public var hasCoverageInfo: Bool {return self._coverageInfo != nil}
   /// Clears the value of `coverageInfo`. Subsequent reads from it will return its default value.
-  public mutating func clearCoverageInfo() {_uniqueStorage()._coverageInfo = nil}
+  public mutating func clearCoverageInfo() {self._coverageInfo = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -166,7 +166,9 @@ public struct Insurance_PoliciesSummary {
 
   public init() {}
 
-  fileprivate var _storage = _StorageClass.defaultInstance
+  fileprivate var _totalCoverage: Insurance_Value? = nil
+  fileprivate var _totalPremium: Insurance_ValueFloat? = nil
+  fileprivate var _coverageInfo: Insurance_PoliciesSummary.CoverageDetails? = nil
 }
 
 public struct Insurance_ExpiredPolicies {
@@ -458,77 +460,41 @@ extension Insurance_PoliciesSummary: SwiftProtobuf.Message, SwiftProtobuf._Messa
     3: .standard(proto: "coverage_info"),
   ]
 
-  fileprivate class _StorageClass {
-    var _totalCoverage: Insurance_Value? = nil
-    var _totalPremium: Insurance_ValueFloat? = nil
-    var _coverageInfo: Insurance_PoliciesSummary.CoverageDetails? = nil
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _totalCoverage = source._totalCoverage
-      _totalPremium = source._totalPremium
-      _coverageInfo = source._coverageInfo
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        // The use of inline closures is to circumvent an issue where the compiler
-        // allocates stack space for every case branch when no optimizations are
-        // enabled. https://github.com/apple/swift-protobuf/issues/1034
-        switch fieldNumber {
-        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._totalCoverage) }()
-        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._totalPremium) }()
-        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._coverageInfo) }()
-        default: break
-        }
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._totalCoverage) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._totalPremium) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._coverageInfo) }()
+      default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every if/case branch local when no optimizations
-      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-      // https://github.com/apple/swift-protobuf/issues/1182
-      try { if let v = _storage._totalCoverage {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      } }()
-      try { if let v = _storage._totalPremium {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      } }()
-      try { if let v = _storage._coverageInfo {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-      } }()
-    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._totalCoverage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._totalPremium {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._coverageInfo {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_PoliciesSummary, rhs: Insurance_PoliciesSummary) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._totalCoverage != rhs_storage._totalCoverage {return false}
-        if _storage._totalPremium != rhs_storage._totalPremium {return false}
-        if _storage._coverageInfo != rhs_storage._coverageInfo {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs._totalCoverage != rhs._totalCoverage {return false}
+    if lhs._totalPremium != rhs._totalPremium {return false}
+    if lhs._coverageInfo != rhs._coverageInfo {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
