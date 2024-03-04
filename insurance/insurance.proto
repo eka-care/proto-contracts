@@ -57,7 +57,9 @@ message SuperTopUpCard {
   vault.common.CTA cta = 3;
   string img = 4;
   optional CardCategory card_category = 5;
-
+  Value premium = 6;
+  Value coverage = 7;
+  
   enum CardCategory {
     CARD_CATEGORY_UNSPECIFIED = 0;
     CARD_CATEGORY_PRIMARY = 1;
