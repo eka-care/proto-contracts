@@ -4,6 +4,7 @@ package insurance;
 import "vault/cta.proto";
 import "insurance/insurance.proto";
 import "insurance/value.proto";
+import "insurance/policy.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/insurance";
 
@@ -33,16 +34,13 @@ message PoliciesSummary {
   }
 }
 
-message Policy {
-  InsurerInfo insurer = 1;
-  PolicyDetails policy_details = 2;
-  vault.common.CTA cta = 3;
-}
+message ExpiredPolicies {}
 
 message InsuranceSummaryData {
   PoliciesSummary policies_summary = 1;
   repeated Policy policies = 2;
   repeated SuperTopUpCard plans = 3;
+  optional ExpiredPolicies expired_policies = 4;
 }
 
 message InsuranceSummaryAPIResponse {
@@ -60,6 +58,7 @@ message InsuranceSummaryAPIResponse {
   message EmptyState {
     repeated SuperTopUpCard plans = 1;
     vault.common.CTA sell_cta = 2;
+    optional ExpiredPolicies expired_policies = 3;
   }
 
   oneof result {

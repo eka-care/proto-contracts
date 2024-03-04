@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package gmailsync;
+
+option go_package = "github.com/eka-care/proto-contracts/go/gmailsync";
+
+enum SyncType {
+  TYPE_UNSPECIFIED = 0; // Unspecified.
+  TYPE_PERIODIC = 1;    // PERIODIC.
+  TYPE_RERUN = 2;       // RERUN.
+  TYPE_INITIAL = 3;     // INITIAL.
+  TYPE_ONDEMAND = 4;    // ONDEMAND.
+}
