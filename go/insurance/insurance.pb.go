@@ -228,7 +228,7 @@ func (x SuperTopUpCard_CardCategory) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SuperTopUpCard_CardCategory.Descriptor instead.
 func (SuperTopUpCard_CardCategory) EnumDescriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{4, 0}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{5, 0}
 }
 
 type Coverage_CoverageStatus int32
@@ -280,7 +280,7 @@ func (x Coverage_CoverageStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Coverage_CoverageStatus.Descriptor instead.
 func (Coverage_CoverageStatus) EnumDescriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{5, 0}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{6, 0}
 }
 
 type PolicyDetails_PolicyStatus int32
@@ -332,7 +332,7 @@ func (x PolicyDetails_PolicyStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PolicyDetails_PolicyStatus.Descriptor instead.
 func (PolicyDetails_PolicyStatus) EnumDescriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{8, 0}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{9, 0}
 }
 
 type InsurerInfo struct {
@@ -595,6 +595,61 @@ func (x *PolicyItem) GetType() PolicyItem_Type {
 	return PolicyItem_TYPE_UNSPECIFIED
 }
 
+type SuperTopUpCardValue struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Premium  *Value `protobuf:"bytes,1,opt,name=premium,proto3" json:"premium,omitempty"`
+	Coverage *Value `protobuf:"bytes,2,opt,name=coverage,proto3" json:"coverage,omitempty"`
+}
+
+func (x *SuperTopUpCardValue) Reset() {
+	*x = SuperTopUpCardValue{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_insurance_insurance_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SuperTopUpCardValue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuperTopUpCardValue) ProtoMessage() {}
+
+func (x *SuperTopUpCardValue) ProtoReflect() protoreflect.Message {
+	mi := &file_insurance_insurance_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuperTopUpCardValue.ProtoReflect.Descriptor instead.
+func (*SuperTopUpCardValue) Descriptor() ([]byte, []int) {
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *SuperTopUpCardValue) GetPremium() *Value {
+	if x != nil {
+		return x.Premium
+	}
+	return nil
+}
+
+func (x *SuperTopUpCardValue) GetCoverage() *Value {
+	if x != nil {
+		return x.Coverage
+	}
+	return nil
+}
+
 type SuperTopUpCard struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -605,12 +660,13 @@ type SuperTopUpCard struct {
 	Cta          *cta.CTA                     `protobuf:"bytes,3,opt,name=cta,proto3" json:"cta,omitempty"`
 	Img          string                       `protobuf:"bytes,4,opt,name=img,proto3" json:"img,omitempty"`
 	CardCategory *SuperTopUpCard_CardCategory `protobuf:"varint,5,opt,name=card_category,json=cardCategory,proto3,enum=insurance.SuperTopUpCard_CardCategory,oneof" json:"card_category,omitempty"`
+	CardValue    *SuperTopUpCardValue         `protobuf:"bytes,6,opt,name=card_value,json=cardValue,proto3" json:"card_value,omitempty"`
 }
 
 func (x *SuperTopUpCard) Reset() {
 	*x = SuperTopUpCard{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[4]
+		mi := &file_insurance_insurance_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -623,7 +679,7 @@ func (x *SuperTopUpCard) String() string {
 func (*SuperTopUpCard) ProtoMessage() {}
 
 func (x *SuperTopUpCard) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[4]
+	mi := &file_insurance_insurance_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -636,7 +692,7 @@ func (x *SuperTopUpCard) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuperTopUpCard.ProtoReflect.Descriptor instead.
 func (*SuperTopUpCard) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{4}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SuperTopUpCard) GetTitle() string {
@@ -674,6 +730,13 @@ func (x *SuperTopUpCard) GetCardCategory() SuperTopUpCard_CardCategory {
 	return SuperTopUpCard_CARD_CATEGORY_UNSPECIFIED
 }
 
+func (x *SuperTopUpCard) GetCardValue() *SuperTopUpCardValue {
+	if x != nil {
+		return x.CardValue
+	}
+	return nil
+}
+
 type Coverage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -687,7 +750,7 @@ type Coverage struct {
 func (x *Coverage) Reset() {
 	*x = Coverage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[5]
+		mi := &file_insurance_insurance_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -700,7 +763,7 @@ func (x *Coverage) String() string {
 func (*Coverage) ProtoMessage() {}
 
 func (x *Coverage) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[5]
+	mi := &file_insurance_insurance_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -713,7 +776,7 @@ func (x *Coverage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Coverage.ProtoReflect.Descriptor instead.
 func (*Coverage) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{5}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Coverage) GetCoverageStatus() Coverage_CoverageStatus {
@@ -750,7 +813,7 @@ type PolicyType struct {
 func (x *PolicyType) Reset() {
 	*x = PolicyType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[6]
+		mi := &file_insurance_insurance_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -763,7 +826,7 @@ func (x *PolicyType) String() string {
 func (*PolicyType) ProtoMessage() {}
 
 func (x *PolicyType) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[6]
+	mi := &file_insurance_insurance_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -776,7 +839,7 @@ func (x *PolicyType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PolicyType.ProtoReflect.Descriptor instead.
 func (*PolicyType) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{6}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PolicyType) GetType() Type {
@@ -813,7 +876,7 @@ type PolicyDates struct {
 func (x *PolicyDates) Reset() {
 	*x = PolicyDates{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[7]
+		mi := &file_insurance_insurance_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -826,7 +889,7 @@ func (x *PolicyDates) String() string {
 func (*PolicyDates) ProtoMessage() {}
 
 func (x *PolicyDates) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[7]
+	mi := &file_insurance_insurance_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -839,7 +902,7 @@ func (x *PolicyDates) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PolicyDates.ProtoReflect.Descriptor instead.
 func (*PolicyDates) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{7}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PolicyDates) GetStartDate() *ValueDate {
@@ -882,7 +945,7 @@ type PolicyDetails struct {
 func (x *PolicyDetails) Reset() {
 	*x = PolicyDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[8]
+		mi := &file_insurance_insurance_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -895,7 +958,7 @@ func (x *PolicyDetails) String() string {
 func (*PolicyDetails) ProtoMessage() {}
 
 func (x *PolicyDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[8]
+	mi := &file_insurance_insurance_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -908,7 +971,7 @@ func (x *PolicyDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PolicyDetails.ProtoReflect.Descriptor instead.
 func (*PolicyDetails) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{8}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PolicyDetails) GetPolicyItem() []*PolicyItem {
@@ -979,7 +1042,7 @@ type OverallPoliciesSummary struct {
 func (x *OverallPoliciesSummary) Reset() {
 	*x = OverallPoliciesSummary{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[9]
+		mi := &file_insurance_insurance_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -992,7 +1055,7 @@ func (x *OverallPoliciesSummary) String() string {
 func (*OverallPoliciesSummary) ProtoMessage() {}
 
 func (x *OverallPoliciesSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[9]
+	mi := &file_insurance_insurance_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1005,7 +1068,7 @@ func (x *OverallPoliciesSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OverallPoliciesSummary.ProtoReflect.Descriptor instead.
 func (*OverallPoliciesSummary) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{9}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *OverallPoliciesSummary) GetCount() int32 {
@@ -1029,7 +1092,7 @@ type InsuranceData struct {
 func (x *InsuranceData) Reset() {
 	*x = InsuranceData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[10]
+		mi := &file_insurance_insurance_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1042,7 +1105,7 @@ func (x *InsuranceData) String() string {
 func (*InsuranceData) ProtoMessage() {}
 
 func (x *InsuranceData) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[10]
+	mi := &file_insurance_insurance_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1055,7 +1118,7 @@ func (x *InsuranceData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsuranceData.ProtoReflect.Descriptor instead.
 func (*InsuranceData) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{10}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *InsuranceData) GetInsurer() *InsurerInfo {
@@ -1099,7 +1162,7 @@ type Error struct {
 func (x *Error) Reset() {
 	*x = Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[11]
+		mi := &file_insurance_insurance_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1112,7 +1175,7 @@ func (x *Error) String() string {
 func (*Error) ProtoMessage() {}
 
 func (x *Error) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[11]
+	mi := &file_insurance_insurance_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1125,7 +1188,7 @@ func (x *Error) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Error.ProtoReflect.Descriptor instead.
 func (*Error) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{11}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Error) GetCode() ErrorCode {
@@ -1157,7 +1220,7 @@ type InsuranceAPIResponse struct {
 func (x *InsuranceAPIResponse) Reset() {
 	*x = InsuranceAPIResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_insurance_insurance_proto_msgTypes[12]
+		mi := &file_insurance_insurance_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1170,7 +1233,7 @@ func (x *InsuranceAPIResponse) String() string {
 func (*InsuranceAPIResponse) ProtoMessage() {}
 
 func (x *InsuranceAPIResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_insurance_insurance_proto_msgTypes[12]
+	mi := &file_insurance_insurance_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1183,7 +1246,7 @@ func (x *InsuranceAPIResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InsuranceAPIResponse.ProtoReflect.Descriptor instead.
 func (*InsuranceAPIResponse) Descriptor() ([]byte, []int) {
-	return file_insurance_insurance_proto_rawDescGZIP(), []int{12}
+	return file_insurance_insurance_proto_rawDescGZIP(), []int{13}
 }
 
 func (m *InsuranceAPIResponse) GetResult() isInsuranceAPIResponse_Result {
@@ -1281,20 +1344,31 @@ var file_insurance_insurance_proto_rawDesc = []byte{
 	0x5f, 0x44, 0x41, 0x54, 0x45, 0x10, 0x04, 0x12, 0x14, 0x0a, 0x10, 0x54, 0x59, 0x50, 0x45, 0x5f,
 	0x53, 0x55, 0x4d, 0x5f, 0x49, 0x4e, 0x53, 0x55, 0x52, 0x45, 0x44, 0x10, 0x05, 0x12, 0x10, 0x0a,
 	0x0c, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x50, 0x52, 0x45, 0x4d, 0x49, 0x55, 0x4d, 0x10, 0x06, 0x42,
-	0x08, 0x0a, 0x06, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0xe2, 0x02, 0x0a, 0x0e, 0x53, 0x75,
-	0x70, 0x65, 0x72, 0x54, 0x6f, 0x70, 0x55, 0x70, 0x43, 0x61, 0x72, 0x64, 0x12, 0x14, 0x0a, 0x05,
-	0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74,
-	0x6c, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x75, 0x62, 0x5f, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x12,
-	0x23, 0x0a, 0x03, 0x63, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x76,
-	0x61, 0x75, 0x6c, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x54, 0x41, 0x52,
-	0x03, 0x63, 0x74, 0x61, 0x12, 0x10, 0x0a, 0x03, 0x69, 0x6d, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x03, 0x69, 0x6d, 0x67, 0x12, 0x50, 0x0a, 0x0d, 0x63, 0x61, 0x72, 0x64, 0x5f, 0x63,
-	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26, 0x2e,
+	0x08, 0x0a, 0x06, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x6f, 0x0a, 0x13, 0x53, 0x75, 0x70,
+	0x65, 0x72, 0x54, 0x6f, 0x70, 0x55, 0x70, 0x43, 0x61, 0x72, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65,
+	0x12, 0x2a, 0x0a, 0x07, 0x70, 0x72, 0x65, 0x6d, 0x69, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x10, 0x2e, 0x69, 0x6e, 0x73, 0x75, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x2e, 0x56, 0x61,
+	0x6c, 0x75, 0x65, 0x52, 0x07, 0x70, 0x72, 0x65, 0x6d, 0x69, 0x75, 0x6d, 0x12, 0x2c, 0x0a, 0x08,
+	0x63, 0x6f, 0x76, 0x65, 0x72, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10,
+	0x2e, 0x69, 0x6e, 0x73, 0x75, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x2e, 0x56, 0x61, 0x6c, 0x75, 0x65,
+	0x52, 0x08, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x61, 0x67, 0x65, 0x22, 0xa1, 0x03, 0x0a, 0x0e, 0x53,
+	0x75, 0x70, 0x65, 0x72, 0x54, 0x6f, 0x70, 0x55, 0x70, 0x43, 0x61, 0x72, 0x64, 0x12, 0x14, 0x0a,
+	0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69,
+	0x74, 0x6c, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x75, 0x62, 0x5f, 0x74, 0x69, 0x74, 0x6c, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x75, 0x62, 0x54, 0x69, 0x74, 0x6c, 0x65,
+	0x12, 0x23, 0x0a, 0x03, 0x63, 0x74, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e,
+	0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x54, 0x41,
+	0x52, 0x03, 0x63, 0x74, 0x61, 0x12, 0x10, 0x0a, 0x03, 0x69, 0x6d, 0x67, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x03, 0x69, 0x6d, 0x67, 0x12, 0x50, 0x0a, 0x0d, 0x63, 0x61, 0x72, 0x64, 0x5f,
+	0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26,
+	0x2e, 0x69, 0x6e, 0x73, 0x75, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x2e, 0x53, 0x75, 0x70, 0x65, 0x72,
+	0x54, 0x6f, 0x70, 0x55, 0x70, 0x43, 0x61, 0x72, 0x64, 0x2e, 0x43, 0x61, 0x72, 0x64, 0x43, 0x61,
+	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x48, 0x00, 0x52, 0x0c, 0x63, 0x61, 0x72, 0x64, 0x43, 0x61,
+	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x88, 0x01, 0x01, 0x12, 0x3d, 0x0a, 0x0a, 0x63, 0x61, 0x72,
+	0x64, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e,
 	0x69, 0x6e, 0x73, 0x75, 0x72, 0x61, 0x6e, 0x63, 0x65, 0x2e, 0x53, 0x75, 0x70, 0x65, 0x72, 0x54,
-	0x6f, 0x70, 0x55, 0x70, 0x43, 0x61, 0x72, 0x64, 0x2e, 0x43, 0x61, 0x72, 0x64, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x48, 0x00, 0x52, 0x0c, 0x63, 0x61, 0x72, 0x64, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x88, 0x01, 0x01, 0x22, 0x81, 0x01, 0x0a, 0x0c, 0x43, 0x61, 0x72,
+	0x6f, 0x70, 0x55, 0x70, 0x43, 0x61, 0x72, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x09, 0x63,
+	0x61, 0x72, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x81, 0x01, 0x0a, 0x0c, 0x43, 0x61, 0x72,
 	0x64, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x1d, 0x0a, 0x19, 0x43, 0x41, 0x52,
 	0x44, 0x5f, 0x43, 0x41, 0x54, 0x45, 0x47, 0x4f, 0x52, 0x59, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
 	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x19, 0x0a, 0x15, 0x43, 0x41, 0x52, 0x44,
@@ -1450,7 +1524,7 @@ func file_insurance_insurance_proto_rawDescGZIP() []byte {
 }
 
 var file_insurance_insurance_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_insurance_insurance_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_insurance_insurance_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_insurance_insurance_proto_goTypes = []interface{}{
 	(ErrorCode)(0),                   // 0: insurance.ErrorCode
 	(Age_Unit)(0),                    // 1: insurance.Age.Unit
@@ -1462,58 +1536,62 @@ var file_insurance_insurance_proto_goTypes = []interface{}{
 	(*Age)(nil),                      // 7: insurance.Age
 	(*Member)(nil),                   // 8: insurance.Member
 	(*PolicyItem)(nil),               // 9: insurance.PolicyItem
-	(*SuperTopUpCard)(nil),           // 10: insurance.SuperTopUpCard
-	(*Coverage)(nil),                 // 11: insurance.Coverage
-	(*PolicyType)(nil),               // 12: insurance.PolicyType
-	(*PolicyDates)(nil),              // 13: insurance.PolicyDates
-	(*PolicyDetails)(nil),            // 14: insurance.PolicyDetails
-	(*OverallPoliciesSummary)(nil),   // 15: insurance.OverallPoliciesSummary
-	(*InsuranceData)(nil),            // 16: insurance.InsuranceData
-	(*Error)(nil),                    // 17: insurance.Error
-	(*InsuranceAPIResponse)(nil),     // 18: insurance.InsuranceAPIResponse
-	(Gender)(0),                      // 19: insurance.Gender
-	(*cta.CTA)(nil),                  // 20: vault.common.CTA
+	(*SuperTopUpCardValue)(nil),      // 10: insurance.SuperTopUpCardValue
+	(*SuperTopUpCard)(nil),           // 11: insurance.SuperTopUpCard
+	(*Coverage)(nil),                 // 12: insurance.Coverage
+	(*PolicyType)(nil),               // 13: insurance.PolicyType
+	(*PolicyDates)(nil),              // 14: insurance.PolicyDates
+	(*PolicyDetails)(nil),            // 15: insurance.PolicyDetails
+	(*OverallPoliciesSummary)(nil),   // 16: insurance.OverallPoliciesSummary
+	(*InsuranceData)(nil),            // 17: insurance.InsuranceData
+	(*Error)(nil),                    // 18: insurance.Error
+	(*InsuranceAPIResponse)(nil),     // 19: insurance.InsuranceAPIResponse
+	(Gender)(0),                      // 20: insurance.Gender
 	(*Value)(nil),                    // 21: insurance.Value
-	(Type)(0),                        // 22: insurance.Type
-	(SubType)(0),                     // 23: insurance.SubType
-	(*ValueDate)(nil),                // 24: insurance.ValueDate
-	(*timestamppb.Timestamp)(nil),    // 25: google.protobuf.Timestamp
+	(*cta.CTA)(nil),                  // 22: vault.common.CTA
+	(Type)(0),                        // 23: insurance.Type
+	(SubType)(0),                     // 24: insurance.SubType
+	(*ValueDate)(nil),                // 25: insurance.ValueDate
+	(*timestamppb.Timestamp)(nil),    // 26: google.protobuf.Timestamp
 }
 var file_insurance_insurance_proto_depIdxs = []int32{
 	1,  // 0: insurance.Age.unit:type_name -> insurance.Age.Unit
 	7,  // 1: insurance.Member.age:type_name -> insurance.Age
-	19, // 2: insurance.Member.gender:type_name -> insurance.Gender
+	20, // 2: insurance.Member.gender:type_name -> insurance.Gender
 	2,  // 3: insurance.PolicyItem.type:type_name -> insurance.PolicyItem.Type
-	20, // 4: insurance.SuperTopUpCard.cta:type_name -> vault.common.CTA
-	3,  // 5: insurance.SuperTopUpCard.card_category:type_name -> insurance.SuperTopUpCard.CardCategory
-	4,  // 6: insurance.Coverage.coverage_status:type_name -> insurance.Coverage.CoverageStatus
-	21, // 7: insurance.Coverage.recommended:type_name -> insurance.Value
-	10, // 8: insurance.Coverage.super_top_up_card:type_name -> insurance.SuperTopUpCard
-	22, // 9: insurance.PolicyType.type:type_name -> insurance.Type
-	23, // 10: insurance.PolicyType.sub_type:type_name -> insurance.SubType
-	21, // 11: insurance.PolicyType.deductible:type_name -> insurance.Value
-	24, // 12: insurance.PolicyDates.start_date:type_name -> insurance.ValueDate
-	25, // 13: insurance.PolicyDates.current_date:type_name -> google.protobuf.Timestamp
-	24, // 14: insurance.PolicyDates.end_date:type_name -> insurance.ValueDate
-	9,  // 15: insurance.PolicyDetails.policy_item:type_name -> insurance.PolicyItem
-	8,  // 16: insurance.PolicyDetails.insured_members:type_name -> insurance.Member
-	5,  // 17: insurance.PolicyDetails.policy_status:type_name -> insurance.PolicyDetails.PolicyStatus
-	11, // 18: insurance.PolicyDetails.coverage:type_name -> insurance.Coverage
-	12, // 19: insurance.PolicyDetails.policy_type:type_name -> insurance.PolicyType
-	21, // 20: insurance.PolicyDetails.sum_insured:type_name -> insurance.Value
-	13, // 21: insurance.PolicyDetails.policy_dates:type_name -> insurance.PolicyDates
-	6,  // 22: insurance.InsuranceData.insurer:type_name -> insurance.InsurerInfo
-	14, // 23: insurance.InsuranceData.policy_details:type_name -> insurance.PolicyDetails
-	20, // 24: insurance.InsuranceData.policy_document_cta:type_name -> vault.common.CTA
-	15, // 25: insurance.InsuranceData.overall_summary:type_name -> insurance.OverallPoliciesSummary
-	0,  // 26: insurance.Error.code:type_name -> insurance.ErrorCode
-	16, // 27: insurance.InsuranceAPIResponse.response:type_name -> insurance.InsuranceData
-	17, // 28: insurance.InsuranceAPIResponse.error:type_name -> insurance.Error
-	29, // [29:29] is the sub-list for method output_type
-	29, // [29:29] is the sub-list for method input_type
-	29, // [29:29] is the sub-list for extension type_name
-	29, // [29:29] is the sub-list for extension extendee
-	0,  // [0:29] is the sub-list for field type_name
+	21, // 4: insurance.SuperTopUpCardValue.premium:type_name -> insurance.Value
+	21, // 5: insurance.SuperTopUpCardValue.coverage:type_name -> insurance.Value
+	22, // 6: insurance.SuperTopUpCard.cta:type_name -> vault.common.CTA
+	3,  // 7: insurance.SuperTopUpCard.card_category:type_name -> insurance.SuperTopUpCard.CardCategory
+	10, // 8: insurance.SuperTopUpCard.card_value:type_name -> insurance.SuperTopUpCardValue
+	4,  // 9: insurance.Coverage.coverage_status:type_name -> insurance.Coverage.CoverageStatus
+	21, // 10: insurance.Coverage.recommended:type_name -> insurance.Value
+	11, // 11: insurance.Coverage.super_top_up_card:type_name -> insurance.SuperTopUpCard
+	23, // 12: insurance.PolicyType.type:type_name -> insurance.Type
+	24, // 13: insurance.PolicyType.sub_type:type_name -> insurance.SubType
+	21, // 14: insurance.PolicyType.deductible:type_name -> insurance.Value
+	25, // 15: insurance.PolicyDates.start_date:type_name -> insurance.ValueDate
+	26, // 16: insurance.PolicyDates.current_date:type_name -> google.protobuf.Timestamp
+	25, // 17: insurance.PolicyDates.end_date:type_name -> insurance.ValueDate
+	9,  // 18: insurance.PolicyDetails.policy_item:type_name -> insurance.PolicyItem
+	8,  // 19: insurance.PolicyDetails.insured_members:type_name -> insurance.Member
+	5,  // 20: insurance.PolicyDetails.policy_status:type_name -> insurance.PolicyDetails.PolicyStatus
+	12, // 21: insurance.PolicyDetails.coverage:type_name -> insurance.Coverage
+	13, // 22: insurance.PolicyDetails.policy_type:type_name -> insurance.PolicyType
+	21, // 23: insurance.PolicyDetails.sum_insured:type_name -> insurance.Value
+	14, // 24: insurance.PolicyDetails.policy_dates:type_name -> insurance.PolicyDates
+	6,  // 25: insurance.InsuranceData.insurer:type_name -> insurance.InsurerInfo
+	15, // 26: insurance.InsuranceData.policy_details:type_name -> insurance.PolicyDetails
+	22, // 27: insurance.InsuranceData.policy_document_cta:type_name -> vault.common.CTA
+	16, // 28: insurance.InsuranceData.overall_summary:type_name -> insurance.OverallPoliciesSummary
+	0,  // 29: insurance.Error.code:type_name -> insurance.ErrorCode
+	17, // 30: insurance.InsuranceAPIResponse.response:type_name -> insurance.InsuranceData
+	18, // 31: insurance.InsuranceAPIResponse.error:type_name -> insurance.Error
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_insurance_insurance_proto_init() }
@@ -1574,7 +1652,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SuperTopUpCard); i {
+			switch v := v.(*SuperTopUpCardValue); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1586,7 +1664,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Coverage); i {
+			switch v := v.(*SuperTopUpCard); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1598,7 +1676,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PolicyType); i {
+			switch v := v.(*Coverage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1610,7 +1688,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PolicyDates); i {
+			switch v := v.(*PolicyType); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1622,7 +1700,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PolicyDetails); i {
+			switch v := v.(*PolicyDates); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1634,7 +1712,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*OverallPoliciesSummary); i {
+			switch v := v.(*PolicyDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1646,7 +1724,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InsuranceData); i {
+			switch v := v.(*OverallPoliciesSummary); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1658,7 +1736,7 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Error); i {
+			switch v := v.(*InsuranceData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1670,6 +1748,18 @@ func file_insurance_insurance_proto_init() {
 			}
 		}
 		file_insurance_insurance_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Error); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_insurance_insurance_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*InsuranceAPIResponse); i {
 			case 0:
 				return &v.state
@@ -1685,12 +1775,12 @@ func file_insurance_insurance_proto_init() {
 	file_insurance_insurance_proto_msgTypes[0].OneofWrappers = []interface{}{}
 	file_insurance_insurance_proto_msgTypes[2].OneofWrappers = []interface{}{}
 	file_insurance_insurance_proto_msgTypes[3].OneofWrappers = []interface{}{}
-	file_insurance_insurance_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	file_insurance_insurance_proto_msgTypes[5].OneofWrappers = []interface{}{}
 	file_insurance_insurance_proto_msgTypes[6].OneofWrappers = []interface{}{}
 	file_insurance_insurance_proto_msgTypes[7].OneofWrappers = []interface{}{}
 	file_insurance_insurance_proto_msgTypes[8].OneofWrappers = []interface{}{}
-	file_insurance_insurance_proto_msgTypes[12].OneofWrappers = []interface{}{
+	file_insurance_insurance_proto_msgTypes[9].OneofWrappers = []interface{}{}
+	file_insurance_insurance_proto_msgTypes[13].OneofWrappers = []interface{}{
 		(*InsuranceAPIResponse_Response)(nil),
 		(*InsuranceAPIResponse_Error)(nil),
 	}
@@ -1700,7 +1790,7 @@ func file_insurance_insurance_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_insurance_insurance_proto_rawDesc,
 			NumEnums:      6,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
