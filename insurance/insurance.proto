@@ -51,13 +51,19 @@ message PolicyItem {
   }
 }
 
+message SuperTopUpCardValue {
+  Value premium = 1;
+  Value coverage = 2;
+}
+
 message SuperTopUpCard {
   string title = 1;
   string sub_title = 2;
   vault.common.CTA cta = 3;
   string img = 4;
   optional CardCategory card_category = 5;
-
+  SuperTopUpCardValue card_value = 6;
+  
   enum CardCategory {
     CARD_CATEGORY_UNSPECIFIED = 0;
     CARD_CATEGORY_PRIMARY = 1;

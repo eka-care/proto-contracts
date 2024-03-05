@@ -292,6 +292,37 @@ extension Insurance_PolicyItem.TypeEnum: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+public struct Insurance_SuperTopUpCardValue {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var premium: Insurance_Value {
+    get {return _premium ?? Insurance_Value()}
+    set {_premium = newValue}
+  }
+  /// Returns true if `premium` has been explicitly set.
+  public var hasPremium: Bool {return self._premium != nil}
+  /// Clears the value of `premium`. Subsequent reads from it will return its default value.
+  public mutating func clearPremium() {self._premium = nil}
+
+  public var coverage: Insurance_Value {
+    get {return _coverage ?? Insurance_Value()}
+    set {_coverage = newValue}
+  }
+  /// Returns true if `coverage` has been explicitly set.
+  public var hasCoverage: Bool {return self._coverage != nil}
+  /// Clears the value of `coverage`. Subsequent reads from it will return its default value.
+  public mutating func clearCoverage() {self._coverage = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _premium: Insurance_Value? = nil
+  fileprivate var _coverage: Insurance_Value? = nil
+}
+
 public struct Insurance_SuperTopUpCard {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -320,6 +351,15 @@ public struct Insurance_SuperTopUpCard {
   public var hasCardCategory: Bool {return self._cardCategory != nil}
   /// Clears the value of `cardCategory`. Subsequent reads from it will return its default value.
   public mutating func clearCardCategory() {self._cardCategory = nil}
+
+  public var cardValue: Insurance_SuperTopUpCardValue {
+    get {return _cardValue ?? Insurance_SuperTopUpCardValue()}
+    set {_cardValue = newValue}
+  }
+  /// Returns true if `cardValue` has been explicitly set.
+  public var hasCardValue: Bool {return self._cardValue != nil}
+  /// Clears the value of `cardValue`. Subsequent reads from it will return its default value.
+  public mutating func clearCardValue() {self._cardValue = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -361,6 +401,7 @@ public struct Insurance_SuperTopUpCard {
 
   fileprivate var _cta: Vault_Common_CTA? = nil
   fileprivate var _cardCategory: Insurance_SuperTopUpCard.CardCategory? = nil
+  fileprivate var _cardValue: Insurance_SuperTopUpCardValue? = nil
 }
 
 #if swift(>=4.2)
@@ -382,25 +423,28 @@ public struct Insurance_Coverage {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var coverageStatus: Insurance_Coverage.CoverageStatus = .unspecified
+  public var coverageStatus: Insurance_Coverage.CoverageStatus {
+    get {return _storage._coverageStatus}
+    set {_uniqueStorage()._coverageStatus = newValue}
+  }
 
   public var recommended: Insurance_Value {
-    get {return _recommended ?? Insurance_Value()}
-    set {_recommended = newValue}
+    get {return _storage._recommended ?? Insurance_Value()}
+    set {_uniqueStorage()._recommended = newValue}
   }
   /// Returns true if `recommended` has been explicitly set.
-  public var hasRecommended: Bool {return self._recommended != nil}
+  public var hasRecommended: Bool {return _storage._recommended != nil}
   /// Clears the value of `recommended`. Subsequent reads from it will return its default value.
-  public mutating func clearRecommended() {self._recommended = nil}
+  public mutating func clearRecommended() {_uniqueStorage()._recommended = nil}
 
   public var superTopUpCard: Insurance_SuperTopUpCard {
-    get {return _superTopUpCard ?? Insurance_SuperTopUpCard()}
-    set {_superTopUpCard = newValue}
+    get {return _storage._superTopUpCard ?? Insurance_SuperTopUpCard()}
+    set {_uniqueStorage()._superTopUpCard = newValue}
   }
   /// Returns true if `superTopUpCard` has been explicitly set.
-  public var hasSuperTopUpCard: Bool {return self._superTopUpCard != nil}
+  public var hasSuperTopUpCard: Bool {return _storage._superTopUpCard != nil}
   /// Clears the value of `superTopUpCard`. Subsequent reads from it will return its default value.
-  public mutating func clearSuperTopUpCard() {self._superTopUpCard = nil}
+  public mutating func clearSuperTopUpCard() {_uniqueStorage()._superTopUpCard = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -440,8 +484,7 @@ public struct Insurance_Coverage {
 
   public init() {}
 
-  fileprivate var _recommended: Insurance_Value? = nil
-  fileprivate var _superTopUpCard: Insurance_SuperTopUpCard? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 #if swift(>=4.2)
@@ -796,6 +839,7 @@ extension Insurance_Age.Unit: @unchecked Sendable {}
 extension Insurance_Member: @unchecked Sendable {}
 extension Insurance_PolicyItem: @unchecked Sendable {}
 extension Insurance_PolicyItem.TypeEnum: @unchecked Sendable {}
+extension Insurance_SuperTopUpCardValue: @unchecked Sendable {}
 extension Insurance_SuperTopUpCard: @unchecked Sendable {}
 extension Insurance_SuperTopUpCard.CardCategory: @unchecked Sendable {}
 extension Insurance_Coverage: @unchecked Sendable {}
@@ -1036,6 +1080,48 @@ extension Insurance_PolicyItem.TypeEnum: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
+extension Insurance_SuperTopUpCardValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SuperTopUpCardValue"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "premium"),
+    2: .same(proto: "coverage"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._premium) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._coverage) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._premium {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._coverage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_SuperTopUpCardValue, rhs: Insurance_SuperTopUpCardValue) -> Bool {
+    if lhs._premium != rhs._premium {return false}
+    if lhs._coverage != rhs._coverage {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SuperTopUpCard"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -1044,6 +1130,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     3: .same(proto: "cta"),
     4: .same(proto: "img"),
     5: .standard(proto: "card_category"),
+    6: .standard(proto: "card_value"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1057,6 +1144,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.img) }()
       case 5: try { try decoder.decodeSingularEnumField(value: &self._cardCategory) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._cardValue) }()
       default: break
       }
     }
@@ -1082,6 +1170,9 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try { if let v = self._cardCategory {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
     } }()
+    try { if let v = self._cardValue {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1091,6 +1182,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs._cta != rhs._cta {return false}
     if lhs.img != rhs.img {return false}
     if lhs._cardCategory != rhs._cardCategory {return false}
+    if lhs._cardValue != rhs._cardValue {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1113,41 +1205,77 @@ extension Insurance_Coverage: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     3: .standard(proto: "super_top_up_card"),
   ]
 
+  fileprivate class _StorageClass {
+    var _coverageStatus: Insurance_Coverage.CoverageStatus = .unspecified
+    var _recommended: Insurance_Value? = nil
+    var _superTopUpCard: Insurance_SuperTopUpCard? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _coverageStatus = source._coverageStatus
+      _recommended = source._recommended
+      _superTopUpCard = source._superTopUpCard
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularEnumField(value: &self.coverageStatus) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._recommended) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._superTopUpCard) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularEnumField(value: &_storage._coverageStatus) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._recommended) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._superTopUpCard) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    if self.coverageStatus != .unspecified {
-      try visitor.visitSingularEnumField(value: self.coverageStatus, fieldNumber: 1)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if _storage._coverageStatus != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._coverageStatus, fieldNumber: 1)
+      }
+      try { if let v = _storage._recommended {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._superTopUpCard {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
     }
-    try { if let v = self._recommended {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._superTopUpCard {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Insurance_Coverage, rhs: Insurance_Coverage) -> Bool {
-    if lhs.coverageStatus != rhs.coverageStatus {return false}
-    if lhs._recommended != rhs._recommended {return false}
-    if lhs._superTopUpCard != rhs._superTopUpCard {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._coverageStatus != rhs_storage._coverageStatus {return false}
+        if _storage._recommended != rhs_storage._recommended {return false}
+        if _storage._superTopUpCard != rhs_storage._superTopUpCard {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
