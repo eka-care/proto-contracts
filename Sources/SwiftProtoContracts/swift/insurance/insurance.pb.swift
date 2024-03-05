@@ -292,6 +292,37 @@ extension Insurance_PolicyItem.TypeEnum: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+public struct Insurance_SuperTopUpCardValue {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var premium: Insurance_Value {
+    get {return _premium ?? Insurance_Value()}
+    set {_premium = newValue}
+  }
+  /// Returns true if `premium` has been explicitly set.
+  public var hasPremium: Bool {return self._premium != nil}
+  /// Clears the value of `premium`. Subsequent reads from it will return its default value.
+  public mutating func clearPremium() {self._premium = nil}
+
+  public var coverage: Insurance_Value {
+    get {return _coverage ?? Insurance_Value()}
+    set {_coverage = newValue}
+  }
+  /// Returns true if `coverage` has been explicitly set.
+  public var hasCoverage: Bool {return self._coverage != nil}
+  /// Clears the value of `coverage`. Subsequent reads from it will return its default value.
+  public mutating func clearCoverage() {self._coverage = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _premium: Insurance_Value? = nil
+  fileprivate var _coverage: Insurance_Value? = nil
+}
+
 public struct Insurance_SuperTopUpCard {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -321,23 +352,14 @@ public struct Insurance_SuperTopUpCard {
   /// Clears the value of `cardCategory`. Subsequent reads from it will return its default value.
   public mutating func clearCardCategory() {self._cardCategory = nil}
 
-  public var premium: Insurance_Value {
-    get {return _premium ?? Insurance_Value()}
-    set {_premium = newValue}
+  public var cardValue: Insurance_SuperTopUpCardValue {
+    get {return _cardValue ?? Insurance_SuperTopUpCardValue()}
+    set {_cardValue = newValue}
   }
-  /// Returns true if `premium` has been explicitly set.
-  public var hasPremium: Bool {return self._premium != nil}
-  /// Clears the value of `premium`. Subsequent reads from it will return its default value.
-  public mutating func clearPremium() {self._premium = nil}
-
-  public var coverage: Insurance_Value {
-    get {return _coverage ?? Insurance_Value()}
-    set {_coverage = newValue}
-  }
-  /// Returns true if `coverage` has been explicitly set.
-  public var hasCoverage: Bool {return self._coverage != nil}
-  /// Clears the value of `coverage`. Subsequent reads from it will return its default value.
-  public mutating func clearCoverage() {self._coverage = nil}
+  /// Returns true if `cardValue` has been explicitly set.
+  public var hasCardValue: Bool {return self._cardValue != nil}
+  /// Clears the value of `cardValue`. Subsequent reads from it will return its default value.
+  public mutating func clearCardValue() {self._cardValue = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -379,8 +401,7 @@ public struct Insurance_SuperTopUpCard {
 
   fileprivate var _cta: Vault_Common_CTA? = nil
   fileprivate var _cardCategory: Insurance_SuperTopUpCard.CardCategory? = nil
-  fileprivate var _premium: Insurance_Value? = nil
-  fileprivate var _coverage: Insurance_Value? = nil
+  fileprivate var _cardValue: Insurance_SuperTopUpCardValue? = nil
 }
 
 #if swift(>=4.2)
@@ -818,6 +839,7 @@ extension Insurance_Age.Unit: @unchecked Sendable {}
 extension Insurance_Member: @unchecked Sendable {}
 extension Insurance_PolicyItem: @unchecked Sendable {}
 extension Insurance_PolicyItem.TypeEnum: @unchecked Sendable {}
+extension Insurance_SuperTopUpCardValue: @unchecked Sendable {}
 extension Insurance_SuperTopUpCard: @unchecked Sendable {}
 extension Insurance_SuperTopUpCard.CardCategory: @unchecked Sendable {}
 extension Insurance_Coverage: @unchecked Sendable {}
@@ -1058,6 +1080,48 @@ extension Insurance_PolicyItem.TypeEnum: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
+extension Insurance_SuperTopUpCardValue: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SuperTopUpCardValue"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "premium"),
+    2: .same(proto: "coverage"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._premium) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._coverage) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._premium {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._coverage {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Insurance_SuperTopUpCardValue, rhs: Insurance_SuperTopUpCardValue) -> Bool {
+    if lhs._premium != rhs._premium {return false}
+    if lhs._coverage != rhs._coverage {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SuperTopUpCard"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -1066,8 +1130,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     3: .same(proto: "cta"),
     4: .same(proto: "img"),
     5: .standard(proto: "card_category"),
-    6: .same(proto: "premium"),
-    7: .same(proto: "coverage"),
+    6: .standard(proto: "card_value"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1081,8 +1144,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.img) }()
       case 5: try { try decoder.decodeSingularEnumField(value: &self._cardCategory) }()
-      case 6: try { try decoder.decodeSingularMessageField(value: &self._premium) }()
-      case 7: try { try decoder.decodeSingularMessageField(value: &self._coverage) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._cardValue) }()
       default: break
       }
     }
@@ -1108,11 +1170,8 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try { if let v = self._cardCategory {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
     } }()
-    try { if let v = self._premium {
+    try { if let v = self._cardValue {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    } }()
-    try { if let v = self._coverage {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -1123,8 +1182,7 @@ extension Insurance_SuperTopUpCard: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs._cta != rhs._cta {return false}
     if lhs.img != rhs.img {return false}
     if lhs._cardCategory != rhs._cardCategory {return false}
-    if lhs._premium != rhs._premium {return false}
-    if lhs._coverage != rhs._coverage {return false}
+    if lhs._cardValue != rhs._cardValue {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
