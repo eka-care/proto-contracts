@@ -219,7 +219,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     6: .same(proto: "lottie"),
     7: .standard(proto: "body_parameters"),
     8: .standard(proto: "banner_id"),
-    10: .same(proto: "tag"),
+    9: .same(proto: "tag"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -250,7 +250,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       }()
       case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
-      case 10: try { try decoder.decodeSingularMessageField(value: &self._tag) }()
+      case 9: try { try decoder.decodeSingularMessageField(value: &self._tag) }()
       default: break
       }
     }
@@ -291,7 +291,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     } }()
     try { if let v = self._tag {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
