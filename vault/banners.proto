@@ -16,15 +16,18 @@ message BannersResponse {
 
 /* Banner represents configuration. */
 message Banner {
-  string title = 1;         // Title of the banner.
-  optional string body = 2; // Body or description of the banner.
-  vault.common.CTA cta = 3; // CTA configuration for button.
-  string colour = 4;        // Colour of the banner in hex code.
+  string title = 1;               // Title of the banner.
+  optional string body = 2;       // Body or description of the banner.
+  vault.common.CTA cta = 3;       // CTA configuration for button.
+  string colour = 4;              // Colour of the banner in hex code.
+  string iconBackgroundColor = 5; // Colour of the banner in hex code.
+  string tagBackgroundColor = 6;  // Colour of the tag background in hex code.
+  string titleBackgroundColo = 7; // Colour of the tag title in hex code.
   oneof image {
-    string img = 5;    // Image link for the banner.
-    string lottie = 6; // Lottie link for the banner.
+    string img = 8;               // Image link for the banner.
+    string lottie = 9;            // Lottie link for the banner.
   }
   repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
-      7;                         // dynamic parameters with body.
-  optional string banner_id = 8; // ID represents banner/card identifier.
+      10;                         // dynamic parameters with body.
+  optional string banner_id = 11; // ID represents banner/card identifier.
 }
