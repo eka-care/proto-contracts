@@ -67,6 +67,15 @@ public struct Vault_Banners_Banner {
   /// Colour of the banner in hex code.
   public var colour: String = String()
 
+  /// Colour of the banner in hex code.
+  public var iconBackgroundColor: String = String()
+
+  /// Colour of the tag background in hex code.
+  public var tagBackgroundColor: String = String()
+
+  /// Colour of the tag title in hex code.
+  public var titleBackgroundColo: String = String()
+
   public var image: Vault_Banners_Banner.OneOf_Image? = nil
 
   /// Image link for the banner.
@@ -184,10 +193,13 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     2: .same(proto: "body"),
     3: .same(proto: "cta"),
     4: .same(proto: "colour"),
-    5: .same(proto: "img"),
-    6: .same(proto: "lottie"),
-    7: .standard(proto: "body_parameters"),
-    8: .standard(proto: "banner_id"),
+    5: .same(proto: "iconBackgroundColor"),
+    6: .same(proto: "tagBackgroundColor"),
+    7: .same(proto: "titleBackgroundColo"),
+    8: .same(proto: "img"),
+    9: .same(proto: "lottie"),
+    10: .standard(proto: "body_parameters"),
+    11: .standard(proto: "banner_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -200,7 +212,10 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       case 2: try { try decoder.decodeSingularStringField(value: &self._body) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.colour) }()
-      case 5: try {
+      case 5: try { try decoder.decodeSingularStringField(value: &self.iconBackgroundColor) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.tagBackgroundColor) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.titleBackgroundColo) }()
+      case 8: try {
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {
@@ -208,7 +223,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.image = .img(v)
         }
       }()
-      case 6: try {
+      case 9: try {
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {
@@ -216,8 +231,8 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.image = .lottie(v)
         }
       }()
-      case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
-      case 8: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
+      case 10: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
+      case 11: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
       default: break
       }
     }
@@ -240,22 +255,31 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if !self.colour.isEmpty {
       try visitor.visitSingularStringField(value: self.colour, fieldNumber: 4)
     }
+    if !self.iconBackgroundColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.iconBackgroundColor, fieldNumber: 5)
+    }
+    if !self.tagBackgroundColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.tagBackgroundColor, fieldNumber: 6)
+    }
+    if !self.titleBackgroundColo.isEmpty {
+      try visitor.visitSingularStringField(value: self.titleBackgroundColo, fieldNumber: 7)
+    }
     switch self.image {
     case .img?: try {
       guard case .img(let v)? = self.image else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     }()
     case .lottie?: try {
       guard case .lottie(let v)? = self.image else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
     }()
     case nil: break
     }
     if !self.bodyParameters.isEmpty {
-      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 7)
+      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 10)
     }
     try { if let v = self._bannerID {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 11)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -265,6 +289,9 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs._body != rhs._body {return false}
     if lhs._cta != rhs._cta {return false}
     if lhs.colour != rhs.colour {return false}
+    if lhs.iconBackgroundColor != rhs.iconBackgroundColor {return false}
+    if lhs.tagBackgroundColor != rhs.tagBackgroundColor {return false}
+    if lhs.titleBackgroundColo != rhs.titleBackgroundColo {return false}
     if lhs.image != rhs.image {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._bannerID != rhs._bannerID {return false}
