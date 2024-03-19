@@ -70,11 +70,15 @@ public struct Vault_Banners_Banner {
   /// Colour of the banner in hex code.
   public var iconBackgroundColor: String = String()
 
-  /// Colour of the tag background in hex code.
-  public var tagBackgroundColor: String = String()
-
-  /// Colour of the tag title in hex code.
-  public var titleBackgroundColo: String = String()
+  /// Tag information for the banner
+  public var tag: Vault_Banners_Tag {
+    get {return _tag ?? Vault_Banners_Tag()}
+    set {_tag = newValue}
+  }
+  /// Returns true if `tag` has been explicitly set.
+  public var hasTag: Bool {return self._tag != nil}
+  /// Clears the value of `tag`. Subsequent reads from it will return its default value.
+  public mutating func clearTag() {self._tag = nil}
 
   public var image: Vault_Banners_Banner.OneOf_Image? = nil
 
@@ -141,13 +145,34 @@ public struct Vault_Banners_Banner {
 
   fileprivate var _body: String? = nil
   fileprivate var _cta: Vault_Common_CTA? = nil
+  fileprivate var _tag: Vault_Banners_Tag? = nil
   fileprivate var _bannerID: String? = nil
+}
+
+public struct Vault_Banners_Tag {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Tag title
+  public var tagTitle: String = String()
+
+  /// Colour of the tag background in hex code.
+  public var tagBackgroundColor: String = String()
+
+  /// Colour of the tag title in hex code.
+  public var titleBackgroundColor: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Banners_BannersResponse: @unchecked Sendable {}
 extension Vault_Banners_Banner: @unchecked Sendable {}
 extension Vault_Banners_Banner.OneOf_Image: @unchecked Sendable {}
+extension Vault_Banners_Tag: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -194,12 +219,11 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     3: .same(proto: "cta"),
     4: .same(proto: "colour"),
     5: .same(proto: "iconBackgroundColor"),
-    6: .same(proto: "tagBackgroundColor"),
-    7: .same(proto: "titleBackgroundColo"),
-    8: .same(proto: "img"),
-    9: .same(proto: "lottie"),
-    10: .standard(proto: "body_parameters"),
-    11: .standard(proto: "banner_id"),
+    6: .same(proto: "tag"),
+    7: .same(proto: "img"),
+    8: .same(proto: "lottie"),
+    9: .standard(proto: "body_parameters"),
+    10: .standard(proto: "banner_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -213,9 +237,8 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.colour) }()
       case 5: try { try decoder.decodeSingularStringField(value: &self.iconBackgroundColor) }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.tagBackgroundColor) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.titleBackgroundColo) }()
-      case 8: try {
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._tag) }()
+      case 7: try {
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {
@@ -223,7 +246,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.image = .img(v)
         }
       }()
-      case 9: try {
+      case 8: try {
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {
@@ -231,8 +254,8 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.image = .lottie(v)
         }
       }()
-      case 10: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
-      case 11: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
+      case 9: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
+      case 10: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
       default: break
       }
     }
@@ -258,28 +281,25 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if !self.iconBackgroundColor.isEmpty {
       try visitor.visitSingularStringField(value: self.iconBackgroundColor, fieldNumber: 5)
     }
-    if !self.tagBackgroundColor.isEmpty {
-      try visitor.visitSingularStringField(value: self.tagBackgroundColor, fieldNumber: 6)
-    }
-    if !self.titleBackgroundColo.isEmpty {
-      try visitor.visitSingularStringField(value: self.titleBackgroundColo, fieldNumber: 7)
-    }
+    try { if let v = self._tag {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
     switch self.image {
     case .img?: try {
       guard case .img(let v)? = self.image else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 7)
     }()
     case .lottie?: try {
       guard case .lottie(let v)? = self.image else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 9)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     }()
     case nil: break
     }
     if !self.bodyParameters.isEmpty {
-      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 10)
+      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 9)
     }
     try { if let v = self._bannerID {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 11)
+      try visitor.visitSingularStringField(value: v, fieldNumber: 10)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -290,11 +310,54 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs._cta != rhs._cta {return false}
     if lhs.colour != rhs.colour {return false}
     if lhs.iconBackgroundColor != rhs.iconBackgroundColor {return false}
-    if lhs.tagBackgroundColor != rhs.tagBackgroundColor {return false}
-    if lhs.titleBackgroundColo != rhs.titleBackgroundColo {return false}
+    if lhs._tag != rhs._tag {return false}
     if lhs.image != rhs.image {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._bannerID != rhs._bannerID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Banners_Tag: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Tag"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "tagTitle"),
+    2: .same(proto: "tagBackgroundColor"),
+    3: .same(proto: "titleBackgroundColor"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tagTitle) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.tagBackgroundColor) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.titleBackgroundColor) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tagTitle.isEmpty {
+      try visitor.visitSingularStringField(value: self.tagTitle, fieldNumber: 1)
+    }
+    if !self.tagBackgroundColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.tagBackgroundColor, fieldNumber: 2)
+    }
+    if !self.titleBackgroundColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.titleBackgroundColor, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Banners_Tag, rhs: Vault_Banners_Tag) -> Bool {
+    if lhs.tagTitle != rhs.tagTitle {return false}
+    if lhs.tagBackgroundColor != rhs.tagBackgroundColor {return false}
+    if lhs.titleBackgroundColor != rhs.titleBackgroundColor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
