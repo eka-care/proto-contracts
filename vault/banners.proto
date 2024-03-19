@@ -27,7 +27,6 @@ message Banner {
   repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
       7;                          // dynamic parameters with body.
   optional string banner_id = 8;  // ID represents banner/card identifier.
-  string iconBackgroundColor = 9; // Colour of the banner in hex code.
   optional Tag tag = 10;          // Tag information for the banner
 }
 
