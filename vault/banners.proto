@@ -32,7 +32,7 @@ message Banner {
 }
 
 message Tag {
-  string tagTitle = 1;              // Tag title
-  string tagBackgroundColor = 2;    // Colour of the tag background in hex code.
-  string titleBackgroundColor = 3;  // Colour of the tag title in hex code.
+  string title = 1;              // Tag title
+  string backgroundColor = 2;    // Colour of the tag background in hex code.
+  string titleColor = 3;  // Colour of the tag title in hex code.
 }
