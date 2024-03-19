@@ -100,9 +100,6 @@ public struct Vault_Banners_Banner {
   /// Clears the value of `bannerID`. Subsequent reads from it will return its default value.
   public mutating func clearBannerID() {self._bannerID = nil}
 
-  /// Colour of the banner in hex code.
-  public var iconBackgroundColor: String = String()
-
   /// Tag information for the banner
   public var tag: Vault_Banners_Tag {
     get {return _tag ?? Vault_Banners_Tag()}
@@ -222,7 +219,6 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     6: .same(proto: "lottie"),
     7: .standard(proto: "body_parameters"),
     8: .standard(proto: "banner_id"),
-    9: .same(proto: "iconBackgroundColor"),
     10: .same(proto: "tag"),
   ]
 
@@ -254,7 +250,6 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       }()
       case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
-      case 9: try { try decoder.decodeSingularStringField(value: &self.iconBackgroundColor) }()
       case 10: try { try decoder.decodeSingularMessageField(value: &self._tag) }()
       default: break
       }
@@ -295,9 +290,6 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try { if let v = self._bannerID {
       try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     } }()
-    if !self.iconBackgroundColor.isEmpty {
-      try visitor.visitSingularStringField(value: self.iconBackgroundColor, fieldNumber: 9)
-    }
     try { if let v = self._tag {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
     } }()
@@ -312,7 +304,6 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs.image != rhs.image {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._bannerID != rhs._bannerID {return false}
-    if lhs.iconBackgroundColor != rhs.iconBackgroundColor {return false}
     if lhs._tag != rhs._tag {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
