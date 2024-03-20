@@ -100,6 +100,16 @@ public struct Vault_Banners_Banner {
   /// Clears the value of `bannerID`. Subsequent reads from it will return its default value.
   public mutating func clearBannerID() {self._bannerID = nil}
 
+  /// Tag information for the banner
+  public var tag: Vault_Banners_Tag {
+    get {return _tag ?? Vault_Banners_Tag()}
+    set {_tag = newValue}
+  }
+  /// Returns true if `tag` has been explicitly set.
+  public var hasTag: Bool {return self._tag != nil}
+  /// Clears the value of `tag`. Subsequent reads from it will return its default value.
+  public mutating func clearTag() {self._tag = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Image: Equatable {
@@ -133,12 +143,33 @@ public struct Vault_Banners_Banner {
   fileprivate var _body: String? = nil
   fileprivate var _cta: Vault_Common_CTA? = nil
   fileprivate var _bannerID: String? = nil
+  fileprivate var _tag: Vault_Banners_Tag? = nil
+}
+
+public struct Vault_Banners_Tag {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Tag title
+  public var title: String = String()
+
+  /// Colour of the tag background in hex code.
+  public var backgroundColor: String = String()
+
+  /// Colour of the tag title in hex code.
+  public var titleColor: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Banners_BannersResponse: @unchecked Sendable {}
 extension Vault_Banners_Banner: @unchecked Sendable {}
 extension Vault_Banners_Banner.OneOf_Image: @unchecked Sendable {}
+extension Vault_Banners_Tag: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -188,6 +219,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     6: .same(proto: "lottie"),
     7: .standard(proto: "body_parameters"),
     8: .standard(proto: "banner_id"),
+    9: .same(proto: "tag"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -218,6 +250,7 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       }()
       case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
       case 8: try { try decoder.decodeSingularStringField(value: &self._bannerID) }()
+      case 9: try { try decoder.decodeSingularMessageField(value: &self._tag) }()
       default: break
       }
     }
@@ -257,6 +290,9 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     try { if let v = self._bannerID {
       try visitor.visitSingularStringField(value: v, fieldNumber: 8)
     } }()
+    try { if let v = self._tag {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -268,6 +304,51 @@ extension Vault_Banners_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs.image != rhs.image {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._bannerID != rhs._bannerID {return false}
+    if lhs._tag != rhs._tag {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Banners_Tag: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Tag"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "title"),
+    2: .same(proto: "backgroundColor"),
+    3: .same(proto: "titleColor"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.backgroundColor) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.titleColor) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.title.isEmpty {
+      try visitor.visitSingularStringField(value: self.title, fieldNumber: 1)
+    }
+    if !self.backgroundColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.backgroundColor, fieldNumber: 2)
+    }
+    if !self.titleColor.isEmpty {
+      try visitor.visitSingularStringField(value: self.titleColor, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Banners_Tag, rhs: Vault_Banners_Tag) -> Bool {
+    if lhs.title != rhs.title {return false}
+    if lhs.backgroundColor != rhs.backgroundColor {return false}
+    if lhs.titleColor != rhs.titleColor {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
