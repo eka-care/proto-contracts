@@ -36,7 +36,7 @@ message HomeResponse {
 
 message UserProfile {
   string blood_group = 1;
-  double weight = 2;
+  string weight = 2;
   string height = 3;
 }
 
