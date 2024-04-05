@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package commons.cta;
 
-option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/my-health/home";
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/commons/cta";
 
 /* CTA represents data for any click through action */
 message CTAV1 {
