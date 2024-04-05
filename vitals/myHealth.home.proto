@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package myHealth.home.proto;
+import "vitals/commons.cta.proto";
+
+// Enums for HealthSectionType
+enum HealthSectionType {
+  HEALTH_SECTION_TYPE_UNSPECIFIED = 0;
+  HEALTH_SECTION_TYPE_1 = 1;
+  HEALTH_SECTION_TYPE_2 = 2;
+  HEALTH_SECTION_TYPE_3 = 3;
+  HEALTH_SECTION_TYPE_4 = 4;
+}
+
+// Enums for ItemComponentType
+enum ItemComponentType {
+  ITEM_COMPONENT_TYPE_UNSPECIFIED = 0;
+  ITEM_COMPONENT_TYPE_CHIP = 1;
+  ITEM_COMPONENT_TYPE_DETAILS = 2;
+}
+
+// Enums for ChipComponentType
+enum ChipComponentType {
+  CHIP_COMPONENT_TYPE_UNSPECIFIED = 0;
+  CHIP_COMPONENT_TYPE_HIGHLIGHTED = 1;
+  CHIP_COMPONENT_TYPE_GREYED = 2;
+  CHIP_COMPONENT_TYPE_NORMAL = 3;
+}
+
+message HomeResponse {
+  UserProfile user_profile = 1;
+  repeated HealthSection health_sections = 2;
+}
+
+message UserProfile {
+  string blood_group = 1;
+  double weight = 2;
+  string height = 3;
+}
+
+message HealthSection {
+  HealthSectionType section_type = 1;
+  string title = 2;
+  repeated SectionType1Cards cards1 = 3;
+  repeated SectionType2Cards cards2 = 4;
+  repeated SectionType3Cards cards3 = 5;
+  repeated SectionType4Cards cards4 = 6;
+  commons.cta.CTAV1 add_cta = 7;
+}
+
+message SectionType1Cards {
+  Meta meta = 1;
+  repeated ItemComponent items = 2;
+  commons.cta.CTAV1 cta = 3;
+  Banner banner = 4;
+}
+
+message Banner {
+  string text = 1;
+}
+
+message ItemComponent {
+  ItemComponentType type = 1;
+  repeated ChipComponent chip_components = 2;
+  repeated string detail_components = 3; // Protobuf doesn't support generic types, so we specify the actual type.
+}
+
+message Meta {
+  string text = 1;
+  string image = 2;
+}
+
+message ChipComponent {
+  string text = 1;
+  ChipComponentType type = 2;
+}
+
+message SectionType2Cards {
+  Meta title_component = 1;
+  LatestReading latest_reading = 2;
+  Graph graph = 3;
+  commons.cta.CTAV1 cta = 4;
+}
+
+message LatestReading {
+  string reading = 1;
+  string status = 2;
+  string time = 3;
+}
+
+message Graph {
+  string type = 1;
+}
+
+message SectionType3Cards {
+  Meta title_component = 1;
+  commons.cta.CTAV1 cta = 2;
+  repeated ChipComponent chips = 3;
+}
+
+message SectionType4Cards {
+  repeated VerticalList items = 1;
+}
+
+message VerticalList {
+  string text = 1;
+  commons.cta.CTAV1 cta = 2;
+}
