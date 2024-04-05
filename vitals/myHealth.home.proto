@@ -4,6 +4,7 @@ package vitals;
 import "vitals/commons.cta.proto";
 
 option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/myhealth/home";
+
 // Enums for HealthSectionType
 enum HealthSectionType {
   HEALTH_SECTION_TYPE_UNSPECIFIED = 0;
@@ -35,18 +36,24 @@ message HomeResponse {
 
 message UserProfile {
   string blood_group = 1;
-  string weight = 2;
+  double weight = 2;
   string height = 3;
 }
 
 message HealthSection {
   HealthSectionType section_type = 1;
   string title = 2;
-  repeated SectionType1Cards cards1 = 3;
-  repeated SectionType2Cards cards2 = 4;
-  repeated SectionType3Cards cards3 = 5;
-  repeated SectionType4Cards cards4 = 6;
-  commons.cta.CTAV1 add_cta = 7;
+  repeated Card cards = 3;
+  commons.cta.CTAV1 add_cta = 4;
+}
+
+message Card {
+  oneof card_type {
+    SectionType1Cards type1_card = 1;
+    SectionType2Cards type2_card = 2;
+    SectionType3Cards type3_card = 3;
+    SectionType4Cards type4_card = 4;
+  }
 }
 
 message SectionType1Cards {
@@ -63,7 +70,7 @@ message Banner {
 message ItemComponent {
   ItemComponentType type = 1;
   repeated ChipComponent chip_components = 2;
-  repeated string detail_components = 3; // Protobuf doesn't support generic types, so we specify the actual type.
+  repeated string detail_components = 3;
 }
 
 message Meta {
