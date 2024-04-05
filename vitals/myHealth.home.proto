@@ -8,9 +8,13 @@ option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vit
 // Enums for HealthSectionType
 enum HealthSectionType {
   HEALTH_SECTION_TYPE_UNSPECIFIED = 0;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-14155&mode=dev
   HEALTH_SECTION_TYPE_1 = 1;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-14374&mode=dev
   HEALTH_SECTION_TYPE_2 = 2;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-14889&mode=dev
   HEALTH_SECTION_TYPE_3 = 3;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
   HEALTH_SECTION_TYPE_4 = 4;
 }
 
@@ -24,8 +28,16 @@ enum ItemComponentType {
 // Enums for ChipComponentType
 enum ChipComponentType {
   CHIP_COMPONENT_TYPE_UNSPECIFIED = 0;
+  // Highlighted chip
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
+  // AUTO-DETECTED
   CHIP_COMPONENT_TYPE_HIGHLIGHTED = 1;
+  // GREYED
+  // TAKING / ONGOING
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
   CHIP_COMPONENT_TYPE_GREYED = 2;
+  // 2 Medicines
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
   CHIP_COMPONENT_TYPE_NORMAL = 3;
 }
 
@@ -40,9 +52,12 @@ message UserProfile {
   string height = 3;
 }
 
+// Defines a section in the Home screen
 message HealthSection {
+  // Type of the section
   HealthSectionType section_type = 1;
   string title = 2;
+  // List of Cards for the section.
   repeated Card cards = 3;
   commons.cta.CTAV1 add_cta = 4;
 }
@@ -84,7 +99,7 @@ message ChipComponent {
 }
 
 message SectionType2Cards {
-  Meta title_component = 1;
+  Meta meta = 1;
   LatestReading latest_reading = 2;
   Graph graph = 3;
   commons.cta.CTAV1 cta = 4;
@@ -101,7 +116,7 @@ message Graph {
 }
 
 message SectionType3Cards {
-  Meta title_component = 1;
+  Meta meta = 1;
   commons.cta.CTAV1 cta = 2;
   repeated ChipComponent chips = 3;
 }
