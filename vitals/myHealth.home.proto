@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package vitals;
+import "vitals/commons.cta.proto";
+
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/myhealth/home";
+
+// Enums for HealthSectionType
+enum HealthSectionType {
+  HEALTH_SECTION_TYPE_UNSPECIFIED = 0;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-14155&mode=dev
+  HEALTH_SECTION_TYPE_1 = 1;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-14374&mode=dev
+  HEALTH_SECTION_TYPE_2 = 2;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-14889&mode=dev
+  HEALTH_SECTION_TYPE_3 = 3;
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
+  HEALTH_SECTION_TYPE_4 = 4;
+}
+
+// Enums for ItemComponentType
+enum ItemComponentType {
+  ITEM_COMPONENT_TYPE_UNSPECIFIED = 0;
+  ITEM_COMPONENT_TYPE_CHIP = 1;
+  ITEM_COMPONENT_TYPE_DETAILS = 2;
+}
+
+// Enums for ChipComponentType
+enum ChipComponentType {
+  CHIP_COMPONENT_TYPE_UNSPECIFIED = 0;
+  // Highlighted chip
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
+  // AUTO-DETECTED
+  CHIP_COMPONENT_TYPE_HIGHLIGHTED = 1;
+  // GREYED
+  // TAKING / ONGOING
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
+  CHIP_COMPONENT_TYPE_GREYED = 2;
+  // 2 Medicines
+  // https://www.figma.com/file/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?type=design&node-id=3556-15535&mode=dev
+  CHIP_COMPONENT_TYPE_NORMAL = 3;
+}
+
+message HomeResponse {
+  UserProfile user_profile = 1;
+  repeated HealthSection health_sections = 2;
+}
+
+message UserProfile {
+  string blood_group = 1;
+  string weight = 2;
+  string height = 3;
+}
+
+// Defines a section in the Home screen
+message HealthSection {
+  // Type of the section
+  HealthSectionType section_type = 1;
+  string title = 2;
+  // List of Cards for the section.
+  repeated Card cards = 3;
+  commons.cta.CTAV1 add_cta = 4;
+}
+
+message Card {
+  oneof card_type {
+    SectionType1Cards type1_card = 1;
+    SectionType2Cards type2_card = 2;
+    SectionType3Cards type3_card = 3;
+    SectionType4Cards type4_card = 4;
+  }
+}
+
+message SectionType1Cards {
+  Meta meta = 1;
+  repeated ItemComponent items = 2;
+  commons.cta.CTAV1 cta = 3;
+  Banner banner = 4;
+}
+
+message Banner {
+  string text = 1;
+}
+
+message ItemComponent {
+  ItemComponentType type = 1;
+  repeated ChipComponent chip_components = 2;
+  repeated string detail_components = 3;
+}
+
+message Meta {
+  string text = 1;
+  string image = 2;
+}
+
+message ChipComponent {
+  string text = 1;
+  ChipComponentType type = 2;
+}
+
+message SectionType2Cards {
+  Meta meta = 1;
+  LatestReading latest_reading = 2;
+  Graph graph = 3;
+  commons.cta.CTAV1 cta = 4;
+}
+
+message LatestReading {
+  string reading = 1;
+  string status = 2;
+  string time = 3;
+}
+
+message Graph {
+  string type = 1;
+}
+
+message SectionType3Cards {
+  Meta meta = 1;
+  commons.cta.CTAV1 cta = 2;
+  repeated ChipComponent chips = 3;
+}
+
+message SectionType4Cards {
+  repeated VerticalList items = 1;
+}
+
+message VerticalList {
+  string text = 1;
+  commons.cta.CTAV1 cta = 2;
+}
