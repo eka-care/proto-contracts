@@ -12,9 +12,10 @@ _sym_db = _symbol_database.Default()
 
 
 from insurance import types_pb2 as insurance_dot_types__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cinsurance/smart_report.proto\x12\tinsurance\x1a\x15insurance/types.proto\"S\n\x12SmartReportCreated\x12\x0e\n\x06p_uuid\x18\x01 \x01(\t\x12\x0e\n\x06ref_id\x18\x02 \x01(\t\x12\x1d\n\x04type\x18\x03 \x01(\x0e\x32\x0f.insurance.TypeB2Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1cinsurance/smart_report.proto\x12\tinsurance\x1a\x15insurance/types.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x99\x01\n\x12SmartReportCreated\x12\x0e\n\x06p_uuid\x18\x01 \x01(\t\x12\x0e\n\x06ref_id\x18\x02 \x01(\t\x12\x1d\n\x04type\x18\x03 \x01(\x0e\x32\x0f.insurance.Type\x12\x34\n\x0bissued_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x00\x88\x01\x01\x42\x0e\n\x0c_issued_dateB2Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'insurance.smart_report_pb2', globals())
@@ -22,6 +23,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
-  _SMARTREPORTCREATED._serialized_start=66
-  _SMARTREPORTCREATED._serialized_end=149
+  _SMARTREPORTCREATED._serialized_start=100
+  _SMARTREPORTCREATED._serialized_end=253
 # @@protoc_insertion_point(module_scope)

@@ -15,7 +15,7 @@ from vault import cta_pb2 as vault_dot_cta__pb2
 from vault import banner_body_parameter_pb2 as vault_dot_banner__body__parameter__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13vault/banners.proto\x12\rvault.banners\x1a\x0fvault/cta.proto\x1a!vault/banner_body_parameter.proto\"9\n\x0f\x42\x61nnersResponse\x12&\n\x07\x62\x61nners\x18\x01 \x03(\x0b\x32\x15.vault.banners.Banner\"\xfe\x01\n\x06\x42\x61nner\x12\r\n\x05title\x18\x01 \x01(\t\x12\x11\n\x04\x62ody\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x1e\n\x03\x63ta\x18\x03 \x01(\x0b\x32\x11.vault.common.CTA\x12\x0e\n\x06\x63olour\x18\x04 \x01(\t\x12\r\n\x03img\x18\x05 \x01(\tH\x00\x12\x10\n\x06lottie\x18\x06 \x01(\tH\x00\x12I\n\x0f\x62ody_parameters\x18\x07 \x03(\x0e\x32\x30.vault.banner_body_parameter.BannerBodyParameter\x12\x16\n\tbanner_id\x18\x08 \x01(\tH\x02\x88\x01\x01\x42\x07\n\x05imageB\x07\n\x05_bodyB\x0c\n\n_banner_idB6Z4github.com/eka-care/proto-contracts/go/vault/bannersb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13vault/banners.proto\x12\rvault.banners\x1a\x0fvault/cta.proto\x1a!vault/banner_body_parameter.proto\"9\n\x0f\x42\x61nnersResponse\x12&\n\x07\x62\x61nners\x18\x01 \x03(\x0b\x32\x15.vault.banners.Banner\"\xac\x02\n\x06\x42\x61nner\x12\r\n\x05title\x18\x01 \x01(\t\x12\x11\n\x04\x62ody\x18\x02 \x01(\tH\x01\x88\x01\x01\x12\x1e\n\x03\x63ta\x18\x03 \x01(\x0b\x32\x11.vault.common.CTA\x12\x0e\n\x06\x63olour\x18\x04 \x01(\t\x12\r\n\x03img\x18\x05 \x01(\tH\x00\x12\x10\n\x06lottie\x18\x06 \x01(\tH\x00\x12I\n\x0f\x62ody_parameters\x18\x07 \x03(\x0e\x32\x30.vault.banner_body_parameter.BannerBodyParameter\x12\x16\n\tbanner_id\x18\x08 \x01(\tH\x02\x88\x01\x01\x12$\n\x03tag\x18\t \x01(\x0b\x32\x12.vault.banners.TagH\x03\x88\x01\x01\x42\x07\n\x05imageB\x07\n\x05_bodyB\x0c\n\n_banner_idB\x06\n\x04_tag\"A\n\x03Tag\x12\r\n\x05title\x18\x01 \x01(\t\x12\x17\n\x0f\x62\x61\x63kgroundColor\x18\x02 \x01(\t\x12\x12\n\ntitleColor\x18\x03 \x01(\tB6Z4github.com/eka-care/proto-contracts/go/vault/bannersb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'vault.banners_pb2', globals())
@@ -26,5 +26,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _BANNERSRESPONSE._serialized_start=90
   _BANNERSRESPONSE._serialized_end=147
   _BANNER._serialized_start=150
-  _BANNER._serialized_end=404
+  _BANNER._serialized_end=450
+  _TAG._serialized_start=452
+  _TAG._serialized_end=517
 # @@protoc_insertion_point(module_scope)
