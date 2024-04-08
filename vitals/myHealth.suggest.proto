@@ -7,7 +7,8 @@ message SuggestResponse {
 }
 
 message SuggestItem {
-  string title = 1;
-  string image = 2;
-  string description = 3;
+  string id = 1;
+  string title = 2;
+  optional string image = 3;
+  optional string description = 4;
 }
