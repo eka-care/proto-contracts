@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/myhealth/suggest";
+
+message SuggestResponse {
+  repeated SuggestItem items = 1;
+}
+
+message SuggestItem {
+  string title = 1;
+  string image = 2;
+  string description = 3;
+}
