@@ -66,6 +66,7 @@ message PlanDetails {
   optional Entity rider_name = 3;
   optional Entity uin_number = 4;
   optional Entity product_name = 5;
+  optional Entity product_id = 6;
 }
 
 message PolicyDate {

@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1einsurance/assign_profile.proto\x12\tinsurance\"W\n\x17\x41ssignProfileAPIRequest\x12\x14\n\x0cmember_db_id\x18\x01 \x01(\t\x12\x17\n\nassign_oid\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\r\n\x0b_assign_oid\"\x96\x01\n\x1d\x41ssignProfileAPIResponseError\x12@\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x32.insurance.AssignProfileAPIResponseError.ErrorCode\x12\x0f\n\x07message\x18\x02 \x01(\t\"\"\n\tErrorCode\x12\x15\n\x11\x45RROR_UNSPECIFIED\x10\x00\"b\n\x18\x41ssignProfileAPIResponse\x12<\n\x05\x65rror\x18\x01 \x01(\x0b\x32(.insurance.AssignProfileAPIResponseErrorH\x00\x88\x01\x01\x42\x08\n\x06_errorB2Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1einsurance/assign_profile.proto\x12\tinsurance\"A\n\x17\x41ssignProfileAPIRequest\x12\x17\n\nassign_oid\x18\x01 \x01(\tH\x00\x88\x01\x01\x42\r\n\x0b_assign_oid\"0\n\x15\x41ssignProfileResponse\x12\x17\n\x0f\x61\x66\x66\x65\x63ted_db_ids\x18\x01 \x03(\t\"\x96\x01\n\x1d\x41ssignProfileAPIResponseError\x12@\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x32.insurance.AssignProfileAPIResponseError.ErrorCode\x12\x0f\n\x07message\x18\x02 \x01(\t\"\"\n\tErrorCode\x12\x15\n\x11\x45RROR_UNSPECIFIED\x10\x00\"\x95\x01\n\x18\x41ssignProfileAPIResponse\x12\x34\n\x08response\x18\x01 \x01(\x0b\x32 .insurance.AssignProfileResponseH\x00\x12\x39\n\x05\x65rror\x18\x02 \x01(\x0b\x32(.insurance.AssignProfileAPIResponseErrorH\x00\x42\x08\n\x06resultB2Z0github.com/eka-care/proto-contracts/go/insuranceb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'insurance.assign_profile_pb2', globals())
@@ -22,11 +22,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z0github.com/eka-care/proto-contracts/go/insurance'
   _ASSIGNPROFILEAPIREQUEST._serialized_start=45
-  _ASSIGNPROFILEAPIREQUEST._serialized_end=132
-  _ASSIGNPROFILEAPIRESPONSEERROR._serialized_start=135
-  _ASSIGNPROFILEAPIRESPONSEERROR._serialized_end=285
-  _ASSIGNPROFILEAPIRESPONSEERROR_ERRORCODE._serialized_start=251
-  _ASSIGNPROFILEAPIRESPONSEERROR_ERRORCODE._serialized_end=285
-  _ASSIGNPROFILEAPIRESPONSE._serialized_start=287
-  _ASSIGNPROFILEAPIRESPONSE._serialized_end=385
+  _ASSIGNPROFILEAPIREQUEST._serialized_end=110
+  _ASSIGNPROFILERESPONSE._serialized_start=112
+  _ASSIGNPROFILERESPONSE._serialized_end=160
+  _ASSIGNPROFILEAPIRESPONSEERROR._serialized_start=163
+  _ASSIGNPROFILEAPIRESPONSEERROR._serialized_end=313
+  _ASSIGNPROFILEAPIRESPONSEERROR_ERRORCODE._serialized_start=279
+  _ASSIGNPROFILEAPIRESPONSEERROR_ERRORCODE._serialized_end=313
+  _ASSIGNPROFILEAPIRESPONSE._serialized_start=316
+  _ASSIGNPROFILEAPIRESPONSE._serialized_end=465
 # @@protoc_insertion_point(module_scope)
