@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+import "auth/auth.aenums.proto";
+import "auth/auth.common.proto";
+
+message AuthInit {
+  AuthMethod method = 1;
+  // Will be the email id for EmailOtp, mobile number for MobileOtp.
+  // For Google and Apple, it will be None.
+  string identifier = 2;
+}
+
+message AuthInitResponse {
+  string txn_id = 1;
+  string message = 2;
+  optional error error = 3;
+}

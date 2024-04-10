@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+import "auth/auth.aenums.proto";
+import "auth/auth.common.proto";
+
+message AuthVerifyRequest {
+  string txn_id = 1;
+  // For EmailOtp and MobileOtp, it will be the OTP.
+  // For Google and Apple, it will be the token.
+  string code = 2;
+}
+
+
+message AuthVerifyResponse {
+  string txnId = 1;
+
+  AuthSkipStates skip_state = 2;
+
+  // Will be present only if skipState is SkipStateErrored.
+  optional error error = 3;
+
+  // Data will be present only if skipState is SkipStateEnd.
+  optional Data data = 4;
+}

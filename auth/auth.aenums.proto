@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+
+enum AuthSkipStates {
+  SkipStateUnknown = 0;
+  SkipStateEnd = 1;
+  SkipStateMobileLinkInit = 2;
+  SkipStateMobileLinkConfirm = 3;
+  SkipStateErrored = 4;
+}
+
+enum AuthMethod {
+  Unknown = 0;
+  EmailOtp = 1;
+  MobileOtp = 2;
+  Google = 3;
+  Apple = 4;
+}

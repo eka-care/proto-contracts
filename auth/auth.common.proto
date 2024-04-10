@@ -1,0 +1,36 @@
+syntax = "proto3";
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+
+
+message error {
+  string code = 1;
+  string message = 2;
+}
+
+message Tokens {
+  // JWT Token for the user
+  string sess = 1;
+  // Refresh token for the user
+  string refresh = 2;
+}
+
+message ExternalTokens {
+  string firebase = 1 ;
+}
+
+message Data {
+  Tokens tokens = 1;
+  ExternalTokens external_tokens = 2;
+  // This will be present only if the user is old and will be Type1 profile.
+  optional Profile profile = 3;
+}
+
+message Profile {
+  string id = 1;
+  string email = 2;
+  string mobile = 3;
+  string name = 4;
+  string photo_url = 5;
+}
