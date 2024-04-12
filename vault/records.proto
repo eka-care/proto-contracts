@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package vault.records;
+
+import "google/protobuf/timestamp.proto";
+import "vault/cta.proto";
+import "vault/document_types.proto";
+import "vault/document_tags.proto";
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/records";
+
+message RecordUploadEventInTransit {}
+
+message RecordMetadata {
+  vault.common.CTA cta = 1;
+  optional string thumbnail = 2;
+  optional google.protobuf.Timestamp document_date = 3;
+  repeated Tag tags = 4;
+}
+
+/* Record represents a document in list of records. */
+message Record {
+  string document_id = 1;
+  google.protobuf.Timestamp upload_date = 2;
+  DocumentType document_type = 3;
+  oneof available_document {
+    RecordUploadEventInTransit in_transit = 4;
+    RecordMetadata metadata = 5;
+  }
+}
+
+/* Item represents an item part of listing of records. */
+message Item {
+  oneof result { Record record = 1; }
+}
+
+/* RecordsResponse represents list of records or any items that we intend to
+ * place in between of records. */
+message RecordsResponse {
+  repeated Item items = 1;
+  optional string next_page_token = 2;
+}
+
+/* RecordsAPIResponse represents api response of records listing. */
+message RecordsAPIResponse {
+  /* ErrorCode represents list of errors */
+  enum ErrorCode {
+    ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+  }
+
+  /* Error represents error resonse of API */
+  message Error {
+    ErrorCode code = 1; // Error Code.
+    string message = 2; // Error Message.
+  }
+
+  oneof result {
+    RecordsResponse response = 1;
+    Error error = 2;
+  }
+}
+
+message RecordMetadataPlus {
+  vault.common.CTA cta = 1;
+  optional string thumbnail = 2;
+  optional google.protobuf.Timestamp document_date = 3;
+  repeated Tag tags = 4;
+  DocumentType document_type = 5;
+}
+
+/* RecordsRichDataResponse represents list of records. */
+message RecordsRichDataResponse {
+  oneof available_document {
+    RecordUploadEventInTransit in_transit = 4;
+    RecordMetadataPlus metadata_analyzing = 5;
+    RecordMetadataPlus metadata_final = 6;
+  }
+}
+
+message RecordsRichDataAPIResponse {
+  /* ErrorCode represents list of errors */
+  enum ErrorCode {
+    ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+  }
+
+  /* Error represents error resonse of API */
+  message Error {
+    ErrorCode code = 1; // Error Code.
+    string message = 2; // Error Message.
+  }
+
+  oneof result {
+    RecordsRichDataResponse response = 1;
+    Error error = 2;
+  }
+}
+
+message RecordsRichDataAPIRequest { repeated string document_ids = 1; }

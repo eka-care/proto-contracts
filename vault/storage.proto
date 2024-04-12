@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package vault.records;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/records";
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;  // Status -> Unspecified.
+  STATUS_WITHIN_LIMIT = 1; // Status -> OK.
+  STATUS_NEAR_LIMIT = 2;   // Status -> Warning.
+  STATUS_EXCEEDED = 3;     // Status -> Exceeded.
+}
+
+message Usage {
+  string amount = 1; // Value.
+  string unit = 2;   // Unit.
+  Status status = 3; // Status.
+}
+
+message Exceeded {
+  string amount = 1; // Value.
+  string unit = 2;   // Unit.
+}
+
+message MaxLimit {
+  string amount = 1; // Value.
+  string unit = 2;   // Unit.
+}
+
+message Storage {
+  Usage usage = 1; // Usage.
+  optional Exceeded exceeded =
+      2; // This key will be absent if usage.status is not "EXCEEDED".
+  MaxLimit max_limit = 3; // Max Limit.
+}
+
+/* RecordsResponse represents list of records. */
+message RecordsStorageDataResponse {
+  Storage storage = 1; // Storage.
+}
+
+message RecordsStorageAPIResponse {
+  /* ErrorCode represents list of errors */
+  enum ErrorCode {
+    ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+  }
+
+  /* Error represents error resonse of API */
+  message Error {
+    ErrorCode code = 1; // Error Code.
+    string message = 2; // Error Message.
+  }
+
+  oneof result {
+    RecordsStorageDataResponse response = 1;
+    Error error = 2;
+  }
+}
