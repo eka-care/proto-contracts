@@ -4,6 +4,18 @@ package vault.records;
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/records";
 
+enum SizeUnit {
+  SIZE_UNIT_UNSPECIFIED = 0; // Size Unit -> Unspecified.
+  SIZE_UNIT_GB = 1;          // Size Unit -> GB.
+  SIZE_UNIT_MB = 2;          // Size Unit -> MB.
+  SIZE_UNIT_KB = 3;          // Size Unit -> KB.
+  SIZE_UNIT_B = 4;           // Size Unit -> B.
+  SIZE_UNIT_TB = 5;          // Size Unit -> TB.
+  SIZE_UNIT_PB = 6;          // Size Unit -> PB.
+  SIZE_UNIT_EB = 7;          // Size Unit -> EB.
+  SIZE_UNIT_ZB = 8;          // Size Unit -> ZB.
+}
+
 enum Status {
   STATUS_UNSPECIFIED = 0;  // Status -> Unspecified.
   STATUS_WITHIN_LIMIT = 1; // Status -> OK.
@@ -13,18 +25,18 @@ enum Status {
 
 message Usage {
   string amount = 1; // Value.
-  string unit = 2;   // Unit.
+  SizeUnit unit = 2; // Unit.
   Status status = 3; // Status.
 }
 
 message Exceeded {
   string amount = 1; // Value.
-  string unit = 2;   // Unit.
+  SizeUnit unit = 2; // Unit.
 }
 
 message MaxLimit {
   string amount = 1; // Value.
-  string unit = 2;   // Unit.
+  SizeUnit unit = 2; // Unit.
 }
 
 message Storage {
@@ -39,6 +51,7 @@ message RecordsStorageDataResponse {
   Storage storage = 1; // Storage.
 }
 
+/* RecordsStorageAPIResponse represents api response of records storage. */
 message RecordsStorageAPIResponse {
   /* ErrorCode represents list of errors */
   enum ErrorCode {
