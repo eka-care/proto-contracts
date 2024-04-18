@@ -23,7 +23,6 @@ message AuthInitResponse {
 }
 
 message OtpInitResponse {
-  string otp = 1;
   bool triggered = 2;
   int64 retries = 3 ;
   string message = 4;
