@@ -5,12 +5,13 @@ package auth;
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 import "auth/auth.aenums.proto";
 import "auth/auth.common.proto";
+import "google/protobuf/timestamp.proto";
 
 message AuthInit {
   AuthMethod method = 1;
   // Will be the email id for EmailOtp, mobile number for MobileOtp.
   // For Google and Apple, it will be None.
-  optional bool allow = 2;
+  optional bool allowWhatsapp = 2;
   string identifier = 3;
 }
 
@@ -26,4 +27,5 @@ message OtpInitResponse {
   bool triggered = 2;
   int64 retries = 3 ;
   string message = 4;
+  google.protobuf.Timestamp  nextOtpRequest = 5 ;
 }
