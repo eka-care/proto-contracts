@@ -10,11 +10,20 @@ message AuthInit {
   AuthMethod method = 1;
   // Will be the email id for EmailOtp, mobile number for MobileOtp.
   // For Google and Apple, it will be None.
-  string identifier = 2;
+  optional bool allow = 2;
+  string identifier = 3;
 }
 
 message AuthInitResponse {
   string txn_id = 1;
   string message = 2;
   optional error error = 3;
+  optional OtpInitResponse otp = 4;
+}
+
+message OtpInitResponse {
+  string otp = 1;
+  bool triggered = 2;
+  int64 retries = 3 ;
+  string message = 4;
 }
