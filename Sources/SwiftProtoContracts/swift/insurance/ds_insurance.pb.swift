@@ -353,6 +353,15 @@ public struct Insurance_PlanDetails {
   /// Clears the value of `productName`. Subsequent reads from it will return its default value.
   public mutating func clearProductName() {self._productName = nil}
 
+  public var productID: Insurance_Entity {
+    get {return _productID ?? Insurance_Entity()}
+    set {_productID = newValue}
+  }
+  /// Returns true if `productID` has been explicitly set.
+  public var hasProductID: Bool {return self._productID != nil}
+  /// Clears the value of `productID`. Subsequent reads from it will return its default value.
+  public mutating func clearProductID() {self._productID = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -362,6 +371,7 @@ public struct Insurance_PlanDetails {
   fileprivate var _riderName: Insurance_Entity? = nil
   fileprivate var _uinNumber: Insurance_Entity? = nil
   fileprivate var _productName: Insurance_Entity? = nil
+  fileprivate var _productID: Insurance_Entity? = nil
 }
 
 public struct Insurance_PolicyDate {
@@ -959,6 +969,7 @@ extension Insurance_PlanDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     3: .standard(proto: "rider_name"),
     4: .standard(proto: "uin_number"),
     5: .standard(proto: "product_name"),
+    6: .standard(proto: "product_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -972,6 +983,7 @@ extension Insurance_PlanDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       case 3: try { try decoder.decodeSingularMessageField(value: &self._riderName) }()
       case 4: try { try decoder.decodeSingularMessageField(value: &self._uinNumber) }()
       case 5: try { try decoder.decodeSingularMessageField(value: &self._productName) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._productID) }()
       default: break
       }
     }
@@ -997,6 +1009,9 @@ extension Insurance_PlanDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try { if let v = self._productName {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     } }()
+    try { if let v = self._productID {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1006,6 +1021,7 @@ extension Insurance_PlanDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     if lhs._riderName != rhs._riderName {return false}
     if lhs._uinNumber != rhs._uinNumber {return false}
     if lhs._productName != rhs._productName {return false}
+    if lhs._productID != rhs._productID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
