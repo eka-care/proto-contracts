@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package vitals;
+
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/myhealth/add";
+
+
+// Define an enumeration for different types of health entries.
+enum EntryType {
+  Unknown = 0;
+  Allergies = 1;
+  Diagnoses = 2;
+}
+
+
+// Main input message that includes a field for each type of entry.
+message AddDataRequest {
+  string eka_id = 1; // SNOMED CT identifier for conditions and allergies
+  int32 year_duration = 2; // Duration in years since the onset or adoption
+  EntryType type = 3; // Type of the entry to determine processing route
+}
+
+message AddDataResponse {
+  string message = 1;
+}
