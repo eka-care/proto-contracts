@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package vault.valuesunlock;
+
+option go_package = "github.com/eka-care/proto-contracts/go/vault/valuesunlock";
+
+/* ValueUnlockProgress represents status of value. */
+message ValueUnlockProgress {
+  Type type = 1;      // Hightlight type of the value.
+  bool completed = 2; // Is unlocked?
+
+  enum Type {
+    TYPE_UNSPECIFIED = 0; // Unspecified.
+    TYPE_LAB_REPORT = 1;
+    TYPE_HEALTH_INSURANCE = 2;
+    TYPE_COWIN_CERTIFICATE = 3;
+  }
+}
+
+/* ValuesUnlockProgressResponse represents status of values to be unlocked using
+ * records.*/
+message ValuesUnlockProgressResponse {
+  /* values represents multiple values using records. */
+  repeated ValueUnlockProgress values = 1;
+}
+
+message ValuesUnlockProgressAPIResponse {
+  /* ErrorCode represents list of errors */
+  enum ErrorCode {
+    ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+  }
+
+  /* Error represents error resonse of API */
+  message Error {
+    ErrorCode code = 1; // Error Code.
+    string message = 2; // Error Message.
+  }
+
+  oneof result {
+    ValuesUnlockProgressResponse response = 1;
+    Error error = 2;
+  }
+}
