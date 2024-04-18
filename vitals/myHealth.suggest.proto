@@ -4,6 +4,7 @@ option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vit
 
 message SuggestResponse {
   repeated SuggestItem items = 1;
+  optional string default_image = 2;
 }
 
 message SuggestItem {
