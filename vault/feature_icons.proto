@@ -10,7 +10,6 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/features";
 message FeatureIcon {
   Feature type = 1;
   vault.common.CTA cta = 2;
-  string title = 3;
 }
 
 message FeatureIconsResponse { repeated FeatureIcon icons = 1; }

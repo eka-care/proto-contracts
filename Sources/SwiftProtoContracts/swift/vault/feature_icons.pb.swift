@@ -36,8 +36,6 @@ public struct Vault_Features_FeatureIcon {
   /// Clears the value of `cta`. Subsequent reads from it will return its default value.
   public mutating func clearCta() {self._cta = nil}
 
-  public var title: String = String()
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -348,7 +346,6 @@ extension Vault_Features_FeatureIcon: SwiftProtobuf.Message, SwiftProtobuf._Mess
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "type"),
     2: .same(proto: "cta"),
-    3: .same(proto: "title"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -359,7 +356,6 @@ extension Vault_Features_FeatureIcon: SwiftProtobuf.Message, SwiftProtobuf._Mess
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularEnumField(value: &self.type) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.title) }()
       default: break
       }
     }
@@ -376,16 +372,12 @@ extension Vault_Features_FeatureIcon: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try { if let v = self._cta {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
-    if !self.title.isEmpty {
-      try visitor.visitSingularStringField(value: self.title, fieldNumber: 3)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_Features_FeatureIcon, rhs: Vault_Features_FeatureIcon) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs._cta != rhs._cta {return false}
-    if lhs.title != rhs.title {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
