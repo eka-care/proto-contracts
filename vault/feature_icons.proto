@@ -4,6 +4,7 @@ package vault.features;
 
 import "vault/cta.proto";
 import "vault/features.proto";
+import "insurance/insurance.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/features";
 
@@ -33,9 +34,15 @@ message FeatureIconsAPIResponse {
 }
 
 message MyHealthFeatureIconResponse { int32 total_vitals = 1; }
+message InsuranceFeatureIconResponse {
+  insurance.Coverage.CoverageStatus status = 1;
+}
 
 message FeatureIconStatusResponse {
-  oneof result { MyHealthFeatureIconResponse my_health = 1; }
+  oneof result {
+    InsuranceFeatureIconResponse insurance = 1;
+    MyHealthFeatureIconResponse my_health = 2;
+  }
 }
 
 message FeatureIconStatusAPIResponse {

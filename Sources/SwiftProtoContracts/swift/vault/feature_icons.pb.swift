@@ -175,12 +175,32 @@ public struct Vault_Features_MyHealthFeatureIconResponse {
   public init() {}
 }
 
+public struct Vault_Features_InsuranceFeatureIconResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: Insurance_Coverage.CoverageStatus = .unspecified
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 public struct Vault_Features_FeatureIconStatusResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   public var result: Vault_Features_FeatureIconStatusResponse.OneOf_Result? = nil
+
+  public var insurance: Vault_Features_InsuranceFeatureIconResponse {
+    get {
+      if case .insurance(let v)? = result {return v}
+      return Vault_Features_InsuranceFeatureIconResponse()
+    }
+    set {result = .insurance(newValue)}
+  }
 
   public var myHealth: Vault_Features_MyHealthFeatureIconResponse {
     get {
@@ -193,6 +213,7 @@ public struct Vault_Features_FeatureIconStatusResponse {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Result: Equatable {
+    case insurance(Vault_Features_InsuranceFeatureIconResponse)
     case myHealth(Vault_Features_MyHealthFeatureIconResponse)
 
   #if !swift(>=4.1)
@@ -201,10 +222,15 @@ public struct Vault_Features_FeatureIconStatusResponse {
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
+      case (.insurance, .insurance): return {
+        guard case .insurance(let l) = lhs, case .insurance(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       case (.myHealth, .myHealth): return {
         guard case .myHealth(let l) = lhs, case .myHealth(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
+      default: return false
       }
     }
   #endif
@@ -329,6 +355,7 @@ extension Vault_Features_FeatureIconsAPIResponse.OneOf_Result: @unchecked Sendab
 extension Vault_Features_FeatureIconsAPIResponse.ErrorCode: @unchecked Sendable {}
 extension Vault_Features_FeatureIconsAPIResponse.Error: @unchecked Sendable {}
 extension Vault_Features_MyHealthFeatureIconResponse: @unchecked Sendable {}
+extension Vault_Features_InsuranceFeatureIconResponse: @unchecked Sendable {}
 extension Vault_Features_FeatureIconStatusResponse: @unchecked Sendable {}
 extension Vault_Features_FeatureIconStatusResponse.OneOf_Result: @unchecked Sendable {}
 extension Vault_Features_FeatureIconStatusAPIResponse: @unchecked Sendable {}
@@ -561,10 +588,43 @@ extension Vault_Features_MyHealthFeatureIconResponse: SwiftProtobuf.Message, Swi
   }
 }
 
+extension Vault_Features_InsuranceFeatureIconResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".InsuranceFeatureIconResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.status != .unspecified {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Features_InsuranceFeatureIconResponse, rhs: Vault_Features_InsuranceFeatureIconResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Vault_Features_FeatureIconStatusResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FeatureIconStatusResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "my_health"),
+    1: .same(proto: "insurance"),
+    2: .standard(proto: "my_health"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -574,6 +634,19 @@ extension Vault_Features_FeatureIconStatusResponse: SwiftProtobuf.Message, Swift
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try {
+        var v: Vault_Features_InsuranceFeatureIconResponse?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .insurance(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .insurance(v)
+        }
+      }()
+      case 2: try {
         var v: Vault_Features_MyHealthFeatureIconResponse?
         var hadOneofValue = false
         if let current = self.result {
@@ -596,9 +669,17 @@ extension Vault_Features_FeatureIconStatusResponse: SwiftProtobuf.Message, Swift
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    try { if case .myHealth(let v)? = self.result {
+    switch self.result {
+    case .insurance?: try {
+      guard case .insurance(let v)? = self.result else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
+    }()
+    case .myHealth?: try {
+      guard case .myHealth(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case nil: break
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
