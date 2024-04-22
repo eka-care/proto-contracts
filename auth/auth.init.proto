@@ -23,8 +23,8 @@ message AuthInitResponse {
 }
 
 message OtpInitResponse {
-  bool triggered = 2;
-  int64 retries = 3 ;
-  string message = 4;
-  google.protobuf.Timestamp  nextOtpRequest = 5 ;
+  bool triggered = 1;
+  int64 retries = 2 ;
+  string message = 3;
+  string  nextOtpRequest = 4 ;
 }
