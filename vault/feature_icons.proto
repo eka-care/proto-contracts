@@ -37,11 +37,21 @@ message MyHealthFeatureIconResponse { int32 total_vitals = 1; }
 message InsuranceFeatureIconResponse {
   insurance.Coverage.CoverageStatus status = 1;
 }
+message SecretLockerFeatureIconResponse {
+  Status status = 1;
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_NOT_CREATED = 1;
+    STATUS_CREATED = 2;
+    STATUS_TO_RESTORE = 3;
+  }
+}
 
 message FeatureIconStatusResponse {
   oneof result {
     InsuranceFeatureIconResponse insurance = 1;
     MyHealthFeatureIconResponse my_health = 2;
+    SecretLockerFeatureIconResponse secret_locker = 3;
   }
 }
 

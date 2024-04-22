@@ -187,6 +187,66 @@ public struct Vault_Features_InsuranceFeatureIconResponse {
   public init() {}
 }
 
+public struct Vault_Features_SecretLockerFeatureIconResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var status: Vault_Features_SecretLockerFeatureIconResponse.Status = .unspecified
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum Status: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
+    case unspecified // = 0
+    case notCreated // = 1
+    case created // = 2
+    case toRestore // = 3
+    case UNRECOGNIZED(Int)
+
+    public init() {
+      self = .unspecified
+    }
+
+    public init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .unspecified
+      case 1: self = .notCreated
+      case 2: self = .created
+      case 3: self = .toRestore
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    public var rawValue: Int {
+      switch self {
+      case .unspecified: return 0
+      case .notCreated: return 1
+      case .created: return 2
+      case .toRestore: return 3
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  public init() {}
+}
+
+#if swift(>=4.2)
+
+extension Vault_Features_SecretLockerFeatureIconResponse.Status: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Vault_Features_SecretLockerFeatureIconResponse.Status] = [
+    .unspecified,
+    .notCreated,
+    .created,
+    .toRestore,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 public struct Vault_Features_FeatureIconStatusResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -210,11 +270,20 @@ public struct Vault_Features_FeatureIconStatusResponse {
     set {result = .myHealth(newValue)}
   }
 
+  public var secretLocker: Vault_Features_SecretLockerFeatureIconResponse {
+    get {
+      if case .secretLocker(let v)? = result {return v}
+      return Vault_Features_SecretLockerFeatureIconResponse()
+    }
+    set {result = .secretLocker(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Result: Equatable {
     case insurance(Vault_Features_InsuranceFeatureIconResponse)
     case myHealth(Vault_Features_MyHealthFeatureIconResponse)
+    case secretLocker(Vault_Features_SecretLockerFeatureIconResponse)
 
   #if !swift(>=4.1)
     public static func ==(lhs: Vault_Features_FeatureIconStatusResponse.OneOf_Result, rhs: Vault_Features_FeatureIconStatusResponse.OneOf_Result) -> Bool {
@@ -228,6 +297,10 @@ public struct Vault_Features_FeatureIconStatusResponse {
       }()
       case (.myHealth, .myHealth): return {
         guard case .myHealth(let l) = lhs, case .myHealth(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.secretLocker, .secretLocker): return {
+        guard case .secretLocker(let l) = lhs, case .secretLocker(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       default: return false
@@ -356,6 +429,8 @@ extension Vault_Features_FeatureIconsAPIResponse.ErrorCode: @unchecked Sendable 
 extension Vault_Features_FeatureIconsAPIResponse.Error: @unchecked Sendable {}
 extension Vault_Features_MyHealthFeatureIconResponse: @unchecked Sendable {}
 extension Vault_Features_InsuranceFeatureIconResponse: @unchecked Sendable {}
+extension Vault_Features_SecretLockerFeatureIconResponse: @unchecked Sendable {}
+extension Vault_Features_SecretLockerFeatureIconResponse.Status: @unchecked Sendable {}
 extension Vault_Features_FeatureIconStatusResponse: @unchecked Sendable {}
 extension Vault_Features_FeatureIconStatusResponse.OneOf_Result: @unchecked Sendable {}
 extension Vault_Features_FeatureIconStatusAPIResponse: @unchecked Sendable {}
@@ -620,11 +695,53 @@ extension Vault_Features_InsuranceFeatureIconResponse: SwiftProtobuf.Message, Sw
   }
 }
 
+extension Vault_Features_SecretLockerFeatureIconResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SecretLockerFeatureIconResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "status"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.status) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.status != .unspecified {
+      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Features_SecretLockerFeatureIconResponse, rhs: Vault_Features_SecretLockerFeatureIconResponse) -> Bool {
+    if lhs.status != rhs.status {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Features_SecretLockerFeatureIconResponse.Status: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "STATUS_UNSPECIFIED"),
+    1: .same(proto: "STATUS_NOT_CREATED"),
+    2: .same(proto: "STATUS_CREATED"),
+    3: .same(proto: "STATUS_TO_RESTORE"),
+  ]
+}
+
 extension Vault_Features_FeatureIconStatusResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".FeatureIconStatusResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "insurance"),
     2: .standard(proto: "my_health"),
+    3: .standard(proto: "secret_locker"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -659,6 +776,19 @@ extension Vault_Features_FeatureIconStatusResponse: SwiftProtobuf.Message, Swift
           self.result = .myHealth(v)
         }
       }()
+      case 3: try {
+        var v: Vault_Features_SecretLockerFeatureIconResponse?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .secretLocker(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .secretLocker(v)
+        }
+      }()
       default: break
       }
     }
@@ -677,6 +807,10 @@ extension Vault_Features_FeatureIconStatusResponse: SwiftProtobuf.Message, Swift
     case .myHealth?: try {
       guard case .myHealth(let v)? = self.result else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case .secretLocker?: try {
+      guard case .secretLocker(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
     case nil: break
     }
