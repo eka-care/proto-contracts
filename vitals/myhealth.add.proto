@@ -15,9 +15,10 @@ enum EntryType {
 
 // Main input message that includes a field for each type of entry.
 message AddDataRequest {
-  string eka_id = 1; // SNOMED CT identifier for conditions and allergies
-  int32 year_duration = 2; // Duration in years since the onset or adoption
-  EntryType type = 3; // Type of the entry to determine processing route
+  EntryType type = 1; // Type of the entry to determine processing route
+  string eka_id = 2; // SNOMED CT identifier for conditions and allergies
+  string name = 3; // Name of the condition or allergy
+  optional int32 onset_year = 4; // Duration in years since the onset or adoption
 }
 
 message AddDataResponse {
