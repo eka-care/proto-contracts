@@ -61,7 +61,7 @@ message RecordsAPIResponse {
 }
 
 message RecordMetadataPlus {
-  RecordMetadata metaData = 1;
+  RecordMetadata metadata = 1;
   DocumentType document_type = 2;
 }
 
