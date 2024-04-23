@@ -61,11 +61,8 @@ message RecordsAPIResponse {
 }
 
 message RecordMetadataPlus {
-  vault.common.CTA cta = 1;
-  optional string thumbnail = 2;
-  optional google.protobuf.Timestamp document_date = 3;
-  repeated Tag tags = 4;
-  DocumentType document_type = 5;
+  RecordMetadata metadata = 1;
+  DocumentType document_type = 2;
 }
 
 /* RecordsRichDataResponse represents list of records. */
