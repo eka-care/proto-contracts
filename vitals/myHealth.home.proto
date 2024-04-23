@@ -101,6 +101,7 @@ message SectionType1Cards {
   commons.cta.CTAV1 cta = 3;
   optional Banner banner = 4;
   string id = 5;
+  optional bool is_sample_data = 6;
 }
 
 message Banner {
@@ -129,6 +130,7 @@ message SectionType2Cards {
   Graph graph = 3;
   commons.cta.CTAV1 cta = 4;
   string id = 5;
+  optional bool is_sample_data = 6;
 }
 
 message LatestReading {
@@ -146,10 +148,12 @@ message SectionType3Cards {
   commons.cta.CTAV1 cta = 2;
   repeated ChipComponent chips = 3;
   string id = 4;
+  optional bool is_sample_data = 6;
 }
 
 message SectionType4Cards {
   repeated VerticalList items = 1;
+  optional bool is_sample_data = 6;
 }
 
 message VerticalList {
