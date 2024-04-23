@@ -66,7 +66,7 @@ enum BloodGroup {
 
 message BodyMeasurements {
   optional  string value_sting = 1;
-  optional  float value_float = 2;
+  optional  double value_float = 2;
   optional BodyMeasurementUnit unit = 3;
 }
 
