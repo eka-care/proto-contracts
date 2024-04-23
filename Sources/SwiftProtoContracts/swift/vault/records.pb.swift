@@ -319,34 +319,14 @@ public struct Vault_Records_RecordMetadataPlus {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var cta: Vault_Common_CTA {
-    get {return _cta ?? Vault_Common_CTA()}
-    set {_cta = newValue}
+  public var metadata: Vault_Records_RecordMetadata {
+    get {return _metadata ?? Vault_Records_RecordMetadata()}
+    set {_metadata = newValue}
   }
-  /// Returns true if `cta` has been explicitly set.
-  public var hasCta: Bool {return self._cta != nil}
-  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
-  public mutating func clearCta() {self._cta = nil}
-
-  public var thumbnail: String {
-    get {return _thumbnail ?? String()}
-    set {_thumbnail = newValue}
-  }
-  /// Returns true if `thumbnail` has been explicitly set.
-  public var hasThumbnail: Bool {return self._thumbnail != nil}
-  /// Clears the value of `thumbnail`. Subsequent reads from it will return its default value.
-  public mutating func clearThumbnail() {self._thumbnail = nil}
-
-  public var documentDate: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _documentDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_documentDate = newValue}
-  }
-  /// Returns true if `documentDate` has been explicitly set.
-  public var hasDocumentDate: Bool {return self._documentDate != nil}
-  /// Clears the value of `documentDate`. Subsequent reads from it will return its default value.
-  public mutating func clearDocumentDate() {self._documentDate = nil}
-
-  public var tags: [Vault_Records_Tag] = []
+  /// Returns true if `metadata` has been explicitly set.
+  public var hasMetadata: Bool {return self._metadata != nil}
+  /// Clears the value of `metadata`. Subsequent reads from it will return its default value.
+  public mutating func clearMetadata() {self._metadata = nil}
 
   public var documentType: Vault_Records_DocumentType = .typeUnspecified
 
@@ -354,9 +334,7 @@ public struct Vault_Records_RecordMetadataPlus {
 
   public init() {}
 
-  fileprivate var _cta: Vault_Common_CTA? = nil
-  fileprivate var _thumbnail: String? = nil
-  fileprivate var _documentDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _metadata: Vault_Records_RecordMetadata? = nil
 }
 
 /// RecordsRichDataResponse represents list of records. 
@@ -939,11 +917,8 @@ extension Vault_Records_RecordsAPIResponse.Error: SwiftProtobuf.Message, SwiftPr
 extension Vault_Records_RecordMetadataPlus: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecordMetadataPlus"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "cta"),
-    2: .same(proto: "thumbnail"),
-    3: .standard(proto: "document_date"),
-    4: .same(proto: "tags"),
-    5: .standard(proto: "document_type"),
+    1: .same(proto: "metadata"),
+    2: .standard(proto: "document_type"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -952,11 +927,8 @@ extension Vault_Records_RecordMetadataPlus: SwiftProtobuf.Message, SwiftProtobuf
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self._thumbnail) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._documentDate) }()
-      case 4: try { try decoder.decodeRepeatedEnumField(value: &self.tags) }()
-      case 5: try { try decoder.decodeSingularEnumField(value: &self.documentType) }()
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._metadata) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.documentType) }()
       default: break
       }
     }
@@ -967,29 +939,17 @@ extension Vault_Records_RecordMetadataPlus: SwiftProtobuf.Message, SwiftProtobuf
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._cta {
+    try { if let v = self._metadata {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
-    try { if let v = self._thumbnail {
-      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
-    } }()
-    try { if let v = self._documentDate {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    if !self.tags.isEmpty {
-      try visitor.visitPackedEnumField(value: self.tags, fieldNumber: 4)
-    }
     if self.documentType != .typeUnspecified {
-      try visitor.visitSingularEnumField(value: self.documentType, fieldNumber: 5)
+      try visitor.visitSingularEnumField(value: self.documentType, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_Records_RecordMetadataPlus, rhs: Vault_Records_RecordMetadataPlus) -> Bool {
-    if lhs._cta != rhs._cta {return false}
-    if lhs._thumbnail != rhs._thumbnail {return false}
-    if lhs._documentDate != rhs._documentDate {return false}
-    if lhs.tags != rhs.tags {return false}
+    if lhs._metadata != rhs._metadata {return false}
     if lhs.documentType != rhs.documentType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
