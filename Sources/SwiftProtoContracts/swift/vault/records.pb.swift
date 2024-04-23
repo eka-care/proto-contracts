@@ -337,13 +337,12 @@ public struct Vault_Records_RecordMetadataPlus {
   fileprivate var _metadata: Vault_Records_RecordMetadata? = nil
 }
 
-/// RecordsRichDataResponse represents list of records. 
-public struct Vault_Records_RecordsRichDataResponse {
+public struct Vault_Records_RecordsRichDocumentResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var availableDocument: Vault_Records_RecordsRichDataResponse.OneOf_AvailableDocument? = nil
+  public var availableDocument: Vault_Records_RecordsRichDocumentResponse.OneOf_AvailableDocument? = nil
 
   public var inTransit: Vault_Records_RecordUploadEventInTransit {
     get {
@@ -377,7 +376,7 @@ public struct Vault_Records_RecordsRichDataResponse {
     case metadataFinal(Vault_Records_RecordMetadataPlus)
 
   #if !swift(>=4.1)
-    public static func ==(lhs: Vault_Records_RecordsRichDataResponse.OneOf_AvailableDocument, rhs: Vault_Records_RecordsRichDataResponse.OneOf_AvailableDocument) -> Bool {
+    public static func ==(lhs: Vault_Records_RecordsRichDocumentResponse.OneOf_AvailableDocument, rhs: Vault_Records_RecordsRichDocumentResponse.OneOf_AvailableDocument) -> Bool {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -399,6 +398,19 @@ public struct Vault_Records_RecordsRichDataResponse {
     }
   #endif
   }
+
+  public init() {}
+}
+
+/// RecordsRichDataResponse represents list of records. 
+public struct Vault_Records_RecordsRichDataResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var data: [Vault_Records_RecordsRichDocumentResponse] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
@@ -536,8 +548,9 @@ extension Vault_Records_RecordsAPIResponse.OneOf_Result: @unchecked Sendable {}
 extension Vault_Records_RecordsAPIResponse.ErrorCode: @unchecked Sendable {}
 extension Vault_Records_RecordsAPIResponse.Error: @unchecked Sendable {}
 extension Vault_Records_RecordMetadataPlus: @unchecked Sendable {}
+extension Vault_Records_RecordsRichDocumentResponse: @unchecked Sendable {}
+extension Vault_Records_RecordsRichDocumentResponse.OneOf_AvailableDocument: @unchecked Sendable {}
 extension Vault_Records_RecordsRichDataResponse: @unchecked Sendable {}
-extension Vault_Records_RecordsRichDataResponse.OneOf_AvailableDocument: @unchecked Sendable {}
 extension Vault_Records_RecordsRichDataAPIResponse: @unchecked Sendable {}
 extension Vault_Records_RecordsRichDataAPIResponse.OneOf_Result: @unchecked Sendable {}
 extension Vault_Records_RecordsRichDataAPIResponse.ErrorCode: @unchecked Sendable {}
@@ -956,8 +969,8 @@ extension Vault_Records_RecordMetadataPlus: SwiftProtobuf.Message, SwiftProtobuf
   }
 }
 
-extension Vault_Records_RecordsRichDataResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".RecordsRichDataResponse"
+extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RecordsRichDocumentResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     4: .standard(proto: "in_transit"),
     5: .standard(proto: "metadata_analyzing"),
@@ -1037,8 +1050,40 @@ extension Vault_Records_RecordsRichDataResponse: SwiftProtobuf.Message, SwiftPro
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Records_RecordsRichDataResponse, rhs: Vault_Records_RecordsRichDataResponse) -> Bool {
+  public static func ==(lhs: Vault_Records_RecordsRichDocumentResponse, rhs: Vault_Records_RecordsRichDocumentResponse) -> Bool {
     if lhs.availableDocument != rhs.availableDocument {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Records_RecordsRichDataResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RecordsRichDataResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "data"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.data) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.data.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.data, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Records_RecordsRichDataResponse, rhs: Vault_Records_RecordsRichDataResponse) -> Bool {
+    if lhs.data != rhs.data {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
