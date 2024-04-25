@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package vitals;
+
+import "vitals/commons.cta.proto";
+import "vitals/myHealth.home.proto";
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/myhealth/add";
+
+message CardDetails {
+  SectionType1Cards top = 1;
+  optional AutoDetectedComponent auto_detected_details = 2;
+
+}
+
+message AutoDetectedComponent {
+  string title = 1;
+  repeated Evidence evidences = 2;
+}
+
+message Evidence {
+  string title = 1;
+  string description = 2;
+}
+
+message Attributes {
+  string title = 1;
+  repeated AttributeItem values = 2;
+  commons.cta.CTAV1 add_cta = 3;
+}
+
+message AttributeItem {
+  string title = 1;
+}

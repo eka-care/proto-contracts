@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package vitals;
+
 option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/myhealth/suggest";
 
 message SuggestResponse {
