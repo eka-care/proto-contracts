@@ -18,7 +18,7 @@ message LinkMobileInitResp {
   AuthSkipStates skip_state = 2;
 
   // Will be present only if skipState is SkipStateErrored.
-  optional error error = 3;
+  optional AuthError error = 3;
 
   // Data will be present only if skipState is SkipStateEnd.
   optional Data data = 4;
@@ -35,7 +35,7 @@ message LinkMobileVerifyResp {
   AuthSkipStates skip_state = 2;
 
   // Will be present only if skipState is SkipStateErrored.
-  optional error error = 3;
+  optional AuthError error = 3;
   // Data will be present only if skipState is SkipStateEnd.
   optional Data data = 4;
 }

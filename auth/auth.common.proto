@@ -4,7 +4,7 @@ package auth;
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 
 
-message error {
+message AuthError {
   string code = 1;
   string message = 2;
 }
