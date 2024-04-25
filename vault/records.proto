@@ -98,3 +98,32 @@ message RecordsRichDataAPIResponse {
 }
 
 message RecordsRichDataAPIRequest { repeated string document_ids = 1; }
+
+message RecordDetailsForEditForm {
+  string oid = 1;
+  bool linked_with_abha = 2;
+  DocumentType document_type = 3;
+  repeated string user_tags = 4;
+  repeated string derived_tags = 5;
+  optional google.protobuf.Timestamp document_date = 6;
+  repeated string shared_with = 7;
+  bool order_meds = 8;
+}
+
+message RecordDetailsForEditFormAPIResponse {
+  /* ErrorCode represents list of errors */
+  enum ErrorCode {
+    ERROR_UNSPECIFIED = 0; // Error -> Unspecified.
+  }
+
+  /* Error represents error resonse of API */
+  message Error {
+    ErrorCode code = 1; // Error Code.
+    string message = 2; // Error Message.
+  }
+
+  oneof result {
+    RecordDetailsForEditForm response = 1;
+    Error error = 2;
+  }
+}

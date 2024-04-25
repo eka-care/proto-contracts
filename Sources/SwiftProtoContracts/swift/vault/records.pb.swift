@@ -538,6 +538,149 @@ public struct Vault_Records_RecordsRichDataAPIRequest {
   public init() {}
 }
 
+public struct Vault_Records_RecordDetailsForEditForm {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var oid: String = String()
+
+  public var linkedWithAbha: Bool = false
+
+  public var documentType: Vault_Records_DocumentType = .typeUnspecified
+
+  public var userTags: [String] = []
+
+  public var derivedTags: [String] = []
+
+  public var documentDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _documentDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_documentDate = newValue}
+  }
+  /// Returns true if `documentDate` has been explicitly set.
+  public var hasDocumentDate: Bool {return self._documentDate != nil}
+  /// Clears the value of `documentDate`. Subsequent reads from it will return its default value.
+  public mutating func clearDocumentDate() {self._documentDate = nil}
+
+  public var sharedWith: [String] = []
+
+  public var orderMeds: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _documentDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+}
+
+public struct Vault_Records_RecordDetailsForEditFormAPIResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var result: Vault_Records_RecordDetailsForEditFormAPIResponse.OneOf_Result? = nil
+
+  public var response: Vault_Records_RecordDetailsForEditForm {
+    get {
+      if case .response(let v)? = result {return v}
+      return Vault_Records_RecordDetailsForEditForm()
+    }
+    set {result = .response(newValue)}
+  }
+
+  public var error: Vault_Records_RecordDetailsForEditFormAPIResponse.Error {
+    get {
+      if case .error(let v)? = result {return v}
+      return Vault_Records_RecordDetailsForEditFormAPIResponse.Error()
+    }
+    set {result = .error(newValue)}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum OneOf_Result: Equatable {
+    case response(Vault_Records_RecordDetailsForEditForm)
+    case error(Vault_Records_RecordDetailsForEditFormAPIResponse.Error)
+
+  #if !swift(>=4.1)
+    public static func ==(lhs: Vault_Records_RecordDetailsForEditFormAPIResponse.OneOf_Result, rhs: Vault_Records_RecordDetailsForEditFormAPIResponse.OneOf_Result) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch (lhs, rhs) {
+      case (.response, .response): return {
+        guard case .response(let l) = lhs, case .response(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.error, .error): return {
+        guard case .error(let l) = lhs, case .error(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      default: return false
+      }
+    }
+  #endif
+  }
+
+  /// ErrorCode represents list of errors 
+  public enum ErrorCode: SwiftProtobuf.Enum {
+    public typealias RawValue = Int
+
+    /// Error -> Unspecified.
+    case errorUnspecified // = 0
+    case UNRECOGNIZED(Int)
+
+    public init() {
+      self = .errorUnspecified
+    }
+
+    public init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .errorUnspecified
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    public var rawValue: Int {
+      switch self {
+      case .errorUnspecified: return 0
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  /// Error represents error resonse of API 
+  public struct Error {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    /// Error Code.
+    public var code: Vault_Records_RecordDetailsForEditFormAPIResponse.ErrorCode = .errorUnspecified
+
+    /// Error Message.
+    public var message: String = String()
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  public init() {}
+}
+
+#if swift(>=4.2)
+
+extension Vault_Records_RecordDetailsForEditFormAPIResponse.ErrorCode: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Vault_Records_RecordDetailsForEditFormAPIResponse.ErrorCode] = [
+    .errorUnspecified,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Records_RecordUploadEventInTransit: @unchecked Sendable {}
 extension Vault_Records_RecordMetadata: @unchecked Sendable {}
@@ -559,6 +702,11 @@ extension Vault_Records_RecordsRichDataAPIResponse.OneOf_Result: @unchecked Send
 extension Vault_Records_RecordsRichDataAPIResponse.ErrorCode: @unchecked Sendable {}
 extension Vault_Records_RecordsRichDataAPIResponse.Error: @unchecked Sendable {}
 extension Vault_Records_RecordsRichDataAPIRequest: @unchecked Sendable {}
+extension Vault_Records_RecordDetailsForEditForm: @unchecked Sendable {}
+extension Vault_Records_RecordDetailsForEditFormAPIResponse: @unchecked Sendable {}
+extension Vault_Records_RecordDetailsForEditFormAPIResponse.OneOf_Result: @unchecked Sendable {}
+extension Vault_Records_RecordDetailsForEditFormAPIResponse.ErrorCode: @unchecked Sendable {}
+extension Vault_Records_RecordDetailsForEditFormAPIResponse.Error: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -1239,6 +1387,198 @@ extension Vault_Records_RecordsRichDataAPIRequest: SwiftProtobuf.Message, SwiftP
 
   public static func ==(lhs: Vault_Records_RecordsRichDataAPIRequest, rhs: Vault_Records_RecordsRichDataAPIRequest) -> Bool {
     if lhs.documentIds != rhs.documentIds {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Records_RecordDetailsForEditForm: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RecordDetailsForEditForm"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "oid"),
+    2: .standard(proto: "linked_with_abha"),
+    3: .standard(proto: "document_type"),
+    4: .standard(proto: "user_tags"),
+    5: .standard(proto: "derived_tags"),
+    6: .standard(proto: "document_date"),
+    7: .standard(proto: "shared_with"),
+    8: .standard(proto: "order_meds"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.oid) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.linkedWithAbha) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self.documentType) }()
+      case 4: try { try decoder.decodeRepeatedStringField(value: &self.userTags) }()
+      case 5: try { try decoder.decodeRepeatedStringField(value: &self.derivedTags) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._documentDate) }()
+      case 7: try { try decoder.decodeRepeatedStringField(value: &self.sharedWith) }()
+      case 8: try { try decoder.decodeSingularBoolField(value: &self.orderMeds) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.oid.isEmpty {
+      try visitor.visitSingularStringField(value: self.oid, fieldNumber: 1)
+    }
+    if self.linkedWithAbha != false {
+      try visitor.visitSingularBoolField(value: self.linkedWithAbha, fieldNumber: 2)
+    }
+    if self.documentType != .typeUnspecified {
+      try visitor.visitSingularEnumField(value: self.documentType, fieldNumber: 3)
+    }
+    if !self.userTags.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.userTags, fieldNumber: 4)
+    }
+    if !self.derivedTags.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.derivedTags, fieldNumber: 5)
+    }
+    try { if let v = self._documentDate {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
+    if !self.sharedWith.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.sharedWith, fieldNumber: 7)
+    }
+    if self.orderMeds != false {
+      try visitor.visitSingularBoolField(value: self.orderMeds, fieldNumber: 8)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Records_RecordDetailsForEditForm, rhs: Vault_Records_RecordDetailsForEditForm) -> Bool {
+    if lhs.oid != rhs.oid {return false}
+    if lhs.linkedWithAbha != rhs.linkedWithAbha {return false}
+    if lhs.documentType != rhs.documentType {return false}
+    if lhs.userTags != rhs.userTags {return false}
+    if lhs.derivedTags != rhs.derivedTags {return false}
+    if lhs._documentDate != rhs._documentDate {return false}
+    if lhs.sharedWith != rhs.sharedWith {return false}
+    if lhs.orderMeds != rhs.orderMeds {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Records_RecordDetailsForEditFormAPIResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".RecordDetailsForEditFormAPIResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "response"),
+    2: .same(proto: "error"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try {
+        var v: Vault_Records_RecordDetailsForEditForm?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .response(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .response(v)
+        }
+      }()
+      case 2: try {
+        var v: Vault_Records_RecordDetailsForEditFormAPIResponse.Error?
+        var hadOneofValue = false
+        if let current = self.result {
+          hadOneofValue = true
+          if case .error(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.result = .error(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    switch self.result {
+    case .response?: try {
+      guard case .response(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }()
+    case .error?: try {
+      guard case .error(let v)? = self.result else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }()
+    case nil: break
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Records_RecordDetailsForEditFormAPIResponse, rhs: Vault_Records_RecordDetailsForEditFormAPIResponse) -> Bool {
+    if lhs.result != rhs.result {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Records_RecordDetailsForEditFormAPIResponse.ErrorCode: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "ERROR_UNSPECIFIED"),
+  ]
+}
+
+extension Vault_Records_RecordDetailsForEditFormAPIResponse.Error: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Records_RecordDetailsForEditFormAPIResponse.protoMessageName + ".Error"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "code"),
+    2: .same(proto: "message"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.code) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.message) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.code != .errorUnspecified {
+      try visitor.visitSingularEnumField(value: self.code, fieldNumber: 1)
+    }
+    if !self.message.isEmpty {
+      try visitor.visitSingularStringField(value: self.message, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Records_RecordDetailsForEditFormAPIResponse.Error, rhs: Vault_Records_RecordDetailsForEditFormAPIResponse.Error) -> Bool {
+    if lhs.code != rhs.code {return false}
+    if lhs.message != rhs.message {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

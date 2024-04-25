@@ -110,6 +110,50 @@ func (RecordsRichDataAPIResponse_ErrorCode) EnumDescriptor() ([]byte, []int) {
 	return file_vault_records_proto_rawDescGZIP(), []int{9, 0}
 }
 
+// ErrorCode represents list of errors
+type RecordDetailsForEditFormAPIResponse_ErrorCode int32
+
+const (
+	RecordDetailsForEditFormAPIResponse_ERROR_UNSPECIFIED RecordDetailsForEditFormAPIResponse_ErrorCode = 0 // Error -> Unspecified.
+)
+
+// Enum value maps for RecordDetailsForEditFormAPIResponse_ErrorCode.
+var (
+	RecordDetailsForEditFormAPIResponse_ErrorCode_name = map[int32]string{
+		0: "ERROR_UNSPECIFIED",
+	}
+	RecordDetailsForEditFormAPIResponse_ErrorCode_value = map[string]int32{
+		"ERROR_UNSPECIFIED": 0,
+	}
+)
+
+func (x RecordDetailsForEditFormAPIResponse_ErrorCode) Enum() *RecordDetailsForEditFormAPIResponse_ErrorCode {
+	p := new(RecordDetailsForEditFormAPIResponse_ErrorCode)
+	*p = x
+	return p
+}
+
+func (x RecordDetailsForEditFormAPIResponse_ErrorCode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RecordDetailsForEditFormAPIResponse_ErrorCode) Descriptor() protoreflect.EnumDescriptor {
+	return file_vault_records_proto_enumTypes[2].Descriptor()
+}
+
+func (RecordDetailsForEditFormAPIResponse_ErrorCode) Type() protoreflect.EnumType {
+	return &file_vault_records_proto_enumTypes[2]
+}
+
+func (x RecordDetailsForEditFormAPIResponse_ErrorCode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RecordDetailsForEditFormAPIResponse_ErrorCode.Descriptor instead.
+func (RecordDetailsForEditFormAPIResponse_ErrorCode) EnumDescriptor() ([]byte, []int) {
+	return file_vault_records_proto_rawDescGZIP(), []int{12, 0}
+}
+
 type RecordUploadEventInTransit struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -867,6 +911,190 @@ func (x *RecordsRichDataAPIRequest) GetDocumentIds() []string {
 	return nil
 }
 
+type RecordDetailsForEditForm struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Oid            string                 `protobuf:"bytes,1,opt,name=oid,proto3" json:"oid,omitempty"`
+	LinkedWithAbha bool                   `protobuf:"varint,2,opt,name=linked_with_abha,json=linkedWithAbha,proto3" json:"linked_with_abha,omitempty"`
+	DocumentType   DocumentType           `protobuf:"varint,3,opt,name=document_type,json=documentType,proto3,enum=vault.records.DocumentType" json:"document_type,omitempty"`
+	UserTags       []string               `protobuf:"bytes,4,rep,name=user_tags,json=userTags,proto3" json:"user_tags,omitempty"`
+	DerivedTags    []string               `protobuf:"bytes,5,rep,name=derived_tags,json=derivedTags,proto3" json:"derived_tags,omitempty"`
+	DocumentDate   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=document_date,json=documentDate,proto3,oneof" json:"document_date,omitempty"`
+	SharedWith     []string               `protobuf:"bytes,7,rep,name=shared_with,json=sharedWith,proto3" json:"shared_with,omitempty"`
+	OrderMeds      bool                   `protobuf:"varint,8,opt,name=order_meds,json=orderMeds,proto3" json:"order_meds,omitempty"`
+}
+
+func (x *RecordDetailsForEditForm) Reset() {
+	*x = RecordDetailsForEditForm{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_records_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecordDetailsForEditForm) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecordDetailsForEditForm) ProtoMessage() {}
+
+func (x *RecordDetailsForEditForm) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_records_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecordDetailsForEditForm.ProtoReflect.Descriptor instead.
+func (*RecordDetailsForEditForm) Descriptor() ([]byte, []int) {
+	return file_vault_records_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *RecordDetailsForEditForm) GetOid() string {
+	if x != nil {
+		return x.Oid
+	}
+	return ""
+}
+
+func (x *RecordDetailsForEditForm) GetLinkedWithAbha() bool {
+	if x != nil {
+		return x.LinkedWithAbha
+	}
+	return false
+}
+
+func (x *RecordDetailsForEditForm) GetDocumentType() DocumentType {
+	if x != nil {
+		return x.DocumentType
+	}
+	return DocumentType_TYPE_UNSPECIFIED
+}
+
+func (x *RecordDetailsForEditForm) GetUserTags() []string {
+	if x != nil {
+		return x.UserTags
+	}
+	return nil
+}
+
+func (x *RecordDetailsForEditForm) GetDerivedTags() []string {
+	if x != nil {
+		return x.DerivedTags
+	}
+	return nil
+}
+
+func (x *RecordDetailsForEditForm) GetDocumentDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DocumentDate
+	}
+	return nil
+}
+
+func (x *RecordDetailsForEditForm) GetSharedWith() []string {
+	if x != nil {
+		return x.SharedWith
+	}
+	return nil
+}
+
+func (x *RecordDetailsForEditForm) GetOrderMeds() bool {
+	if x != nil {
+		return x.OrderMeds
+	}
+	return false
+}
+
+type RecordDetailsForEditFormAPIResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Result:
+	//
+	//	*RecordDetailsForEditFormAPIResponse_Response
+	//	*RecordDetailsForEditFormAPIResponse_Error_
+	Result isRecordDetailsForEditFormAPIResponse_Result `protobuf_oneof:"result"`
+}
+
+func (x *RecordDetailsForEditFormAPIResponse) Reset() {
+	*x = RecordDetailsForEditFormAPIResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_records_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecordDetailsForEditFormAPIResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecordDetailsForEditFormAPIResponse) ProtoMessage() {}
+
+func (x *RecordDetailsForEditFormAPIResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_records_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecordDetailsForEditFormAPIResponse.ProtoReflect.Descriptor instead.
+func (*RecordDetailsForEditFormAPIResponse) Descriptor() ([]byte, []int) {
+	return file_vault_records_proto_rawDescGZIP(), []int{12}
+}
+
+func (m *RecordDetailsForEditFormAPIResponse) GetResult() isRecordDetailsForEditFormAPIResponse_Result {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+func (x *RecordDetailsForEditFormAPIResponse) GetResponse() *RecordDetailsForEditForm {
+	if x, ok := x.GetResult().(*RecordDetailsForEditFormAPIResponse_Response); ok {
+		return x.Response
+	}
+	return nil
+}
+
+func (x *RecordDetailsForEditFormAPIResponse) GetError() *RecordDetailsForEditFormAPIResponse_Error {
+	if x, ok := x.GetResult().(*RecordDetailsForEditFormAPIResponse_Error_); ok {
+		return x.Error
+	}
+	return nil
+}
+
+type isRecordDetailsForEditFormAPIResponse_Result interface {
+	isRecordDetailsForEditFormAPIResponse_Result()
+}
+
+type RecordDetailsForEditFormAPIResponse_Response struct {
+	Response *RecordDetailsForEditForm `protobuf:"bytes,1,opt,name=response,proto3,oneof"`
+}
+
+type RecordDetailsForEditFormAPIResponse_Error_ struct {
+	Error *RecordDetailsForEditFormAPIResponse_Error `protobuf:"bytes,2,opt,name=error,proto3,oneof"`
+}
+
+func (*RecordDetailsForEditFormAPIResponse_Response) isRecordDetailsForEditFormAPIResponse_Result() {}
+
+func (*RecordDetailsForEditFormAPIResponse_Error_) isRecordDetailsForEditFormAPIResponse_Result() {}
+
 // Error represents error resonse of API
 type RecordsAPIResponse_Error struct {
 	state         protoimpl.MessageState
@@ -880,7 +1108,7 @@ type RecordsAPIResponse_Error struct {
 func (x *RecordsAPIResponse_Error) Reset() {
 	*x = RecordsAPIResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_records_proto_msgTypes[11]
+		mi := &file_vault_records_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -893,7 +1121,7 @@ func (x *RecordsAPIResponse_Error) String() string {
 func (*RecordsAPIResponse_Error) ProtoMessage() {}
 
 func (x *RecordsAPIResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_records_proto_msgTypes[11]
+	mi := &file_vault_records_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -936,7 +1164,7 @@ type RecordsRichDataAPIResponse_Error struct {
 func (x *RecordsRichDataAPIResponse_Error) Reset() {
 	*x = RecordsRichDataAPIResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_records_proto_msgTypes[12]
+		mi := &file_vault_records_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -949,7 +1177,7 @@ func (x *RecordsRichDataAPIResponse_Error) String() string {
 func (*RecordsRichDataAPIResponse_Error) ProtoMessage() {}
 
 func (x *RecordsRichDataAPIResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_records_proto_msgTypes[12]
+	mi := &file_vault_records_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -973,6 +1201,62 @@ func (x *RecordsRichDataAPIResponse_Error) GetCode() RecordsRichDataAPIResponse_
 }
 
 func (x *RecordsRichDataAPIResponse_Error) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+// Error represents error resonse of API
+type RecordDetailsForEditFormAPIResponse_Error struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Code    RecordDetailsForEditFormAPIResponse_ErrorCode `protobuf:"varint,1,opt,name=code,proto3,enum=vault.records.RecordDetailsForEditFormAPIResponse_ErrorCode" json:"code,omitempty"` // Error Code.
+	Message string                                        `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`                                                             // Error Message.
+}
+
+func (x *RecordDetailsForEditFormAPIResponse_Error) Reset() {
+	*x = RecordDetailsForEditFormAPIResponse_Error{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_records_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecordDetailsForEditFormAPIResponse_Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecordDetailsForEditFormAPIResponse_Error) ProtoMessage() {}
+
+func (x *RecordDetailsForEditFormAPIResponse_Error) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_records_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecordDetailsForEditFormAPIResponse_Error.ProtoReflect.Descriptor instead.
+func (*RecordDetailsForEditFormAPIResponse_Error) Descriptor() ([]byte, []int) {
+	return file_vault_records_proto_rawDescGZIP(), []int{12, 0}
+}
+
+func (x *RecordDetailsForEditFormAPIResponse_Error) GetCode() RecordDetailsForEditFormAPIResponse_ErrorCode {
+	if x != nil {
+		return x.Code
+	}
+	return RecordDetailsForEditFormAPIResponse_ERROR_UNSPECIFIED
+}
+
+func (x *RecordDetailsForEditFormAPIResponse_Error) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
@@ -1118,11 +1402,56 @@ var file_vault_records_proto_rawDesc = []byte{
 	0x68, 0x44, 0x61, 0x74, 0x61, 0x41, 0x50, 0x49, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
 	0x21, 0x0a, 0x0c, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x73, 0x18,
 	0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x49,
-	0x64, 0x73, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d,
-	0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61, 0x75,
-	0x6c, 0x74, 0x2f, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x64, 0x73, 0x22, 0xf0, 0x02, 0x0a, 0x18, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x44, 0x65, 0x74,
+	0x61, 0x69, 0x6c, 0x73, 0x46, 0x6f, 0x72, 0x45, 0x64, 0x69, 0x74, 0x46, 0x6f, 0x72, 0x6d, 0x12,
+	0x10, 0x0a, 0x03, 0x6f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6f, 0x69,
+	0x64, 0x12, 0x28, 0x0a, 0x10, 0x6c, 0x69, 0x6e, 0x6b, 0x65, 0x64, 0x5f, 0x77, 0x69, 0x74, 0x68,
+	0x5f, 0x61, 0x62, 0x68, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x6c, 0x69, 0x6e,
+	0x6b, 0x65, 0x64, 0x57, 0x69, 0x74, 0x68, 0x41, 0x62, 0x68, 0x61, 0x12, 0x40, 0x0a, 0x0d, 0x64,
+	0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0e, 0x32, 0x1b, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72,
+	0x64, 0x73, 0x2e, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x52,
+	0x0c, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1b, 0x0a,
+	0x09, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x74, 0x61, 0x67, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x54, 0x61, 0x67, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x64, 0x65,
+	0x72, 0x69, 0x76, 0x65, 0x64, 0x5f, 0x74, 0x61, 0x67, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x0b, 0x64, 0x65, 0x72, 0x69, 0x76, 0x65, 0x64, 0x54, 0x61, 0x67, 0x73, 0x12, 0x44, 0x0a,
+	0x0d, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x64, 0x61, 0x74, 0x65, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
+	0x48, 0x00, 0x52, 0x0c, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x44, 0x61, 0x74, 0x65,
+	0x88, 0x01, 0x01, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64, 0x5f, 0x77, 0x69,
+	0x74, 0x68, 0x18, 0x07, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x73, 0x68, 0x61, 0x72, 0x65, 0x64,
+	0x57, 0x69, 0x74, 0x68, 0x12, 0x1d, 0x0a, 0x0a, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x6d, 0x65,
+	0x64, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x4d,
+	0x65, 0x64, 0x73, 0x42, 0x10, 0x0a, 0x0e, 0x5f, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74,
+	0x5f, 0x64, 0x61, 0x74, 0x65, 0x22, 0xe1, 0x02, 0x0a, 0x23, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64,
+	0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x46, 0x6f, 0x72, 0x45, 0x64, 0x69, 0x74, 0x46, 0x6f,
+	0x72, 0x6d, 0x41, 0x50, 0x49, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a,
+	0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x27, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x2e,
+	0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x46, 0x6f, 0x72,
+	0x45, 0x64, 0x69, 0x74, 0x46, 0x6f, 0x72, 0x6d, 0x48, 0x00, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x50, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x38, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x72, 0x65, 0x63, 0x6f,
+	0x72, 0x64, 0x73, 0x2e, 0x52, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c,
+	0x73, 0x46, 0x6f, 0x72, 0x45, 0x64, 0x69, 0x74, 0x46, 0x6f, 0x72, 0x6d, 0x41, 0x50, 0x49, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x48, 0x00, 0x52,
+	0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x1a, 0x73, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12,
+	0x50, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x3c, 0x2e,
+	0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x2e, 0x52, 0x65,
+	0x63, 0x6f, 0x72, 0x64, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x46, 0x6f, 0x72, 0x45, 0x64,
+	0x69, 0x74, 0x46, 0x6f, 0x72, 0x6d, 0x41, 0x50, 0x49, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x63, 0x6f, 0x64,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x22, 0x0a, 0x09, 0x45,
+	0x72, 0x72, 0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x15, 0x0a, 0x11, 0x45, 0x52, 0x52, 0x4f,
+	0x52, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x42,
+	0x08, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65,
+	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73,
+	0x2f, 0x67, 0x6f, 0x2f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2f, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64,
+	0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1137,56 +1466,65 @@ func file_vault_records_proto_rawDescGZIP() []byte {
 	return file_vault_records_proto_rawDescData
 }
 
-var file_vault_records_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_vault_records_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_vault_records_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_vault_records_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_vault_records_proto_goTypes = []interface{}{
-	(RecordsAPIResponse_ErrorCode)(0),         // 0: vault.records.RecordsAPIResponse.ErrorCode
-	(RecordsRichDataAPIResponse_ErrorCode)(0), // 1: vault.records.RecordsRichDataAPIResponse.ErrorCode
-	(*RecordUploadEventInTransit)(nil),        // 2: vault.records.RecordUploadEventInTransit
-	(*RecordMetadata)(nil),                    // 3: vault.records.RecordMetadata
-	(*Record)(nil),                            // 4: vault.records.Record
-	(*Item)(nil),                              // 5: vault.records.Item
-	(*RecordsResponse)(nil),                   // 6: vault.records.RecordsResponse
-	(*RecordsAPIResponse)(nil),                // 7: vault.records.RecordsAPIResponse
-	(*RecordMetadataPlus)(nil),                // 8: vault.records.RecordMetadataPlus
-	(*RecordsRichDocumentResponse)(nil),       // 9: vault.records.RecordsRichDocumentResponse
-	(*RecordsRichDataResponse)(nil),           // 10: vault.records.RecordsRichDataResponse
-	(*RecordsRichDataAPIResponse)(nil),        // 11: vault.records.RecordsRichDataAPIResponse
-	(*RecordsRichDataAPIRequest)(nil),         // 12: vault.records.RecordsRichDataAPIRequest
-	(*RecordsAPIResponse_Error)(nil),          // 13: vault.records.RecordsAPIResponse.Error
-	(*RecordsRichDataAPIResponse_Error)(nil),  // 14: vault.records.RecordsRichDataAPIResponse.Error
-	(*cta.CTA)(nil),                           // 15: vault.common.CTA
-	(*timestamppb.Timestamp)(nil),             // 16: google.protobuf.Timestamp
-	(Tag)(0),                                  // 17: vault.records.Tag
-	(DocumentType)(0),                         // 18: vault.records.DocumentType
+	(RecordsAPIResponse_ErrorCode)(0),                  // 0: vault.records.RecordsAPIResponse.ErrorCode
+	(RecordsRichDataAPIResponse_ErrorCode)(0),          // 1: vault.records.RecordsRichDataAPIResponse.ErrorCode
+	(RecordDetailsForEditFormAPIResponse_ErrorCode)(0), // 2: vault.records.RecordDetailsForEditFormAPIResponse.ErrorCode
+	(*RecordUploadEventInTransit)(nil),                 // 3: vault.records.RecordUploadEventInTransit
+	(*RecordMetadata)(nil),                             // 4: vault.records.RecordMetadata
+	(*Record)(nil),                                     // 5: vault.records.Record
+	(*Item)(nil),                                       // 6: vault.records.Item
+	(*RecordsResponse)(nil),                            // 7: vault.records.RecordsResponse
+	(*RecordsAPIResponse)(nil),                         // 8: vault.records.RecordsAPIResponse
+	(*RecordMetadataPlus)(nil),                         // 9: vault.records.RecordMetadataPlus
+	(*RecordsRichDocumentResponse)(nil),                // 10: vault.records.RecordsRichDocumentResponse
+	(*RecordsRichDataResponse)(nil),                    // 11: vault.records.RecordsRichDataResponse
+	(*RecordsRichDataAPIResponse)(nil),                 // 12: vault.records.RecordsRichDataAPIResponse
+	(*RecordsRichDataAPIRequest)(nil),                  // 13: vault.records.RecordsRichDataAPIRequest
+	(*RecordDetailsForEditForm)(nil),                   // 14: vault.records.RecordDetailsForEditForm
+	(*RecordDetailsForEditFormAPIResponse)(nil),        // 15: vault.records.RecordDetailsForEditFormAPIResponse
+	(*RecordsAPIResponse_Error)(nil),                   // 16: vault.records.RecordsAPIResponse.Error
+	(*RecordsRichDataAPIResponse_Error)(nil),           // 17: vault.records.RecordsRichDataAPIResponse.Error
+	(*RecordDetailsForEditFormAPIResponse_Error)(nil),  // 18: vault.records.RecordDetailsForEditFormAPIResponse.Error
+	(*cta.CTA)(nil),                                    // 19: vault.common.CTA
+	(*timestamppb.Timestamp)(nil),                      // 20: google.protobuf.Timestamp
+	(Tag)(0),                                           // 21: vault.records.Tag
+	(DocumentType)(0),                                  // 22: vault.records.DocumentType
 }
 var file_vault_records_proto_depIdxs = []int32{
-	15, // 0: vault.records.RecordMetadata.cta:type_name -> vault.common.CTA
-	16, // 1: vault.records.RecordMetadata.document_date:type_name -> google.protobuf.Timestamp
-	17, // 2: vault.records.RecordMetadata.tags:type_name -> vault.records.Tag
-	16, // 3: vault.records.Record.upload_date:type_name -> google.protobuf.Timestamp
-	18, // 4: vault.records.Record.document_type:type_name -> vault.records.DocumentType
-	2,  // 5: vault.records.Record.in_transit:type_name -> vault.records.RecordUploadEventInTransit
-	3,  // 6: vault.records.Record.metadata:type_name -> vault.records.RecordMetadata
-	4,  // 7: vault.records.Item.record:type_name -> vault.records.Record
-	5,  // 8: vault.records.RecordsResponse.items:type_name -> vault.records.Item
-	6,  // 9: vault.records.RecordsAPIResponse.response:type_name -> vault.records.RecordsResponse
-	13, // 10: vault.records.RecordsAPIResponse.error:type_name -> vault.records.RecordsAPIResponse.Error
-	3,  // 11: vault.records.RecordMetadataPlus.metadata:type_name -> vault.records.RecordMetadata
-	18, // 12: vault.records.RecordMetadataPlus.document_type:type_name -> vault.records.DocumentType
-	2,  // 13: vault.records.RecordsRichDocumentResponse.in_transit:type_name -> vault.records.RecordUploadEventInTransit
-	8,  // 14: vault.records.RecordsRichDocumentResponse.metadata_analyzing:type_name -> vault.records.RecordMetadataPlus
-	8,  // 15: vault.records.RecordsRichDocumentResponse.metadata_final:type_name -> vault.records.RecordMetadataPlus
-	9,  // 16: vault.records.RecordsRichDataResponse.data:type_name -> vault.records.RecordsRichDocumentResponse
-	10, // 17: vault.records.RecordsRichDataAPIResponse.response:type_name -> vault.records.RecordsRichDataResponse
-	14, // 18: vault.records.RecordsRichDataAPIResponse.error:type_name -> vault.records.RecordsRichDataAPIResponse.Error
-	0,  // 19: vault.records.RecordsAPIResponse.Error.code:type_name -> vault.records.RecordsAPIResponse.ErrorCode
-	1,  // 20: vault.records.RecordsRichDataAPIResponse.Error.code:type_name -> vault.records.RecordsRichDataAPIResponse.ErrorCode
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	19, // 0: vault.records.RecordMetadata.cta:type_name -> vault.common.CTA
+	20, // 1: vault.records.RecordMetadata.document_date:type_name -> google.protobuf.Timestamp
+	21, // 2: vault.records.RecordMetadata.tags:type_name -> vault.records.Tag
+	20, // 3: vault.records.Record.upload_date:type_name -> google.protobuf.Timestamp
+	22, // 4: vault.records.Record.document_type:type_name -> vault.records.DocumentType
+	3,  // 5: vault.records.Record.in_transit:type_name -> vault.records.RecordUploadEventInTransit
+	4,  // 6: vault.records.Record.metadata:type_name -> vault.records.RecordMetadata
+	5,  // 7: vault.records.Item.record:type_name -> vault.records.Record
+	6,  // 8: vault.records.RecordsResponse.items:type_name -> vault.records.Item
+	7,  // 9: vault.records.RecordsAPIResponse.response:type_name -> vault.records.RecordsResponse
+	16, // 10: vault.records.RecordsAPIResponse.error:type_name -> vault.records.RecordsAPIResponse.Error
+	4,  // 11: vault.records.RecordMetadataPlus.metadata:type_name -> vault.records.RecordMetadata
+	22, // 12: vault.records.RecordMetadataPlus.document_type:type_name -> vault.records.DocumentType
+	3,  // 13: vault.records.RecordsRichDocumentResponse.in_transit:type_name -> vault.records.RecordUploadEventInTransit
+	9,  // 14: vault.records.RecordsRichDocumentResponse.metadata_analyzing:type_name -> vault.records.RecordMetadataPlus
+	9,  // 15: vault.records.RecordsRichDocumentResponse.metadata_final:type_name -> vault.records.RecordMetadataPlus
+	10, // 16: vault.records.RecordsRichDataResponse.data:type_name -> vault.records.RecordsRichDocumentResponse
+	11, // 17: vault.records.RecordsRichDataAPIResponse.response:type_name -> vault.records.RecordsRichDataResponse
+	17, // 18: vault.records.RecordsRichDataAPIResponse.error:type_name -> vault.records.RecordsRichDataAPIResponse.Error
+	22, // 19: vault.records.RecordDetailsForEditForm.document_type:type_name -> vault.records.DocumentType
+	20, // 20: vault.records.RecordDetailsForEditForm.document_date:type_name -> google.protobuf.Timestamp
+	14, // 21: vault.records.RecordDetailsForEditFormAPIResponse.response:type_name -> vault.records.RecordDetailsForEditForm
+	18, // 22: vault.records.RecordDetailsForEditFormAPIResponse.error:type_name -> vault.records.RecordDetailsForEditFormAPIResponse.Error
+	0,  // 23: vault.records.RecordsAPIResponse.Error.code:type_name -> vault.records.RecordsAPIResponse.ErrorCode
+	1,  // 24: vault.records.RecordsRichDataAPIResponse.Error.code:type_name -> vault.records.RecordsRichDataAPIResponse.ErrorCode
+	2,  // 25: vault.records.RecordDetailsForEditFormAPIResponse.Error.code:type_name -> vault.records.RecordDetailsForEditFormAPIResponse.ErrorCode
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_vault_records_proto_init() }
@@ -1330,7 +1668,7 @@ func file_vault_records_proto_init() {
 			}
 		}
 		file_vault_records_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RecordsAPIResponse_Error); i {
+			switch v := v.(*RecordDetailsForEditForm); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1342,7 +1680,43 @@ func file_vault_records_proto_init() {
 			}
 		}
 		file_vault_records_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecordDetailsForEditFormAPIResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vault_records_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecordsAPIResponse_Error); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vault_records_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RecordsRichDataAPIResponse_Error); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vault_records_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecordDetailsForEditFormAPIResponse_Error); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1376,13 +1750,18 @@ func file_vault_records_proto_init() {
 		(*RecordsRichDataAPIResponse_Response)(nil),
 		(*RecordsRichDataAPIResponse_Error_)(nil),
 	}
+	file_vault_records_proto_msgTypes[11].OneofWrappers = []interface{}{}
+	file_vault_records_proto_msgTypes[12].OneofWrappers = []interface{}{
+		(*RecordDetailsForEditFormAPIResponse_Response)(nil),
+		(*RecordDetailsForEditFormAPIResponse_Error_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_vault_records_proto_rawDesc,
-			NumEnums:      2,
-			NumMessages:   13,
+			NumEnums:      3,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
