@@ -85,6 +85,19 @@ public struct Vault_Bannersv4_Banner {
   /// Clears the value of `highlight`. Subsequent reads from it will return its default value.
   public mutating func clearHighlight() {self._highlight = nil}
 
+  /// Hash of the banner.
+  public var bannerHash: String = String()
+
+  /// Image link for the banner.
+  public var image2: Vault_Bannersv4_Banner.Image2 {
+    get {return _image2 ?? Vault_Bannersv4_Banner.Image2()}
+    set {_image2 = newValue}
+  }
+  /// Returns true if `image2` has been explicitly set.
+  public var hasImage2: Bool {return self._image2 != nil}
+  /// Clears the value of `image2`. Subsequent reads from it will return its default value.
+  public mutating func clearImage2() {self._image2 = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_Image: Equatable {
@@ -152,11 +165,28 @@ public struct Vault_Bannersv4_Banner {
 
   }
 
+  public struct Image2 {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    /// Image link for the banner.
+    public var img: String = String()
+
+    /// Lottie link for the banner.
+    public var lottie: String = String()
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
   public init() {}
 
   fileprivate var _subTitle: String? = nil
   fileprivate var _cta: Vault_Common_CTA? = nil
   fileprivate var _highlight: Vault_Bannersv4_Banner.Highlight? = nil
+  fileprivate var _image2: Vault_Bannersv4_Banner.Image2? = nil
 }
 
 #if swift(>=4.2)
@@ -311,6 +341,7 @@ extension Vault_Bannersv4_BannersAPIResponse.ErrorCode: CaseIterable {
 extension Vault_Bannersv4_Banner: @unchecked Sendable {}
 extension Vault_Bannersv4_Banner.OneOf_Image: @unchecked Sendable {}
 extension Vault_Bannersv4_Banner.Highlight: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Image2: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersResponse: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersAPIResponse: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersAPIResponse.OneOf_Result: @unchecked Sendable {}
@@ -333,6 +364,8 @@ extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     6: .standard(proto: "banner_id"),
     7: .standard(proto: "body_parameters"),
     8: .same(proto: "highlight"),
+    9: .standard(proto: "banner_hash"),
+    10: .same(proto: "image2"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -363,6 +396,8 @@ extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       case 6: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
       case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
       case 8: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.bannerHash) }()
+      case 10: try { try decoder.decodeSingularMessageField(value: &self._image2) }()
       default: break
       }
     }
@@ -402,6 +437,12 @@ extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try { if let v = self._highlight {
       try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
     } }()
+    if !self.bannerHash.isEmpty {
+      try visitor.visitSingularStringField(value: self.bannerHash, fieldNumber: 9)
+    }
+    try { if let v = self._image2 {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -413,6 +454,8 @@ extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if lhs.bannerID != rhs.bannerID {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._highlight != rhs._highlight {return false}
+    if lhs.bannerHash != rhs.bannerHash {return false}
+    if lhs._image2 != rhs._image2 {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -426,6 +469,44 @@ extension Vault_Bannersv4_Banner.Highlight: SwiftProtobuf._ProtoNameProviding {
     3: .same(proto: "TYPE_THREE"),
     4: .same(proto: "TYPE_FOUR"),
   ]
+}
+
+extension Vault_Bannersv4_Banner.Image2: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Bannersv4_Banner.protoMessageName + ".Image2"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "img"),
+    2: .same(proto: "lottie"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.img) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.lottie) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.img.isEmpty {
+      try visitor.visitSingularStringField(value: self.img, fieldNumber: 1)
+    }
+    if !self.lottie.isEmpty {
+      try visitor.visitSingularStringField(value: self.lottie, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Bannersv4_Banner.Image2, rhs: Vault_Bannersv4_Banner.Image2) -> Bool {
+    if lhs.img != rhs.img {return false}
+    if lhs.lottie != rhs.lottie {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
 }
 
 extension Vault_Bannersv4_BannersResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {

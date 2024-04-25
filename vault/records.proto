@@ -27,6 +27,7 @@ message Record {
     RecordUploadEventInTransit in_transit = 4;
     RecordMetadata metadata = 5;
   }
+  string record_hash = 6; // Hash of the record.
 }
 
 /* Item represents an item part of listing of records. */

@@ -110,6 +110,9 @@ public struct Vault_Records_Record {
     set {availableDocument = .metadata(newValue)}
   }
 
+  /// Hash of the record.
+  public var recordHash: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_AvailableDocument: Equatable {
@@ -643,6 +646,7 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     3: .standard(proto: "document_type"),
     4: .standard(proto: "in_transit"),
     5: .same(proto: "metadata"),
+    6: .standard(proto: "record_hash"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -680,6 +684,7 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.availableDocument = .metadata(v)
         }
       }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.recordHash) }()
       default: break
       }
     }
@@ -710,6 +715,9 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     }()
     case nil: break
     }
+    if !self.recordHash.isEmpty {
+      try visitor.visitSingularStringField(value: self.recordHash, fieldNumber: 6)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -718,6 +726,7 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if lhs._uploadDate != rhs._uploadDate {return false}
     if lhs.documentType != rhs.documentType {return false}
     if lhs.availableDocument != rhs.availableDocument {return false}
+    if lhs.recordHash != rhs.recordHash {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

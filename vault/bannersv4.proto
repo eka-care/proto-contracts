@@ -21,6 +21,13 @@ message Banner {
   repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
       7; // dynamic parameters with-in sub title to be filled by client.
   optional Highlight highlight = 8; // Hightlight type of the banner.
+  string banner_hash = 9;           // Hash of the banner.
+  optional Image2 image2 = 10;      // Image link for the banner.
+
+  message Image2 {
+    string img = 1;    // Image link for the banner.
+    string lottie = 2; // Lottie link for the banner.
+  }
 
   enum Highlight {
     TYPE_UNSPECIFIED = 0; // Unspecified.
