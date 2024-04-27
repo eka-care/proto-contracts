@@ -18,15 +18,6 @@ enum HealthSectionType {
   HEALTH_SECTION_TYPE_4 = 4;
 }
 
-// Enums for HealthSectionType
-enum CardType {
-  CARD_TYPE_UNSPECIFIED = 0;
-  CARD_TYPE_1 = 1;
-  CARD_TYPE_2 = 2;
-  CARD_TYPE_3 = 3;
-  CARD_TYPE_4 = 4;
-}
-
 // Enums for ItemComponentType
 enum ItemComponentType {
   ITEM_COMPONENT_TYPE_UNSPECIFIED = 0;
@@ -93,15 +84,15 @@ message HealthSection {
   // List of Cards for the section.
   repeated Card cards = 3;
   commons.cta.CTAV1 add_cta = 4;
-  string cards_default_image = 5;
 }
 
 message Card {
-    CardType card_type = 1;
-    SectionType1Cards type1_card = 2;
-    SectionType2Cards type2_card = 3;
-    SectionType3Cards type3_card = 4;
-    SectionType4Cards type4_card = 5;
+  oneof card_type {
+    SectionType1Cards type1_card = 1;
+    SectionType2Cards type2_card = 2;
+    SectionType3Cards type3_card = 3;
+    SectionType4Cards type4_card = 4;
+  }
 }
 
 message SectionType1Cards {
@@ -124,7 +115,7 @@ message ItemComponent {
 
 message Meta {
   string text = 1;
-  optional string image = 2;
+  string image = 2;
 }
 
 message ChipComponent {
