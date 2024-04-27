@@ -9,32 +9,43 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/bannersv4";
 
 /* Banner represents banner info. */
 message Banner {
-  string title = 1;              // Title of the banner.
-  optional string sub_title = 2; // Sub Title of the banner.
-  vault.common.CTA cta = 3;      // CTA configuration for button.
-  oneof image {
-    string img = 4;    // Image link for the banner.
-    string lottie = 5; // Lottie link for the banner.
-  }
-  string banner_id =
-      6; // ID represents banner identifier for tracking in Mixpanel.
-  repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
-      7; // dynamic parameters with-in sub title to be filled by client.
-  optional Highlight highlight = 8; // Hightlight type of the banner.
-  string banner_hash = 9;           // Hash of the banner.
-  optional Image2 image2 = 10;      // Image link for the banner.
+  Item item = 1;
+  string hash = 2; // Hash of the banner.
 
-  message Image2 {
-    string img = 1;    // Image link for the banner.
-    string lottie = 2; // Lottie link for the banner.
-  }
+  message Item {
+    string title = 1;              // Title of the banner.
+    optional string sub_title = 2; // Sub Title of the banner.
+    vault.common.CTA cta = 3;      // CTA configuration for button.
+    string banner_id =
+        4; // ID represents banner identifier for tracking in Mixpanel.
+    repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
+        5; // dynamic parameters with-in sub title to be filled by client.
+    optional Highlight highlight = 6; // Hightlight type of the banner.
 
-  enum Highlight {
-    TYPE_UNSPECIFIED = 0; // Unspecified.
-    TYPE_ONE = 1;
-    TYPE_TWO = 2;
-    TYPE_THREE = 3;
-    TYPE_FOUR = 4;
+    message Assets {
+      BgAsset bg_asset = 1;
+      optional TopAsset top_asset = 2;
+
+      message BgAsset {
+        oneof image {
+          string img = 1;    // Image link for the banner.
+          string lottie = 2; // Lottie link for the banner.
+        }
+      }
+
+      message TopAsset {
+        string img = 1;    // Image link for the banner.
+        string lottie = 2; // Lottie link for the banner.
+      }
+    }
+
+    enum Highlight {
+      TYPE_UNSPECIFIED = 0; // Unspecified.
+      TYPE_ONE = 1;
+      TYPE_TWO = 2;
+      TYPE_THREE = 3;
+      TYPE_FOUR = 4;
+    }
   }
 }
 

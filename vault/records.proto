@@ -20,14 +20,19 @@ message RecordMetadata {
 
 /* Record represents a document in list of records. */
 message Record {
-  string document_id = 1;
-  google.protobuf.Timestamp upload_date = 2;
-  DocumentType document_type = 3;
-  oneof available_document {
-    RecordUploadEventInTransit in_transit = 4;
-    RecordMetadata metadata = 5;
+  Item item = 1;
+  string hash = 2; // Hash of the record.
+
+  message Item {
+    string document_id = 1;
+    google.protobuf.Timestamp upload_date = 2;
+    DocumentType document_type = 3;
+    string source = 4;
+    oneof available_document {
+      RecordUploadEventInTransit in_transit = 5;
+      RecordMetadata metadata = 6;
+    }
   }
-  string record_hash = 6; // Hash of the record.
 }
 
 /* Item represents an item part of listing of records. */
@@ -67,10 +72,11 @@ message RecordMetadataPlus {
 }
 
 message RecordsRichDocumentResponse {
+  string hash = 1;
   oneof available_document {
-    RecordUploadEventInTransit in_transit = 4;
-    RecordMetadataPlus metadata_analyzing = 5;
-    RecordMetadataPlus metadata_final = 6;
+    RecordUploadEventInTransit in_transit = 2;
+    RecordMetadataPlus metadata_analyzing = 3;
+    RecordMetadataPlus metadata_final = 4;
   }
 }
 

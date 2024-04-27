@@ -79,69 +79,92 @@ public struct Vault_Records_Record {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var documentID: String = String()
-
-  public var uploadDate: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _uploadDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_uploadDate = newValue}
+  public var item: Vault_Records_Record.Item {
+    get {return _item ?? Vault_Records_Record.Item()}
+    set {_item = newValue}
   }
-  /// Returns true if `uploadDate` has been explicitly set.
-  public var hasUploadDate: Bool {return self._uploadDate != nil}
-  /// Clears the value of `uploadDate`. Subsequent reads from it will return its default value.
-  public mutating func clearUploadDate() {self._uploadDate = nil}
-
-  public var documentType: Vault_Records_DocumentType = .typeUnspecified
-
-  public var availableDocument: Vault_Records_Record.OneOf_AvailableDocument? = nil
-
-  public var inTransit: Vault_Records_RecordUploadEventInTransit {
-    get {
-      if case .inTransit(let v)? = availableDocument {return v}
-      return Vault_Records_RecordUploadEventInTransit()
-    }
-    set {availableDocument = .inTransit(newValue)}
-  }
-
-  public var metadata: Vault_Records_RecordMetadata {
-    get {
-      if case .metadata(let v)? = availableDocument {return v}
-      return Vault_Records_RecordMetadata()
-    }
-    set {availableDocument = .metadata(newValue)}
-  }
+  /// Returns true if `item` has been explicitly set.
+  public var hasItem: Bool {return self._item != nil}
+  /// Clears the value of `item`. Subsequent reads from it will return its default value.
+  public mutating func clearItem() {self._item = nil}
 
   /// Hash of the record.
-  public var recordHash: String = String()
+  public var hash: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_AvailableDocument: Equatable {
-    case inTransit(Vault_Records_RecordUploadEventInTransit)
-    case metadata(Vault_Records_RecordMetadata)
+  public struct Item {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
 
-  #if !swift(>=4.1)
-    public static func ==(lhs: Vault_Records_Record.OneOf_AvailableDocument, rhs: Vault_Records_Record.OneOf_AvailableDocument) -> Bool {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch (lhs, rhs) {
-      case (.inTransit, .inTransit): return {
-        guard case .inTransit(let l) = lhs, case .inTransit(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      case (.metadata, .metadata): return {
-        guard case .metadata(let l) = lhs, case .metadata(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      default: return false
-      }
+    public var documentID: String = String()
+
+    public var uploadDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+      get {return _uploadDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+      set {_uploadDate = newValue}
     }
-  #endif
+    /// Returns true if `uploadDate` has been explicitly set.
+    public var hasUploadDate: Bool {return self._uploadDate != nil}
+    /// Clears the value of `uploadDate`. Subsequent reads from it will return its default value.
+    public mutating func clearUploadDate() {self._uploadDate = nil}
+
+    public var documentType: Vault_Records_DocumentType = .typeUnspecified
+
+    public var source: String = String()
+
+    public var availableDocument: Vault_Records_Record.Item.OneOf_AvailableDocument? = nil
+
+    public var inTransit: Vault_Records_RecordUploadEventInTransit {
+      get {
+        if case .inTransit(let v)? = availableDocument {return v}
+        return Vault_Records_RecordUploadEventInTransit()
+      }
+      set {availableDocument = .inTransit(newValue)}
+    }
+
+    public var metadata: Vault_Records_RecordMetadata {
+      get {
+        if case .metadata(let v)? = availableDocument {return v}
+        return Vault_Records_RecordMetadata()
+      }
+      set {availableDocument = .metadata(newValue)}
+    }
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public enum OneOf_AvailableDocument: Equatable {
+      case inTransit(Vault_Records_RecordUploadEventInTransit)
+      case metadata(Vault_Records_RecordMetadata)
+
+    #if !swift(>=4.1)
+      public static func ==(lhs: Vault_Records_Record.Item.OneOf_AvailableDocument, rhs: Vault_Records_Record.Item.OneOf_AvailableDocument) -> Bool {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch (lhs, rhs) {
+        case (.inTransit, .inTransit): return {
+          guard case .inTransit(let l) = lhs, case .inTransit(let r) = rhs else { preconditionFailure() }
+          return l == r
+        }()
+        case (.metadata, .metadata): return {
+          guard case .metadata(let l) = lhs, case .metadata(let r) = rhs else { preconditionFailure() }
+          return l == r
+        }()
+        default: return false
+        }
+      }
+    #endif
+    }
+
+    public init() {}
+
+    fileprivate var _uploadDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
   }
 
   public init() {}
 
-  fileprivate var _uploadDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _item: Vault_Records_Record.Item? = nil
 }
 
 /// Item represents an item part of listing of records. 
@@ -344,6 +367,8 @@ public struct Vault_Records_RecordsRichDocumentResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var hash: String = String()
 
   public var availableDocument: Vault_Records_RecordsRichDocumentResponse.OneOf_AvailableDocument? = nil
 
@@ -685,7 +710,8 @@ extension Vault_Records_RecordDetailsForEditFormAPIResponse.ErrorCode: CaseItera
 extension Vault_Records_RecordUploadEventInTransit: @unchecked Sendable {}
 extension Vault_Records_RecordMetadata: @unchecked Sendable {}
 extension Vault_Records_Record: @unchecked Sendable {}
-extension Vault_Records_Record.OneOf_AvailableDocument: @unchecked Sendable {}
+extension Vault_Records_Record.Item: @unchecked Sendable {}
+extension Vault_Records_Record.Item.OneOf_AvailableDocument: @unchecked Sendable {}
 extension Vault_Records_Item: @unchecked Sendable {}
 extension Vault_Records_Item.OneOf_Result: @unchecked Sendable {}
 extension Vault_Records_RecordsResponse: @unchecked Sendable {}
@@ -789,12 +815,54 @@ extension Vault_Records_RecordMetadata: SwiftProtobuf.Message, SwiftProtobuf._Me
 extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Record"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "item"),
+    2: .same(proto: "hash"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._item) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.hash) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._item {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.hash.isEmpty {
+      try visitor.visitSingularStringField(value: self.hash, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Records_Record, rhs: Vault_Records_Record) -> Bool {
+    if lhs._item != rhs._item {return false}
+    if lhs.hash != rhs.hash {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Records_Record.Item: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Records_Record.protoMessageName + ".Item"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "document_id"),
     2: .standard(proto: "upload_date"),
     3: .standard(proto: "document_type"),
-    4: .standard(proto: "in_transit"),
-    5: .same(proto: "metadata"),
-    6: .standard(proto: "record_hash"),
+    4: .same(proto: "source"),
+    5: .standard(proto: "in_transit"),
+    6: .same(proto: "metadata"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -806,7 +874,8 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
       case 1: try { try decoder.decodeSingularStringField(value: &self.documentID) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._uploadDate) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.documentType) }()
-      case 4: try {
+      case 4: try { try decoder.decodeSingularStringField(value: &self.source) }()
+      case 5: try {
         var v: Vault_Records_RecordUploadEventInTransit?
         var hadOneofValue = false
         if let current = self.availableDocument {
@@ -819,7 +888,7 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.availableDocument = .inTransit(v)
         }
       }()
-      case 5: try {
+      case 6: try {
         var v: Vault_Records_RecordMetadata?
         var hadOneofValue = false
         if let current = self.availableDocument {
@@ -832,7 +901,6 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
           self.availableDocument = .metadata(v)
         }
       }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.recordHash) }()
       default: break
       }
     }
@@ -852,29 +920,29 @@ extension Vault_Records_Record: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
     if self.documentType != .typeUnspecified {
       try visitor.visitSingularEnumField(value: self.documentType, fieldNumber: 3)
     }
+    if !self.source.isEmpty {
+      try visitor.visitSingularStringField(value: self.source, fieldNumber: 4)
+    }
     switch self.availableDocument {
     case .inTransit?: try {
       guard case .inTransit(let v)? = self.availableDocument else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
     }()
     case .metadata?: try {
       guard case .metadata(let v)? = self.availableDocument else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
     }()
     case nil: break
-    }
-    if !self.recordHash.isEmpty {
-      try visitor.visitSingularStringField(value: self.recordHash, fieldNumber: 6)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Records_Record, rhs: Vault_Records_Record) -> Bool {
+  public static func ==(lhs: Vault_Records_Record.Item, rhs: Vault_Records_Record.Item) -> Bool {
     if lhs.documentID != rhs.documentID {return false}
     if lhs._uploadDate != rhs._uploadDate {return false}
     if lhs.documentType != rhs.documentType {return false}
+    if lhs.source != rhs.source {return false}
     if lhs.availableDocument != rhs.availableDocument {return false}
-    if lhs.recordHash != rhs.recordHash {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1129,9 +1197,10 @@ extension Vault_Records_RecordMetadataPlus: SwiftProtobuf.Message, SwiftProtobuf
 extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".RecordsRichDocumentResponse"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    4: .standard(proto: "in_transit"),
-    5: .standard(proto: "metadata_analyzing"),
-    6: .standard(proto: "metadata_final"),
+    1: .same(proto: "hash"),
+    2: .standard(proto: "in_transit"),
+    3: .standard(proto: "metadata_analyzing"),
+    4: .standard(proto: "metadata_final"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1140,7 +1209,8 @@ extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, Swif
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 4: try {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.hash) }()
+      case 2: try {
         var v: Vault_Records_RecordUploadEventInTransit?
         var hadOneofValue = false
         if let current = self.availableDocument {
@@ -1153,7 +1223,7 @@ extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, Swif
           self.availableDocument = .inTransit(v)
         }
       }()
-      case 5: try {
+      case 3: try {
         var v: Vault_Records_RecordMetadataPlus?
         var hadOneofValue = false
         if let current = self.availableDocument {
@@ -1166,7 +1236,7 @@ extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, Swif
           self.availableDocument = .metadataAnalyzing(v)
         }
       }()
-      case 6: try {
+      case 4: try {
         var v: Vault_Records_RecordMetadataPlus?
         var hadOneofValue = false
         if let current = self.availableDocument {
@@ -1189,18 +1259,21 @@ extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, Swif
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.hash.isEmpty {
+      try visitor.visitSingularStringField(value: self.hash, fieldNumber: 1)
+    }
     switch self.availableDocument {
     case .inTransit?: try {
       guard case .inTransit(let v)? = self.availableDocument else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     }()
     case .metadataAnalyzing?: try {
       guard case .metadataAnalyzing(let v)? = self.availableDocument else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     }()
     case .metadataFinal?: try {
       guard case .metadataFinal(let v)? = self.availableDocument else { preconditionFailure() }
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     }()
     case nil: break
     }
@@ -1208,6 +1281,7 @@ extension Vault_Records_RecordsRichDocumentResponse: SwiftProtobuf.Message, Swif
   }
 
   public static func ==(lhs: Vault_Records_RecordsRichDocumentResponse, rhs: Vault_Records_RecordsRichDocumentResponse) -> Bool {
+    if lhs.hash != rhs.hash {return false}
     if lhs.availableDocument != rhs.availableDocument {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

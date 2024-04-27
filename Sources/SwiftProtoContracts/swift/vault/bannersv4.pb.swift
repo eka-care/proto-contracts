@@ -26,174 +26,225 @@ public struct Vault_Bannersv4_Banner {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// Title of the banner.
-  public var title: String = String()
-
-  /// Sub Title of the banner.
-  public var subTitle: String {
-    get {return _subTitle ?? String()}
-    set {_subTitle = newValue}
+  public var item: Vault_Bannersv4_Banner.Item {
+    get {return _item ?? Vault_Bannersv4_Banner.Item()}
+    set {_item = newValue}
   }
-  /// Returns true if `subTitle` has been explicitly set.
-  public var hasSubTitle: Bool {return self._subTitle != nil}
-  /// Clears the value of `subTitle`. Subsequent reads from it will return its default value.
-  public mutating func clearSubTitle() {self._subTitle = nil}
-
-  /// CTA configuration for button.
-  public var cta: Vault_Common_CTA {
-    get {return _cta ?? Vault_Common_CTA()}
-    set {_cta = newValue}
-  }
-  /// Returns true if `cta` has been explicitly set.
-  public var hasCta: Bool {return self._cta != nil}
-  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
-  public mutating func clearCta() {self._cta = nil}
-
-  public var image: Vault_Bannersv4_Banner.OneOf_Image? = nil
-
-  /// Image link for the banner.
-  public var img: String {
-    get {
-      if case .img(let v)? = image {return v}
-      return String()
-    }
-    set {image = .img(newValue)}
-  }
-
-  /// Lottie link for the banner.
-  public var lottie: String {
-    get {
-      if case .lottie(let v)? = image {return v}
-      return String()
-    }
-    set {image = .lottie(newValue)}
-  }
-
-  /// ID represents banner identifier for tracking in Mixpanel.
-  public var bannerID: String = String()
-
-  /// dynamic parameters with-in sub title to be filled by client.
-  public var bodyParameters: [Vault_BannerBodyParameter_BannerBodyParameter] = []
-
-  /// Hightlight type of the banner.
-  public var highlight: Vault_Bannersv4_Banner.Highlight {
-    get {return _highlight ?? .typeUnspecified}
-    set {_highlight = newValue}
-  }
-  /// Returns true if `highlight` has been explicitly set.
-  public var hasHighlight: Bool {return self._highlight != nil}
-  /// Clears the value of `highlight`. Subsequent reads from it will return its default value.
-  public mutating func clearHighlight() {self._highlight = nil}
+  /// Returns true if `item` has been explicitly set.
+  public var hasItem: Bool {return self._item != nil}
+  /// Clears the value of `item`. Subsequent reads from it will return its default value.
+  public mutating func clearItem() {self._item = nil}
 
   /// Hash of the banner.
-  public var bannerHash: String = String()
-
-  /// Image link for the banner.
-  public var image2: Vault_Bannersv4_Banner.Image2 {
-    get {return _image2 ?? Vault_Bannersv4_Banner.Image2()}
-    set {_image2 = newValue}
-  }
-  /// Returns true if `image2` has been explicitly set.
-  public var hasImage2: Bool {return self._image2 != nil}
-  /// Clears the value of `image2`. Subsequent reads from it will return its default value.
-  public mutating func clearImage2() {self._image2 = nil}
+  public var hash: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  public enum OneOf_Image: Equatable {
-    /// Image link for the banner.
-    case img(String)
-    /// Lottie link for the banner.
-    case lottie(String)
-
-  #if !swift(>=4.1)
-    public static func ==(lhs: Vault_Bannersv4_Banner.OneOf_Image, rhs: Vault_Bannersv4_Banner.OneOf_Image) -> Bool {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch (lhs, rhs) {
-      case (.img, .img): return {
-        guard case .img(let l) = lhs, case .img(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      case (.lottie, .lottie): return {
-        guard case .lottie(let l) = lhs, case .lottie(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      default: return false
-      }
-    }
-  #endif
-  }
-
-  public enum Highlight: SwiftProtobuf.Enum {
-    public typealias RawValue = Int
-
-    /// Unspecified.
-    case typeUnspecified // = 0
-    case typeOne // = 1
-    case typeTwo // = 2
-    case typeThree // = 3
-    case typeFour // = 4
-    case UNRECOGNIZED(Int)
-
-    public init() {
-      self = .typeUnspecified
-    }
-
-    public init?(rawValue: Int) {
-      switch rawValue {
-      case 0: self = .typeUnspecified
-      case 1: self = .typeOne
-      case 2: self = .typeTwo
-      case 3: self = .typeThree
-      case 4: self = .typeFour
-      default: self = .UNRECOGNIZED(rawValue)
-      }
-    }
-
-    public var rawValue: Int {
-      switch self {
-      case .typeUnspecified: return 0
-      case .typeOne: return 1
-      case .typeTwo: return 2
-      case .typeThree: return 3
-      case .typeFour: return 4
-      case .UNRECOGNIZED(let i): return i
-      }
-    }
-
-  }
-
-  public struct Image2 {
+  public struct Item {
     // SwiftProtobuf.Message conformance is added in an extension below. See the
     // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
     // methods supported on all messages.
 
-    /// Image link for the banner.
-    public var img: String = String()
+    /// Title of the banner.
+    public var title: String = String()
 
-    /// Lottie link for the banner.
-    public var lottie: String = String()
+    /// Sub Title of the banner.
+    public var subTitle: String {
+      get {return _subTitle ?? String()}
+      set {_subTitle = newValue}
+    }
+    /// Returns true if `subTitle` has been explicitly set.
+    public var hasSubTitle: Bool {return self._subTitle != nil}
+    /// Clears the value of `subTitle`. Subsequent reads from it will return its default value.
+    public mutating func clearSubTitle() {self._subTitle = nil}
+
+    /// CTA configuration for button.
+    public var cta: Vault_Common_CTA {
+      get {return _cta ?? Vault_Common_CTA()}
+      set {_cta = newValue}
+    }
+    /// Returns true if `cta` has been explicitly set.
+    public var hasCta: Bool {return self._cta != nil}
+    /// Clears the value of `cta`. Subsequent reads from it will return its default value.
+    public mutating func clearCta() {self._cta = nil}
+
+    /// ID represents banner identifier for tracking in Mixpanel.
+    public var bannerID: String = String()
+
+    /// dynamic parameters with-in sub title to be filled by client.
+    public var bodyParameters: [Vault_BannerBodyParameter_BannerBodyParameter] = []
+
+    /// Hightlight type of the banner.
+    public var highlight: Vault_Bannersv4_Banner.Item.Highlight {
+      get {return _highlight ?? .typeUnspecified}
+      set {_highlight = newValue}
+    }
+    /// Returns true if `highlight` has been explicitly set.
+    public var hasHighlight: Bool {return self._highlight != nil}
+    /// Clears the value of `highlight`. Subsequent reads from it will return its default value.
+    public mutating func clearHighlight() {self._highlight = nil}
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
+    public enum Highlight: SwiftProtobuf.Enum {
+      public typealias RawValue = Int
+
+      /// Unspecified.
+      case typeUnspecified // = 0
+      case typeOne // = 1
+      case typeTwo // = 2
+      case typeThree // = 3
+      case typeFour // = 4
+      case UNRECOGNIZED(Int)
+
+      public init() {
+        self = .typeUnspecified
+      }
+
+      public init?(rawValue: Int) {
+        switch rawValue {
+        case 0: self = .typeUnspecified
+        case 1: self = .typeOne
+        case 2: self = .typeTwo
+        case 3: self = .typeThree
+        case 4: self = .typeFour
+        default: self = .UNRECOGNIZED(rawValue)
+        }
+      }
+
+      public var rawValue: Int {
+        switch self {
+        case .typeUnspecified: return 0
+        case .typeOne: return 1
+        case .typeTwo: return 2
+        case .typeThree: return 3
+        case .typeFour: return 4
+        case .UNRECOGNIZED(let i): return i
+        }
+      }
+
+    }
+
+    public struct Assets {
+      // SwiftProtobuf.Message conformance is added in an extension below. See the
+      // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+      // methods supported on all messages.
+
+      public var bgAsset: Vault_Bannersv4_Banner.Item.Assets.BgAsset {
+        get {return _bgAsset ?? Vault_Bannersv4_Banner.Item.Assets.BgAsset()}
+        set {_bgAsset = newValue}
+      }
+      /// Returns true if `bgAsset` has been explicitly set.
+      public var hasBgAsset: Bool {return self._bgAsset != nil}
+      /// Clears the value of `bgAsset`. Subsequent reads from it will return its default value.
+      public mutating func clearBgAsset() {self._bgAsset = nil}
+
+      public var topAsset: Vault_Bannersv4_Banner.Item.Assets.TopAsset {
+        get {return _topAsset ?? Vault_Bannersv4_Banner.Item.Assets.TopAsset()}
+        set {_topAsset = newValue}
+      }
+      /// Returns true if `topAsset` has been explicitly set.
+      public var hasTopAsset: Bool {return self._topAsset != nil}
+      /// Clears the value of `topAsset`. Subsequent reads from it will return its default value.
+      public mutating func clearTopAsset() {self._topAsset = nil}
+
+      public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+      public struct BgAsset {
+        // SwiftProtobuf.Message conformance is added in an extension below. See the
+        // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+        // methods supported on all messages.
+
+        public var image: Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image? = nil
+
+        /// Image link for the banner.
+        public var img: String {
+          get {
+            if case .img(let v)? = image {return v}
+            return String()
+          }
+          set {image = .img(newValue)}
+        }
+
+        /// Lottie link for the banner.
+        public var lottie: String {
+          get {
+            if case .lottie(let v)? = image {return v}
+            return String()
+          }
+          set {image = .lottie(newValue)}
+        }
+
+        public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+        public enum OneOf_Image: Equatable {
+          /// Image link for the banner.
+          case img(String)
+          /// Lottie link for the banner.
+          case lottie(String)
+
+        #if !swift(>=4.1)
+          public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image, rhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image) -> Bool {
+            // The use of inline closures is to circumvent an issue where the compiler
+            // allocates stack space for every case branch when no optimizations are
+            // enabled. https://github.com/apple/swift-protobuf/issues/1034
+            switch (lhs, rhs) {
+            case (.img, .img): return {
+              guard case .img(let l) = lhs, case .img(let r) = rhs else { preconditionFailure() }
+              return l == r
+            }()
+            case (.lottie, .lottie): return {
+              guard case .lottie(let l) = lhs, case .lottie(let r) = rhs else { preconditionFailure() }
+              return l == r
+            }()
+            default: return false
+            }
+          }
+        #endif
+        }
+
+        public init() {}
+      }
+
+      public struct TopAsset {
+        // SwiftProtobuf.Message conformance is added in an extension below. See the
+        // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+        // methods supported on all messages.
+
+        /// Image link for the banner.
+        public var img: String = String()
+
+        /// Lottie link for the banner.
+        public var lottie: String = String()
+
+        public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+        public init() {}
+      }
+
+      public init() {}
+
+      fileprivate var _bgAsset: Vault_Bannersv4_Banner.Item.Assets.BgAsset? = nil
+      fileprivate var _topAsset: Vault_Bannersv4_Banner.Item.Assets.TopAsset? = nil
+    }
+
     public init() {}
+
+    fileprivate var _subTitle: String? = nil
+    fileprivate var _cta: Vault_Common_CTA? = nil
+    fileprivate var _highlight: Vault_Bannersv4_Banner.Item.Highlight? = nil
   }
 
   public init() {}
 
-  fileprivate var _subTitle: String? = nil
-  fileprivate var _cta: Vault_Common_CTA? = nil
-  fileprivate var _highlight: Vault_Bannersv4_Banner.Highlight? = nil
-  fileprivate var _image2: Vault_Bannersv4_Banner.Image2? = nil
+  fileprivate var _item: Vault_Bannersv4_Banner.Item? = nil
 }
 
 #if swift(>=4.2)
 
-extension Vault_Bannersv4_Banner.Highlight: CaseIterable {
+extension Vault_Bannersv4_Banner.Item.Highlight: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static let allCases: [Vault_Bannersv4_Banner.Highlight] = [
+  public static let allCases: [Vault_Bannersv4_Banner.Item.Highlight] = [
     .typeUnspecified,
     .typeOne,
     .typeTwo,
@@ -339,9 +390,12 @@ extension Vault_Bannersv4_BannersAPIResponse.ErrorCode: CaseIterable {
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Bannersv4_Banner: @unchecked Sendable {}
-extension Vault_Bannersv4_Banner.OneOf_Image: @unchecked Sendable {}
-extension Vault_Bannersv4_Banner.Highlight: @unchecked Sendable {}
-extension Vault_Bannersv4_Banner.Image2: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Highlight: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Assets: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Assets.BgAsset: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Assets.TopAsset: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersResponse: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersAPIResponse: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersAPIResponse.OneOf_Result: @unchecked Sendable {}
@@ -356,16 +410,54 @@ fileprivate let _protobuf_package = "vault.bannersv4"
 extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Banner"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "item"),
+    2: .same(proto: "hash"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._item) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.hash) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._item {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.hash.isEmpty {
+      try visitor.visitSingularStringField(value: self.hash, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Bannersv4_Banner, rhs: Vault_Bannersv4_Banner) -> Bool {
+    if lhs._item != rhs._item {return false}
+    if lhs.hash != rhs.hash {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Bannersv4_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Bannersv4_Banner.protoMessageName + ".Item"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "title"),
     2: .standard(proto: "sub_title"),
     3: .same(proto: "cta"),
-    4: .same(proto: "img"),
-    5: .same(proto: "lottie"),
-    6: .standard(proto: "banner_id"),
-    7: .standard(proto: "body_parameters"),
-    8: .same(proto: "highlight"),
-    9: .standard(proto: "banner_hash"),
-    10: .same(proto: "image2"),
+    4: .standard(proto: "banner_id"),
+    5: .standard(proto: "body_parameters"),
+    6: .same(proto: "highlight"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -377,27 +469,9 @@ extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self._subTitle) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      case 4: try {
-        var v: String?
-        try decoder.decodeSingularStringField(value: &v)
-        if let v = v {
-          if self.image != nil {try decoder.handleConflictingOneOf()}
-          self.image = .img(v)
-        }
-      }()
-      case 5: try {
-        var v: String?
-        try decoder.decodeSingularStringField(value: &v)
-        if let v = v {
-          if self.image != nil {try decoder.handleConflictingOneOf()}
-          self.image = .lottie(v)
-        }
-      }()
-      case 6: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
-      case 7: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
-      case 8: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
-      case 9: try { try decoder.decodeSingularStringField(value: &self.bannerHash) }()
-      case 10: try { try decoder.decodeSingularMessageField(value: &self._image2) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
+      case 5: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
       default: break
       }
     }
@@ -417,51 +491,31 @@ extension Vault_Bannersv4_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try { if let v = self._cta {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
     } }()
-    switch self.image {
-    case .img?: try {
-      guard case .img(let v)? = self.image else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 4)
-    }()
-    case .lottie?: try {
-      guard case .lottie(let v)? = self.image else { preconditionFailure() }
-      try visitor.visitSingularStringField(value: v, fieldNumber: 5)
-    }()
-    case nil: break
-    }
     if !self.bannerID.isEmpty {
-      try visitor.visitSingularStringField(value: self.bannerID, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: self.bannerID, fieldNumber: 4)
     }
     if !self.bodyParameters.isEmpty {
-      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 7)
+      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 5)
     }
     try { if let v = self._highlight {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 8)
-    } }()
-    if !self.bannerHash.isEmpty {
-      try visitor.visitSingularStringField(value: self.bannerHash, fieldNumber: 9)
-    }
-    try { if let v = self._image2 {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 6)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Bannersv4_Banner, rhs: Vault_Bannersv4_Banner) -> Bool {
+  public static func ==(lhs: Vault_Bannersv4_Banner.Item, rhs: Vault_Bannersv4_Banner.Item) -> Bool {
     if lhs.title != rhs.title {return false}
     if lhs._subTitle != rhs._subTitle {return false}
     if lhs._cta != rhs._cta {return false}
-    if lhs.image != rhs.image {return false}
     if lhs.bannerID != rhs.bannerID {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._highlight != rhs._highlight {return false}
-    if lhs.bannerHash != rhs.bannerHash {return false}
-    if lhs._image2 != rhs._image2 {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Vault_Bannersv4_Banner.Highlight: SwiftProtobuf._ProtoNameProviding {
+extension Vault_Bannersv4_Banner.Item.Highlight: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TYPE_UNSPECIFIED"),
     1: .same(proto: "TYPE_ONE"),
@@ -471,8 +525,110 @@ extension Vault_Bannersv4_Banner.Highlight: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension Vault_Bannersv4_Banner.Image2: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Vault_Bannersv4_Banner.protoMessageName + ".Image2"
+extension Vault_Bannersv4_Banner.Item.Assets: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Bannersv4_Banner.Item.protoMessageName + ".Assets"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "bg_asset"),
+    2: .standard(proto: "top_asset"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._bgAsset) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._topAsset) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._bgAsset {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._topAsset {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets, rhs: Vault_Bannersv4_Banner.Item.Assets) -> Bool {
+    if lhs._bgAsset != rhs._bgAsset {return false}
+    if lhs._topAsset != rhs._topAsset {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Bannersv4_Banner.Item.Assets.BgAsset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Bannersv4_Banner.Item.Assets.protoMessageName + ".BgAsset"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "img"),
+    2: .same(proto: "lottie"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.image != nil {try decoder.handleConflictingOneOf()}
+          self.image = .img(v)
+        }
+      }()
+      case 2: try {
+        var v: String?
+        try decoder.decodeSingularStringField(value: &v)
+        if let v = v {
+          if self.image != nil {try decoder.handleConflictingOneOf()}
+          self.image = .lottie(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    switch self.image {
+    case .img?: try {
+      guard case .img(let v)? = self.image else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    }()
+    case .lottie?: try {
+      guard case .lottie(let v)? = self.image else { preconditionFailure() }
+      try visitor.visitSingularStringField(value: v, fieldNumber: 2)
+    }()
+    case nil: break
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset, rhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset) -> Bool {
+    if lhs.image != rhs.image {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Bannersv4_Banner.Item.Assets.TopAsset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Bannersv4_Banner.Item.Assets.protoMessageName + ".TopAsset"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "img"),
     2: .same(proto: "lottie"),
@@ -501,7 +657,7 @@ extension Vault_Bannersv4_Banner.Image2: SwiftProtobuf.Message, SwiftProtobuf._M
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Bannersv4_Banner.Image2, rhs: Vault_Bannersv4_Banner.Image2) -> Bool {
+  public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.TopAsset, rhs: Vault_Bannersv4_Banner.Item.Assets.TopAsset) -> Bool {
     if lhs.img != rhs.img {return false}
     if lhs.lottie != rhs.lottie {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
