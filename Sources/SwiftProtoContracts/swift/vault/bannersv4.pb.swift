@@ -140,8 +140,8 @@ public struct Vault_Bannersv4_Banner {
       // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
       // methods supported on all messages.
 
-      public var bgAsset: Vault_Bannersv4_Banner.Item.Assets.BgAsset {
-        get {return _bgAsset ?? Vault_Bannersv4_Banner.Item.Assets.BgAsset()}
+      public var bgAsset: Vault_Bannersv4_Banner.Item.Assets.Img {
+        get {return _bgAsset ?? Vault_Bannersv4_Banner.Item.Assets.Img()}
         set {_bgAsset = newValue}
       }
       /// Returns true if `bgAsset` has been explicitly set.
@@ -149,8 +149,8 @@ public struct Vault_Bannersv4_Banner {
       /// Clears the value of `bgAsset`. Subsequent reads from it will return its default value.
       public mutating func clearBgAsset() {self._bgAsset = nil}
 
-      public var topAsset: Vault_Bannersv4_Banner.Item.Assets.TopAsset {
-        get {return _topAsset ?? Vault_Bannersv4_Banner.Item.Assets.TopAsset()}
+      public var topAsset: Vault_Bannersv4_Banner.Item.Assets.Img {
+        get {return _topAsset ?? Vault_Bannersv4_Banner.Item.Assets.Img()}
         set {_topAsset = newValue}
       }
       /// Returns true if `topAsset` has been explicitly set.
@@ -160,12 +160,12 @@ public struct Vault_Bannersv4_Banner {
 
       public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-      public struct BgAsset {
+      public struct Img {
         // SwiftProtobuf.Message conformance is added in an extension below. See the
         // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
         // methods supported on all messages.
 
-        public var image: Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image? = nil
+        public var image: Vault_Bannersv4_Banner.Item.Assets.Img.OneOf_Image? = nil
 
         /// Image link for the banner.
         public var img: String {
@@ -194,7 +194,7 @@ public struct Vault_Bannersv4_Banner {
           case lottie(String)
 
         #if !swift(>=4.1)
-          public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image, rhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image) -> Bool {
+          public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.Img.OneOf_Image, rhs: Vault_Bannersv4_Banner.Item.Assets.Img.OneOf_Image) -> Bool {
             // The use of inline closures is to circumvent an issue where the compiler
             // allocates stack space for every case branch when no optimizations are
             // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -216,26 +216,10 @@ public struct Vault_Bannersv4_Banner {
         public init() {}
       }
 
-      public struct TopAsset {
-        // SwiftProtobuf.Message conformance is added in an extension below. See the
-        // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-        // methods supported on all messages.
-
-        /// Image link for the banner.
-        public var img: String = String()
-
-        /// Lottie link for the banner.
-        public var lottie: String = String()
-
-        public var unknownFields = SwiftProtobuf.UnknownStorage()
-
-        public init() {}
-      }
-
       public init() {}
 
-      fileprivate var _bgAsset: Vault_Bannersv4_Banner.Item.Assets.BgAsset? = nil
-      fileprivate var _topAsset: Vault_Bannersv4_Banner.Item.Assets.TopAsset? = nil
+      fileprivate var _bgAsset: Vault_Bannersv4_Banner.Item.Assets.Img? = nil
+      fileprivate var _topAsset: Vault_Bannersv4_Banner.Item.Assets.Img? = nil
     }
 
     public init() {}
@@ -404,9 +388,8 @@ extension Vault_Bannersv4_Banner: @unchecked Sendable {}
 extension Vault_Bannersv4_Banner.Item: @unchecked Sendable {}
 extension Vault_Bannersv4_Banner.Item.Highlight: @unchecked Sendable {}
 extension Vault_Bannersv4_Banner.Item.Assets: @unchecked Sendable {}
-extension Vault_Bannersv4_Banner.Item.Assets.BgAsset: @unchecked Sendable {}
-extension Vault_Bannersv4_Banner.Item.Assets.BgAsset.OneOf_Image: @unchecked Sendable {}
-extension Vault_Bannersv4_Banner.Item.Assets.TopAsset: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Assets.Img: @unchecked Sendable {}
+extension Vault_Bannersv4_Banner.Item.Assets.Img.OneOf_Image: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersResponse: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersAPIResponse: @unchecked Sendable {}
 extension Vault_Bannersv4_BannersAPIResponse.OneOf_Result: @unchecked Sendable {}
@@ -584,8 +567,8 @@ extension Vault_Bannersv4_Banner.Item.Assets: SwiftProtobuf.Message, SwiftProtob
   }
 }
 
-extension Vault_Bannersv4_Banner.Item.Assets.BgAsset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Vault_Bannersv4_Banner.Item.Assets.protoMessageName + ".BgAsset"
+extension Vault_Bannersv4_Banner.Item.Assets.Img: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = Vault_Bannersv4_Banner.Item.Assets.protoMessageName + ".Img"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "img"),
     2: .same(proto: "lottie"),
@@ -637,46 +620,8 @@ extension Vault_Bannersv4_Banner.Item.Assets.BgAsset: SwiftProtobuf.Message, Swi
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset, rhs: Vault_Bannersv4_Banner.Item.Assets.BgAsset) -> Bool {
+  public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.Img, rhs: Vault_Bannersv4_Banner.Item.Assets.Img) -> Bool {
     if lhs.image != rhs.image {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Vault_Bannersv4_Banner.Item.Assets.TopAsset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = Vault_Bannersv4_Banner.Item.Assets.protoMessageName + ".TopAsset"
-  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "img"),
-    2: .same(proto: "lottie"),
-  ]
-
-  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.img) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.lottie) }()
-      default: break
-      }
-    }
-  }
-
-  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.img.isEmpty {
-      try visitor.visitSingularStringField(value: self.img, fieldNumber: 1)
-    }
-    if !self.lottie.isEmpty {
-      try visitor.visitSingularStringField(value: self.lottie, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  public static func ==(lhs: Vault_Bannersv4_Banner.Item.Assets.TopAsset, rhs: Vault_Bannersv4_Banner.Item.Assets.TopAsset) -> Bool {
-    if lhs.img != rhs.img {return false}
-    if lhs.lottie != rhs.lottie {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

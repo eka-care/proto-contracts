@@ -24,19 +24,14 @@ message Banner {
     optional Highlight highlight = 7; // Hightlight type of the banner.
 
     message Assets {
-      BgAsset bg_asset = 1;
-      optional TopAsset top_asset = 2;
+      Img bg_asset = 1;
+      optional Img top_asset = 2;
 
-      message BgAsset {
+      message Img {
         oneof image {
           string img = 1;    // Image link for the banner.
           string lottie = 2; // Lottie link for the banner.
         }
-      }
-
-      message TopAsset {
-        string img = 1;    // Image link for the banner.
-        string lottie = 2; // Lottie link for the banner.
       }
     }
 

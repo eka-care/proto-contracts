@@ -27,10 +27,19 @@ message Record {
     string document_id = 1;
     google.protobuf.Timestamp upload_date = 2;
     DocumentType document_type = 3;
-    string source = 4;
+    optional Source source = 4;
     oneof available_document {
       RecordUploadEventInTransit in_transit = 5;
       RecordMetadata metadata = 6;
+    }
+
+    enum Source {
+      SOURCE_UNSPECIFIED = 0;
+      SOURCE_GMAIL = 1;
+      SOURCE_ABHA = 2;
+      SOURCE_WHATSAPP = 3;
+      SOURCE_EMAIL_FORWARD = 4;
+      SOURCE_HXNG = 5;
     }
   }
 }

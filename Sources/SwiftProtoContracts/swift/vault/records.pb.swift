@@ -111,7 +111,14 @@ public struct Vault_Records_Record {
 
     public var documentType: Vault_Records_DocumentType = .typeUnspecified
 
-    public var source: String = String()
+    public var source: Vault_Records_Record.Item.Source {
+      get {return _source ?? .unspecified}
+      set {_source = newValue}
+    }
+    /// Returns true if `source` has been explicitly set.
+    public var hasSource: Bool {return self._source != nil}
+    /// Clears the value of `source`. Subsequent reads from it will return its default value.
+    public mutating func clearSource() {self._source = nil}
 
     public var availableDocument: Vault_Records_Record.Item.OneOf_AvailableDocument? = nil
 
@@ -157,15 +164,72 @@ public struct Vault_Records_Record {
     #endif
     }
 
+    public enum Source: SwiftProtobuf.Enum {
+      public typealias RawValue = Int
+      case unspecified // = 0
+      case gmail // = 1
+      case abha // = 2
+      case whatsapp // = 3
+      case emailForward // = 4
+      case hxng // = 5
+      case UNRECOGNIZED(Int)
+
+      public init() {
+        self = .unspecified
+      }
+
+      public init?(rawValue: Int) {
+        switch rawValue {
+        case 0: self = .unspecified
+        case 1: self = .gmail
+        case 2: self = .abha
+        case 3: self = .whatsapp
+        case 4: self = .emailForward
+        case 5: self = .hxng
+        default: self = .UNRECOGNIZED(rawValue)
+        }
+      }
+
+      public var rawValue: Int {
+        switch self {
+        case .unspecified: return 0
+        case .gmail: return 1
+        case .abha: return 2
+        case .whatsapp: return 3
+        case .emailForward: return 4
+        case .hxng: return 5
+        case .UNRECOGNIZED(let i): return i
+        }
+      }
+
+    }
+
     public init() {}
 
     fileprivate var _uploadDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    fileprivate var _source: Vault_Records_Record.Item.Source? = nil
   }
 
   public init() {}
 
   fileprivate var _item: Vault_Records_Record.Item? = nil
 }
+
+#if swift(>=4.2)
+
+extension Vault_Records_Record.Item.Source: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Vault_Records_Record.Item.Source] = [
+    .unspecified,
+    .gmail,
+    .abha,
+    .whatsapp,
+    .emailForward,
+    .hxng,
+  ]
+}
+
+#endif  // swift(>=4.2)
 
 /// Item represents an item part of listing of records. 
 public struct Vault_Records_Item {
@@ -712,6 +776,7 @@ extension Vault_Records_RecordMetadata: @unchecked Sendable {}
 extension Vault_Records_Record: @unchecked Sendable {}
 extension Vault_Records_Record.Item: @unchecked Sendable {}
 extension Vault_Records_Record.Item.OneOf_AvailableDocument: @unchecked Sendable {}
+extension Vault_Records_Record.Item.Source: @unchecked Sendable {}
 extension Vault_Records_Item: @unchecked Sendable {}
 extension Vault_Records_Item.OneOf_Result: @unchecked Sendable {}
 extension Vault_Records_RecordsResponse: @unchecked Sendable {}
@@ -874,7 +939,7 @@ extension Vault_Records_Record.Item: SwiftProtobuf.Message, SwiftProtobuf._Messa
       case 1: try { try decoder.decodeSingularStringField(value: &self.documentID) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._uploadDate) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.documentType) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.source) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self._source) }()
       case 5: try {
         var v: Vault_Records_RecordUploadEventInTransit?
         var hadOneofValue = false
@@ -920,9 +985,9 @@ extension Vault_Records_Record.Item: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if self.documentType != .typeUnspecified {
       try visitor.visitSingularEnumField(value: self.documentType, fieldNumber: 3)
     }
-    if !self.source.isEmpty {
-      try visitor.visitSingularStringField(value: self.source, fieldNumber: 4)
-    }
+    try { if let v = self._source {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 4)
+    } }()
     switch self.availableDocument {
     case .inTransit?: try {
       guard case .inTransit(let v)? = self.availableDocument else { preconditionFailure() }
@@ -941,11 +1006,22 @@ extension Vault_Records_Record.Item: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if lhs.documentID != rhs.documentID {return false}
     if lhs._uploadDate != rhs._uploadDate {return false}
     if lhs.documentType != rhs.documentType {return false}
-    if lhs.source != rhs.source {return false}
+    if lhs._source != rhs._source {return false}
     if lhs.availableDocument != rhs.availableDocument {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
+}
+
+extension Vault_Records_Record.Item.Source: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "SOURCE_UNSPECIFIED"),
+    1: .same(proto: "SOURCE_GMAIL"),
+    2: .same(proto: "SOURCE_ABHA"),
+    3: .same(proto: "SOURCE_WHATSAPP"),
+    4: .same(proto: "SOURCE_EMAIL_FORWARD"),
+    5: .same(proto: "SOURCE_HXNG"),
+  ]
 }
 
 extension Vault_Records_Item: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
