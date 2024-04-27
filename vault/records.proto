@@ -12,7 +12,7 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/records";
 message RecordUploadEventInTransit {}
 
 message RecordMetadata {
-  vault.common.CTA cta = 1;
+  optional vault.common.CTA cta = 1;
   optional string thumbnail = 2;
   optional google.protobuf.Timestamp document_date = 3;
   repeated Tag tags = 4;
