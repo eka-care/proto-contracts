@@ -20,7 +20,8 @@ message Banner {
         4; // ID represents banner identifier for tracking in Mixpanel.
     repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
         5; // dynamic parameters with-in sub title to be filled by client.
-    optional Highlight highlight = 6; // Hightlight type of the banner.
+    Assets assets = 6;                // Assets for the banner.
+    optional Highlight highlight = 7; // Hightlight type of the banner.
 
     message Assets {
       BgAsset bg_asset = 1;

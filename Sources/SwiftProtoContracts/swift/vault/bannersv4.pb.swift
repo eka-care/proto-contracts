@@ -74,6 +74,16 @@ public struct Vault_Bannersv4_Banner {
     /// dynamic parameters with-in sub title to be filled by client.
     public var bodyParameters: [Vault_BannerBodyParameter_BannerBodyParameter] = []
 
+    /// Assets for the banner.
+    public var assets: Vault_Bannersv4_Banner.Item.Assets {
+      get {return _assets ?? Vault_Bannersv4_Banner.Item.Assets()}
+      set {_assets = newValue}
+    }
+    /// Returns true if `assets` has been explicitly set.
+    public var hasAssets: Bool {return self._assets != nil}
+    /// Clears the value of `assets`. Subsequent reads from it will return its default value.
+    public mutating func clearAssets() {self._assets = nil}
+
     /// Hightlight type of the banner.
     public var highlight: Vault_Bannersv4_Banner.Item.Highlight {
       get {return _highlight ?? .typeUnspecified}
@@ -232,6 +242,7 @@ public struct Vault_Bannersv4_Banner {
 
     fileprivate var _subTitle: String? = nil
     fileprivate var _cta: Vault_Common_CTA? = nil
+    fileprivate var _assets: Vault_Bannersv4_Banner.Item.Assets? = nil
     fileprivate var _highlight: Vault_Bannersv4_Banner.Item.Highlight? = nil
   }
 
@@ -457,7 +468,8 @@ extension Vault_Bannersv4_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
     3: .same(proto: "cta"),
     4: .standard(proto: "banner_id"),
     5: .standard(proto: "body_parameters"),
-    6: .same(proto: "highlight"),
+    6: .same(proto: "assets"),
+    7: .same(proto: "highlight"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -471,7 +483,8 @@ extension Vault_Bannersv4_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
       case 5: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
-      case 6: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
+      case 6: try { try decoder.decodeSingularMessageField(value: &self._assets) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
       default: break
       }
     }
@@ -497,8 +510,11 @@ extension Vault_Bannersv4_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if !self.bodyParameters.isEmpty {
       try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 5)
     }
+    try { if let v = self._assets {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    } }()
     try { if let v = self._highlight {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 6)
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 7)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -509,6 +525,7 @@ extension Vault_Bannersv4_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if lhs._cta != rhs._cta {return false}
     if lhs.bannerID != rhs.bannerID {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
+    if lhs._assets != rhs._assets {return false}
     if lhs._highlight != rhs._highlight {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
