@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package vitals.sources;
+
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/sources";
+
+message SourceDetails {
+  uint32 id = 1;
+  string external_source_id = 2;
+  bool is_primary = 3;
+  string icon = 4;
+}
+
+// Define SourceResp message
+message SourceResp {
+  repeated SourceDetails sources = 1;
+}
+
+// Define SourcePrefReq message
+message SourcePrefReq {
+  uint32 vital_id = 1;
+  uint32 source_id = 2;
+}
