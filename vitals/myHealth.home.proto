@@ -49,7 +49,7 @@ message HomeResponse {
 message UserProfile {
   optional BloodGroup blood_group = 1;
   optional BodyMeasurements weight = 2;
-  BodyMeasurements height = 3;
+  optional BodyMeasurements height = 3;
 }
 
 enum BloodGroup {
@@ -65,7 +65,7 @@ enum BloodGroup {
 }
 
 message BodyMeasurements {
-  optional  string value_sting = 1;
+  optional  string value_string = 1;
   optional  double value_float = 2;
   optional BodyMeasurementUnit unit = 3;
 }
