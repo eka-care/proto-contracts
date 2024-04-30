@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package vitals.sources;
 
-option go_package = "../go/vitals/sources";
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/sources";
 
 message SourceDetails {
   uint32 id = 1;
