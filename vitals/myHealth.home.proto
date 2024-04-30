@@ -47,12 +47,12 @@ message HomeResponse {
 }
 
 message UserProfile {
-  optional BloodGroup blood_group = 1;
+  optional BloodGroups blood_group = 1;
   optional BodyMeasurements weight = 2;
   optional BodyMeasurements height = 3;
 }
 
-enum BloodGroup {
+enum BloodGroups {
   BLOOD_GROUP_UNSPECIFIED = 0;
   BLOOD_GROUP_A_POSITIVE = 1;
   BLOOD_GROUP_A_NEGATIVE = 2;
