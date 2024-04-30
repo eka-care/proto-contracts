@@ -6,19 +6,24 @@ option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vit
 
 
 // Define an enumeration for different types of health entries.
-enum EntryType {
+enum MedicalDataType {
   Unknown = 0;
   Allergies = 1;
   Diagnoses = 2;
+  Height = 3;
+  Weight = 4;
+  BloodGroup = 5;
 }
 
 
 // Main input message that includes a field for each type of entry.
 message AddDataRequest {
-  EntryType type = 1; // Type of the entry to determine processing route
-  string eka_id = 2; // SNOMED CT identifier for conditions and allergies
-  string name = 3; // Name of the condition or allergy
+  MedicalDataType type = 1; // Type of the entry to determine processing route
+  optional string eka_id = 2; // SNOMED CT identifier for conditions and allergies
+  optional string name = 3; // Name of the condition or allergy
   optional int32 onset_year = 4; // Duration in years since the onset or adoption
+  optional double value_number = 5; // Float value for weight, etc.
+  optional string value_string = 6; // String value for blood group, etc.
 }
 
 message AddDataResponse {
