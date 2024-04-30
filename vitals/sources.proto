@@ -18,6 +18,6 @@ message SourceResp {
 
 // Define SourcePrefReq message
 message SourcePrefReq {
-  uint32 vital_id = 1;
+  string test_eka_id = 1;
   uint32 source_id = 2;
 }
