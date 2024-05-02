@@ -9,6 +9,7 @@ import "auth/auth.common.proto";
 message LinkMobileInit {
   string mobile = 1;
   string txn_id = 2;
+  optional Attributes attributes = 3;
 }
 
 

@@ -40,3 +40,8 @@ message Profile {
   string name = 4;
   string photo_url = 5;
 }
+
+message Attributes {
+  optional bool allow_whatsapp = 1;
+  optional bool allow_email = 2;
+}

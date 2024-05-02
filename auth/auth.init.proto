@@ -15,11 +15,6 @@ message AuthInit {
   optional Attributes attributes = 3;
 }
 
-message Attributes {
-  optional bool allow_whatsapp = 1;
-  optional bool allow_email = 2;
-}
-
 message AuthInitResponse {
   string txn_id = 1;
   string message = 2;
