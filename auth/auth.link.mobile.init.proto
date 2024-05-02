@@ -14,20 +14,15 @@ message LinkMobileInit {
 
 message LinkMobileInitResp {
   string txn_id = 1;
-
-  AuthSkipStates skip_state = 2;
-
-  // Will be present only if skipState is SkipStateErrored.
+  string message = 2;
   optional AuthError error = 3;
-
-  // Data will be present only if skipState is SkipStateEnd.
-  optional Data data = 4;
+  optional OtpInitResponse otp = 4;
 }
 
 message LinkMobileVerify {
   string txn_id = 1;
   string otp = 2;
-
+  optional bool skip =3;
 }
 
 message LinkMobileVerifyResp {
