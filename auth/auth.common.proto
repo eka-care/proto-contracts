@@ -34,11 +34,25 @@ message OtpInitResponse {
 }
 
 message Profile {
-  string id = 1;
-  string email = 2;
-  string mobile = 3;
-  string name = 4;
-  string photo_url = 5;
+  string fln = 1;
+  string fn = 2;
+  string mn = 3;
+  string ln = 4;
+  string gen = 5;
+  string dob = 6;
+  string mobile = 7;
+  string email = 8;
+  string uuid = 9;
+  string bloodgroup = 10;
+  string pic = 11;
+  string as = 12;
+  bool is_doctor = 13;
+  bool is_doctor_staff = 14;
+  bool is_patient = 15;
+  bool is_biz = 16;
+  string oid = 17;
+  string type = 18;
+  repeated string health_ids = 19;
 }
 
 message Attributes {
