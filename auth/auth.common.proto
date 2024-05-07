@@ -25,7 +25,7 @@ message Data {
   ExternalTokens external_tokens = 2;
   // This will be present only if the user is old and will be Type1 profile.
   optional Profile profile = 3;
-  optional bool hasMoreProfile =4;
+  optional bool hasMoreProfile =4 [json_name="has_more_profiles"];
   optional bool firstTimeUser = 5;
 }
 
