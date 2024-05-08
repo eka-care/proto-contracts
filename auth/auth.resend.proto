@@ -3,13 +3,11 @@ syntax = "proto3";
 package auth;
 
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
-import "auth/auth.aenums.proto";
 import "auth/auth.common.proto";
-import "auth/auth.init.proto";
-import "google/protobuf/timestamp.proto";
+
 
 
 message  AuthResendRequest {
-  string txnId  = 1 ;
+  string txn_id  = 1 ;
   optional Attributes attributes = 3;
 }
