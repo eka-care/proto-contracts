@@ -5,7 +5,6 @@ package auth;
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 import "auth/auth.aenums.proto";
 import "auth/auth.common.proto";
-import "google/protobuf/timestamp.proto";
 
 message AuthInit {
   AuthMethod method = 1;
