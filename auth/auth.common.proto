@@ -53,7 +53,7 @@ message Profile {
   bool is_patient = 15;
   bool is_biz = 16;
   string oid = 17;
-  string type = 18;
+  int64 type = 18;
   repeated string health_ids = 19;
 }
 
