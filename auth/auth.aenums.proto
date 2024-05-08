@@ -9,7 +9,8 @@ enum AuthSkipStates {
   SkipStateEnd = 1;
   SkipStateMobileLinkInit = 2;
   SkipStateMobileLinkConfirm = 3;
-  SkipStateErrored = 4;
+  SkipStateProfile =4;
+  SkipStateErrored = 5;
 }
 
 enum AuthMethod {
