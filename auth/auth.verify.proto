@@ -16,7 +16,7 @@ message AuthVerifyRequest {
 
 
 message AuthVerifyResponse {
-  string txnId = 1;
+  string txn_id = 1;
 
   AuthSkipStates skip_state = 2;
 
