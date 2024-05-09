@@ -7,8 +7,8 @@ import "auth/auth.common.proto";
 
 
 message AuthRefreshRequest{
-  string sess =1 ;
-  string refresh = 2 ;
+  string sess = 1;
+  string refresh = 2;
 }
 
 message  AuthRefreshResponse {

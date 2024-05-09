@@ -25,14 +25,14 @@ message Data {
   ExternalTokens external_tokens = 2;
   // This will be present only if the user is old and will be Type1 profile.
   optional Profile profile = 3;
-  optional bool hasMoreProfile =4 [json_name = "has_more_profiles"];
-  optional bool firstTimeUser = 5 [json_name = "first_time_user"];
+  bool has_more_profiles = 4;
+  bool first_time_user = 5;
 }
 
 message OtpInitResponse {
   bool triggered = 1;
   int64 retries = 2 ;
-  string  next_otp_request = 3 [json_name = "next_otp_request"];
+  string  next_otp_request = 3;
 }
 
 message Profile {
