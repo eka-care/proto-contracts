@@ -1,0 +1,63 @@
+syntax = "proto3";
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+
+
+message AuthError {
+  string code = 1;
+  string message = 2;
+}
+
+message Tokens {
+  // JWT Token for the user
+  string sess = 1;
+  // Refresh token for the user
+  string refresh = 2;
+}
+
+message ExternalTokens {
+  string firebase = 1 ;
+}
+
+message Data {
+  Tokens tokens = 1;
+  ExternalTokens external_tokens = 2;
+  // This will be present only if the user is old and will be Type1 profile.
+  optional Profile profile = 3;
+  bool has_more_profiles = 4;
+  bool first_time_user = 5;
+}
+
+message OtpInitResponse {
+  bool triggered = 1;
+  int64 retries = 2 ;
+  string  next_otp_request = 3;
+}
+
+message Profile {
+  string fln = 1;
+  string fn = 2;
+  string mn = 3;
+  string ln = 4;
+  string gen = 5;
+  string dob = 6;
+  string mobile = 7;
+  string email = 8;
+  string uuid = 9;
+  string bloodgroup = 10;
+  string pic = 11;
+  string as = 12;
+  bool is_doctor = 13;
+  bool is_doctor_staff = 14;
+  bool is_patient = 15;
+  bool is_biz = 16;
+  string oid = 17;
+  int64 type = 18;
+  repeated string health_ids = 19;
+}
+
+message Attributes {
+  optional bool allow_whatsapp = 1;
+  optional bool allow_email = 2;
+}

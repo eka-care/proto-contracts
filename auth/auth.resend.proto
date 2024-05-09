@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+import "auth/auth.common.proto";
+
+
+
+message  AuthResendRequest {
+  string txn_id  = 1 ;
+  optional Attributes attributes = 3;
+}

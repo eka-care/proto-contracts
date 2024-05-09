@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+import "auth/auth.common.proto";
+
+
+message AuthRefreshRequest{
+  string sess = 1;
+  string refresh = 2;
+}
+
+message  AuthRefreshResponse {
+  string sess =1;
+  string refresh = 2;
+  optional AuthError error = 3;
+}

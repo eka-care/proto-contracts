@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+import "auth/auth.aenums.proto";
+import "auth/auth.common.proto";
+
+message LinkMobileInit {
+  string mobile = 1;
+  string txn_id = 2;
+  optional Attributes attributes = 3;
+}
+
+
+message LinkMobileInitResp {
+  string txn_id = 1;
+  string message = 2;
+  optional AuthError error = 3;
+  optional OtpInitResponse otp = 4;
+}
+
+message LinkMobileVerify {
+  string txn_id = 1;
+  string otp = 2;
+  optional bool skip =3;
+}
+
+message LinkMobileVerifyResp {
+  string txnId = 1;
+  AuthSkipStates skip_state = 2;
+
+  // Will be present only if skipState is SkipStateErrored.
+  optional AuthError error = 3;
+  // Data will be present only if skipState is SkipStateEnd.
+  optional Data data = 4;
+}
