@@ -25,8 +25,8 @@ message Data {
   ExternalTokens external_tokens = 2;
   // This will be present only if the user is old and will be Type1 profile.
   optional Profile profile = 3;
-  bool has_more_profiles = 4;
-  bool first_time_user = 5;
+  optional bool has_more_profiles = 4;
+  optional bool first_time_user = 5;
 }
 
 message OtpInitResponse {
