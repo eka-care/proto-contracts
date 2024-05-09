@@ -17,8 +17,9 @@ message AuthInit {
 message AuthInitResponse {
   string txn_id = 1;
   string message = 2;
-  optional AuthError error = 3;
-  optional OtpInitResponse otp = 4;
+  AuthMethod method = 3;
+  optional AuthError error = 4;
+  optional OtpInitResponse otp = 5;
 }
 
 

@@ -19,10 +19,10 @@ message AuthVerifyResponse {
   string txn_id = 1;
 
   AuthSkipStates skip_state = 2;
-
+  AuthMethod method = 3;
   // Will be present only if skipState is SkipStateErrored.
-  optional AuthError error = 3;
+  optional AuthError error = 4;
 
   // Data will be present only if skipState is SkipStateEnd.
-  optional Data data = 4;
+  optional Data data = 5;
 }
