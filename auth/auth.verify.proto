@@ -11,7 +11,7 @@ message AuthVerifyRequest {
   // For EmailOtp and MobileOtp, it will be the OTP.
   // For Google and Apple, it will be the token.
   string code = 2;
-  optional int64 skip_state = 3;
+  optional bool skip_state = 3;
 }
 
 
