@@ -11,7 +11,7 @@ enum AuthSkipStates {
   SkipStateMobileLinkConfirm = 3;
   SkipStateProfile = 4;
   SkipStateErrored = 5;
-  SKipStateNoVerifyMobile = 6;
+  SkipStateNoVerifyMobile = 6;
 }
 
 enum AuthMethod {
