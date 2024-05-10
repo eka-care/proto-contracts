@@ -12,6 +12,7 @@ message AuthVerifyRequest {
   // For Google and Apple, it will be the token.
   string code = 2;
   AuthMethod method = 3;
+  optional AuthSkipStates skip_state = 4;
 }
 
 
