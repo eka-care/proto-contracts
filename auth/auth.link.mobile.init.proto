@@ -7,8 +7,8 @@ import "auth/auth.aenums.proto";
 import "auth/auth.common.proto";
 
 message LinkMobileInit {
-  string mobile = 1;
-  string txn_id = 2;
+  AuthMethod method = 1;
+  string identifier = 2;
   optional Attributes attributes = 3;
 }
 
@@ -16,22 +16,24 @@ message LinkMobileInit {
 message LinkMobileInitResp {
   string txn_id = 1;
   string message = 2;
-  optional AuthError error = 3;
-  optional OtpInitResponse otp = 4;
+  AuthMethod method = 3;
+  optional AuthError error = 4;
+  optional OtpInitResponse otp = 5;
 }
 
 message LinkMobileVerify {
   string txn_id = 1;
-  string otp = 2;
-  optional bool skip =3;
+  string code = 2;
 }
 
 message LinkMobileVerifyResp {
-  string txnId = 1;
-  AuthSkipStates skip_state = 2;
+  string txn_id = 1;
 
+  AuthSkipStates skip_state = 2;
+  AuthMethod method = 3;
   // Will be present only if skipState is SkipStateErrored.
-  optional AuthError error = 3;
+  optional AuthError error = 4;
+
   // Data will be present only if skipState is SkipStateEnd.
-  optional Data data = 4;
+  optional Data data = 5;
 }
