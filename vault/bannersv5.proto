@@ -12,14 +12,14 @@ option go_package = "github.com/eka-care/proto-contracts/go/vault/bannersv5";
 message Banner {
   Item item = 1;
   string hash = 2; // Hash of the banner.
-  string banner_id =
-      3; // ID represents banner identifier for tracking in Mixpanel.
 
   message Item {
     oneof result {
       Content content = 1;
       records.DisplayAsset asset = 2;
     }
+    string banner_id =
+        3; // ID represents banner identifier for tracking in Mixpanel.
   }
 
   message Content {
