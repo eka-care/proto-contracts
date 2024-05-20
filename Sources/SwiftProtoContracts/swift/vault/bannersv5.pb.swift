@@ -38,9 +38,6 @@ public struct Vault_Bannersv5_Banner {
   /// Hash of the banner.
   public var hash: String = String()
 
-  /// ID represents banner identifier for tracking in Mixpanel.
-  public var bannerID: String = String()
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public struct Item {
@@ -65,6 +62,9 @@ public struct Vault_Bannersv5_Banner {
       }
       set {result = .asset(newValue)}
     }
+
+    /// ID represents banner identifier for tracking in Mixpanel.
+    public var bannerID: String = String()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -460,7 +460,6 @@ extension Vault_Bannersv5_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "item"),
     2: .same(proto: "hash"),
-    3: .standard(proto: "banner_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -471,7 +470,6 @@ extension Vault_Bannersv5_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._item) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.hash) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
       default: break
       }
     }
@@ -488,16 +486,12 @@ extension Vault_Bannersv5_Banner: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     if !self.hash.isEmpty {
       try visitor.visitSingularStringField(value: self.hash, fieldNumber: 2)
     }
-    if !self.bannerID.isEmpty {
-      try visitor.visitSingularStringField(value: self.bannerID, fieldNumber: 3)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_Bannersv5_Banner, rhs: Vault_Bannersv5_Banner) -> Bool {
     if lhs._item != rhs._item {return false}
     if lhs.hash != rhs.hash {return false}
-    if lhs.bannerID != rhs.bannerID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -508,6 +502,7 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "content"),
     2: .same(proto: "asset"),
+    3: .standard(proto: "banner_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -542,6 +537,7 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
           self.result = .asset(v)
         }
       }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
       default: break
       }
     }
@@ -563,11 +559,15 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }()
     case nil: break
     }
+    if !self.bannerID.isEmpty {
+      try visitor.visitSingularStringField(value: self.bannerID, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_Bannersv5_Banner.Item, rhs: Vault_Bannersv5_Banner.Item) -> Bool {
     if lhs.result != rhs.result {return false}
+    if lhs.bannerID != rhs.bannerID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
