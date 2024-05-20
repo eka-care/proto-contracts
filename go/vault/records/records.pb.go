@@ -1103,6 +1103,95 @@ func (*RecordDetailsForEditFormAPIResponse_Response) isRecordDetailsForEditFormA
 
 func (*RecordDetailsForEditFormAPIResponse_Error_) isRecordDetailsForEditFormAPIResponse_Result() {}
 
+type DisplayAsset struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Asset:
+	//
+	//	*DisplayAsset_Image
+	//	*DisplayAsset_Lottie
+	Asset isDisplayAsset_Asset `protobuf_oneof:"Asset"`
+	Cta   *cta.CTA             `protobuf:"bytes,3,opt,name=cta,proto3" json:"cta,omitempty"` // CTA configuration for button.
+}
+
+func (x *DisplayAsset) Reset() {
+	*x = DisplayAsset{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_vault_records_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DisplayAsset) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisplayAsset) ProtoMessage() {}
+
+func (x *DisplayAsset) ProtoReflect() protoreflect.Message {
+	mi := &file_vault_records_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisplayAsset.ProtoReflect.Descriptor instead.
+func (*DisplayAsset) Descriptor() ([]byte, []int) {
+	return file_vault_records_proto_rawDescGZIP(), []int{13}
+}
+
+func (m *DisplayAsset) GetAsset() isDisplayAsset_Asset {
+	if m != nil {
+		return m.Asset
+	}
+	return nil
+}
+
+func (x *DisplayAsset) GetImage() string {
+	if x, ok := x.GetAsset().(*DisplayAsset_Image); ok {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *DisplayAsset) GetLottie() string {
+	if x, ok := x.GetAsset().(*DisplayAsset_Lottie); ok {
+		return x.Lottie
+	}
+	return ""
+}
+
+func (x *DisplayAsset) GetCta() *cta.CTA {
+	if x != nil {
+		return x.Cta
+	}
+	return nil
+}
+
+type isDisplayAsset_Asset interface {
+	isDisplayAsset_Asset()
+}
+
+type DisplayAsset_Image struct {
+	Image string `protobuf:"bytes,1,opt,name=image,proto3,oneof"` // Image link for the banner.
+}
+
+type DisplayAsset_Lottie struct {
+	Lottie string `protobuf:"bytes,2,opt,name=lottie,proto3,oneof"` // Lottie link for the banner.
+}
+
+func (*DisplayAsset_Image) isDisplayAsset_Asset() {}
+
+func (*DisplayAsset_Lottie) isDisplayAsset_Asset() {}
+
 type Record_Item struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1122,7 +1211,7 @@ type Record_Item struct {
 func (x *Record_Item) Reset() {
 	*x = Record_Item{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_records_proto_msgTypes[13]
+		mi := &file_vault_records_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1135,7 +1224,7 @@ func (x *Record_Item) String() string {
 func (*Record_Item) ProtoMessage() {}
 
 func (x *Record_Item) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_records_proto_msgTypes[13]
+	mi := &file_vault_records_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +1318,7 @@ type RecordsAPIResponse_Error struct {
 func (x *RecordsAPIResponse_Error) Reset() {
 	*x = RecordsAPIResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_records_proto_msgTypes[14]
+		mi := &file_vault_records_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1242,7 +1331,7 @@ func (x *RecordsAPIResponse_Error) String() string {
 func (*RecordsAPIResponse_Error) ProtoMessage() {}
 
 func (x *RecordsAPIResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_records_proto_msgTypes[14]
+	mi := &file_vault_records_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1285,7 +1374,7 @@ type RecordsRichDataAPIResponse_Error struct {
 func (x *RecordsRichDataAPIResponse_Error) Reset() {
 	*x = RecordsRichDataAPIResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_records_proto_msgTypes[15]
+		mi := &file_vault_records_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1298,7 +1387,7 @@ func (x *RecordsRichDataAPIResponse_Error) String() string {
 func (*RecordsRichDataAPIResponse_Error) ProtoMessage() {}
 
 func (x *RecordsRichDataAPIResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_records_proto_msgTypes[15]
+	mi := &file_vault_records_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1341,7 +1430,7 @@ type RecordDetailsForEditFormAPIResponse_Error struct {
 func (x *RecordDetailsForEditFormAPIResponse_Error) Reset() {
 	*x = RecordDetailsForEditFormAPIResponse_Error{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_vault_records_proto_msgTypes[16]
+		mi := &file_vault_records_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1354,7 +1443,7 @@ func (x *RecordDetailsForEditFormAPIResponse_Error) String() string {
 func (*RecordDetailsForEditFormAPIResponse_Error) ProtoMessage() {}
 
 func (x *RecordDetailsForEditFormAPIResponse_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_vault_records_proto_msgTypes[16]
+	mi := &file_vault_records_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1586,7 +1675,14 @@ var file_vault_records_proto_rawDesc = []byte{
 	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x22, 0x0a, 0x09, 0x45, 0x72, 0x72,
 	0x6f, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x15, 0x0a, 0x11, 0x45, 0x52, 0x52, 0x4f, 0x52, 0x5f,
 	0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x42, 0x08, 0x0a,
-	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x6e, 0x0a, 0x0c, 0x44, 0x69, 0x73, 0x70, 0x6c,
+	0x61, 0x79, 0x41, 0x73, 0x73, 0x65, 0x74, 0x12, 0x16, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x12,
+	0x18, 0x0a, 0x06, 0x6c, 0x6f, 0x74, 0x74, 0x69, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48,
+	0x00, 0x52, 0x06, 0x6c, 0x6f, 0x74, 0x74, 0x69, 0x65, 0x12, 0x23, 0x0a, 0x03, 0x63, 0x74, 0x61,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2e, 0x63,
+	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x54, 0x41, 0x52, 0x03, 0x63, 0x74, 0x61, 0x42, 0x07,
+	0x0a, 0x05, 0x41, 0x73, 0x73, 0x65, 0x74, 0x42, 0x36, 0x5a, 0x34, 0x67, 0x69, 0x74, 0x68, 0x75,
 	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x65, 0x6b, 0x61, 0x2d, 0x63, 0x61, 0x72, 0x65, 0x2f, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67,
 	0x6f, 0x2f, 0x76, 0x61, 0x75, 0x6c, 0x74, 0x2f, 0x72, 0x65, 0x63, 0x6f, 0x72, 0x64, 0x73, 0x62,
@@ -1606,7 +1702,7 @@ func file_vault_records_proto_rawDescGZIP() []byte {
 }
 
 var file_vault_records_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_vault_records_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_vault_records_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_vault_records_proto_goTypes = []interface{}{
 	(Record_Item_Source)(0),                            // 0: vault.records.Record.Item.Source
 	(RecordsAPIResponse_ErrorCode)(0),                  // 1: vault.records.RecordsAPIResponse.ErrorCode
@@ -1625,49 +1721,51 @@ var file_vault_records_proto_goTypes = []interface{}{
 	(*RecordsRichDataAPIRequest)(nil),                  // 14: vault.records.RecordsRichDataAPIRequest
 	(*RecordDetailsForEditForm)(nil),                   // 15: vault.records.RecordDetailsForEditForm
 	(*RecordDetailsForEditFormAPIResponse)(nil),        // 16: vault.records.RecordDetailsForEditFormAPIResponse
-	(*Record_Item)(nil),                                // 17: vault.records.Record.Item
-	(*RecordsAPIResponse_Error)(nil),                   // 18: vault.records.RecordsAPIResponse.Error
-	(*RecordsRichDataAPIResponse_Error)(nil),           // 19: vault.records.RecordsRichDataAPIResponse.Error
-	(*RecordDetailsForEditFormAPIResponse_Error)(nil),  // 20: vault.records.RecordDetailsForEditFormAPIResponse.Error
-	(*cta.CTA)(nil),                                    // 21: vault.common.CTA
-	(*timestamppb.Timestamp)(nil),                      // 22: google.protobuf.Timestamp
-	(Tag)(0),                                           // 23: vault.records.Tag
-	(DocumentType)(0),                                  // 24: vault.records.DocumentType
+	(*DisplayAsset)(nil),                               // 17: vault.records.DisplayAsset
+	(*Record_Item)(nil),                                // 18: vault.records.Record.Item
+	(*RecordsAPIResponse_Error)(nil),                   // 19: vault.records.RecordsAPIResponse.Error
+	(*RecordsRichDataAPIResponse_Error)(nil),           // 20: vault.records.RecordsRichDataAPIResponse.Error
+	(*RecordDetailsForEditFormAPIResponse_Error)(nil),  // 21: vault.records.RecordDetailsForEditFormAPIResponse.Error
+	(*cta.CTA)(nil),                                    // 22: vault.common.CTA
+	(*timestamppb.Timestamp)(nil),                      // 23: google.protobuf.Timestamp
+	(Tag)(0),                                           // 24: vault.records.Tag
+	(DocumentType)(0),                                  // 25: vault.records.DocumentType
 }
 var file_vault_records_proto_depIdxs = []int32{
-	21, // 0: vault.records.RecordMetadata.cta:type_name -> vault.common.CTA
-	22, // 1: vault.records.RecordMetadata.document_date:type_name -> google.protobuf.Timestamp
-	23, // 2: vault.records.RecordMetadata.tags:type_name -> vault.records.Tag
-	17, // 3: vault.records.Record.item:type_name -> vault.records.Record.Item
+	22, // 0: vault.records.RecordMetadata.cta:type_name -> vault.common.CTA
+	23, // 1: vault.records.RecordMetadata.document_date:type_name -> google.protobuf.Timestamp
+	24, // 2: vault.records.RecordMetadata.tags:type_name -> vault.records.Tag
+	18, // 3: vault.records.Record.item:type_name -> vault.records.Record.Item
 	6,  // 4: vault.records.Item.record:type_name -> vault.records.Record
 	7,  // 5: vault.records.RecordsResponse.items:type_name -> vault.records.Item
 	8,  // 6: vault.records.RecordsAPIResponse.response:type_name -> vault.records.RecordsResponse
-	18, // 7: vault.records.RecordsAPIResponse.error:type_name -> vault.records.RecordsAPIResponse.Error
+	19, // 7: vault.records.RecordsAPIResponse.error:type_name -> vault.records.RecordsAPIResponse.Error
 	5,  // 8: vault.records.RecordMetadataPlus.metadata:type_name -> vault.records.RecordMetadata
-	24, // 9: vault.records.RecordMetadataPlus.document_type:type_name -> vault.records.DocumentType
+	25, // 9: vault.records.RecordMetadataPlus.document_type:type_name -> vault.records.DocumentType
 	4,  // 10: vault.records.RecordsRichDocumentResponse.in_transit:type_name -> vault.records.RecordUploadEventInTransit
 	10, // 11: vault.records.RecordsRichDocumentResponse.metadata_analyzing:type_name -> vault.records.RecordMetadataPlus
 	10, // 12: vault.records.RecordsRichDocumentResponse.metadata_final:type_name -> vault.records.RecordMetadataPlus
 	11, // 13: vault.records.RecordsRichDataResponse.data:type_name -> vault.records.RecordsRichDocumentResponse
 	12, // 14: vault.records.RecordsRichDataAPIResponse.response:type_name -> vault.records.RecordsRichDataResponse
-	19, // 15: vault.records.RecordsRichDataAPIResponse.error:type_name -> vault.records.RecordsRichDataAPIResponse.Error
-	24, // 16: vault.records.RecordDetailsForEditForm.document_type:type_name -> vault.records.DocumentType
-	22, // 17: vault.records.RecordDetailsForEditForm.document_date:type_name -> google.protobuf.Timestamp
+	20, // 15: vault.records.RecordsRichDataAPIResponse.error:type_name -> vault.records.RecordsRichDataAPIResponse.Error
+	25, // 16: vault.records.RecordDetailsForEditForm.document_type:type_name -> vault.records.DocumentType
+	23, // 17: vault.records.RecordDetailsForEditForm.document_date:type_name -> google.protobuf.Timestamp
 	15, // 18: vault.records.RecordDetailsForEditFormAPIResponse.response:type_name -> vault.records.RecordDetailsForEditForm
-	20, // 19: vault.records.RecordDetailsForEditFormAPIResponse.error:type_name -> vault.records.RecordDetailsForEditFormAPIResponse.Error
-	22, // 20: vault.records.Record.Item.upload_date:type_name -> google.protobuf.Timestamp
-	24, // 21: vault.records.Record.Item.document_type:type_name -> vault.records.DocumentType
-	0,  // 22: vault.records.Record.Item.source:type_name -> vault.records.Record.Item.Source
-	4,  // 23: vault.records.Record.Item.in_transit:type_name -> vault.records.RecordUploadEventInTransit
-	5,  // 24: vault.records.Record.Item.metadata:type_name -> vault.records.RecordMetadata
-	1,  // 25: vault.records.RecordsAPIResponse.Error.code:type_name -> vault.records.RecordsAPIResponse.ErrorCode
-	2,  // 26: vault.records.RecordsRichDataAPIResponse.Error.code:type_name -> vault.records.RecordsRichDataAPIResponse.ErrorCode
-	3,  // 27: vault.records.RecordDetailsForEditFormAPIResponse.Error.code:type_name -> vault.records.RecordDetailsForEditFormAPIResponse.ErrorCode
-	28, // [28:28] is the sub-list for method output_type
-	28, // [28:28] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	21, // 19: vault.records.RecordDetailsForEditFormAPIResponse.error:type_name -> vault.records.RecordDetailsForEditFormAPIResponse.Error
+	22, // 20: vault.records.DisplayAsset.cta:type_name -> vault.common.CTA
+	23, // 21: vault.records.Record.Item.upload_date:type_name -> google.protobuf.Timestamp
+	25, // 22: vault.records.Record.Item.document_type:type_name -> vault.records.DocumentType
+	0,  // 23: vault.records.Record.Item.source:type_name -> vault.records.Record.Item.Source
+	4,  // 24: vault.records.Record.Item.in_transit:type_name -> vault.records.RecordUploadEventInTransit
+	5,  // 25: vault.records.Record.Item.metadata:type_name -> vault.records.RecordMetadata
+	1,  // 26: vault.records.RecordsAPIResponse.Error.code:type_name -> vault.records.RecordsAPIResponse.ErrorCode
+	2,  // 27: vault.records.RecordsRichDataAPIResponse.Error.code:type_name -> vault.records.RecordsRichDataAPIResponse.ErrorCode
+	3,  // 28: vault.records.RecordDetailsForEditFormAPIResponse.Error.code:type_name -> vault.records.RecordDetailsForEditFormAPIResponse.ErrorCode
+	29, // [29:29] is the sub-list for method output_type
+	29, // [29:29] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_vault_records_proto_init() }
@@ -1835,7 +1933,7 @@ func file_vault_records_proto_init() {
 			}
 		}
 		file_vault_records_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Record_Item); i {
+			switch v := v.(*DisplayAsset); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1847,7 +1945,7 @@ func file_vault_records_proto_init() {
 			}
 		}
 		file_vault_records_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RecordsAPIResponse_Error); i {
+			switch v := v.(*Record_Item); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1859,7 +1957,7 @@ func file_vault_records_proto_init() {
 			}
 		}
 		file_vault_records_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RecordsRichDataAPIResponse_Error); i {
+			switch v := v.(*RecordsAPIResponse_Error); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1871,6 +1969,18 @@ func file_vault_records_proto_init() {
 			}
 		}
 		file_vault_records_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecordsRichDataAPIResponse_Error); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_vault_records_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RecordDetailsForEditFormAPIResponse_Error); i {
 			case 0:
 				return &v.state
@@ -1907,6 +2017,10 @@ func file_vault_records_proto_init() {
 		(*RecordDetailsForEditFormAPIResponse_Error_)(nil),
 	}
 	file_vault_records_proto_msgTypes[13].OneofWrappers = []interface{}{
+		(*DisplayAsset_Image)(nil),
+		(*DisplayAsset_Lottie)(nil),
+	}
+	file_vault_records_proto_msgTypes[14].OneofWrappers = []interface{}{
 		(*Record_Item_InTransit)(nil),
 		(*Record_Item_Metadata)(nil),
 	}
@@ -1916,7 +2030,7 @@ func file_vault_records_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_vault_records_proto_rawDesc,
 			NumEnums:      4,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

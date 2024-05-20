@@ -142,3 +142,12 @@ message RecordDetailsForEditFormAPIResponse {
     Error error = 2;
   }
 }
+
+message DisplayAsset {
+  oneof Asset {
+    string image = 1;  // Image link for the banner.
+    string lottie = 2; // Lottie link for the banner.
+  }
+
+  vault.common.CTA cta = 3; // CTA configuration for button.
+}
