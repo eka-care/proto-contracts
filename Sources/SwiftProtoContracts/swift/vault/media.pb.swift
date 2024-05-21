@@ -28,12 +28,12 @@ public struct Vault_Media_Media {
   public var asset: Vault_Media_Media.OneOf_Asset? = nil
 
   /// Image link for the banner.
-  public var img: String {
+  public var image: String {
     get {
-      if case .img(let v)? = asset {return v}
+      if case .image(let v)? = asset {return v}
       return String()
     }
-    set {asset = .img(newValue)}
+    set {asset = .image(newValue)}
   }
 
   /// Lottie link for the banner.
@@ -49,7 +49,7 @@ public struct Vault_Media_Media {
 
   public enum OneOf_Asset: Equatable {
     /// Image link for the banner.
-    case img(String)
+    case image(String)
     /// Lottie link for the banner.
     case lottie(String)
 
@@ -59,8 +59,8 @@ public struct Vault_Media_Media {
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.img, .img): return {
-        guard case .img(let l) = lhs, case .img(let r) = rhs else { preconditionFailure() }
+      case (.image, .image): return {
+        guard case .image(let l) = lhs, case .image(let r) = rhs else { preconditionFailure() }
         return l == r
       }()
       case (.lottie, .lottie): return {
@@ -76,9 +76,43 @@ public struct Vault_Media_Media {
   public init() {}
 }
 
+public struct Vault_Media_MediaCTA {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Media.
+  public var media: Vault_Media_Media {
+    get {return _media ?? Vault_Media_Media()}
+    set {_media = newValue}
+  }
+  /// Returns true if `media` has been explicitly set.
+  public var hasMedia: Bool {return self._media != nil}
+  /// Clears the value of `media`. Subsequent reads from it will return its default value.
+  public mutating func clearMedia() {self._media = nil}
+
+  /// CTA configuration for button.
+  public var cta: Vault_Common_CTA {
+    get {return _cta ?? Vault_Common_CTA()}
+    set {_cta = newValue}
+  }
+  /// Returns true if `cta` has been explicitly set.
+  public var hasCta: Bool {return self._cta != nil}
+  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
+  public mutating func clearCta() {self._cta = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _media: Vault_Media_Media? = nil
+  fileprivate var _cta: Vault_Common_CTA? = nil
+}
+
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vault_Media_Media: @unchecked Sendable {}
 extension Vault_Media_Media.OneOf_Asset: @unchecked Sendable {}
+extension Vault_Media_MediaCTA: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -88,7 +122,7 @@ fileprivate let _protobuf_package = "vault.media"
 extension Vault_Media_Media: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".Media"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "img"),
+    1: .same(proto: "image"),
     2: .same(proto: "lottie"),
   ]
 
@@ -103,7 +137,7 @@ extension Vault_Media_Media: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {
           if self.asset != nil {try decoder.handleConflictingOneOf()}
-          self.asset = .img(v)
+          self.asset = .image(v)
         }
       }()
       case 2: try {
@@ -125,8 +159,8 @@ extension Vault_Media_Media: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
     // https://github.com/apple/swift-protobuf/issues/1182
     switch self.asset {
-    case .img?: try {
-      guard case .img(let v)? = self.asset else { preconditionFailure() }
+    case .image?: try {
+      guard case .image(let v)? = self.asset else { preconditionFailure() }
       try visitor.visitSingularStringField(value: v, fieldNumber: 1)
     }()
     case .lottie?: try {
@@ -140,6 +174,48 @@ extension Vault_Media_Media: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 
   public static func ==(lhs: Vault_Media_Media, rhs: Vault_Media_Media) -> Bool {
     if lhs.asset != rhs.asset {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vault_Media_MediaCTA: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".MediaCTA"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "media"),
+    2: .same(proto: "cta"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._media) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._media {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._cta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vault_Media_MediaCTA, rhs: Vault_Media_MediaCTA) -> Bool {
+    if lhs._media != rhs._media {return false}
+    if lhs._cta != rhs._cta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -55,10 +55,10 @@ public struct Vault_Bannersv5_Banner {
       set {result = .content(newValue)}
     }
 
-    public var asset: Vault_Records_DisplayAsset {
+    public var asset: Vault_Media_Media {
       get {
         if case .asset(let v)? = result {return v}
-        return Vault_Records_DisplayAsset()
+        return Vault_Media_Media()
       }
       set {result = .asset(newValue)}
     }
@@ -66,11 +66,21 @@ public struct Vault_Bannersv5_Banner {
     /// ID represents banner identifier for tracking in Mixpanel.
     public var bannerID: String = String()
 
+    /// CTA configuration for button.
+    public var cta: Vault_Common_CTA {
+      get {return _cta ?? Vault_Common_CTA()}
+      set {_cta = newValue}
+    }
+    /// Returns true if `cta` has been explicitly set.
+    public var hasCta: Bool {return self._cta != nil}
+    /// Clears the value of `cta`. Subsequent reads from it will return its default value.
+    public mutating func clearCta() {self._cta = nil}
+
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
     public enum OneOf_Result: Equatable {
       case content(Vault_Bannersv5_Banner.Content)
-      case asset(Vault_Records_DisplayAsset)
+      case asset(Vault_Media_Media)
 
     #if !swift(>=4.1)
       public static func ==(lhs: Vault_Bannersv5_Banner.Item.OneOf_Result, rhs: Vault_Bannersv5_Banner.Item.OneOf_Result) -> Bool {
@@ -93,6 +103,8 @@ public struct Vault_Bannersv5_Banner {
     }
 
     public init() {}
+
+    fileprivate var _cta: Vault_Common_CTA? = nil
   }
 
   public struct Content {
@@ -112,16 +124,6 @@ public struct Vault_Bannersv5_Banner {
     public var hasSubTitle: Bool {return self._subTitle != nil}
     /// Clears the value of `subTitle`. Subsequent reads from it will return its default value.
     public mutating func clearSubTitle() {self._subTitle = nil}
-
-    /// CTA configuration for button.
-    public var cta: Vault_Common_CTA {
-      get {return _cta ?? Vault_Common_CTA()}
-      set {_cta = newValue}
-    }
-    /// Returns true if `cta` has been explicitly set.
-    public var hasCta: Bool {return self._cta != nil}
-    /// Clears the value of `cta`. Subsequent reads from it will return its default value.
-    public mutating func clearCta() {self._cta = nil}
 
     /// dynamic parameters with-in sub title to be filled by client.
     public var bodyParameters: [Vault_BannerBodyParameter_BannerBodyParameter] = []
@@ -221,7 +223,6 @@ public struct Vault_Bannersv5_Banner {
     public init() {}
 
     fileprivate var _subTitle: String? = nil
-    fileprivate var _cta: Vault_Common_CTA? = nil
     fileprivate var _assets: Vault_Bannersv5_Banner.Content.Assets? = nil
     fileprivate var _highlight: Vault_Bannersv5_Banner.Content.Highlight? = nil
   }
@@ -445,6 +446,7 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
     1: .same(proto: "content"),
     2: .same(proto: "asset"),
     3: .standard(proto: "banner_id"),
+    4: .same(proto: "cta"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -467,7 +469,7 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
       }()
       case 2: try {
-        var v: Vault_Records_DisplayAsset?
+        var v: Vault_Media_Media?
         var hadOneofValue = false
         if let current = self.result {
           hadOneofValue = true
@@ -480,6 +482,7 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
       }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.bannerID) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       default: break
       }
     }
@@ -504,12 +507,16 @@ extension Vault_Bannersv5_Banner.Item: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if !self.bannerID.isEmpty {
       try visitor.visitSingularStringField(value: self.bannerID, fieldNumber: 3)
     }
+    try { if let v = self._cta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vault_Bannersv5_Banner.Item, rhs: Vault_Bannersv5_Banner.Item) -> Bool {
     if lhs.result != rhs.result {return false}
     if lhs.bannerID != rhs.bannerID {return false}
+    if lhs._cta != rhs._cta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -520,10 +527,9 @@ extension Vault_Bannersv5_Banner.Content: SwiftProtobuf.Message, SwiftProtobuf._
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "title"),
     2: .standard(proto: "sub_title"),
-    3: .same(proto: "cta"),
-    4: .standard(proto: "body_parameters"),
-    5: .same(proto: "assets"),
-    6: .same(proto: "highlight"),
+    3: .standard(proto: "body_parameters"),
+    4: .same(proto: "assets"),
+    5: .same(proto: "highlight"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -534,10 +540,9 @@ extension Vault_Bannersv5_Banner.Content: SwiftProtobuf.Message, SwiftProtobuf._
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self._subTitle) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      case 4: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
-      case 5: try { try decoder.decodeSingularMessageField(value: &self._assets) }()
-      case 6: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
+      case 3: try { try decoder.decodeRepeatedEnumField(value: &self.bodyParameters) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._assets) }()
+      case 5: try { try decoder.decodeSingularEnumField(value: &self._highlight) }()
       default: break
       }
     }
@@ -554,17 +559,14 @@ extension Vault_Bannersv5_Banner.Content: SwiftProtobuf.Message, SwiftProtobuf._
     try { if let v = self._subTitle {
       try visitor.visitSingularStringField(value: v, fieldNumber: 2)
     } }()
-    try { if let v = self._cta {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
     if !self.bodyParameters.isEmpty {
-      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 4)
+      try visitor.visitPackedEnumField(value: self.bodyParameters, fieldNumber: 3)
     }
     try { if let v = self._assets {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     } }()
     try { if let v = self._highlight {
-      try visitor.visitSingularEnumField(value: v, fieldNumber: 6)
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 5)
     } }()
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -572,7 +574,6 @@ extension Vault_Bannersv5_Banner.Content: SwiftProtobuf.Message, SwiftProtobuf._
   public static func ==(lhs: Vault_Bannersv5_Banner.Content, rhs: Vault_Bannersv5_Banner.Content) -> Bool {
     if lhs.title != rhs.title {return false}
     if lhs._subTitle != rhs._subTitle {return false}
-    if lhs._cta != rhs._cta {return false}
     if lhs.bodyParameters != rhs.bodyParameters {return false}
     if lhs._assets != rhs._assets {return false}
     if lhs._highlight != rhs._highlight {return false}
