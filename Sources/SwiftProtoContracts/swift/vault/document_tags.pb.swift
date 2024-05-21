@@ -26,6 +26,7 @@ public enum Vault_Records_Tag: SwiftProtobuf.Enum {
   /// Unspecified.
   case typeTagUnspecified // = 0
   case typeTagSmart // = 1
+  case typeTagExpired // = 2
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -36,6 +37,7 @@ public enum Vault_Records_Tag: SwiftProtobuf.Enum {
     switch rawValue {
     case 0: self = .typeTagUnspecified
     case 1: self = .typeTagSmart
+    case 2: self = .typeTagExpired
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -44,6 +46,7 @@ public enum Vault_Records_Tag: SwiftProtobuf.Enum {
     switch self {
     case .typeTagUnspecified: return 0
     case .typeTagSmart: return 1
+    case .typeTagExpired: return 2
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -57,6 +60,7 @@ extension Vault_Records_Tag: CaseIterable {
   public static let allCases: [Vault_Records_Tag] = [
     .typeTagUnspecified,
     .typeTagSmart,
+    .typeTagExpired,
   ]
 }
 
@@ -72,5 +76,6 @@ extension Vault_Records_Tag: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "TYPE_TAG_UNSPECIFIED"),
     1: .same(proto: "TYPE_TAG_SMART"),
+    2: .same(proto: "TYPE_TAG_EXPIRED"),
   ]
 }

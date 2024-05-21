@@ -3,7 +3,7 @@ syntax = "proto3";
 package vault.bannersv5;
 
 import "vault/cta.proto";
-import "vault/records.proto";
+import "vault/media.proto";
 import "vault/banner_body_parameter.proto";
 
 option go_package = "github.com/eka-care/proto-contracts/go/vault/bannersv5";
@@ -16,31 +16,24 @@ message Banner {
   message Item {
     oneof result {
       Content content = 1;
-      records.DisplayAsset asset = 2;
+      media.Media asset = 2;
     }
     string banner_id =
         3; // ID represents banner identifier for tracking in Mixpanel.
+    vault.common.CTA cta = 4; // CTA configuration for button.
   }
 
   message Content {
     string title = 1;              // Title of the banner.
     optional string sub_title = 2; // Sub Title of the banner.
-    vault.common.CTA cta = 3;      // CTA configuration for button.
     repeated vault.banner_body_parameter.BannerBodyParameter body_parameters =
-        4; // dynamic parameters with-in sub title to be filled by client.
-    Assets assets = 5;                // Assets for the banner.
-    optional Highlight highlight = 6; // Hightlight type of the banner.
+        3; // dynamic parameters with-in sub title to be filled by client.
+    Assets assets = 4;                // Assets for the banner.
+    optional Highlight highlight = 5; // Hightlight type of the banner.
 
     message Assets {
-      Img bg_asset = 1;
-      optional Img top_asset = 2;
-
-      message Img {
-        oneof image {
-          string img = 1;    // Image link for the banner.
-          string lottie = 2; // Lottie link for the banner.
-        }
-      }
+      media.Media bg_asset = 1;
+      optional media.Media top_asset = 2;
     }
 
     enum Highlight {
