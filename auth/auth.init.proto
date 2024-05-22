@@ -19,7 +19,6 @@ message AuthInitResponse {
   string message = 2;
   AuthMethod method = 3;
   optional AuthError error = 4;
-  optional OtpInitResponse otp = 5;
 }
 
 
