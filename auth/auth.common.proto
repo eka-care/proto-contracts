@@ -29,12 +29,6 @@ message Data {
   optional bool first_time_user = 5;
 }
 
-message OtpInitResponse {
-  bool triggered = 1;
-  int64 retries = 2 ;
-  string  next_otp_request = 3;
-}
-
 message Profile {
   string fln = 1;
   string fn = 2;
