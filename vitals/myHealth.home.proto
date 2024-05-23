@@ -47,21 +47,9 @@ message HomeResponse {
 }
 
 message UserProfile {
-  optional BloodGroups blood_group = 1;
+  optional BodyMeasurements blood_group = 1;
   optional BodyMeasurements weight = 2;
   optional BodyMeasurements height = 3;
-}
-
-enum BloodGroups {
-  BLOOD_GROUP_UNSPECIFIED = 0;
-  BLOOD_GROUP_A_POSITIVE = 1;
-  BLOOD_GROUP_A_NEGATIVE = 2;
-  BLOOD_GROUP_B_POSITIVE = 3;
-  BLOOD_GROUP_B_NEGATIVE = 4;
-  BLOOD_GROUP_AB_POSITIVE = 5;
-  BLOOD_GROUP_AB_NEGATIVE = 6;
-  BLOOD_GROUP_O_POSITIVE = 7;
-  BLOOD_GROUP_O_NEGATIVE = 8;
 }
 
 message BodyMeasurements {
@@ -74,6 +62,7 @@ enum BodyMeasurementUnit {
   BODY_MEASUREMENT_TYPE_UNSPECIFIED = 0;
   BODY_MEASUREMENT_UNIT_KG = 1;
   BODY_MEASUREMENT_Unit_CM = 2;
+  BODY_MEASUREMENT_UNIT_BloodGroup = 3;
 }
 
 // Defines a section in the Home screen
