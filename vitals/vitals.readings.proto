@@ -16,3 +16,7 @@ message VitalsReading {
   int64 document_date = 9;
   int64 created_at = 10;
 }
+
+message VitalsReadingWrapper {
+  repeated VitalsReading readings = 1;
+}
