@@ -1,22 +1,21 @@
 syntax = "proto3";
-import "google/protobuf/timestamp.proto";
 
 package vitals;
-option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/readings";
+
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals";
 
 message VitalsReading {
-  string test_name = 1;
-  string test_eka_id = 2;
-  int32 standalone_reading = 3;
-  float value = 4;
-  string value_string = 5;
-  string unit = 6;
-  string oid = 7;
-  string interpretation_eka_id = 8;
-  int64 document_date = 9;
-  int64 created_at = 10;
+  optional string test_name = 1;
+  optional string test_eka_id = 2;
+  optional int32 standalone_reading = 3;
+  optional double value = 4;
+  optional string value_string = 5;
+  optional string unit = 6;
+  optional int64 created_at = 7;
+  optional string interpretation_eka_id = 8;
+  optional int64 document_date = 9;
 }
 
-message VitalsReadingWrapper {
+message Readings {
   repeated VitalsReading readings = 1;
 }
