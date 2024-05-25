@@ -13,6 +13,6 @@ message VitalsReading {
   string unit = 6;
   string oid = 7;
   string interpretation_eka_id = 8;
-  google.protobuf.Timestamp document_date = 9;
-  google.protobuf.Timestamp created_at = 10;
+  int64 document_date = 9;
+  int64 created_at = 10;
 }
