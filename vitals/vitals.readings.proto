@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package vitals;
+option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vitals/readings";
+
+message VitalsReading {
+  string test_name = 1;
+  string test_eka_id = 2;
+  int32 standalone_reading = 3;
+  float value = 4;
+  string value_string = 5;
+  string unit = 6;
+  string oid = 7;
+  string interpretation_eka_id = 8;
+  google.protobuf.Timestamp document_date = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
