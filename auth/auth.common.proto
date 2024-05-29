@@ -55,10 +55,3 @@ message Attributes {
   optional bool allow_whatsapp = 1;
   optional bool allow_email = 2;
 }
-
-message GoogleProfile{
-  string firstName = 1;
-  string lastName = 2 ;
-  string email = 3;
-  string picture = 4;
-}

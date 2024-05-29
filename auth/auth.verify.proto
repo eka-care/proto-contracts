@@ -12,7 +12,7 @@ message AuthVerifyRequest {
   // For Google and Apple, it will be the token.
   string code = 2;
   optional bool skip_mobile_verification = 3;
-  optional GoogleProfile google_profile = 4;
+  optional Profile google_profile = 4;
 }
 
 
