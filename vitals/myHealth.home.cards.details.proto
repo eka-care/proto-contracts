@@ -9,7 +9,20 @@ option go_package = "github.com/eka-care/device-ingestion/proto-generated/go/vit
 message CardDetails {
   SectionType1Cards top = 1;
   optional AutoDetectedComponent auto_detected_details = 2;
+  optional HealthBot health_bot = 3;
+}
 
+// https://www.figma.com/design/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?node-id=6805-232908&t=i1PMsjPhSI4GORxQ-4
+message HealthBot {
+  // Asthma is a condition.
+  string description = 1;
+
+  repeated HealthBotQuestions questions = 3;
+}
+
+message HealthBotQuestions {
+  string Text = 1;
+  commons.cta.CTAV1 cta = 2;
 }
 
 message AutoDetectedComponent {
