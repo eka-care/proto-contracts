@@ -28,6 +28,7 @@ message HealthBotQuestions {
 message AutoDetectedComponent {
   string title = 1;
   repeated Evidence evidences = 2;
+  string sub_title = 3;
 }
 
 message Evidence {
