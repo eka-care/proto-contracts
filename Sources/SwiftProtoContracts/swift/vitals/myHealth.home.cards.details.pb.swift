@@ -43,12 +43,61 @@ public struct Vitals_CardDetails {
   /// Clears the value of `autoDetectedDetails`. Subsequent reads from it will return its default value.
   public mutating func clearAutoDetectedDetails() {self._autoDetectedDetails = nil}
 
+  public var healthBot: Vitals_HealthBot {
+    get {return _healthBot ?? Vitals_HealthBot()}
+    set {_healthBot = newValue}
+  }
+  /// Returns true if `healthBot` has been explicitly set.
+  public var hasHealthBot: Bool {return self._healthBot != nil}
+  /// Clears the value of `healthBot`. Subsequent reads from it will return its default value.
+  public mutating func clearHealthBot() {self._healthBot = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
   fileprivate var _top: Vitals_SectionType1Cards? = nil
   fileprivate var _autoDetectedDetails: Vitals_AutoDetectedComponent? = nil
+  fileprivate var _healthBot: Vitals_HealthBot? = nil
+}
+
+/// https://www.figma.com/design/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?node-id=6805-232908&t=i1PMsjPhSI4GORxQ-4
+public struct Vitals_HealthBot {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Asthma is a condition.
+  public var description_p: String = String()
+
+  public var questions: [Vitals_HealthBotQuestions] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct Vitals_HealthBotQuestions {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var text: String = String()
+
+  public var cta: Commons_Cta_CTAV1 {
+    get {return _cta ?? Commons_Cta_CTAV1()}
+    set {_cta = newValue}
+  }
+  /// Returns true if `cta` has been explicitly set.
+  public var hasCta: Bool {return self._cta != nil}
+  /// Clears the value of `cta`. Subsequent reads from it will return its default value.
+  public mutating func clearCta() {self._cta = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _cta: Commons_Cta_CTAV1? = nil
 }
 
 public struct Vitals_AutoDetectedComponent {
@@ -59,6 +108,8 @@ public struct Vitals_AutoDetectedComponent {
   public var title: String = String()
 
   public var evidences: [Vitals_Evidence] = []
+
+  public var subTitle: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -118,6 +169,8 @@ public struct Vitals_AttributeItem {
 
 #if swift(>=5.5) && canImport(_Concurrency)
 extension Vitals_CardDetails: @unchecked Sendable {}
+extension Vitals_HealthBot: @unchecked Sendable {}
+extension Vitals_HealthBotQuestions: @unchecked Sendable {}
 extension Vitals_AutoDetectedComponent: @unchecked Sendable {}
 extension Vitals_Evidence: @unchecked Sendable {}
 extension Vitals_Attributes: @unchecked Sendable {}
@@ -133,6 +186,7 @@ extension Vitals_CardDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "top"),
     2: .standard(proto: "auto_detected_details"),
+    3: .standard(proto: "health_bot"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -143,6 +197,7 @@ extension Vitals_CardDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._top) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._autoDetectedDetails) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._healthBot) }()
       default: break
       }
     }
@@ -159,12 +214,96 @@ extension Vitals_CardDetails: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
     try { if let v = self._autoDetectedDetails {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
+    try { if let v = self._healthBot {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vitals_CardDetails, rhs: Vitals_CardDetails) -> Bool {
     if lhs._top != rhs._top {return false}
     if lhs._autoDetectedDetails != rhs._autoDetectedDetails {return false}
+    if lhs._healthBot != rhs._healthBot {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vitals_HealthBot: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".HealthBot"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "description"),
+    3: .same(proto: "questions"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.questions) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.description_p.isEmpty {
+      try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 1)
+    }
+    if !self.questions.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.questions, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vitals_HealthBot, rhs: Vitals_HealthBot) -> Bool {
+    if lhs.description_p != rhs.description_p {return false}
+    if lhs.questions != rhs.questions {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vitals_HealthBotQuestions: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".HealthBotQuestions"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "Text"),
+    2: .same(proto: "cta"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.text) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.text.isEmpty {
+      try visitor.visitSingularStringField(value: self.text, fieldNumber: 1)
+    }
+    try { if let v = self._cta {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vitals_HealthBotQuestions, rhs: Vitals_HealthBotQuestions) -> Bool {
+    if lhs.text != rhs.text {return false}
+    if lhs._cta != rhs._cta {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -175,6 +314,7 @@ extension Vitals_AutoDetectedComponent: SwiftProtobuf.Message, SwiftProtobuf._Me
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "title"),
     2: .same(proto: "evidences"),
+    3: .standard(proto: "sub_title"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -185,6 +325,7 @@ extension Vitals_AutoDetectedComponent: SwiftProtobuf.Message, SwiftProtobuf._Me
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.title) }()
       case 2: try { try decoder.decodeRepeatedMessageField(value: &self.evidences) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.subTitle) }()
       default: break
       }
     }
@@ -197,12 +338,16 @@ extension Vitals_AutoDetectedComponent: SwiftProtobuf.Message, SwiftProtobuf._Me
     if !self.evidences.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.evidences, fieldNumber: 2)
     }
+    if !self.subTitle.isEmpty {
+      try visitor.visitSingularStringField(value: self.subTitle, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vitals_AutoDetectedComponent, rhs: Vitals_AutoDetectedComponent) -> Bool {
     if lhs.title != rhs.title {return false}
     if lhs.evidences != rhs.evidences {return false}
+    if lhs.subTitle != rhs.subTitle {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
