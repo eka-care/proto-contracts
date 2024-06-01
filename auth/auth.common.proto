@@ -48,7 +48,7 @@ message Profile {
   bool is_biz = 16;
   string oid = 17;
   int64 type = 18;
-  repeated string healthIds = 19 [json_name="health-ids"];
+  repeated string health_ids = 19 [json_name="health-ids"];
 }
 
 message Attributes {
