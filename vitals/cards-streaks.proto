@@ -33,7 +33,7 @@ message BannerV1 {
   string background_color = 3 [json_name = "background_color"];
   // CTA
   commons.cta.CTAV1 cta = 4;
-
+  uint32 type = 5;
 }
 
 message LatestReadingV1 {
