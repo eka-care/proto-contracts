@@ -25,6 +25,13 @@ message StreaksCardV1 {
   BannerV1 banner = 4;
 }
 
+message StreaksCardV2 {
+  StreakCardMetaV1 meta = 1;
+  StreaksPlotV1 plot = 2;
+  LatestReadingV1 latest_reading = 3 [json_name = "latest_reading"];
+  repeated BannerV1 banner = 4;
+}
+
 message BannerV1 {
   string title = 1;
   // Icon before the title text.
