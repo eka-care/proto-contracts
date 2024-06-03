@@ -41,6 +41,7 @@ message BannerV1 {
   // CTA
   commons.cta.CTAV1 cta = 4;
   uint32 type = 5;
+  string sub_title = 6;
 }
 
 message LatestReadingV1 {
