@@ -20,4 +20,5 @@ enum AuthMethod {
   MobileOtp = 2;
   Google = 3;
   Apple = 4;
+  TrueCaller = 5;
 }
