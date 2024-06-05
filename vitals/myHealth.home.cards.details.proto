@@ -10,6 +10,7 @@ message CardDetails {
   SectionType1Cards top = 1;
   optional AutoDetectedComponent auto_detected_details = 2;
   optional HealthBot health_bot = 3;
+  optional string type = 4;
 }
 
 // https://www.figma.com/design/vFAwz8wqE8Qm9MDXJGwixD/ABHA-%26-Login-2024?node-id=6805-232908&t=i1PMsjPhSI4GORxQ-4
