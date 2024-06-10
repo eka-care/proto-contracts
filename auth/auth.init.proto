@@ -19,6 +19,7 @@ message AuthInitResponse {
   string message = 2;
   AuthMethod method = 3;
   optional AuthError error = 4;
+  string  next_otp_request = 5 [json_name = "next_otp_request"];
 }
 
 
