@@ -42,9 +42,9 @@ message Profile {
   string bloodgroup = 10;
   string pic = 11;
   string as = 12;
-  bool is_doctor = 13;
-  bool is_doctor_staff = 14;
-  bool is_patient = 15;
+  bool is_d = 13;
+  bool is_d_s = 14;
+  bool is_p = 15;
   bool is_biz = 16;
   string oid = 17;
   int64 type = 18;
