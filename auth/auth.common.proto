@@ -3,7 +3,6 @@ package auth;
 
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 
-
 message AuthError {
   string code = 1;
   string message = 2;
@@ -42,13 +41,13 @@ message Profile {
   string bloodgroup = 10;
   string pic = 11;
   string as = 12;
-  bool is_d = 13;
-  bool is_d_s = 14;
-  bool is_p = 15;
-  bool is_biz = 16;
+  bool is_d = 13 [json_name = "is-d"];
+  bool is_d_s = 14 [json_name = "is-d-s"];
+  bool is_p = 15 [json_name = "is-p"];
+  bool is_biz = 16 [json_name = "is-biz"];
   string oid = 17;
   int64 type = 18;
-  repeated string health_ids = 19 [json_name="health-ids"];
+  repeated string health_ids = 19 [json_name = "health-ids"];
 }
 
 message Attributes {
