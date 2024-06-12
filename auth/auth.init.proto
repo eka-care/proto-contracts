@@ -15,7 +15,7 @@ message AuthInit {
 }
 
 message AuthInitResponse {
-  string txn_id = 1;
+  string txn_id = 1 [json_name = "txn_id"];
   string message = 2;
   AuthMethod method = 3;
   optional AuthError error = 4;
