@@ -32,6 +32,7 @@ message Record {
       RecordUploadEventInTransit in_transit = 5;
       RecordMetadata metadata = 6;
     }
+    string patient_oid = 7;
 
     enum Source {
       SOURCE_UNSPECIFIED = 0;
@@ -78,6 +79,7 @@ message RecordsAPIResponse {
 message RecordMetadataPlus {
   RecordMetadata metadata = 1;
   DocumentType document_type = 2;
+  string patient_oid = 3;
 }
 
 message RecordsRichDocumentResponse {
