@@ -186,6 +186,54 @@ extension Vitals_ChipComponentType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+public enum Vitals_BodyMeasurementUnit: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+  case bodyMeasurementTypeUnspecified // = 0
+  case kg // = 1
+  case cm // = 2
+  case bloodGroup // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .bodyMeasurementTypeUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .bodyMeasurementTypeUnspecified
+    case 1: self = .kg
+    case 2: self = .cm
+    case 3: self = .bloodGroup
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .bodyMeasurementTypeUnspecified: return 0
+    case .kg: return 1
+    case .cm: return 2
+    case .bloodGroup: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension Vitals_BodyMeasurementUnit: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static let allCases: [Vitals_BodyMeasurementUnit] = [
+    .bodyMeasurementTypeUnspecified,
+    .kg,
+    .cm,
+    .bloodGroup,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 public struct Vitals_HomeResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -214,15 +262,81 @@ public struct Vitals_UserProfile {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var bloodGroup: String = String()
+  public var bloodGroup: Vitals_BodyMeasurements {
+    get {return _bloodGroup ?? Vitals_BodyMeasurements()}
+    set {_bloodGroup = newValue}
+  }
+  /// Returns true if `bloodGroup` has been explicitly set.
+  public var hasBloodGroup: Bool {return self._bloodGroup != nil}
+  /// Clears the value of `bloodGroup`. Subsequent reads from it will return its default value.
+  public mutating func clearBloodGroup() {self._bloodGroup = nil}
 
-  public var weight: String = String()
+  public var weight: Vitals_BodyMeasurements {
+    get {return _weight ?? Vitals_BodyMeasurements()}
+    set {_weight = newValue}
+  }
+  /// Returns true if `weight` has been explicitly set.
+  public var hasWeight: Bool {return self._weight != nil}
+  /// Clears the value of `weight`. Subsequent reads from it will return its default value.
+  public mutating func clearWeight() {self._weight = nil}
 
-  public var height: String = String()
+  public var height: Vitals_BodyMeasurements {
+    get {return _height ?? Vitals_BodyMeasurements()}
+    set {_height = newValue}
+  }
+  /// Returns true if `height` has been explicitly set.
+  public var hasHeight: Bool {return self._height != nil}
+  /// Clears the value of `height`. Subsequent reads from it will return its default value.
+  public mutating func clearHeight() {self._height = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _bloodGroup: Vitals_BodyMeasurements? = nil
+  fileprivate var _weight: Vitals_BodyMeasurements? = nil
+  fileprivate var _height: Vitals_BodyMeasurements? = nil
+}
+
+public struct Vitals_BodyMeasurements {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var valueString: String {
+    get {return _valueString ?? String()}
+    set {_valueString = newValue}
+  }
+  /// Returns true if `valueString` has been explicitly set.
+  public var hasValueString: Bool {return self._valueString != nil}
+  /// Clears the value of `valueString`. Subsequent reads from it will return its default value.
+  public mutating func clearValueString() {self._valueString = nil}
+
+  public var valueFloat: Double {
+    get {return _valueFloat ?? 0}
+    set {_valueFloat = newValue}
+  }
+  /// Returns true if `valueFloat` has been explicitly set.
+  public var hasValueFloat: Bool {return self._valueFloat != nil}
+  /// Clears the value of `valueFloat`. Subsequent reads from it will return its default value.
+  public mutating func clearValueFloat() {self._valueFloat = nil}
+
+  public var unit: Vitals_BodyMeasurementUnit {
+    get {return _unit ?? .bodyMeasurementTypeUnspecified}
+    set {_unit = newValue}
+  }
+  /// Returns true if `unit` has been explicitly set.
+  public var hasUnit: Bool {return self._unit != nil}
+  /// Clears the value of `unit`. Subsequent reads from it will return its default value.
+  public mutating func clearUnit() {self._unit = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _valueString: String? = nil
+  fileprivate var _valueFloat: Double? = nil
+  fileprivate var _unit: Vitals_BodyMeasurementUnit? = nil
 }
 
 /// Defines a section in the Home screen
@@ -367,7 +481,14 @@ public struct Vitals_SectionType1Cards {
   /// Clears the value of `banner`. Subsequent reads from it will return its default value.
   public mutating func clearBanner() {self._banner = nil}
 
-  public var id: String = String()
+  public var isSampleData: Bool {
+    get {return _isSampleData ?? false}
+    set {_isSampleData = newValue}
+  }
+  /// Returns true if `isSampleData` has been explicitly set.
+  public var hasIsSampleData: Bool {return self._isSampleData != nil}
+  /// Clears the value of `isSampleData`. Subsequent reads from it will return its default value.
+  public mutating func clearIsSampleData() {self._isSampleData = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -376,6 +497,7 @@ public struct Vitals_SectionType1Cards {
   fileprivate var _meta: Vitals_Meta? = nil
   fileprivate var _cta: Commons_Cta_CTAV1? = nil
   fileprivate var _banner: Vitals_Banner? = nil
+  fileprivate var _isSampleData: Bool? = nil
 }
 
 public struct Vitals_Banner {
@@ -475,7 +597,14 @@ public struct Vitals_SectionType2Cards {
   /// Clears the value of `cta`. Subsequent reads from it will return its default value.
   public mutating func clearCta() {self._cta = nil}
 
-  public var id: String = String()
+  public var isSampleData: Bool {
+    get {return _isSampleData ?? false}
+    set {_isSampleData = newValue}
+  }
+  /// Returns true if `isSampleData` has been explicitly set.
+  public var hasIsSampleData: Bool {return self._isSampleData != nil}
+  /// Clears the value of `isSampleData`. Subsequent reads from it will return its default value.
+  public mutating func clearIsSampleData() {self._isSampleData = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -485,6 +614,7 @@ public struct Vitals_SectionType2Cards {
   fileprivate var _latestReading: Vitals_LatestReading? = nil
   fileprivate var _graph: Vitals_Graph? = nil
   fileprivate var _cta: Commons_Cta_CTAV1? = nil
+  fileprivate var _isSampleData: Bool? = nil
 }
 
 public struct Vitals_LatestReading {
@@ -540,7 +670,14 @@ public struct Vitals_SectionType3Cards {
 
   public var chips: [Vitals_ChipComponent] = []
 
-  public var id: String = String()
+  public var isSampleData: Bool {
+    get {return _isSampleData ?? false}
+    set {_isSampleData = newValue}
+  }
+  /// Returns true if `isSampleData` has been explicitly set.
+  public var hasIsSampleData: Bool {return self._isSampleData != nil}
+  /// Clears the value of `isSampleData`. Subsequent reads from it will return its default value.
+  public mutating func clearIsSampleData() {self._isSampleData = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -548,6 +685,7 @@ public struct Vitals_SectionType3Cards {
 
   fileprivate var _meta: Vitals_Meta? = nil
   fileprivate var _cta: Commons_Cta_CTAV1? = nil
+  fileprivate var _isSampleData: Bool? = nil
 }
 
 public struct Vitals_SectionType4Cards {
@@ -557,9 +695,20 @@ public struct Vitals_SectionType4Cards {
 
   public var items: [Vitals_VerticalList] = []
 
+  public var isSampleData: Bool {
+    get {return _isSampleData ?? false}
+    set {_isSampleData = newValue}
+  }
+  /// Returns true if `isSampleData` has been explicitly set.
+  public var hasIsSampleData: Bool {return self._isSampleData != nil}
+  /// Clears the value of `isSampleData`. Subsequent reads from it will return its default value.
+  public mutating func clearIsSampleData() {self._isSampleData = nil}
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+
+  fileprivate var _isSampleData: Bool? = nil
 }
 
 public struct Vitals_VerticalList {
@@ -578,8 +727,6 @@ public struct Vitals_VerticalList {
   /// Clears the value of `cta`. Subsequent reads from it will return its default value.
   public mutating func clearCta() {self._cta = nil}
 
-  public var id: String = String()
-
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -591,8 +738,10 @@ public struct Vitals_VerticalList {
 extension Vitals_HealthSectionType: @unchecked Sendable {}
 extension Vitals_ItemComponentType: @unchecked Sendable {}
 extension Vitals_ChipComponentType: @unchecked Sendable {}
+extension Vitals_BodyMeasurementUnit: @unchecked Sendable {}
 extension Vitals_HomeResponse: @unchecked Sendable {}
 extension Vitals_UserProfile: @unchecked Sendable {}
+extension Vitals_BodyMeasurements: @unchecked Sendable {}
 extension Vitals_HealthSection: @unchecked Sendable {}
 extension Vitals_Card: @unchecked Sendable {}
 extension Vitals_Card.OneOf_CardType: @unchecked Sendable {}
@@ -637,6 +786,15 @@ extension Vitals_ChipComponentType: SwiftProtobuf._ProtoNameProviding {
     1: .same(proto: "CHIP_COMPONENT_TYPE_HIGHLIGHTED"),
     2: .same(proto: "CHIP_COMPONENT_TYPE_GREYED"),
     3: .same(proto: "CHIP_COMPONENT_TYPE_NORMAL"),
+  ]
+}
+
+extension Vitals_BodyMeasurementUnit: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "BODY_MEASUREMENT_TYPE_UNSPECIFIED"),
+    1: .same(proto: "BODY_MEASUREMENT_UNIT_KG"),
+    2: .same(proto: "BODY_MEASUREMENT_Unit_CM"),
+    3: .same(proto: "BODY_MEASUREMENT_UNIT_BloodGroup"),
   ]
 }
 
@@ -696,31 +854,83 @@ extension Vitals_UserProfile: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.bloodGroup) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.weight) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.height) }()
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._bloodGroup) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._weight) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._height) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.bloodGroup.isEmpty {
-      try visitor.visitSingularStringField(value: self.bloodGroup, fieldNumber: 1)
-    }
-    if !self.weight.isEmpty {
-      try visitor.visitSingularStringField(value: self.weight, fieldNumber: 2)
-    }
-    if !self.height.isEmpty {
-      try visitor.visitSingularStringField(value: self.height, fieldNumber: 3)
-    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._bloodGroup {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._weight {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._height {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vitals_UserProfile, rhs: Vitals_UserProfile) -> Bool {
-    if lhs.bloodGroup != rhs.bloodGroup {return false}
-    if lhs.weight != rhs.weight {return false}
-    if lhs.height != rhs.height {return false}
+    if lhs._bloodGroup != rhs._bloodGroup {return false}
+    if lhs._weight != rhs._weight {return false}
+    if lhs._height != rhs._height {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Vitals_BodyMeasurements: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".BodyMeasurements"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "value_string"),
+    2: .standard(proto: "value_float"),
+    3: .same(proto: "unit"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self._valueString) }()
+      case 2: try { try decoder.decodeSingularDoubleField(value: &self._valueFloat) }()
+      case 3: try { try decoder.decodeSingularEnumField(value: &self._unit) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._valueString {
+      try visitor.visitSingularStringField(value: v, fieldNumber: 1)
+    } }()
+    try { if let v = self._valueFloat {
+      try visitor.visitSingularDoubleField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._unit {
+      try visitor.visitSingularEnumField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Vitals_BodyMeasurements, rhs: Vitals_BodyMeasurements) -> Bool {
+    if lhs._valueString != rhs._valueString {return false}
+    if lhs._valueFloat != rhs._valueFloat {return false}
+    if lhs._unit != rhs._unit {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -893,7 +1103,7 @@ extension Vitals_SectionType1Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2: .same(proto: "items"),
     3: .same(proto: "cta"),
     4: .same(proto: "banner"),
-    5: .same(proto: "id"),
+    6: .standard(proto: "is_sample_data"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -906,7 +1116,7 @@ extension Vitals_SectionType1Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 2: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 4: try { try decoder.decodeSingularMessageField(value: &self._banner) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._isSampleData) }()
       default: break
       }
     }
@@ -929,9 +1139,9 @@ extension Vitals_SectionType1Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try { if let v = self._banner {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     } }()
-    if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 5)
-    }
+    try { if let v = self._isSampleData {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -940,7 +1150,7 @@ extension Vitals_SectionType1Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs.items != rhs.items {return false}
     if lhs._cta != rhs._cta {return false}
     if lhs._banner != rhs._banner {return false}
-    if lhs.id != rhs.id {return false}
+    if lhs._isSampleData != rhs._isSampleData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1105,7 +1315,7 @@ extension Vitals_SectionType2Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     2: .standard(proto: "latest_reading"),
     3: .same(proto: "graph"),
     4: .same(proto: "cta"),
-    5: .same(proto: "id"),
+    6: .standard(proto: "is_sample_data"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1118,7 +1328,7 @@ extension Vitals_SectionType2Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 2: try { try decoder.decodeSingularMessageField(value: &self._latestReading) }()
       case 3: try { try decoder.decodeSingularMessageField(value: &self._graph) }()
       case 4: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      case 5: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._isSampleData) }()
       default: break
       }
     }
@@ -1141,9 +1351,9 @@ extension Vitals_SectionType2Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try { if let v = self._cta {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
     } }()
-    if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 5)
-    }
+    try { if let v = self._isSampleData {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1152,7 +1362,7 @@ extension Vitals_SectionType2Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs._latestReading != rhs._latestReading {return false}
     if lhs._graph != rhs._graph {return false}
     if lhs._cta != rhs._cta {return false}
-    if lhs.id != rhs.id {return false}
+    if lhs._isSampleData != rhs._isSampleData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1240,7 +1450,7 @@ extension Vitals_SectionType3Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     1: .same(proto: "meta"),
     2: .same(proto: "cta"),
     3: .same(proto: "chips"),
-    4: .same(proto: "id"),
+    6: .standard(proto: "is_sample_data"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1252,7 +1462,7 @@ extension Vitals_SectionType3Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
       case 1: try { try decoder.decodeSingularMessageField(value: &self._meta) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
       case 3: try { try decoder.decodeRepeatedMessageField(value: &self.chips) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._isSampleData) }()
       default: break
       }
     }
@@ -1272,9 +1482,9 @@ extension Vitals_SectionType3Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if !self.chips.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.chips, fieldNumber: 3)
     }
-    if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 4)
-    }
+    try { if let v = self._isSampleData {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -1282,7 +1492,7 @@ extension Vitals_SectionType3Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if lhs._meta != rhs._meta {return false}
     if lhs._cta != rhs._cta {return false}
     if lhs.chips != rhs.chips {return false}
-    if lhs.id != rhs.id {return false}
+    if lhs._isSampleData != rhs._isSampleData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1292,6 +1502,7 @@ extension Vitals_SectionType4Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
   public static let protoMessageName: String = _protobuf_package + ".SectionType4Cards"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "items"),
+    6: .standard(proto: "is_sample_data"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1301,20 +1512,29 @@ extension Vitals_SectionType4Cards: SwiftProtobuf.Message, SwiftProtobuf._Messag
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.items) }()
+      case 6: try { try decoder.decodeSingularBoolField(value: &self._isSampleData) }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
     if !self.items.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.items, fieldNumber: 1)
     }
+    try { if let v = self._isSampleData {
+      try visitor.visitSingularBoolField(value: v, fieldNumber: 6)
+    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vitals_SectionType4Cards, rhs: Vitals_SectionType4Cards) -> Bool {
     if lhs.items != rhs.items {return false}
+    if lhs._isSampleData != rhs._isSampleData {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -1325,7 +1545,6 @@ extension Vitals_VerticalList: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "text"),
     2: .same(proto: "cta"),
-    3: .same(proto: "id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -1336,7 +1555,6 @@ extension Vitals_VerticalList: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.text) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._cta) }()
-      case 3: try { try decoder.decodeSingularStringField(value: &self.id) }()
       default: break
       }
     }
@@ -1353,16 +1571,12 @@ extension Vitals_VerticalList: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try { if let v = self._cta {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
     } }()
-    if !self.id.isEmpty {
-      try visitor.visitSingularStringField(value: self.id, fieldNumber: 3)
-    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: Vitals_VerticalList, rhs: Vitals_VerticalList) -> Bool {
     if lhs.text != rhs.text {return false}
     if lhs._cta != rhs._cta {return false}
-    if lhs.id != rhs.id {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
