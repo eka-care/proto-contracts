@@ -57,3 +57,7 @@ message Attributes {
   optional bool allow_whatsapp = 1;
   optional bool allow_email = 2;
 }
+
+message Profiles {
+  repeated Profile data = 1;
+}
