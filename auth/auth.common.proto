@@ -41,15 +41,22 @@ message Profile {
   optional string bloodgroup = 10;
   optional string pic = 11;
   optional string as = 12;
+  // @gotags: json:"is-d"
   optional bool is_d = 13 [json_name = "is-d"];
+  // @gotags: json:"is-d-s"
   optional bool is_d_s = 14 [json_name = "is-d-s"];
+  // @gotags: json:"is-p"
   optional bool is_p = 15 [json_name = "is-p"];
+  // @gotags: json:"is-biz"
   optional bool is_biz = 16 [json_name = "is-biz"];
   string oid = 17;
   int64 type = 18;
+  // @gotags: json:"health-ids"
   repeated string health_ids = 19 [json_name = "health-ids"];
+  // @gotags: json:"at"
   optional   string created_at = 20 [json_name = "at"];
   optional string pincode = 21;
+  // @gotags: json:"dob-valid"
   optional bool dob_valid = 22 [json_name = "dob-valid"];
 }
 
