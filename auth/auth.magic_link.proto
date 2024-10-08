@@ -4,9 +4,10 @@ package auth;
 
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 import "auth/auth.common.proto";
+import "validate/validate.proto";
 
 message MagicLinkRequest {
-  string  mobile = 1;
+  string  mobile = 1 [(validate.rules).message = {required: true}];
   string  uuid = 2;
   string oid = 3;
   int64 ttl_min = 4;
