@@ -6,13 +6,18 @@ option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 
 import "auth/auth.common.proto";
 
-message MagicLinkRequest {
+message CreateMagicLinkRequest {
   string  mobile = 1;
   string  uuid = 2;
   string oid = 3;
   int64 ttl_min = 4;
 }
 
-message  MagicLinkResponse {
+message  CreateMagicLinkResponse {
   string  magic_token = 1;
 }
+
+message VerifyMagicLinkRequest {
+  string magic_token = 1;
+}
+
