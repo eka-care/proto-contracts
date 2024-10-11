@@ -21,4 +21,5 @@ enum AuthMethod {
   Google = 3;
   Apple = 4;
   TrueCaller = 5;
+  MagicToken = 6;
 }
