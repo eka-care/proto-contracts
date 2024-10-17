@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+
+import "auth/auth.common.proto";
+
+message JwtClaimsMeta {
+  optional bool refresh_token = 1;
+  optional string sess_system = 2;
+}
+
+message ProfileCreateRequest {
+  Profile payload = 1 ;
+  optional JwtClaimsMeta meta = 2;
+
+}
+
+message ProfileCreateResponse {
+  optional Data data = 1;
+  optional AuthError error = 2;
+}
