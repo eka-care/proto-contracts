@@ -17,6 +17,11 @@ message ProfileCreateRequest {
 
 }
 
+message TestToken {
+  string  sess = 1;
+  string refresh = 2;
+}
+
 message ProfileCreateResponse {
   optional Data data = 1;
   optional AuthError error = 2;
