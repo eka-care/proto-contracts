@@ -19,6 +19,16 @@ message ExternalTokens {
   string firebase = 1 ;
 }
 
+message Params {
+  optional string url = 1;
+}
+
+message Target {
+  optional string pid = 1;
+  optional string pageId = 2;
+  optional Params params = 3;
+}
+
 message Data {
   Tokens tokens = 1;
   ExternalTokens external_tokens = 2;
@@ -26,6 +36,7 @@ message Data {
   optional Profile profile = 3;
   optional bool has_more_profiles = 4;
   optional bool first_time_user = 5;
+  optional Target tgt = 6;
 }
 
 message Profile {
