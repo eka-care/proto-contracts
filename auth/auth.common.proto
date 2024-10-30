@@ -69,7 +69,6 @@ message Profile {
   optional string pincode = 21;
   // @gotags: json:"dob-valid,omitempty"
   optional bool dob_valid = 22 [json_name = "dob-valid"];
-  optional uint32 ageInM = 23 ;
 }
 
 message Attributes {
