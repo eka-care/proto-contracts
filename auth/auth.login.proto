@@ -8,6 +8,10 @@ import "auth/auth.aenums.proto";
 
 message AuthLoginRequest {
   AuthMethod method = 1;
+
+  //  identifier & code will be required for username & password based login
+  optional string identifier = 2;
+  optional string code = 3;
 }
 
 message AuthLoginResponse {
