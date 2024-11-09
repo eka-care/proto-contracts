@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
+import "auth/auth.aenums.proto";
+
+
+message AuthLoginRequest {
+  AuthMethod method = 1;
+}
+
+message AuthLoginResponse {
+  string sess = 1;
+  string refresh = 2;
+}
