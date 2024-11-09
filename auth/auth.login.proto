@@ -4,17 +4,16 @@ package auth;
 
 option go_package = "github.com/eka-care/aorta-go/proto-generated/go/auth";
 import "auth/auth.aenums.proto";
+import "auth/auth.common.proto";
 
 
 message AuthLoginRequest {
   AuthMethod method = 1;
-
-  //  identifier & code will be required for username & password based login
-  optional string identifier = 2;
-  optional string code = 3;
 }
 
 message AuthLoginResponse {
-  string sess = 1;
-  string refresh = 2;
+  Tokens tokens = 1;
+  // This will be present only if the user is old and will be Type1 profile.
+  optional Profile profile = 2;
 }
+
