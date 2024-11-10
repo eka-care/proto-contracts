@@ -13,6 +13,8 @@ message Tokens {
   string sess = 1;
   // Refresh token for the user
   string refresh = 2;
+  uint64 sess_exp = 3;
+  uint64 refresh_exp = 4;
 }
 
 message ExternalTokens {
