@@ -79,3 +79,8 @@ message Attributes {
 message Profiles {
   repeated Profile data = 1;
 }
+
+message GenericResponse {
+  optional bool success = 1;
+  optional string message = 2;
+}
