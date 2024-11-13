@@ -16,6 +16,7 @@ message RecordMetadata {
   optional string thumbnail = 2;
   optional google.protobuf.Timestamp document_date = 3;
   repeated Tag tags = 4;
+  repeated string user_tags = 5;
 }
 
 /* Record represents a document in list of records. */
