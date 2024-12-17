@@ -17,6 +17,7 @@ message RecordMetadata {
   optional google.protobuf.Timestamp document_date = 3;
   repeated Tag tags = 4;
   repeated string user_tags = 5;
+  optional bool is_encrypted = 6;
 }
 
 /* Record represents a document in list of records. */
