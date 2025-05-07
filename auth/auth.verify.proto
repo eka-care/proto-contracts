@@ -13,6 +13,7 @@ message AuthVerifyRequest {
   string code = 2;
   optional bool skip_mobile_verification = 3;
   optional Profile oauth_profile = 4;
+  optional string token = 5;
 }
 
 

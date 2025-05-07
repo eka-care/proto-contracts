@@ -22,4 +22,5 @@ enum AuthMethod {
   Apple = 4;
   TrueCaller = 5;
   MagicToken = 6;
+  EkaService = 7;
 }
